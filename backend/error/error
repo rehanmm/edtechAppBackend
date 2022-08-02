@@ -1,0 +1,50 @@
+E11000 duplicate key error collection
+
+  password: CastError: Cast to String failed for value "nitish#123" (type string) at path "password" because 
+of "TypeError"
+
+Operational Errors
+
+    failed to connect to server
+    failed to resolve hostname
+    invalid user input
+    request timeout
+    server returned a 500 response
+    socket hang-up
+    system is out of memory
+
+
+Programmer Errors
+
+    called an asynchronous function without a callback
+    did not resolve a promise
+    did not catch a rejected promise
+    passed a string where an object was expected
+    passed an object where a string was expected
+    passed incorrect parameters in a function
+
+
+
+class BaseError extends Error {
+ public readonly name: string;
+ public readonly httpCode: HttpStatusCode;
+ public readonly isOperational: boolean;
+ 
+ constructor(name: string, httpCode: HttpStatusCode, description: string, isOperational: boolean) {
+   super(description);
+   Object.setPrototypeOf(this, new.target.prototype);
+ 
+   this.name = name;
+   this.httpCode = httpCode;
+   this.isOperational = isOperational;
+ 
+   Error.captureStackTrace(this);
+ }
+}
+
+//free to extend the BaseError
+class APIError extends BaseError {
+ constructor(name, httpCode = HttpStatusCode.INTERNAL_SERVER, isOperational = true, description = 'internal server error') {
+   super(name, httpCode, isOperational, description);
+ }
+}
