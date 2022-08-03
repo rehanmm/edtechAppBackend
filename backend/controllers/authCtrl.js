@@ -73,8 +73,8 @@ const anonymous=catchAsyncError( async function(req,res){
 
     res.status(200).json({
         success: true,
-        message: 'user signed up successfully',
-       _id
+        message: 'Anonymous user created successfully',
+       data:{userId:_id}
 
     })
 
