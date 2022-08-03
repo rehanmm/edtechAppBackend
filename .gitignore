@@ -1,6 +1,5 @@
 node_modules
 .vscode
-backend/config
 .env
 test
 .gitignore
