@@ -69,13 +69,12 @@ const anonymous=catchAsyncError( async function(req,res){
     await user.save()
     
    const {_id}=user
-   user1= await User.findOne({_id})
-   console.log(user1);
+  
 
     res.status(200).json({
         success: true,
         message: 'user signed up successfully',
-        data:user1
+       _id
 
     })
 
