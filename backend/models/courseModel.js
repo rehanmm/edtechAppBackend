@@ -9,7 +9,21 @@ const courseSchema = new mongoose.Schema({
        },
        description: {
         type: String,
-        trim: true
+        trim: true,
+        required: 'Description is required'
+
+       },
+       quote: {
+        type: String,
+        trim: true,
+        required: 'Quote is required'
+
+       },
+       total_lessons: {
+        type: Number
+       },
+       total_units: {
+        type: Number
        },
        image: {
         data: Buffer,
@@ -23,8 +37,8 @@ const courseSchema = new mongoose.Schema({
         type: Boolean,
         default: false
        },
-       instructor: {
-        type: mongoose.Schema.ObjectId,
+       instructor: {// des id photo
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
        },
        updated: Date,
@@ -32,6 +46,26 @@ const courseSchema = new mongoose.Schema({
         type: Date,
       default: Date.now
       },
+
+      total_review:Number,
+      total_purchases:Number,
+      total_likes:Number,
+      top_reviews:[{
+
+      }],
+      latest_reviews:[{
+
+      }],
+      units:[{
+
+      }],
+
+      total_articles:Number,
+      
+      total_videos:Number,
+      total_videos:Number,
+      total_resoursces:Number,
+      total_tests:Number,
 
       units:[unitSchema],
 

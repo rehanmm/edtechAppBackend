@@ -4,14 +4,15 @@ const mongoose =require('mongoose') ;
 const jwt=require('jsonwebtoken');
 const config=require('../config/config')
 
+const catchAsyncError = require('../error/catchAsyncError');
+const errorHandler = require('../utils/errorHandler');
 
 
 
-const signin= async function(req,res){
-    
-    try{
-     
-        
+
+
+const signin= catchAsyncError( async function(req,res){
+
         const user= await User.findOne({email:req.body.email})
         if(!user){
             return res.status(401).json({error:"User not found"})
@@ -32,23 +33,54 @@ return res.status(200).json({
         email:user.email
     }
 })
-    }catch(error){
-        return res.status(401).json({
-           message:error.message,
-        })
-    }
-
-}
 
 
-const signout=function(req,res){
+})
+
+
+const signout=catchAsyncError( function(req,res){
 
     res.clearCookie('t');
     return res.status(200).json({
         message:"signed out"
     })
 
-}
+})
+
+const anonymous=catchAsyncError( async function(req,res){
+
+   
+    const {phone_number}=req.body
+    
+    if(phone_number===undefined){
+        const a =Math.floor( Math.random() * (200000000000-1) + 1);
+     
+        req.body={
+            name:"Anonymous",
+           email:`rand${a}@jjfkj.com`
+        }
+    }
+
+
+    // console.log(req.body);
+    let user = new User(req.body);
+    
+    
+    await user.save()
+    
+   const {_id}=user
+   user1= await User.findOne({_id})
+   console.log(user1);
+
+    res.status(200).json({
+        success: true,
+        message: 'user signed up successfully',
+        data:user1
+
+    })
+
+
+})
 
 
 const requireSignin=function(req,res){
@@ -64,4 +96,4 @@ const hasAuthorisation=function(req,res){
 }
 
 
-module.exports={signin,signout,requireSignin,hasAuthorisation}
+module.exports={anonymous,signin,signout,requireSignin,hasAuthorisation}

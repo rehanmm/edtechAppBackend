@@ -15,13 +15,24 @@ const list = catchAsyncError(async function (req, res) {
 })
 
 const create = catchAsyncError(async function (req, res) {
-    const user = new User(req.body);
 
+  
+
+
+    // console.log(req.body);
+    let user = new User(req.body);
+    
+    
     await user.save()
+    
+   const {_id}=user
+   user1= await User.findOne({_id})
+   console.log(user1);
+
     res.status(200).json({
         success: true,
         message: 'user signed up successfully',
-        user
+        data:user1
 
     })
 
