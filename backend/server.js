@@ -19,7 +19,7 @@ process.on('uncaughtException',(err)=>{
 })
 
 
-mongoose.connect("mongodb://localhost:27017/Edtech")
+mongoose.connect(config.MONGO_URL.toString())
 .then(()=>console.log('connected to database'))
 .catch((err)=>console.log(err))
 
