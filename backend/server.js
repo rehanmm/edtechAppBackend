@@ -18,8 +18,8 @@ process.on('uncaughtException',(err)=>{
     
 })
 // console.log(config.MONGODB_URI)
-
-mongoose.connect(config.MONGODB_URI)
+// console.log(config.MONGODB_URI.toString())
+mongoose.connect(config.MONGODB_URI.toString())
 .then(()=>console.log('connected to database'))
 .catch((err)=>console.log(err))
 
