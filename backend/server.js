@@ -1,8 +1,10 @@
 const app=require('./express')
 const mongoose=require('mongoose')
+const dotenv = require("dotenv")
 const config=require('../backend/config/config')
 // const errorHandler = require('./utils/errorHandler')
 
+dotenv.config()
 port=config.PORT
 
 
@@ -19,7 +21,7 @@ process.on('uncaughtException',(err)=>{
 })
 // console.log(config.MONGODB_URI)
 // console.log(config.MONGODB_URI.toString())
-mongoose.connect(config.MONGODB_URI.toString())
+mongoose.connect(config.MONGODB_URI)
 .then(()=>console.log('connected to database'))
 .catch((err)=>console.log(err))
 
