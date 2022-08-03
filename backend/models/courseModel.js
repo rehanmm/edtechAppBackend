@@ -10,34 +10,36 @@ const courseSchema = new mongoose.Schema({
        description: {
         type: String,
         trim: true,
-        required: 'Description is required'
+        // required: 'Description is required'
 
        },
        quote: {
         type: String,
         trim: true,
-        required: 'Quote is required'
+        // required: 'Quote is required'
 
        },
        total_lessons: {
-        type: Number
+        type: Number,
+        default:0
        },
        total_units: {
-        type: Number
+        type: Number,
+        default:0
        },
        image: {
         data: Buffer,
         contentType: String
        },
-       category: {
-        type: String,
-        required: 'Category is required'
-       },
-       published: {
-        type: Boolean,
-        default: false
-       },
-       instructor: {// des id photo
+      //  category: {
+      //   type: String,
+      //   required: 'Category is required'
+      //  },
+      //  published: {
+      //   type: Boolean,
+      //   default: false
+      //  },
+       user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
        },
@@ -47,9 +49,18 @@ const courseSchema = new mongoose.Schema({
       default: Date.now
       },
 
-      total_review:Number,
-      total_purchases:Number,
-      total_likes:Number,
+      total_review:{
+        type: Number,
+        default:0
+       },
+      total_purchases:{
+        type: Number,
+        default:0
+       },
+      total_likes:{
+        type: Number,
+        default:0
+       },
       top_reviews:[{
 
       }],
@@ -60,12 +71,27 @@ const courseSchema = new mongoose.Schema({
 
       }],
 
-      total_articles:Number,
+      total_articles:{
+        type: Number,
+        default:0
+       },
       
-      total_videos:Number,
-      total_videos:Number,
-      total_resoursces:Number,
-      total_tests:Number,
+      total_videos:{
+        type: Number,
+        default:0
+       },
+      total_videos:{
+        type: Number,
+        default:0
+       },
+      total_resoursces:{
+        type: Number,
+        default:0
+       },
+      total_tests:{
+        type: Number,
+        default:0
+       },
 
       units:[unitSchema],
 

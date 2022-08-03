@@ -56,10 +56,18 @@ upcommingeventsubbed:[{
     }
 
 }],
-lessons_completed:Number,
-video_watched:Number,
-test_given:Number,
-avg_percentage_test:Number,
+lessons_completed:{
+    type:Number,
+default:0},
+video_watched:{
+    type:Number,
+default:0},
+test_given:{
+    type:Number,
+default:0},
+avg_percentage_test:{
+    type:Number,
+default:0},
 last_unit:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Unit'
@@ -68,7 +76,9 @@ last_lesson:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Lesson'
 },
-last_lesson_title:String,
+last_lesson_title:{
+    type:String,
+default:'user has not seen any lesson'},
 last_lesson_progress:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Progress'

@@ -2,6 +2,7 @@ const Course=require('../models/courseModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError')
+const errorHandler = require('../utils/errorHandler');
 
 
 const list=catchAsyncError(  async function(req ,res,){
@@ -10,11 +11,17 @@ res.status(200).json(course)
 })
 
 const create=catchAsyncError( async function(req ,res){
- 
+//  const course0=await Course.find({}).count()
+
     const course = new Course(req.body);
 
     await course.save()
-    res.status(200).json(req.body)
+    const {_id}=course
+   course1= await Course.findOne({_id})
+  
+    res.status(200).json(course1)
+
+
 
 })
 const read=catchAsyncError( function(req ,res){

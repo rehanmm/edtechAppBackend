@@ -6,10 +6,15 @@ const catchAsyncError=require('../error/catchAsyncError')
 
 const list = catchAsyncError(async function (req, res) {
     const users = await User.find({})
-    if(!users){
-        return next(new errorHandler('list not found',404))
-    }
-    res.status(200).json(users)
+    // if(!users){
+    //     return next(new errorHandler('list not found',404))
+    // }
+
+    console.log(req.user)
+    res.status(200).json({
+        success:true,
+status:200,
+        data:req.user})
 })
 
 module.exports={list};

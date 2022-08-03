@@ -16,7 +16,16 @@ const list = catchAsyncError(async function (req, res) {
 
 const create = catchAsyncError(async function (req, res) {
 
-  
+    const {phone_number}=req.body
+    
+    if(phone_number===undefined){
+        const a =Math.floor( Math.random() * (200000000000-1) + 1);
+     
+        req.body={
+            name:"Anonymous",
+           email:`rand${a}@jjfkj.com`
+        }
+    }
 
 
     // console.log(req.body);

@@ -21,7 +21,7 @@ process.on('uncaughtException',(err)=>{
 })
 // console.log(config.MONGODB_URI)
 // console.log(config.MONGODB_URI.toString())
-mongoose.connect( "mongodb+srv://App_Project:ue76RvCZ23XoXIOB@appcluster.jbd00.mongodb.net/app?retryWrites=true&w=majority")
+mongoose.connect( "mongodb+srv://quasar-edtech:MongoDB@quasar.so7kqha.mongodb.net/?retryWrites=true&w=majority")
 .then(()=>console.log('connected to database'))
 .catch((err)=>console.log(err))
 
