@@ -3,6 +3,7 @@
     "development": "nodemon backend/server.js"
   },
   "dependencies": {
+    "config": "3.3.1",
     "cookie-parser": "^1.4.6",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
