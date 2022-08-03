@@ -17,9 +17,9 @@ process.on('uncaughtException',(err)=>{
     server.close();
     
 })
+// console.log(config.MONGODB_URI)
 
-
-mongoose.connect(config.MONGO_URL.toString())
+mongoose.connect(config.MONGODB_URI)
 .then(()=>console.log('connected to database'))
 .catch((err)=>console.log(err))
 
