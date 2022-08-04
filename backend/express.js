@@ -6,6 +6,7 @@ const courseRoutes=require('../backend/routers/courseRoutes')
 const lessonRoutes=require('../backend/routers/lessonRoutes')
 const authRoutes=require('../backend/routers/authRoutes');
 const homeRoutes=require('../backend/routers/homeRoutes');
+const unitRoutes=require('../backend/routers/unitRoutes');
 const enrollRoutes=require('../backend/routers/enrollRoutes');
 const errorMiddleware=require('./error/errorMiddleware')
 
@@ -28,6 +29,7 @@ app.use('/edtech',courseRoutes);
 app.use('/edtech',lessonRoutes);
 app.use('/edtech',enrollRoutes);
 app.use('/edtech',homeRoutes);
+app.use('/edtech',unitRoutes);
 
 
 

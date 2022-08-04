@@ -80,7 +80,6 @@ const update =catchAsyncError( async function (req, res) {
 
 const userById = catchAsyncError( async function (req, res, next) {
     const user = await User.findById(req.params.userId);
-    console.log(user);
     if(!user){
         return next(new errorHandler('user not found',404))
     }

@@ -55,7 +55,55 @@ const update=catchAsyncError( async function(req ,res){
  
 const courseById=catchAsyncError( async function(req ,res,next){
 const course= await Course.findById(req.params.courseId);
-req.course=course
+let unit= await Course.findById(req.params.courseId).select('units -_id');
+// console.log(course.units)
+// console.log(unit.units)
+unit=unit.units
+course.units.push(
+    {
+       
+        unit_title: "Physics",
+        tags:["thermodynamics","Mechanics","Electrodynamics","Waves"],
+        total_lessons: "10",
+        completed_lessons: "3",
+        prerequisite: {
+            has_prerequisite:false,
+            type:'auto'
+            ,//manual or auto
+            time:0,
+            message:"please complete required unit first"
+
+        },
+       
+        is_locked:false,
+        is_paid:false
+    }
+
+);
+course.units.push(
+    {
+       
+        unit_title: "Physical chemistry",
+        tags:["Mole concept","Ionic Equilibirium","Chemical Equilibrium"],
+        total_lessons: "6",
+        completed_lessons: "7",
+        prerequisite: {
+            has_prerequisite:false,
+            type:'auto'
+            ,//manual or auto
+            time:0,
+            message:"please complete required unit first"
+
+        },
+       
+        is_locked:true,
+        is_paid:false
+    }
+
+);
+
+await course.save()
+req.course=unit
 
 next()
 })

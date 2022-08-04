@@ -10,13 +10,14 @@ const courseSchema = new mongoose.Schema({
        description: {
         type: String,
         trim: true,
+        default:' '
         // required: 'Description is required'
 
        },
        quote: {
         type: String,
         trim: true,
-        // required: 'Quote is required'
+        default:'keep up good work'
 
        },
        total_lessons: {
@@ -27,10 +28,10 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         default:0
        },
-       image: {
-        data: Buffer,
-        contentType: String
-       },
+      //  image: {
+      //   data: Buffer,
+      //   contentType: String
+      //  },
       //  category: {
       //   type: String,
       //   required: 'Category is required'
@@ -93,7 +94,48 @@ const courseSchema = new mongoose.Schema({
         default:0
        },
 
-      units:[unitSchema],
+      units:[{
+        unit_id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Unit'
+         },//full model id
+        unit_title:String,
+        tags:[String],
+        total_lessons:Number,
+        completed_lesson:Number,
+        prerequisite:
+          {
+            has_prerequisite:{
+              type:Boolean,
+            default:false},
+            type:{
+              type:String,
+              default:'auto'
+            },//manual or auto
+            on:{
+               type: mongoose.Schema.Types.ObjectId,
+               ref:'Unit'
+            },
+            time:{
+              type:Number,
+            default:0},
+            message:{
+              type:String,
+              default:"please complete required unit first"
+
+            }
+        },
+is_paid:Boolean,
+is_locked:Boolean
+}
+],
+
+tags:[String],
+
+headline:{
+  type:String,
+  default:''
+}
 
 
     

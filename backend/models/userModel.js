@@ -56,6 +56,10 @@ upcommingeventsubbed:[{
     }
 
 }],
+is_anonymous:{
+    type:Boolean,
+    default:false
+},
 lessons_completed:{
     type:Number,
 default:0},
@@ -68,17 +72,31 @@ default:0},
 avg_percentage_test:{
     type:Number,
 default:0},
-last_unit:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Unit'
-},
 last_lesson:{
+title:{
+    type:String,
+    default:'user has not seen any lesson'
+
+},
+    lesson_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Lesson'
+}
+
 },
-last_lesson_title:{
+last_unit:{
+title:{
     type:String,
-default:'user has not seen any lesson'},
+    default:'user has not seen any units'
+
+},
+    unit_id:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Unit'
+}
+
+},
+
 last_lesson_progress:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Progress'
