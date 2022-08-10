@@ -6,15 +6,15 @@ const router=express.Router()
 
 
 
-router.route('/auth/signin')
+router.route('/admin/signin')
 .get(authCtrl.signin)
 
 router.route('/auth/anonymous')
 .post(authCtrl.anonymous)
 
-router.route('/auth/signup')
+router.route('/admin/signup')
 .post(authCtrl.signup)
-router.route('/auth/signout')
+router.route('/admin/signout')
 .get(authCtrl.signout)
 
 
