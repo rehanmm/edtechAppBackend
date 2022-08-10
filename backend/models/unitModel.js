@@ -106,8 +106,7 @@ const unitSchema = new mongoose.Schema({
               default:'auto'
             },//manual or auto
             on:{
-               type: mongoose.Schema.Types.ObjectId,
-               ref:'Unit'
+               type: mongoose.Schema.Types.ObjectId
             },
             time:{
               type:Number,

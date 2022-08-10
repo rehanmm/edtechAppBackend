@@ -9,8 +9,8 @@ const lessonSchema = new mongoose.Schema({
         type:String,
         default:'auto'
       },
-    pre_requisite:{
-        has_pre_requisite:Boolean,
+    prerequisite:{
+        has_prerequisite:Boolean,
         type:{
          type: String,
          enum:['manual','auto']

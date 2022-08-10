@@ -7,17 +7,21 @@ module.exports=function(user,unitPrerequisite){
     if (has_prerequisite) {
 //  console.log(units_completed);
 
-        units_completed.forEach(function (unit) {
-            // let on='62ecf6772d0f69f9c00d56c2'
-            console.log(unit[on]);
+        
+        const lessonObj = units_completed.find(item => item[on] != undefined);
+        
+        
+        
+        
+        // console.log(unit);
+        if (lessonObj) {
             
+            const completed_time = lessonObj[on] // here the extracted value is by key
             
-            // console.log(unit);
-            if (unit[on]) {
-                completed_time = unit[on];
 
                 let difference = current_time - completed_time;
                 difference = difference/(1000*60)
+                // console.log(difference)
                 if (difference >= time) {
                   
             return false;
@@ -25,13 +29,15 @@ module.exports=function(user,unitPrerequisite){
                 }else{
                     return true;
                 }
+ 
 
 
-
+            }else{
+                return true
             }
 
 
-        })
+      
 
 
     }else{

@@ -4,10 +4,7 @@ const progressSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'User'
 },
-   completed_lessons:{
-    type:mongoose.Schema.Types.Map,
-    of:Object
-   },
+   completed_lessons:[{}],
    course_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Course'

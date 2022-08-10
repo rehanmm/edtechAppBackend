@@ -14,9 +14,11 @@ const config=require('../config/config')
 
 
 const list = catchAsyncError(async function (req, res, next) {
+
+    // console.log(req.body.user_id)
     const user = await User.findById(req.body.user_id)
     
-    // console.log(req.body.user_id)
+    
     // console.log(user)
     if (!user) {
         return next(new errorHandler('list not found', 404))
@@ -24,12 +26,10 @@ const list = catchAsyncError(async function (req, res, next) {
     const course = await Course.findById(config.COURSE_ID);
     // console.log(course);
     
-    // course.units.forEach(function(user,pre){
-        // console.log(pre);
-        // pre.is_locked=true;
-        //     // pre.is_locked=prereqFunction(user,pre.prerequisite)
-        // })
-        completdunitPusher('62ecf6772d0f69f9c00d56c2','1659772127431',user);
+
+        // completdunitPusher('62ecf6772d0f69f9c00d56c2','1659772127431',user);
+
+
         await user.save();
         //    console.log(course.units[0].is_locked)
         for( let i=0;i<course.units.length;i++){

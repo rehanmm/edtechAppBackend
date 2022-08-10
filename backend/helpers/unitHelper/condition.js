@@ -1,46 +1,48 @@
-// requiring files  and library
-
-
-
-// condition
-const onlyLesson=lesson_id&&!unit_id
-const onlyunit=lesson_id&&!unit_id
-const nothingProvided=!lesson_id&&!unit_id
 
 
 //condtion logic for function
-if(onlyLesson){
-getFullLessonDetail
-}
-else if(onlyunit){
-    checkPrerequisite(arg,callback)
-    nextLessonUserHasToComplete
-}
-else if(nothingProvided){
-    checkPrerequisite(arg,callback)
-    lastLessonFetchByTheUser(lessons_completed)
-    const lastValue = Object.values(lessons_completed).pop();
-}
+// if(onlyLesson){
+// getFullLessonDetail
+// }
+// else if(onlyunit){
+//     checkPrerequisite(arg,callback)
+//     nextLessonUserHasToComplete
+// }
+// else if(nothingProvided){
+//     checkPrerequisite(arg,callback)
+//     lastLessonFetchByTheUser(lessons_completed)
+//     const lastValue = Object.values(lessons_completed).pop();
+// }
 
 
 // prerequisiteFunction
+// module.exports=function(user,unitPrerequisite){
+module.exports=function(unitProgress,lessonPrerequisite){
+    // const { units_completed } = user;
+    const { completed_lessons } = unitProgress;
 
-module.exports=function(unitProgress,prerequisite,callback){
-    const {completed_lessons} = unitProgress;
     const current_time = Date.now()
     // console.log(unitPrerequisite);
-    const { has_prerequisite, on, time, message } = prerequisite
+    const { has_prerequisite, on, time, message } = lessonPrerequisite
 // console.log(has_prerequisite);
     if (has_prerequisite) {
 //  console.log(units_completed);
-     
-            // let on='62ecf6772d0f69f9c00d56c2'
-            // console.log(unit[on]);
-            if (completed_lessons.hasOwnProperty(on)) {
-                completed_time = unit[on];
+
+        
+        const lessonObj =completed_lessons.find(item => item[on] != undefined);
+        
+        
+        
+        
+        // console.log(unit);
+        if (lessonObj) {
+            
+            const completed_time = lessonObj[on] // here the extracted value is by key
+            
 
                 let difference = current_time - completed_time;
                 difference = difference/(1000*60)
+                console.log(difference)
                 if (difference >= time) {
                   
             return false;
@@ -48,15 +50,15 @@ module.exports=function(unitProgress,prerequisite,callback){
                 }else{
                     return true;
                 }
-
+ 
 
 
             }else{
-return false
+                return true
             }
 
 
-        
+      
 
 
     }else{
@@ -65,6 +67,15 @@ return false
     }
 
 }
+
+
+
+
+
+
+
+
+
 
 
 
