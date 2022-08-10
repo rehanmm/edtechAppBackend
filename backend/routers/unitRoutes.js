@@ -4,7 +4,9 @@ const router=express.Router()
 
 
 // :courseId/lesson/new'    
-router.route('/course/units')
+router.route('/ui/unit')
+.get(unitCtrl.read)
+router.route('/admin/course/units')
 .get(unitCtrl.list)
 router.route('/admin/unit/create')
 .post(unitCtrl.create)
@@ -18,11 +20,13 @@ router.route('/admin/unit/create')
 
 
 
-router.route('/units/:unitId')
+router.route('/admin/unit')
 .get(unitCtrl.read)
+router.route('/admin/units/updateUnit')
 .put(unitCtrl.update)
+router.route('/admin/units/removeUnit')
 .delete(unitCtrl.remove)
 
-router.param('unitId',unitCtrl.unitById)
+
 
 module.exports= router

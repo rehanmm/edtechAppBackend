@@ -4,33 +4,60 @@ const progressSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'User'
 },
-   progress:[{lesson_id:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'User'},
-    is_completed:Boolean,
-    last_timestamp:Number
-}],
+   completed_lessons:{
+    type:mongoose.Schema.Types.Map,
+    of:Object
+   },
    course_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Course'
 },
-   unit_id:{
+
+unit_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Unit'
 },
+// option_selected:{
+
+   
+// },
 course_name:{
     type:String,
+    default:''
     
 },
+test_taken:{
+    type:Number,
+    default:0
+},
+
 user_name:{
     type:String,
+    default:''
     
 },
+// completed_lessons:Number,
+completed_videos:Number,
+test_taken:Number,
+avg_test_score:Number,
+assignment_done:Number,
 unit_name:{
     type:String
 },
     content: String,
     resource_url: String
    })
-   const Lesson=mongoose.model('Lesson', lessonSchema)
-   module.exports={lessonSchema,Lesson}
+
+
+
+
+   const Progress=mongoose.model('Progress', progressSchema)
+   module.exports=Progress
+
+
+//    progressSchema.virtual('completed_lesson').get(()=>{
+
+// // const len =Object.keys(this.lessons_progress).length
+// // return len;
+
+// //    })

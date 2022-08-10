@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema({
     // },
     phone_number:{
         type:Number,
-    
     }
     ,
     email:{
@@ -101,10 +100,7 @@ last_lesson_progress:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Progress'
 },
-units_completed:[{
-    unit_id:mongoose.Schema.Types.ObjectId
-
-}]
+units_completed:[{}]
 
 
     

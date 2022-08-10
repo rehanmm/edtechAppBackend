@@ -9,20 +9,19 @@ const homeRoutes=require('../backend/routers/homeRoutes');
 const unitRoutes=require('../backend/routers/unitRoutes');
 const enrollRoutes=require('../backend/routers/enrollRoutes');
 const errorMiddleware=require('./error/errorMiddleware')
+// const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
+// const logger=require('./middleware/logger')
 
-// middleware parser
-app.get('/', (req, res,next) => {
-  
-
-   next({message:'fuck'}) // Express will catch this on its own.
-  })
 
 
 app.use(express.json());
 app.use(cookieparser());
 app.use(express.urlencoded({extended:true}));
+// app.use(base64Decoder);
+// app.use(md5HashVerifier);
 
 
+// app.use(logger);
 app.use('/edtech',authRoutes);
 app.use('/edtech',userRoutes);
 app.use('/edtech',courseRoutes);
@@ -36,7 +35,7 @@ app.use('/edtech',unitRoutes);
 app.get('*', function (req, res) {
     res.send('invalid url');
 })
-  
+
 
 
 

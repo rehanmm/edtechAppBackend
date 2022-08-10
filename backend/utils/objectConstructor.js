@@ -20,6 +20,78 @@ class homeData{
 // const home =new homeData({is_anonymous:true},{quote:'apki nazro ne samjha'})
 
 // console.log(home);
-module.exports=homeData
 
 
+class longUnitToShort{
+    constructor(unit){
+
+
+        this.unit_title=unit.unit_name
+        this.tags=unit.tags
+        
+        this.total_lessons=unit.total_lesson
+        this.completed_lessons=unit.completed_lessons||0
+        this.is_paid= unit.is_paid,
+        this.is_locked=unit.is_paid,
+        this.unit_id=unit._id
+        
+        this.prerequisite=unit.prerequisite
+        
+    }
+
+    
+    
+}
+
+
+
+class unitData{
+    
+// counter(){
+//     let video=0,article=0,assignment=0,events=0,payment=0;
+//     console.log(this)
+//   for(let i=0;i<this.lessons.length;i++){
+//   let type=this.lessons[i].type
+//        if(type==='video'){ video++;}
+//   else if(type==='article') {article++;}
+//   else if(type==='assignment') {assignment++;}
+//   else if(type==='events') {events++;}
+//   else if(type==='payment') {payment++;}
+  
+  
+//   }
+  
+  
+//   }
+    constructor(unitProgress)
+    {
+
+        if(!unitProgress)
+      {
+          this.completed_lessons={}
+        this.has_user_started=false
+        this.has_user_purchased=false
+        this.assignments=[]
+        this.started_at={}
+
+        // this.compleion
+    }else{
+        this.completed_lessons=unitProgress.completed_lessons||{}
+        this.has_user_started=unitProgress.has_user_started||false
+        this.has_user_purchased=unitProgress.has_user_purchased||false
+        this.assignments=unitProgress.assignments||[]
+        this.started_at={}
+
+        //     this.unit_title=unit.name||''
+        //     this.tags=unit.tags
+        //     this.lessons=course.lessons
+        //    this.completion=this.completion||false
+    }
+}
+
+
+
+
+}
+
+module.exports={homeData,longUnitToShort,unitData}  
