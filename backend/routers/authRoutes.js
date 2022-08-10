@@ -6,7 +6,7 @@ const router=express.Router()
 
 
 
-router.route('/admin/signin')
+router.route('/admin/login')
 .get(authCtrl.signin)
 
 router.route('/auth/anonymous')
