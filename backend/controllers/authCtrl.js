@@ -26,8 +26,8 @@ const signin = catchAsyncError( async function(req,res){
 
   
 return res.status(200).json({
-    token,
-    user:{
+    // token,
+    data:{
         _id:user._id,
         name:user.name,
         email:user.email
