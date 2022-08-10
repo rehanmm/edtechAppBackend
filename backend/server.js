@@ -21,7 +21,11 @@ process.on('uncaughtException',(err)=>{
 })
 // console.log(config.MONGODB_URI)
 // console.log(config.MONGODB_URI.toString())
-mongoose.connect( "mongodb+srv://quasar-edtech:MongoDB@quasar.so7kqha.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect( "mongodb+srv://quasar-edtech:MongoDB@quasar.so7kqha.mongodb.net/?retryWrites=true&w=majority",{
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    autoIndex: true, 
+})
 .then(()=>console.log('connected to database'))
 .catch((err)=>console.log(err))
 

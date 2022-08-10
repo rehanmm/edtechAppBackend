@@ -82,6 +82,27 @@ const anonymous=catchAsyncError( async function(req,res){
 })
 
 
+const signup=catchAsyncError( async function(req,res){
+    // console.log(req.body);
+    let user = new User(req.body);
+    
+    
+    await user.save()
+    
+   const {_id}=user
+  
+
+    res.status(200).json({
+        success: true,
+        message: 'user signed up successfully',
+       data:{userId:_id}
+
+    })
+
+
+})
+
+
 const requireSignin=function(req,res){
 
     const requireSignin = expressJwt({
@@ -130,4 +151,4 @@ function authenticateToken(req, res, next) {
 }
 
 
-module.exports={anonymous,signin,signout,requireSignin,hasAuthorisation}
+module.exports={anonymous,signin,signup,signout,requireSignin,hasAuthorisation}
