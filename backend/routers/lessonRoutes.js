@@ -3,7 +3,7 @@ const lessonCtrl =require( '../controllers/lessonCtrl')
 const router=express.Router()
 
 router.route('/admin/lessons')
-.get(lessonCtrl.list)
+.post(lessonCtrl.list)
 router.route('/admin/lesson/create')
 .post(lessonCtrl.create)
 // router.route('/lessons/by/:instructorId')

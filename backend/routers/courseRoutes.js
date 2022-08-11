@@ -18,7 +18,7 @@ const router=express.Router()
 
 
 router.route('/admin/course')
-.get(courseCtrl.read)
+.post(courseCtrl.read)
 router.route('/admin/courses/updateCourse')
 .put(courseCtrl.update)
 // .delete(courseCtrl.remove)

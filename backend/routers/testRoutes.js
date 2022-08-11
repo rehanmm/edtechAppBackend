@@ -2,10 +2,10 @@ const  express  = require('express');
 const testCtrl =require( '../controllers/testCtrl')
 const router=express.Router()
 
-router.route('/admin/lessons')
-.get(testCtrl.getTestQuestion)
+// router.route('/admin/lessons')
+// .get(testCtrl.getTestQuestion)
 router.route('/ui/startTest')
-.post(testCtrl.StartTest)
+.post(testCtrl.startTest)
 
 router.route('/ui/submitTest')
 .get(testCtrl.submitTest)

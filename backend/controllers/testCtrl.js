@@ -9,8 +9,8 @@ const {send,tsend}=require('../middleware/responseSender')
 const startTest=catchAsyncError(async function(req,res){
    const {lesson_id,unit_id,user_id}=req.body
     const test = await Lesson.findById(lesson_id).select('title num_question time_allowed questions');
-    const testProgress= await Progress.findById(user_id).select('test_answers option_choosed test_evaluation test_taken avg_test_score');
-    
+    let testProgress= await Progress.findById(user_id).select('test_answers option_choosed test_evaluation test_taken avg_test_score');
+    console.log(testProgress)
 const arr=testProgress.test_evaluation
 startTime=Date.now();
     const test_record={
