@@ -29,6 +29,7 @@ return res.status(200).json({
    success:true,
    message:'login successfully',
     data:{
+        token,
         _id:user._id,
         name:user.name,
         email:user.email
