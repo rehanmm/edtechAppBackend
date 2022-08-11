@@ -37,9 +37,7 @@ obj1['62f3f6bd088e0c7a694a6bb2']='1660151960229'
 
 
     unitProgress={
-        completed_lessons:[
-            
-        ]
+        completed_lessons:[]
     }
     unitProgress.completed_lessons.push(obj)
     unitProgress.completed_lessons.push(obj1);

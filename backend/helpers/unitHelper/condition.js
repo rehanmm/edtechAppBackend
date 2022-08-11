@@ -79,9 +79,9 @@ module.exports=function(unitProgress,lessonPrerequisite){
 
 
 
-function lastLessonFetchByTheUser(completed_lessons){
-    let lastKey = Object.keys(completed_lessons).pop()
-    let lastValue = animals[Object.keys(completed_lessons).pop()]
-return {lesson_id:lastKey}
+// function lastLessonFetchByTheUser(completed_lessons){
+//     let lastKey = Object.keys(completed_lessons).pop()
+//     let lastValue = animals[Object.keys(completed_lessons).pop()]
+// return {lesson_id:lastKey}
            
-}
+// }

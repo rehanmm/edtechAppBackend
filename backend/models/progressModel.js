@@ -14,19 +14,11 @@ unit_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Unit'
 },
-// option_selected:{
-
-   
-// },
 course_name:{
     type:String,
-    default:''
-    
+    default:'' 
 },
-test_taken:{
-    type:Number,
-    default:0
-},
+
 
 user_name:{
     type:String,
@@ -35,14 +27,38 @@ user_name:{
 },
 // completed_lessons:Number,
 completed_videos:Number,
-test_taken:Number,
-avg_test_score:Number,
 assignment_done:Number,
 unit_name:{
     type:String
 },
     content: String,
-    resource_url: String
+    resource_url: String,
+
+
+
+// test progress
+test_answers:[{
+    lessonId:{ 
+index:Number,
+option_choosed:{
+    type:String,
+    enum:['a','b','c','d']
+}
+}
+}],
+test_evaluation:[{
+lesson_id:mongoose.Schema.Types.ObjectId,
+start_time:Number,
+submit_time:Number,
+test_score:Number
+}],
+
+test_taken:{
+    type:Number,
+    default:0
+},
+avg_test_score:Number,
+
    })
 
 

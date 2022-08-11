@@ -58,6 +58,26 @@ status:  {
 //test
 num_question: Number,
 time_allowed: Number,
+questions:[
+  {
+  index: Number,
+  id: String,
+  question: String,
+  image: String ,//url
+  video: String ,//url
+  options:{
+  a: String,
+  b: String,
+  c: String,
+  d: String
+  }
+  }
+  ],
+  correct_option:[{}],
+  start_time:Number,
+  End_time:Number,
+  //index correct option and option choosed
+  
 
 
 //Payment
