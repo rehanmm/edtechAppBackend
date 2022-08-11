@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+const cors = require('cors');
 const cookieparser=require('cookie-parser');
 const userRoutes=require('../backend/routers/userRoutes')
 const courseRoutes=require('../backend/routers/courseRoutes')
@@ -17,6 +18,7 @@ const errorMiddleware=require('./error/errorMiddleware')
 app.use(express.json());
 app.use(cookieparser());
 app.use(express.urlencoded({extended:true}));
+app.use(cors());
 // app.use(base64Decoder);
 // app.use(md5HashVerifier);
 
