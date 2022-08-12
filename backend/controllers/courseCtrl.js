@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const catchAsyncError = require('../error/catchAsyncError')
 const errorHandler = require('../utils/errorHandler');
 const { send, tsend } = require('../middleware/responseSender');
+const { findById } = require('../models/userModel');
 
 const list = catchAsyncError(async function (req, res,) {
     const course = await Course.find({});
@@ -42,7 +43,8 @@ const remove = catchAsyncError(async function (req, res) {
 
 const update = catchAsyncError(async function (req, res) {
 
-    const course =await Course.findByIdAndUpdate(config.COURSE_ID, req.body)
+    await Course.findByIdAndUpdate(config.COURSE_ID, req.body)
+    const course =await Course.findById(config.COURSE_ID);
     res.status(200).json(
         {
             success: true,

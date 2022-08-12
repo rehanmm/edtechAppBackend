@@ -28,10 +28,12 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         default:0
        },
-      //  image: {
-      //   data: Buffer,
-      //   contentType: String
-      //  },
+       image_url: {
+        type:String
+       },
+       video_url: {
+        type:String
+       },
       //  category: {
       //   type: String,
       //   required: 'Category is required'
@@ -40,10 +42,6 @@ const courseSchema = new mongoose.Schema({
       //   type: Boolean,
       //   default: false
       //  },
-       user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-       },
        updated: Date,
      created: {
         type: Date,
@@ -130,10 +128,11 @@ is_paid:Boolean,
 is_locked:Boolean
 }
 ],
-
+price:Number,
+is_paid:Boolean,
 tags:[String],
 
-headline:{
+header:{
   type:String,
   default:''
 }
