@@ -56,15 +56,16 @@ const anonymous=catchAsyncError( async function(req,res){
     const {phone_number}=req.body
     
     if(phone_number===undefined){
-       
+        const a =Math.floor( Math.random() * (200000000000-1) + 1);
 req.body={
             name:"Anonymous",
-            is_anonymous:true
+            is_anonymous:true,
+            email:`anonymous${a}@user.com`
         }
     }
 
 
-    // console.log(req.body);
+    
     let user = new User(req.body);
     
     
@@ -77,7 +78,7 @@ req.body={
         success: true,
         message: 'Anonymous user created successfully',
        data:{userId:_id}
-
+ 
     })
 
 
