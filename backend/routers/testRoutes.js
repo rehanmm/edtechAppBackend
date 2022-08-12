@@ -8,7 +8,7 @@ router.route('/ui/startTest')
 .post(testCtrl.startTest)
 
 router.route('/ui/submitTest')
-.get(testCtrl.submitTest)
+.post(testCtrl.submitTest)
 
 // router.route('/ui/testResult')
 // .get(testCtrl.testREsult)

@@ -52,7 +52,7 @@ const signout=catchAsyncError( function(req,res){
 
 const anonymous=catchAsyncError( async function(req,res){
 
-   console.log('test')
+   
     const {phone_number}=req.body
     
     if(phone_number===undefined){

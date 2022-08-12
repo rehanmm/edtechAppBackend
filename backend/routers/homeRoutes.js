@@ -4,7 +4,7 @@ const userCtrl =require('../controllers/userCtrl')
 const router=express.Router()
 
 router.route('/ui/home')
-.get(homeCtrl.list)
+.post(homeCtrl.list)
 
 router.param('userId',userCtrl.userById)
 module.exports=router;

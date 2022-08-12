@@ -61,16 +61,45 @@ tsend({lesson_id,is_locked:true},'lesson is locked',res);
 else if(onlyunit){
 
 //get next lesson user has to access
+  const unitProgress= await findOne({user_id})
+  const arr=unitProgress.completed_lessons
+  let lastElement = arr.pop();
+  const lastWatchedLessonId=Object.keys(lastElement)[0];
+  const unit= await Unit.findOne({unit_id})
+  const lessonsArray=unit.lessons
 
+  const index = arr.findIndex(object => {
+    return object.lesson_id == lastWatchedLessonId}
+)
+
+//  agar lesson akhari hi ho to
+// if(index+1==lessonsArray.length ){
+//  const data=   {
+
+
+//     }
+// tsend()
+// }
+
+ if (index !== -1) {
+    const nextLessonObject=arr[index+1].lesson_id
+    const nextLessonid=nextLessonObject.lesson_id
+    const lesson= await Lesson.findById(nextLessonid);
+    
+}
+else {
+    next(new errorHandler('lesson not found',500))
+}
 
 //
 
 if(!prereqFunction(unitProgress,lesson.prerequisite)){
     //do stuff
+    tsend(lesson,'',res);
     
 }else{
     //do stuff   
-    
+    tsend({lesson_id,is_locked:true},'lesson is locked',res);
 }
 
 tsend(unit,'',res);
