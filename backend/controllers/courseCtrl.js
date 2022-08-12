@@ -42,7 +42,7 @@ const remove = catchAsyncError(async function (req, res) {
 
 const update = catchAsyncError(async function (req, res) {
 
-    const course =await Course.findByIdAndUpdate(req.params.courseId, req.body)
+    const course =await Course.findByIdAndUpdate(config.COURSE_ID, req.body)
     res.status(200).json(
         {
             success: true,
