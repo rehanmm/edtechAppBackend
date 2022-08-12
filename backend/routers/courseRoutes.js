@@ -1,13 +1,14 @@
 const  express  = require('express');
 const courseCtrl =require('../controllers/courseCtrl')
+const progressCtrl =require('../../test/progressCtrl')
 const router=express.Router()
 
 
 // :courseId/lesson/new'    
 // router.route('/courses')
 // .get(courseCtrl.list)
-.post(courseCtrl.create)
-// router.route('/courses/by/:instructorId')
+router.route('/progress/create')
+.post(progressCtrl.create)
 // .get(courseCtrl.courseByInstructor)
 // router.route('/courses/published')
 // .get(courseCtrl.coursePublished)

@@ -4,6 +4,7 @@ const mongoose =require('mongoose') ;
 const jwt=require('jsonwebtoken');
 const config=require('../config/config')
 
+
 const catchAsyncError = require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 
@@ -55,11 +56,10 @@ const anonymous=catchAsyncError( async function(req,res){
     const {phone_number}=req.body
     
     if(phone_number===undefined){
-        const a =Math.floor( Math.random() * (200000000000-1) + 1);
-     
-        req.body={
+       
+req.body={
             name:"Anonymous",
-           email:`rand${a}@jjfkj.com`
+            is_anonymous:true
         }
     }
 
@@ -85,7 +85,7 @@ const anonymous=catchAsyncError( async function(req,res){
 
 
 const signup=catchAsyncError( async function(req,res){
-    // console.log(req.body);
+   req.body.is_anonymous=false;
     let user = new User(req.body);
     
     

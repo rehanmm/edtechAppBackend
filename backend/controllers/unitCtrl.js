@@ -48,6 +48,8 @@ unit=unit.toObject({ getters: true, virtuals: true })
     if(unitProgress){
         unitProgress= unitProgress.toObject({ getters: true, virtuals: true });
     }
+
+    unit.lessons.sort((a,b)=>a.index-b.index)
 const unitdata=new unitData(unit,unitProgress);
 
  data={...unit,...unitdata}

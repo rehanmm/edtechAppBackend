@@ -37,7 +37,7 @@ const list = catchAsyncError(async function (req, res, next) {
         }
         //    
         const home = new homeData(user, course);
-      
+      home.units.sort((a, b) => a.index-b.index);
 // send(home,'',res);
  tsend(home,'',res);
 

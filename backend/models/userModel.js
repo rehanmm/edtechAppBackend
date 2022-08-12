@@ -123,7 +123,7 @@ units_completed:[{}]
 // checking validity of the password
 userSchema.methods.isValidPassword= function(password) { 
                 const hash = crypto.pbkdf2Sync(password,  
-            this.salt, 1000, 64, `sha512`).toString(`hex`); 
+            this.salt, 1000, 64, `sha512`).toString(`hex`);
             return this.password === hash; 
         }; 
     
