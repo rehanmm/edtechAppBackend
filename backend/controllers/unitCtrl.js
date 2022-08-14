@@ -8,6 +8,7 @@ const {longUnitToShort,unitData}=require('../utils/objectConstructor');
 const unitUpdater=require('../helpers/unitUpdater')
 const {send,tsend}=require('../middleware/responseSender');
 const Progress = require('../models/progressModel');
+const config=require('../config/config');
 
 
 const list=catchAsyncError(  async function(req ,res){
@@ -35,7 +36,7 @@ const create=catchAsyncError( async function(req ,res){
 })
 const read=catchAsyncError(async function(req ,res){
     // console.log(req.body.unit_id);
-let unit = await Unit.findById(req.body.unit_id).select('completion tags is_paid total_articles total_video total_test total_lesson name lessons ')
+let unit = await Unit.findById(req.body.unit_id).select(' completion tags is_paid total_articles total_video total_test total_lesson name lessons ')
 unit=unit.toObject({ getters: true, virtuals: true })
 // unit =unit.toObject()
 
@@ -44,7 +45,7 @@ unit=unit.toObject({ getters: true, virtuals: true })
   
    
 
-    let unitProgress = await Progress.findById(req.body.unit_id)
+    let unitProgress = await Progress.findById(req.body.user_id)
     if(unitProgress){
         unitProgress= unitProgress.toObject({ getters: true, virtuals: true });
     }
@@ -87,17 +88,28 @@ const update=catchAsyncError( async function(req ,res){
     )
 
 })
+const updateUnitPosition=catchAsyncError( async function(req ,res){
+  
+        const unitArray=await Unit.findById(config.COURSE_ID).select('units')
+//destruct userId and newIndex 
+arr[indexOfTargetUnit]=(arr[newIndex]+arr[newIndex-1])/2
+        
+    res.status(200).json(
+       { success:true,
+        message:'updated successfully'
+    }
+    )
+
+})
  
-// const unitById=catchAsyncError( async function(req ,res,next){
-// const unit= await Unit.findById(req.params.unitId);
 
 
-// await course.save()
-// req.course=unit
 
-// next()
-// })
 
-module.exports={list,read,update,create,remove
+
+
+
+
+module.exports={list,read,update,updateUnitPosition,create,remove
 }
 

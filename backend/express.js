@@ -8,7 +8,7 @@ const lessonRoutes=require('../backend/routers/lessonRoutes')
 const authRoutes=require('../backend/routers/authRoutes');
 const homeRoutes=require('../backend/routers/homeRoutes');
 const unitRoutes=require('../backend/routers/unitRoutes');
-const enrollRoutes=require('../backend/routers/enrollRoutes');
+const forumRoutes=require('../backend/routers/forumRoutes');
 const testRoutes=require('../backend/routers/testRoutes');
 const errorMiddleware=require('./error/errorMiddleware')
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
@@ -29,7 +29,7 @@ app.use('/edtech',authRoutes);
 app.use('/edtech',userRoutes);
 app.use('/edtech',courseRoutes);
 app.use('/edtech',lessonRoutes);
-app.use('/edtech',enrollRoutes);
+app.use('/edtech',forumRoutes);
 app.use('/edtech',homeRoutes);
 app.use('/edtech',unitRoutes);
 app.use('/edtech',testRoutes);

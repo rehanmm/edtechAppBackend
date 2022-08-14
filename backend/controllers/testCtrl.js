@@ -12,7 +12,6 @@ const startTest=catchAsyncError(async function(req,res){
     let testProgress= await Progress.findOne({user_id})//.select('test_answers option_choosed test_evaluation test_taken avg_test_score');
     // console.log(testProgress)
 const arr=testProgress.test_evaluation
-console.log(arr)
 startTime=Date.now();
     const test_record={
         lesson_id:lesson_id,

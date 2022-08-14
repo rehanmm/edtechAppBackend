@@ -3,7 +3,7 @@ const express=require('express');
 const mongoose =require('mongoose') ;
 const jwt=require('jsonwebtoken');
 const config=require('../config/config')
-
+const {send,tsend}=require('../middleware/responseSender')
 
 const catchAsyncError = require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
@@ -16,11 +16,13 @@ const signin = catchAsyncError( async function(req,res){
 
         const user= await User.findOne({email:req.body.email})
         if(!user){
-            return res.status(401).json({error:"User not found"})
+           
+            return next(new errorHandler('User not found',401));
 
         }
   if(!user.isValidPassword(req.body.password)){
-    return res.status(401).json({error:"Email or Password does not match"})
+    
+    return next(new errorHandler('Email or Password does not match',401));
   }
   const token=jwt.sign({_id:user._id},config.JWT_SECRET_KEY)
   res.cookie('t',token,{expire:new Date+10000});
@@ -45,6 +47,7 @@ const signout=catchAsyncError( function(req,res){
 
     res.clearCookie('t');
     return res.status(200).json({
+        success:true,
         message:"signed out"
     })
 

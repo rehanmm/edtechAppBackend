@@ -1,20 +1,46 @@
 const mongoose = require('mongoose');  
 
 const questionSchema=new mongoose.Schema({
-title:{
+
+    body:String,
+    image_url:String,
+    tags:[],
+head:{
     type:String,
     trim:true,
     required:[true,'please enter your question']
 },
-details:{
+body:{
     type:String,
     required:[true,'please explain your question ']
 },
-posted:{
-    type:Boolean,
-    default:false
-}
+
+accepted_answer:{
+
+},
+
+popularity_index:{
+
+},
+top_answer:[{}],
+
+// created_at:{
+// type:Date,
+// default:Date.now()
+// },
+// last_edited_at:{
+//     type:Date,
+//     },
+total_likes:{
+type:Number
+},
+total_comments:{
+type:Number
+},
 
 
+}, {
+    timestamps: { createdAt: true, updatedAt:true }
+  })
 
-})
+module.exports=mongoose.model('Question',questionSchema)
