@@ -72,7 +72,7 @@ class unitData{
         this.has_user_started=false
         this.has_user_purchased=false
         this.assignments=[]
-        this.started_at=null
+        this.start_at={}
 
         // this.compleion
     }else{
@@ -80,7 +80,7 @@ class unitData{
         this.has_user_started=unitProgress.has_user_started||false
         this.has_user_purchased=unitProgress.has_user_purchased||false
         this.assignments=unitProgress.assignments||[]
-        this.started_at=null
+        this.start_at={}
 
         //     this.unit_title=unit.name||''
         //     this.tags=unit.tags
@@ -96,4 +96,23 @@ class unitData{
 
 
 
-module.exports={homeData,longUnitToShort,unitData}  
+class longLessonToShort{
+constructor(lesson){
+this.lesson_id=lesson._id
+this.type=lesson.type
+this.title=lesson.title
+this.description=lesson.description
+this.is_completed=null//from progress model
+this.prerequisite=lesson.prerequisite
+this.index=null //from previous lesson index in array
+this.is_locked=lesson.is_locked
+
+
+}
+
+
+}
+
+
+
+module.exports={homeData,longUnitToShort,longLessonToShort,unitData}  

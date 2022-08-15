@@ -6,6 +6,8 @@ const errorHandler = require('../utils/errorHandler');
 const {send,tsend} = require('../middleware/responseSender')
 const Progress=require('../models/progressModel');
 const prereqFunction=require('../helpers/unitHelper/condition')
+const {longLessonToShort} =require('../utils/objectConstructor')
+const shortLessonupdater=require('../helpers/shortLessonUpdater')
 
 
 const list=catchAsyncError(  async function(req ,res,){
@@ -14,8 +16,11 @@ res.status(200).json(lesson)
 })
 
 const create=catchAsyncError( async function(req ,res){
- 
+    const  {unit_id}= req.body
     const lesson = new Lesson(req.body);
+    shortLessonupdater(lesson,unit_id)
+const shortLesson = new longLessonToShort(lesson); 
+
     await lesson.save()
     res.status(200).json(req.body)
 

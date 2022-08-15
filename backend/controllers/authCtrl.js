@@ -12,9 +12,10 @@ const errorHandler = require('../utils/errorHandler');
 
 
 
-const signin = catchAsyncError( async function(req,res){
-
-        const user= await User.findOne({email:req.body.email})
+const signin = catchAsyncError( async function(req,res,next){
+console.log(req.body)
+const {email,password}=req.body
+        const user= await User.findOne({email})
         if(!user){
            
             return next(new errorHandler('User not found',401));
@@ -92,8 +93,9 @@ const signup=catchAsyncError( async function(req,res){
    req.body.is_anonymous=false;
     let user = new User(req.body);
     
-    
+    await user.savePassword()
     await user.save()
+
     
    const {_id}=user
   

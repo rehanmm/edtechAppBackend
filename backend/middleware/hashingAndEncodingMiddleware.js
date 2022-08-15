@@ -3,6 +3,7 @@ const errorHandler = require('../utils/errorHandler');
 const config=require('../config/config');
 
 
+
 const secret = config.SECRET_KEY;
 const base64Decoder= function(req,res,next){
     // var a = Buffer.from('baseAuth').toString('base64')

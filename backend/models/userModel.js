@@ -124,24 +124,23 @@ units_completed:[{}]
 userSchema.methods.isValidPassword= function(password) { 
                 const hash = crypto.pbkdf2Sync(password,  
             this.salt, 1000, 64, `sha512`).toString(`hex`);
-            console.log(hash);
             return this.password === hash; 
         }; 
     
+        userSchema.methods.savePassword=async function(password) {
+            if(this.is_anonymous){return}
+
+            this.salt=crypto.randomBytes(16).toString('hex')
     
+            this.password=crypto.pbkdf2Sync(this.password, this.salt,  
+                1000, 64, `sha512`).toString(`hex`); 
     
+        }
+     
+     
+//    userSchema.pre('save',async function(){
    
-     
-     
-   userSchema.pre('save',async function(){
-    if(this.is_anonymous){return}
-
-        this.salt=crypto.randomBytes(16).toString('hex')
-
-        this.password=crypto.pbkdf2Sync(this.password, this.salt,  
-            1000, 64, `sha512`).toString(`hex`); 
-
-    })
+//     })
     module.exports= mongoose.model('User',userSchema);
     
     

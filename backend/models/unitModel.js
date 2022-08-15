@@ -6,11 +6,11 @@ const unitSchema = new mongoose.Schema({
         type: String,
         required: 'Name is required'
       },
-      course_name:{
-        type:String,
-        trim: true,
-        default:''
-       },
+      // course_name:{
+      //   type:String,
+      //   trim: true,
+      //   default:''
+      //  },
        completion:{
         type:String,
         default:'auto'

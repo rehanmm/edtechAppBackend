@@ -7,7 +7,8 @@ const lessonSchema = new mongoose.Schema({
     type:String,
     completion:{
         type:String,
-        default:'auto'
+        default:'auto',
+        enum:['auto','manual']
       },
     prerequisite:{
         has_prerequisite:Boolean,
@@ -111,7 +112,7 @@ events:[
   venue: String,
   is_paid: Boolean,
   price: Number,
-  pre_requisite: {
+  prerequisite: {
     has_prerequisite:{
       type:Boolean,
     default:false},

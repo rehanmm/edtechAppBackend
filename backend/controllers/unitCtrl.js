@@ -28,7 +28,7 @@ const create=catchAsyncError( async function(req ,res){
 
     await unit.save()
 
-    res.status(200).json(unit)
+    tsend(unit,'unit created successfully',res)
     // send(unit,'',res);
 
 
