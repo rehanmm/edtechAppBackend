@@ -75,7 +75,7 @@ const unitSchema = new mongoose.Schema({
     //   type:Number,
     //   default:0
     // },
-    total_article:{//new
+    total_articles:{
       type:Number,
       default:0
     },
@@ -121,7 +121,6 @@ const unitSchema = new mongoose.Schema({
         title:{type:String,
           default:''},
         is_completed:Boolean,
-        is_completed:Boolean,
         description:{type:String,
           default:''}
 
@@ -134,13 +133,13 @@ const Unit=mongoose.model('unit',unitSchema);
 
 unitSchema.set('toObject', { virtuals: true })
 unitSchema.set('toJSON', { virtuals: true })
-unitSchema.virtual('total_lessons').get(function(){
+unitSchema.virtual('total_lesson').get(function(){
 return this.lessons.length;
 })
-unitSchema.virtual('total_articles').get(function(){
-// console.log(this.lessons.length)
-return 'article';
-})
+// unitSchema.virtual('total_articles').get(function(){
+// // console.log(this.lessons.length)
+// return this.lessons.length;
+// })
 module.exports={
     Unit,unitSchema
 }

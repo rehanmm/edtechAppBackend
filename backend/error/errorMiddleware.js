@@ -1,8 +1,9 @@
+const { mongo, MongooseError, default: mongoose } = require('mongoose');
 const errorHandler=require('../utils/errorHandler')
 
 module.exports=(err,req,res,next)=>{ 
 err.statusCode=200//err.statusCode||500;
-err.message=err.message||'internal server  error';
+err.message=err.message||'internal server error';
 
 //cast error handling
 if(err.name==='CastError'){
@@ -19,9 +20,8 @@ if(err.name==='CastError'){
 
 // }
 
-
 res.status(err.statusCode).json({
-    success:true,
+    success:false,
     name:err.name,
     message:err.message
 

@@ -133,6 +133,7 @@ events:[
 
     }
 },
+
   is_locked: Boolean,
   is_subscribed :{
     type: Boolean,
