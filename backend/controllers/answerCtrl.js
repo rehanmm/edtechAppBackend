@@ -41,10 +41,18 @@ const update = catchAsyncError( async function(req ,res){
     
 
 })
+
+const upvote = catchAsyncError( async function(req ,res){
+const {answer_id}=req.body
+ await Answer.findOneAndUpdate({answer_id},{$inc:{upvote:1}})
+   tsend({},'you upvoted answer',res)
+    
+
+})
  
 
 
-module.exports = {list,read,update,create,remove
+module.exports = {list,read,update,upvote,create,remove
 }
 
 

@@ -1,14 +1,15 @@
 const errorHandler=require('../utils/errorHandler')
 
 module.exports=(err,req,res,next)=>{ 
-err.statusCode=err.statusCode||500;
+err.statusCode=200//err.statusCode||500;
 err.message=err.message||'internal server  error';
 
 //cast error handling
 if(err.name==='CastError'){
     const message=`Resource not found invalid:${err.path}`
 
-    err=new errorHandler(message,400)//bad request
+    // err=new errorHandler(message,400)//bad request
+    err=new errorHandler(message,200)//bad request
 
 }
 // if(err.name==='TypeError'){
@@ -20,7 +21,7 @@ if(err.name==='CastError'){
 
 
 res.status(err.statusCode).json({
-    success:false,
+    success:true,
     name:err.name,
     message:err.message
 

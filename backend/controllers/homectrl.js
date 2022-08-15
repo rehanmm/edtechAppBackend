@@ -21,9 +21,9 @@ const list = catchAsyncError(async function (req, res, next) {
     
     // console.log(user)
     if (!user) {
-        return next(new errorHandler('list not found', 404))
+        return next(new errorHandler('list not found', 200))
     }
-    const course = await Course.findById(config.COURSE_ID);
+    const course = await Course.findById(config.COURSE_ID).select('-_id');
     // console.log(course);
     
 

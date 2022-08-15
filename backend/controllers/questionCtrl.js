@@ -1,11 +1,12 @@
 const Question=require('../models/questionModel');
+const Answer=require('../models/answerModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 const { tsend,send } = require('../middleware/responseSender');
 
-
+ 
 const list=catchAsyncError(  async function(req ,res,){
     const filter = req.query;
     let where = {};
@@ -25,7 +26,7 @@ const list=catchAsyncError(  async function(req ,res,){
             message: "No page found",
         });
     }
-    result = await query.skip(skip).limit(pageSize);
+    result = await query.skip(skip).limit(pageSize).sort({'upvote':-1});
     res.json({
         status: "success",
         filter,
@@ -39,21 +40,21 @@ const list=catchAsyncError(  async function(req ,res,){
 const create=catchAsyncError( async function(req ,res){
  
     const question = new Question(req.body);
-
     await question.save()
     tsend(question,'',res)
 
 })
-const read=catchAsyncError( function(req ,res){
-
+const read=catchAsyncError( async function(req ,res){
+const {question_id}=req.body
+const question= await Question.findById(question_id);
+const answers= await Answer.find({question_id}).sort({upvote:-1}).limit(10)
+tsend({question,answers},'',res);
    
     
 })
 const remove= catchAsyncError( async function(req ,res){
 const {question_id}=req.body
-
 const question= await Question.findById(question_id)
-
 await question.remove();
 
    tsend({question_id:question._id},'question deleted successfully',res)

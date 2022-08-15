@@ -9,7 +9,7 @@ const errorHandler = require('../utils/errorHandler');
 const list = catchAsyncError(async function (req, res) {
     const users = await User.find({})
     if(!users){
-        return next(new errorHandler('list not found',404))
+        return next(new errorHandler('list not found',200))
     }
     res.status(200).json(users)
 })
@@ -81,7 +81,7 @@ const update =catchAsyncError( async function (req, res) {
 const userById = catchAsyncError( async function (req, res, next) {
     const user = await User.findById(req.params.userId);
     if(!user){
-        return next(new errorHandler('user not found',404))
+        return next(new errorHandler('user not found',200))
     }
     req.user = user;
 

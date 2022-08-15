@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 
 const questionSchema=new mongoose.Schema({
 
+
+    user_id:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Question',
+        required:[true,'user id is required']
+    },
     body:String,
     image_url:String,
     tags:[],
@@ -20,9 +26,8 @@ accepted_answer:{
 },
 
 popularity_index:{
-
+type:Number
 },
-top_answer:[{}],
 
 // created_at:{
 // type:Date,
@@ -37,6 +42,7 @@ type:Number
 total_comments:{
 type:Number
 },
+
 
 
 }, {

@@ -132,7 +132,7 @@ price:Number,
 is_paid:Boolean,
 tags:[String],
 
-header:{
+headline:{
   type:String,
   default:''
 }
