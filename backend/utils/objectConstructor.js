@@ -65,22 +65,22 @@ class unitData{
 //   }
     constructor(unitProgress)
     {
-
+        // const numberOfLessonCompleted=
         if(!unitProgress)
       {
-          this.completed_lessons={}
+          this.completed_lessons=0
         this.has_user_started=false
         this.has_user_purchased=false
         this.assignments=[]
-        this.started_at={}
+        this.started_at=null
 
         // this.compleion
     }else{
-        this.completed_lessons=unitProgress.completed_lessons||{}
+        this.completed_lessons=unitProgress.completed_lessons.length
         this.has_user_started=unitProgress.has_user_started||false
         this.has_user_purchased=unitProgress.has_user_purchased||false
         this.assignments=unitProgress.assignments||[]
-        this.started_at={}
+        this.started_at=null
 
         //     this.unit_title=unit.name||''
         //     this.tags=unit.tags

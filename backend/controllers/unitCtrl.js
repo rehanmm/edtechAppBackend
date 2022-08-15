@@ -37,7 +37,7 @@ const create=catchAsyncError( async function(req ,res){
 const read=catchAsyncError(async function(req ,res){
     // console.log(req.body.unit_id);
 let unit = await Unit.findById(req.body.unit_id).select(' completion tags is_paid total_articles total_video total_test total_lesson name lessons ')
-console.log(unit)
+// console.log(unit)
 unit=unit.toObject({ getters: true, virtuals: true })
 // unit =unit.toObject()
 
@@ -45,14 +45,16 @@ unit=unit.toObject({ getters: true, virtuals: true })
 
   
    
+const user_id=req.body.user_id;
 
-    let unitProgress = await Progress.findById(req.body.user_id)
+    let unitProgress = await Progress.findOne({user_id})
+
     if(unitProgress){
         unitProgress= unitProgress.toObject({ getters: true, virtuals: true });
     }
 
     unit.lessons.sort((a,b)=>a.index-b.index)
-const unitdata=new unitData(unit,unitProgress);
+const unitdata=new unitData(unitProgress);
 
  data={...unit,...unitdata}
 
