@@ -1,4 +1,5 @@
 const Lesson=require('../models/lessonModel');
+const Unit=require('../models/unitModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
@@ -18,8 +19,9 @@ res.status(200).json(lesson)
 const create=catchAsyncError( async function(req ,res){
     const  {unit_id}= req.body
     const lesson = new Lesson(req.body);
-    shortLessonupdater(lesson,unit_id)
-const shortLesson = new longLessonToShort(lesson); 
+    const shortLesson = new longLessonToShort(lesson); 
+    // const unitLessonUpdate = await Unit.findOneAndUpdate(shortLesson,unit_id);
+    shortLessonupdater(shortLesson,unit_id)
 
     await lesson.save()
     res.status(200).json(req.body)
@@ -34,11 +36,11 @@ const read=catchAsyncError( async function(req ,res){
     const nothingProvided=!lesson_id&&!unit_id
     // console.log(nothingProvided);
 
-    // const unitProgress = await Progress.findById(user_id)
-const obj={}
-obj['62f3f716088e0c7a694a6bb4']='1660155813697'
-let obj1={}
-obj1['62f3f6bd088e0c7a694a6bb2']='1660151960229'
+//     // const unitProgress = await Progress.findById(user_id)
+// const obj={}
+// obj['62f3f716088e0c7a694a6bb4']='1660155813697'
+// let obj1={}
+// obj1['62f3f6bd088e0c7a694a6bb2']='1660151960229'
 
 
     unitProgress={

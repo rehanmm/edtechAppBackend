@@ -13,9 +13,9 @@ router.route('/admin/unit')
 .post(unitCtrl.read)
 router.route('/admin/unit/update')
 .put(unitCtrl.update)
-router.route('/unit/updatePosition')
+router.route('/unit/update/position')
 .put(unitCtrl.updateUnitPosition)
-router.route('/admin/units/removeUnit')
+router.route('/admin/unit/remove')
 .delete(unitCtrl.remove)
 
 

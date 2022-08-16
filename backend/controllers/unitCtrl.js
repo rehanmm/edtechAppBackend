@@ -95,7 +95,9 @@ const updateUnitPosition=catchAsyncError( async function(req ,res){
   
         const unitArray=await Unit.findById(config.COURSE_ID).select('units')
 //destruct userId and newIndex 
-arr[indexOfTargetUnit]=(arr[newIndex]+arr[newIndex-1])/2
+const {user_id,Index}=req.body;
+
+unitArray[indexOfTargetUnit]=(unitArray[Index]+unitArray[Index-1])/2
         
     res.status(200).json(
        { success:true,

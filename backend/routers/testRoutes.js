@@ -4,10 +4,10 @@ const router=express.Router()
 
 // router.route('/admin/lessons')
 // .get(testCtrl.getTestQuestion)
-router.route('/ui/startTest')
+router.route('/ui/test/start')
 .post(testCtrl.startTest)
 
-router.route('/ui/submitTest')
+router.route('/ui/test/submit')
 .post(testCtrl.submitTest)
 
 // router.route('/ui/testResult')

@@ -4,7 +4,10 @@ const {lessonSchema}=require('../models/lessonModel')
 const unitSchema = new mongoose.Schema({
     unit_name: {
         type: String,
-        required: 'Name is required'
+        required: 'unit name is required'
+      },
+      image_url:{
+        type:String
       },
       // course_name:{
       //   type:String,
