@@ -12,6 +12,9 @@ user_id:{
     ref:'Question',
     required:[true,'id of the user is required']
 },
+user_name:{
+    type:String,
+},
 head:{
     type:String,
     trim:true,
@@ -21,10 +24,6 @@ body:{
     type:String,
     required:[true,'please explain your question ']
 },
-// popularity_index:{
-
-// },
-
 total_upvote:{
 type:Number
 },

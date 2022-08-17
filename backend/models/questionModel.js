@@ -29,14 +29,10 @@ accepted_answer:{
 popularity_index:{
 type:Number
 },
-
-// created_at:{
-// type:Date,
-// default:Date.now()
-// },
-// last_edited_at:{
-//     type:Date,
-//     },
+user_name:{
+    type:String,
+    trim:true,
+},
 total_likes:{
 type:Number,
 default:0
@@ -54,7 +50,6 @@ likes:[mongoose.Schema.Types.ObjectId],
   })
 
 module.exports=mongoose.model('Question',questionSchema)
-
 
 questionSchema.methods.popularityIndex=function(){
     let referenceDate = 1660673618948;

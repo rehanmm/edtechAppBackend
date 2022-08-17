@@ -3,7 +3,8 @@ const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
-const {tsend,send} = require('../middleware/responseSender')
+const {tsend,send} = require('../middleware/responseSender');
+const Question = require('../models/questionModel');
 
 
 const list=catchAsyncError(  async function(req ,res,){
@@ -12,7 +13,11 @@ tsend(answer,'',res)
 })
 
 const create=catchAsyncError( async function(req ,res){
- 
+ const question_id=req.body.question_id;
+ const question= await Question.findOne({question_id});
+ question.total_comment++;
+ question.popularityIndex();
+ question.save();
     const answer = new Answer(req.body);
     await answer.save()
     tsend(answer,'',res)
@@ -46,7 +51,7 @@ const upvote = catchAsyncError( async function(req ,res){
 
     const {user_id,answer_id}=req.body
   
-    const answer= await Answer.findById(question_id)
+    const answer= await Answer.findById(answer_id)
      if(answer.likes.includes(user_id)){
             answer.upvotes.pull(user_id)
           const value=answer.total_upvote
@@ -54,7 +59,7 @@ const upvote = catchAsyncError( async function(req ,res){
      }else{
         const value=question.total_upvote
         question.total_upvote=value+1
-            question.upvotes.push(user_id)
+            answer.upvotes.push(user_id)
      }
     await question.save()
 //   const updatedvalue=await Question.findById(req.body.question_id)

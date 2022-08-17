@@ -28,18 +28,19 @@ const list=catchAsyncError(  async function(req ,res,){
     }
     result = await query.skip(skip).limit(pageSize).sort({'createdAt':-1});
     res.json({
-        status: "success",
+        success: true,
         filter,
         count: result.length,
         page,
         pages,
-        data: result
+        data: {questions:result}
     });
 })
 
 const create=catchAsyncError( async function(req ,res){
  
     const question = new Question(req.body);
+    question.popularityIndex();
     await question.save()
     tsend(question,'',res)
 
@@ -75,7 +76,7 @@ const update=catchAsyncError( async function(req ,res){
 const like=catchAsyncError( async function(req ,res){
 
   const {user_id,question_id}=req.body
-  
+
     const question= await Question.findById(question_id)
      if(question.likes.includes(user_id)){
             question.likes.pull(user_id)
@@ -86,8 +87,11 @@ const like=catchAsyncError( async function(req ,res){
         question.total_likes=value+1
             question.likes.push(user_id)
      }
-    await question.save()
-//   const updatedvalue=await Question.findById(req.body.question_id)
+
+//update question popularity index
+question.popularityIndex();
+await question.save()
+//const updatedvalue=await Question.findById(req.body.question_id)
     tsend ({},'',res)
     
 
