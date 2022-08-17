@@ -40,7 +40,7 @@ const list=catchAsyncError(  async function(req ,res,){
 const create=catchAsyncError( async function(req ,res){
  
     const question = new Question(req.body);
-    question.popularityIndex();
+    // question.popularityIndex();
     await question.save()
     tsend(question,'',res)
 
@@ -89,7 +89,7 @@ const like=catchAsyncError( async function(req ,res){
      }
 
 //update question popularity index
-question.popularityIndex();
+// question.popularityIndex();
 await question.save()
 //const updatedvalue=await Question.findById(req.body.question_id)
     tsend ({},'',res)
