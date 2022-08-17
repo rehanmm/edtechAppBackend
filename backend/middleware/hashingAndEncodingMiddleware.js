@@ -6,9 +6,9 @@ const config=require('../config/config');
 
 const secret = config.SECRET_KEY;
 const base64Decoder= function(req,res,next){
+    
     // var a = Buffer.from('baseAuth').toString('base64')
     // console.log(a);
-   
     var b = Buffer.from(req.body.data,'base64').toString()
 b=JSON.parse(b);
 req.body=b;

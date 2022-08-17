@@ -43,10 +43,22 @@ const update = catchAsyncError( async function(req ,res){
 })
 
 const upvote = catchAsyncError( async function(req ,res){
-const {answer_id}=req.body
- await Answer.findOneAndUpdate({answer_id},{$inc:{upvote:1}})
-   tsend({},'you upvoted answer',res)
-    
+
+    const {user_id,answer_id}=req.body
+  
+    const answer= await Answer.findById(question_id)
+     if(answer.likes.includes(user_id)){
+            answer.upvotes.pull(user_id)
+          const value=answer.total_upvote
+           answer.total_upvote=value-1
+     }else{
+        const value=question.total_upvote
+        question.total_upvote=value+1
+            question.upvotes.push(user_id)
+     }
+    await question.save()
+//   const updatedvalue=await Question.findById(req.body.question_id)
+    tsend ({},'',res)
 
 })
  

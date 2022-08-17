@@ -25,9 +25,10 @@ body:{
 
 // },
 
-upvote:{
+total_upvote:{
 type:Number
 },
+upvotes:[mongoose.Schema.Types.ObjectId],
 is_top_answer:Boolean,
 accepted_answer:{
     type:Boolean,

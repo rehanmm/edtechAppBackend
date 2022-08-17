@@ -8,6 +8,7 @@ const {longUnitToShort,unitData}=require('../utils/objectConstructor');
 const unitUpdater=require('../helpers/unitUpdater')
 const {send,tsend}=require('../middleware/responseSender');
 const Progress = require('../models/progressModel');
+const Course = require('../models/courseModel');
 const config=require('../config/config');
 
 
@@ -17,12 +18,10 @@ tsend(unit,'',res);
 })
 
 const create=catchAsyncError( async function(req ,res){
-//  const course0=await Course.find({}).count()
-
     const unit = new Unit(req.body);
     const unit1= new longUnitToShort(unit);
-    unitUpdater(unit1);
-    // console.log(unit1);
+                      unitUpdater(unit1);
+
     
     
 
@@ -58,12 +57,6 @@ const unitdata=new unitData(unitProgress);
 
  data={...unit,...unitdata}
 
-
- 
-// const unitData=_.extend(unit,unitProgress)
-
-
-// console.log(data);
     tsend(data,'',res);
     
 })
@@ -92,13 +85,51 @@ const update=catchAsyncError( async function(req ,res){
 
 })
 const updateUnitPosition=catchAsyncError( async function(req ,res){
+    let {units,user_id}=req.body;
   
-        const unitArray=await Unit.findById(config.COURSE_ID).select('units')
-//destruct userId and newIndex 
-const {user_id,Index}=req.body;
+        let course=await Course.findById(config.COURSE_ID).select('units')
+        unitArray=course.units
+        //destruct userId and newIndex 
+  units.forEach(async (unit)=>{      
+        let {unit_id,index}=unit;
+// console.log(unitArray);
+const indexOfTargetUnit = unitArray.findIndex(e=> e.unit_id ==unit_id);
+// console.log(indexOfTargetUnit);
+if(index==indexOfTargetUnit+1){
+    // console.log('same position')
+    return ;
+}
 
-unitArray[indexOfTargetUnit]=(unitArray[Index]+unitArray[Index-1])/2
-        
+else if(index==1){
+    unitArray[indexOfTargetUnit].index=0.5;
+    console.log(unitArray[indexOfTargetUnit].index);
+}
+else if(index==unitArray.length){
+    // console.log(index==unitArray.length);
+    // console.log(index)
+    unitArray[indexOfTargetUnit].index=index;
+    console.log(unitArray[indexOfTargetUnit].index);
+}
+else if(index==unitArray.length-1){
+    index=index-2
+unitArray[indexOfTargetUnit].index=(unitArray[index].index+unitArray[index+1].index)/2
+console.log(unitArray[indexOfTargetUnit].index);
+}
+else{
+    index=index-2
+unitArray[indexOfTargetUnit].index=(unitArray[index].index+unitArray[index+1].index)/2
+console.log(unitArray[indexOfTargetUnit].index);
+}
+unitArray.sort((a, b) => a.index-b.index);
+for(let i=0;i<unitArray.length;i++){
+    unitArray[i].index=i+1;
+}
+  })
+
+
+// console.log(unitArray);
+await course.save()
+
     res.status(200).json(
        { success:true,
         message:'updated successfully'

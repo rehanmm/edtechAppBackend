@@ -26,7 +26,7 @@ const list=catchAsyncError(  async function(req ,res,){
             message: "No page found",
         });
     }
-    result = await query.skip(skip).limit(pageSize).sort({'upvote':-1});
+    result = await query.skip(skip).limit(pageSize).sort({'createdAt':-1});
     res.json({
         status: "success",
         filter,
@@ -71,10 +71,31 @@ const update=catchAsyncError( async function(req ,res){
     
 
 })
+//
+const like=catchAsyncError( async function(req ,res){
+
+  const {user_id,question_id}=req.body
+  
+    const question= await Question.findById(question_id)
+     if(question.likes.includes(user_id)){
+            question.likes.pull(user_id)
+          const value=question.total_likes
+           question.total_likes=value-1
+     }else{
+        const value=question.total_likes
+        question.total_likes=value+1
+            question.likes.push(user_id)
+     }
+    await question.save()
+//   const updatedvalue=await Question.findById(req.body.question_id)
+    tsend ({},'',res)
+    
+
+})
  
 
 
-module.exports={list,read,update,create,remove
+module.exports={list,read,update,create,remove,like
 }
 
 
