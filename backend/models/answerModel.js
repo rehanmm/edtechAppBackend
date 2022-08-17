@@ -18,7 +18,7 @@ user_name:{
 head:{
     type:String,
     trim:true,
-    required:[true,'please enter your question']
+    // required:[true,'please enter your question']
 },
 body:{
     type:String,
