@@ -29,7 +29,7 @@ const lessonSchema = new mongoose.Schema({
 body: String,
 
 //video
-video_url: String,
+video_id: String,
 thumbnail_url: String,
 total_time: Number,
 start_at:{
