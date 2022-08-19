@@ -51,8 +51,16 @@ const user_id=req.body.user_id;
     if(unitProgress){
         unitProgress= unitProgress.toObject({ getters: true, virtuals: true });
     }
+    else{
 
-    unit.lessons.sort((a,b)=>a.index-b.index)
+const newProgress = new Progress({user_id});
+unitProgress=newProgress.toObject({ getters: true, virtuals: true });
+
+    }
+
+
+
+ unit.lessons.sort((a,b)=>a.index-b.index)
 const unitdata=new unitData(unitProgress);
 
  data={...unit,...unitdata}

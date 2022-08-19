@@ -17,8 +17,6 @@ const list = catchAsyncError(async function (req, res, next) {
 const {user_id}=req.body
     // console.log(req.body.user_id)
     const user = await User.findOne({user_id})
-    
-    
     // console.log(user)
     if (!user) {
         return next(new errorHandler('list not found', 200))
