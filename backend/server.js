@@ -13,8 +13,8 @@ port=config.PORT
 
 //uncaughtException error handling
 process.on('uncaughtException',(err)=>{
-    console.timeLog(`Error:${err.message}`);
-    console.log('Shutting down the server due to uncaughtException');
+    // console.timeLog(`Error:${err.message}`);
+    console.log(`Shutting down the server due to uncaughtException ${err}`);
     server = app.listen(port)
 
     server.close();
