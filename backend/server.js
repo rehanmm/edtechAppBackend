@@ -2,6 +2,7 @@ const app=require('./express')
 const mongoose=require('mongoose')
 const dotenv = require("dotenv")
 const config=require('../backend/config/config')
+process.env.NODE_CONFIG_DIR = '../backend/config';
 // const errorHandler = require('./utils/errorHandler')
 
 dotenv.config()

@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema({
         trim:true,
         // required:['Name is required']
     },
+    user_id:{
+        type:String
+    },
     password:{
         type:String ,
         required:[function(value){
