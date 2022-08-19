@@ -11,6 +11,7 @@ const forumRoutes=require('../backend/routers/forumRoutes');
 const testRoutes=require('../backend/routers/testRoutes');
 const errorMiddleware=require('./error/errorMiddleware')
 const authRoutes=require('../backend/routers/authRoutes');
+const firebaseAuthRoutes=require('../backend/routers/firebaseRoutes');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
 // const logger=require('./middleware/logger')
@@ -27,7 +28,7 @@ app.use(cors());
 
 // app.use(logger);
 app.use('/edtech',authRoutes);
-// app.use('/edtech',firebaseAuthRoutes);
+app.use('/edtech',firebaseAuthRoutes);
 app.use('/edtech',userRoutes);
 app.use('/edtech',courseRoutes);
 app.use('/edtech',lessonRoutes);

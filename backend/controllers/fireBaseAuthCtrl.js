@@ -20,17 +20,20 @@ const login=catchAsyncError( async function(req ,res){
 const {user_id,phone_number}=req.body
 
  const user=await admin.auth().getUser(user_id)
- //  console.log(user)
+  // console.log(user)
  if(user.phoneNumber==phone_number){
    
    let msg = "Login Successful";
    let is_new = false;
     // console.log(req.body.user_id)
     const user = await User.findOne({user_id})
+    console.log(user)
     if(!user){
+      const a =Math.floor( Math.random() * (200000000000-1) + 1);
       const user1= await new User({
         phone_number:phone_number,
         user_id:user_id,
+        email:`dummy-user${a}@email.com`
       })
       await user1.save()
       msg = "New user created successfully";

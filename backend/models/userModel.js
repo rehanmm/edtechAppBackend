@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String ,
         required:[function(value){
-            if(this.is_anonymous){
+            if(this.is_anonymous||this.phone_number){
             return false
         }else {return true}},'Password is required']
     },
@@ -29,12 +29,12 @@ const userSchema = new mongoose.Schema({
     ,
     email:{
         type:String,
-        trim:true,
         unique:true,
+        trim:true,
         dropDups: true,
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         required:[function(value){
-            if(this.is_anonymous){
+            if(this.is_anonymous||this.phone_number){
             return false
         }else {return true}},'Email is required']
     },
