@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     name:{
         type:String,
         trim:true,
+        default:'user'
         // required:['Name is required']
     },
     user_id:{
