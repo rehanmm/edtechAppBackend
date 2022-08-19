@@ -88,8 +88,41 @@ return res.status(200).json({
 })
 
 
+const anonymous=catchAsyncError( async function(req,res){
 
-module.exports={login,update}
+   
+  const {user_id}=req.body
+  
+      const a =Math.floor( Math.random() * (20000000000000-1) + 1);
+req.body={user_id,
+          is_anonymous:true,
+          email:`anonymous-${a}@user.com`
+      }
+
+
+
+  
+  let user = new User(req.body);
+  
+  
+  await user.save()
+  
+ const {_id}=user
+
+
+  res.status(200).json({
+      success: true,
+      message: 'Anonymous user created successfully',
+     data:{userId:_id}
+
+  })
+
+
+})
+
+
+
+module.exports={login,update,anonymous}
 
 
 // admin.auth().createUser({
