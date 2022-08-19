@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');   
 const progressSchema = new mongoose.Schema({
    user_id:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'User'
+    type:String
 },
    completed_lessons:[{}],
    course_id:{
