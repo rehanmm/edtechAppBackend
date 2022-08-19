@@ -25,13 +25,14 @@ const {user_id,phone_number}=req.body
   if(!user.displayName){
 const user1= await new User({
   phone_number:phone_number,
+  user_id:user_id,
 })
 await user1.save()
 
  res.status(200).json({
   success:true,
   message:'no userName found',
-  data:user
+  data:user1
 })
 
   }
@@ -40,7 +41,7 @@ await user1.save()
     success:true,
     message:'login successfully',
     data:{
-      uid,phone_number,user
+      user_id,phone_number,user
     }
   }
     )
