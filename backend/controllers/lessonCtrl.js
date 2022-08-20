@@ -9,6 +9,7 @@ const Progress=require('../models/progressModel');
 const prereqFunction=require('../helpers/unitHelper/condition')
 const {longLessonToShort} =require('../utils/objectConstructor')
 const shortLessonupdater=require('../helpers/shortLessonUpdater')
+const video=require('../helpers/lessonHelper/videoUrlProcessing')
 
 
 const list=catchAsyncError(  async function(req ,res,){
@@ -17,8 +18,11 @@ res.status(200).json(lesson)
 })
 
 const create=catchAsyncError( async function(req ,res){
-    const  {unit_id}= req.body
+    const  {unit_id,type}= req.body
     const lesson = new Lesson(req.body);
+
+
+
     const shortLesson = new longLessonToShort(lesson); 
     // const unitLessonUpdate = await Unit.findOneAndUpdate(shortLesson,unit_id);
     shortLessonupdater(shortLesson,unit_id)
@@ -36,24 +40,34 @@ const read=catchAsyncError( async function(req ,res){
     const nothingProvided=!lesson_id&&!unit_id
     // console.log(nothingProvided);
 
-//     // const unitProgress = await Progress.findById(user_id)
+    const unitProgress = await Progress.findOne({user_id})
+    
 // const obj={}
 // obj['62f3f716088e0c7a694a6bb4']='1660155813697'
 // let obj1={}
 // obj1['62f3f6bd088e0c7a694a6bb2']='1660151960229'
 
 
-    unitProgress={
-        completed_lessons:[]
-    }
-    unitProgress.completed_lessons.push(obj)
-    unitProgress.completed_lessons.push(obj1);
+    // unitProgress={
+    //     completed_lessons:[]
+    // }
+    // unitProgress.completed_lessons.push(obj)
+    // unitProgress.completed_lessons.push(obj1);
 
-//condition logic for function
-if(onlyLesson){
-// getLessonById
-const lesson= await Lesson.findById(lesson_id);
-//
+    //condition logic for function
+    if(onlyLesson){
+    // getLessonById
+    const lesson= await Lesson.findById(lesson_id).select(' title type completion title head body video');
+    //
+   
+
+
+    if(!unitProgress){
+        if(!lesson.prerequisite.has_prerequisite){
+            return  tsend(lesson,'',res)
+           
+             
+    }
 
 //prerequisite
 if(!prereqFunction(unitProgress,lesson.prerequisite)){
@@ -64,7 +78,7 @@ tsend({lesson_id,is_locked:true},'lesson is locked',res);
 }
 //
 
-}
+}}
 else if(onlyunit){
 
 //get next lesson user has to access

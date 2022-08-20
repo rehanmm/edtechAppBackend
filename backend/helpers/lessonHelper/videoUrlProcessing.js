@@ -4,16 +4,27 @@ class video{
         this.video_id=video_id;
     }
 
-    getStringquality(quality){
+    getStringQuality(quality){
+        if(quality=="360"){
+            return "Low Quality";
+        } 
+        else if(quality=="480"){
+            return "Medium Quality";
+        }   
+        else if(quality=="720"){
+            return "High Quality";
+        }
 
     }
 
-    getVideoUrl(quality){
+    getVideoObject(quality){
         return {
-            title:"High Quality",
+            title:getStringQuality(quality),
            quality:  quality+"p",
             url:`https://quasar-edtech-stream.s3.amazonaws.com/${this.video_id}_${quality}.m3u8`};
     }
 
 
 }
+
+module.exports=video;

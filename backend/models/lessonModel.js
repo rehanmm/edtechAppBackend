@@ -1,5 +1,7 @@
 
-const mongoose = require('mongoose');   
+const mongoose = require('mongoose');  
+const catchAsyncError=require('../error/catchAsyncError');
+const video=require('../helpers/lessonHelper/videoUrlProcessing') 
 const lessonSchema = new mongoose.Schema({
 
     title : String,
@@ -11,10 +13,14 @@ const lessonSchema = new mongoose.Schema({
         enum:['auto','manual']
       },
     prerequisite:{
-        has_prerequisite:Boolean,
+        has_prerequisite:{
+          type:Boolean,
+          default:false
+        },
         type:{
          type: String,
-         enum:['manual','auto']
+         enum:['manual','auto'],
+         default:'auto'
         },//manual or auto
         on:{
            type: mongoose.Schema.Types.ObjectId,
@@ -156,4 +162,12 @@ events:[
 
    })
    const Lesson=mongoose.model('Lesson', lessonSchema)
+
+
+   lessonSchema.methods.setVideo=function(){
+      this.video=[];
+
+      
+
+   }
    module.exports=Lesson
