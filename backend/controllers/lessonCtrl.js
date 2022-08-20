@@ -57,13 +57,14 @@ const read=catchAsyncError( async function(req ,res){
     //condition logic for function
     if(onlyLesson){
     // getLessonById
-    const lesson= await Lesson.findById(lesson_id).select(' title type completion title head body video');
+    const lesson= await Lesson.findById(lesson_id).select(' title type completion description start_at is_locked thumbnail_url total_time video');
     //
    
 
 
     if(!unitProgress){
         if(!lesson.prerequisite.has_prerequisite){
+            // lesson.is_completed=false;
             return  tsend(lesson,'',res)
            
              

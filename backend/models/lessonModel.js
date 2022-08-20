@@ -36,6 +36,10 @@ body: String,
 
 //video
 video_id: String,
+description:{
+  type:String,
+  default:''
+},
 video:[
   {
   title: String, //(Eg. High Quality, Low Quality, Medium Quality)
@@ -45,9 +49,14 @@ video:[
   }
   
   ],
-  
-thumbnail_url: String,
-total_time: Number,
+thumbnail_url: {
+  type:String,
+   default:''
+ },
+total_time: {
+  type:Number,
+   default:0
+ },
 start_at:{
    type:Number,
     default:0
