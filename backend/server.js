@@ -7,14 +7,13 @@ process.env.NODE_CONFIG_DIR = '../backend/config';
 
 dotenv.config()
 port=config.PORT
-
-
-// const error= new errorHandler('me',100);
+// console.log(process.env.PORT);
 
 //uncaughtException error handling
 process.on('uncaughtException',(err)=>{
     // console.timeLog(`Error:${err.message}`);
-    console.log(`Shutting down the server due to uncaughtException ${err}`);
+    console.log(`Shutting down the server due to uncaughtException ${err}
+    \n${err.stack}`);
     server = app.listen(port)
 
     server.close();
@@ -22,7 +21,7 @@ process.on('uncaughtException',(err)=>{
 })
 // console.log(config.MONGODB_URI)
 // console.log(config.MONGODB_URI.toString())
-mongoose.connect( "mongodb+srv://quasar-edtech:MongoDB@quasar.so7kqha.mongodb.net/?retryWrites=true&w=majority",{
+mongoose.connect( config.MONGODB_URI,{
     useUnifiedTopology: true,
     useNewUrlParser: true,
     autoIndex: true, 

@@ -20,15 +20,21 @@ res.status(200).json(lesson)
 const create=catchAsyncError( async function(req ,res){
     const  {unit_id,type}= req.body
     const lesson = new Lesson(req.body);
-
+    await lesson.save()
+    const {_id}=lesson
+    if(type==='video'){
+        
+        const lesson= await Lesson.findById(_id.toString()).select('prerequisite video_id type unit_id completion description thumbnail_url');
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
 
 
     const shortLesson = new longLessonToShort(lesson); 
     // const unitLessonUpdate = await Unit.findOneAndUpdate(shortLesson,unit_id);
     shortLessonupdater(shortLesson,unit_id)
 
-    await lesson.save()
-    res.status(200).json(req.body)
+    tsend(lesson,'lesson updated successfully',res)
 
 })
 const read=catchAsyncError( async function(req ,res){
@@ -228,7 +234,7 @@ tsend({user_id,lesson_id},'completed lesson updated successfuly',res)
 
 const submitAssignment=catchAsyncError( async function(req ,res,next){
 
-    
+
 })
 
 module.exports={list,read,update,completedLesson,submitAssignment,create,remove
