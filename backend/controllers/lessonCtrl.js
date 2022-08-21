@@ -24,7 +24,7 @@ const create=catchAsyncError( async function(req ,res){
     const {_id}=lesson
     if(type==='video'){
         
-        const lesson= await Lesson.findById(_id.toString()).select('prerequisite video_id type unit_id completion description thumbnail_url');
+        const lesson= await Lesson.findById(_id.toString()).select('prerequisite title video_id type unit_id completion start_at total_time description thumbnail_url');
         console.log(lesson);
     return tsend(lesson,'',res);
 }
