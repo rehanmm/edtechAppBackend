@@ -3,6 +3,7 @@
     "development": "nodemon backend/server.js"
   },
   "dependencies": {
+    "aws-sdk": "^2.1199.0",
     "config": "3.3.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

@@ -83,11 +83,7 @@ return res.status(200).json({
   message:'updated successfully',
   data:user1
 })
-
-
 })
-
-
 const anonymous=catchAsyncError( async function(req,res){
 
    

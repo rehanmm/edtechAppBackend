@@ -7,6 +7,9 @@ const lessonSchema = new mongoose.Schema({
     title : String,
     content: String,
     type:String,
+      unit_id:{
+        type:String
+      },
     completion:{
         type:String,
         default:'auto',

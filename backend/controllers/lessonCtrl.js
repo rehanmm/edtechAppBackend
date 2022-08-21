@@ -193,6 +193,43 @@ const course= await Lesson.findById(req.params.lessonId);
 req.lesson=course
 next()
 })
+const completedLesson=catchAsyncError( async function(req ,res,next){
+    const {user_id,lesson_id,unit_id,timestamp}=req.body
+//user_id
 
-module.exports={list,read,update,lessonById,create,remove
+//lesson_id
+//unit_id
+
+let progress= await Progress.findOne({user_id});
+console.log(progress);
+if(!progress){
+ progress= new Progress({
+        user_id,
+        unit_id,
+        timestamp
+    })
+    progress.save();
+console.log(progress)
+
+const obj={}
+obj[user_id]=timestamp
+ 
+const alreadyExist=progress.completed_lessons.some(o=>user_id in o)
+console.log(alreadyExist);
+if(!alreadyExist)
+progress.completed_lessons.push(obj)
+}
+console.log(progress);
+
+tsend({user_id,lesson_id},'completed lesson updated successfuly',res)
+
+})
+
+
+const submitAssignment=catchAsyncError( async function(req ,res,next){
+
+    
+})
+
+module.exports={list,read,update,completedLesson,submitAssignment,create,remove
 }
