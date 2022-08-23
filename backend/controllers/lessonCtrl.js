@@ -13,8 +13,8 @@ const video=require('../helpers/lessonHelper/videoUrlProcessing')
 
 
 const list=catchAsyncError(  async function(req ,res,){
-const lesson=await Lesson.find();
-res.status(200).json(lesson)
+const lesson=await Lesson.find({unit_id:req.body.unit_id});
+tsend(lesson,'',res);
 })
 
 const create=catchAsyncError( async function(req ,res){
