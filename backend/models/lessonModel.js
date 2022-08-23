@@ -6,7 +6,9 @@ const lessonSchema = new mongoose.Schema({
 
     title : String,
     content: String,
-    type:String,
+    type:{
+      type:String
+    },
       unit_id:{
         type:String
       },
