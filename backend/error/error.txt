@@ -1,3 +1,22 @@
+query unexpected cheeze aana ko handle karo
+galat variable bhj diya 
+ko document nhi find Hua
+hmne kissi request pe data accept kiya tha but null data or data not found
+making request on server other than required url
+promise rejection 
+
+
+ var timeout = require('connect-timeout');
+ app.use(timeout('100s'));
+
+
+ ou can use this package https://github.com/paulomcnally/node-heroku-ssl-redirect/ to redirect any incoming HTTP traffic from the client to HTTPS.
+
+
+process.on('SIGTERM', exitHandler(0, 'SIGTERM'))
+process.on('SIGINT', exitHandler(0, 'SIGINT'))
+
+
 E11000 duplicate key error collection
 
   password: CastError: Cast to String failed for value "nitish#123" (type string) at path "password" because 

@@ -12,6 +12,7 @@ const testRoutes=require('../backend/routers/testRoutes');
 const errorMiddleware=require('./error/errorMiddleware')
 const authRoutes=require('../backend/routers/authRoutes');
 const firebaseAuthRoutes=require('../backend/routers/firebaseRoutes');
+const assignmentRoutes=require('../backend/routers/assignmentRoutes');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
 // const logger=require('./middleware/logger')
@@ -36,6 +37,7 @@ app.use('/edtech',forumRoutes);
 app.use('/edtech',homeRoutes);
 app.use('/edtech',unitRoutes);
 app.use('/edtech',testRoutes);
+app.use('/edtech',assignmentRoutes);
 
 
 
