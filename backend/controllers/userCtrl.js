@@ -7,11 +7,37 @@ const errorHandler = require('../utils/errorHandler');
 
 
 const list = catchAsyncError(async function (req, res) {
-    const users = await User.find({})
-    if(!users){
-        return next(new errorHandler('list not found',200))
+    // const users = await User.find({})
+    // if(!users){
+    //     return next(new errorHandler('users not found',200))
+    // }
+    const filter = req.body;
+    let where = {};
+    if (filter.keyword) {
+        where.name = { $regex: filter.keyword, $options: "i" }
     }
-    res.status(200).json(users)
+    let query = User.find(where);
+    const page = parseInt(req.body.page) || 1;
+    const pageSize = parseInt(req.body.limit) || 10;
+    const skip = (page - 1) * pageSize;
+    const total = await User.countDocuments(where);
+    const pages = Math.ceil(total / pageSize);
+
+    if (page > pages) {
+        return res.status(404).json({
+            success: "true",
+            message: "No page found",
+        });
+    }
+    result = await query.select('-email -password').skip(skip).limit(pageSize).sort({'createdAt':-1});
+    res.json({
+        success: true,
+        filter,
+        count: result.length,
+        page,
+        pages,
+        data: {users:result}
+    });
 })
 
 const create = catchAsyncError(async function (req, res) {

@@ -3,9 +3,9 @@ const userCtrl =require( '../controllers/userCtrl')
 const router=express.Router()
 //  console.log(userCtrl);
  
-router.route('/users')
-.get(userCtrl.list)
-.post(userCtrl.create)
+router.route('/admin/users')
+.post(userCtrl.list)
+// .post(userCtrl.create)
 router.route('/users/:userId')
 .get(userCtrl.read)
 .put(userCtrl.update)
