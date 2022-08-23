@@ -85,12 +85,12 @@ await unit.remove();
 
 const update=catchAsyncError( async function(req ,res){
   const {unit_id}=req.body
-await Unit.findByIdAndUpdate(req.body.unit_id,req.body)
+  console.log(req.body)
+await Unit.findByIdAndUpdate(unit_id,req.body)
 const unit= await Unit.findById(unit_id)
   
     const course= await Course.findById(config.COURSE_ID)
     const index = course.units.findIndex(item => item.unit_id == unit_id);
-    console.log(index);
     course.units[index]= new longUnitToShort(unit)
     console.log( new longUnitToShort(unit))
 
@@ -115,37 +115,39 @@ const updateUnitPosition=catchAsyncError( async function(req ,res){
         let {unit_id,index}=unit;
 // console.log(unitArray);
 const indexOfTargetUnit = unitArray.findIndex(e=> e.unit_id ==unit_id);
-// console.log(indexOfTargetUnit);
-if(index==indexOfTargetUnit+1){
-    // console.log('same position')
-    return ;
-}
-
-else if(index==1){
-    unitArray[indexOfTargetUnit].index=0.5;
-    console.log(unitArray[indexOfTargetUnit].index);
-}
-else if(index==unitArray.length){
-    // console.log(index==unitArray.length);
-    // console.log(index)
-    unitArray[indexOfTargetUnit].index=index;
-    console.log(unitArray[indexOfTargetUnit].index);
-}
-else if(index==unitArray.length-1){
-    index=index-2
-unitArray[indexOfTargetUnit].index=(unitArray[index].index+unitArray[index+1].index)/2
-console.log(unitArray[indexOfTargetUnit].index);
-}
-else{
-    index=index-2
-unitArray[indexOfTargetUnit].index=(unitArray[index].index+unitArray[index+1].index)/2
-console.log(unitArray[indexOfTargetUnit].index);
-}
-unitArray.sort((a, b) => a.index-b.index);
-for(let i=0;i<unitArray.length;i++){
-    unitArray[i].index=i+1;
-}
+console.log(indexOfTargetUnit);
+unitArray[indexOfTargetUnit].index=index;
   })
+// console.log(indexOfTargetUnit);
+// if(index==indexOfTargetUnit+1){
+//     // console.log('same position')
+//     return ;
+// }
+
+// else if(index==1){
+//     unitArray[indexOfTargetUnit].index=0.5;
+//     console.log(unitArray[indexOfTargetUnit].index);
+// }
+// else if(index==unitArray.length){
+//     // console.log(index==unitArray.length);
+//     // console.log(index)
+//     unitArray[indexOfTargetUnit].index=index;
+//     console.log(unitArray[indexOfTargetUnit].index);
+// }
+// else if(index==unitArray.length-1){
+//     index=index-2
+// unitArray[indexOfTargetUnit].index=(unitArray[index].index+unitArray[index+1].index)/2
+// console.log(unitArray[indexOfTargetUnit].index);
+// }
+// else{
+//     index=index-2
+// unitArray[indexOfTargetUnit].index=(unitArray[index].index+unitArray[index+1].index)/2
+// console.log(unitArray[indexOfTargetUnit].index);
+// }
+// for(let i=0;i<unitArray.length;i++){
+//     unitArray[i].index=i+1;
+// }
+unitArray.sort((a, b) => a.index-b.index);
 
 
 // console.log(unitArray);
