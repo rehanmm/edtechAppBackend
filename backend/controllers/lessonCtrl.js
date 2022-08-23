@@ -18,6 +18,7 @@ tsend(lesson,'',res);
 })
 
 const create=catchAsyncError( async function(req ,res){
+    console.log(req.body);
     const  {unit_id,type}= req.body
     const lesson = new Lesson(req.body);
     await lesson.save()
