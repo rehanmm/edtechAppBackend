@@ -118,35 +118,8 @@ const indexOfTargetUnit = unitArray.findIndex(e=> e.unit_id ==unit_id);
 console.log(indexOfTargetUnit);
 unitArray[indexOfTargetUnit].index=index;
   })
-// console.log(indexOfTargetUnit);
-// if(index==indexOfTargetUnit+1){
-//     // console.log('same position')
-//     return ;
-// }
 
-// else if(index==1){
-//     unitArray[indexOfTargetUnit].index=0.5;
-//     console.log(unitArray[indexOfTargetUnit].index);
-// }
-// else if(index==unitArray.length){
-//     // console.log(index==unitArray.length);
-//     // console.log(index)
-//     unitArray[indexOfTargetUnit].index=index;
-//     console.log(unitArray[indexOfTargetUnit].index);
-// }
-// else if(index==unitArray.length-1){
-//     index=index-2
-// unitArray[indexOfTargetUnit].index=(unitArray[index].index+unitArray[index+1].index)/2
-// console.log(unitArray[indexOfTargetUnit].index);
-// }
-// else{
-//     index=index-2
-// unitArray[indexOfTargetUnit].index=(unitArray[index].index+unitArray[index+1].index)/2
-// console.log(unitArray[indexOfTargetUnit].index);
-// }
-// for(let i=0;i<unitArray.length;i++){
-//     unitArray[i].index=i+1;
-// }
+
 unitArray.sort((a, b) => a.index-b.index);
 
 

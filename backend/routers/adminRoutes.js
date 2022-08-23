@@ -1,0 +1,30 @@
+const  express  = require('express');
+const adminCtrl = require( '../controllers/adminCtrl')
+// const adminCtrl = require( '../controllers/adminCtrl.js')
+const router = express.Router()
+
+
+router.route('/admin/forum/get-user-question')
+.post(adminCtrl.Qlist)
+router.route('/admin/forum/getAllquestion')
+.post(adminCtrl.QToplist)
+router.route('/admin/forum/question/create')
+.post(adminCtrl.Qcreate)
+router.route('/admin/forum/question')
+.post(adminCtrl.Qread)
+router.route('/admin/forum/question/edit')
+.put(adminCtrl.Qupdate)
+router.route('/admin/forum/question/remove')
+.delete(adminCtrl.Qremove)
+router.route('/admin/forum/listOfAnwser')
+.get(adminCtrl.Alist)
+router.route('/admin/forum/answer/create')
+.post(adminCtrl.Acreate)
+router.route('/admin/forum/answer/edit')
+.put(adminCtrl.Aupdate)
+router.route('/admin/forum/answer/remove')
+.delete(adminCtrl.Aremove)
+router.route('/admin/user-information')
+.post(adminCtrl.userInfo)
+
+module.exports= router

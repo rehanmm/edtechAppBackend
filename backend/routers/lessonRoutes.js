@@ -17,9 +17,10 @@ router.route('/ui/lesson/completed')
 router.route('/ui/lesson/assignment/submit')
 .post(lessonCtrl.submitAssignment)
 // router.route('/lessons/:lessonId')
-router.route('/lessons/:lessonId')
-.put(lessonCtrl.update)
+router.route('/admi/lesson/delete')
 .delete(lessonCtrl.remove)
+router.route('/admin/lesson/update')
+.put(lessonCtrl.update)
 
 
 

@@ -23,9 +23,33 @@ const create=catchAsyncError( async function(req ,res){
     const lesson = new Lesson(req.body);
     await lesson.save()
     const {_id}=lesson
-    if(type==='video'){
-        
+    if(type==='video'){  
         const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title video_id type unit_id completion start_at total_time description thumbnail_url');
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+   else if(type==='event'){  
+        const lesson= await Lesson.findById(_id.toString())
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+    else if(type==='article'){  
+        const lesson= await Lesson.findById(_id.toString());
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+   else if(type==='test'){  
+        const lesson= await Lesson.findById(_id.toString())
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+   else if(type==='payment'){  
+        const lesson= await Lesson.findById(_id.toString())
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+   else if(type==='assignment'){  
+        const lesson= await Lesson.findById(_id.toString())
         console.log(lesson);
     return tsend(lesson,'',res);
 }
@@ -169,8 +193,7 @@ console.log(lesson.prerequisite);
     
 })
 const remove= catchAsyncError( async function(req ,res){
-const lesson=req.lesson;
-
+const lesson= await Lesson.findById(req.body.lesson_id);
 await lesson.remove();
 
     res.status(200).json({
@@ -183,9 +206,9 @@ await lesson.remove();
 
 const update=catchAsyncError( async function(req ,res){
 
-  
-     await Lesson.findByIdAndUpdate(req.params.lessonId,req.body)
-  const updatedvalue=await Lesson.findById(req.params.lessonId)
+  const {lesson_id,user_id}=req.body;
+     await Lesson.findByIdAndUpdate(lesson_id,req.body)
+  const updatedvalue=await Lesson.findById(lesson_id)
     res.status(200).json(
        { success:true,
         message:'updated successfully',
@@ -195,11 +218,7 @@ const update=catchAsyncError( async function(req ,res){
 
 })
  
-const lessonById=catchAsyncError( async function(req ,res,next){
-const course= await Lesson.findById(req.params.lessonId);
-req.lesson=course
-next()
-})
+
 const completedLesson=catchAsyncError( async function(req ,res,next){
     const {user_id,lesson_id,unit_id,timestamp}=req.body
 //user_id
@@ -234,6 +253,35 @@ tsend({user_id,lesson_id},'completed lesson updated successfuly',res)
 
 
 const submitAssignment=catchAsyncError( async function(req ,res,next){
+
+
+})
+const updateLessonPosition=catchAsyncError( async function(req ,res,next){
+    let {lessons,unit_id,user_id}=req.body;
+  
+    let unit=await Unit.findById(unit_id).select('lessons')
+   lessonArray=unit.lessons
+    //destruct userId and newIndex 
+lessons.forEach(async (unit)=>{      
+    let {lesson_id,index}=unit;
+console.log(lessonArray);
+const indexOfTargetLesson = lessonArray.findIndex(e=> e.lesson_id ==lesson_id);
+console.log(indexOfTargetLesson);
+lessonArray[indexOfTargetLesson].index=index;
+})
+
+
+unitArray.sort((a, b) => a.index-b.index);
+
+
+// console.log(unitArray);
+await course.save()
+
+res.status(200).json(
+   { success:true,
+    message:'updated successfully'
+}
+)
 
 
 })

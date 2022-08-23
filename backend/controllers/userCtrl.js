@@ -29,7 +29,7 @@ const list = catchAsyncError(async function (req, res) {
             message: "No page found",
         });
     }
-    result = await query.select('-email -password').skip(skip).limit(pageSize).sort({'createdAt':-1});
+    result = await query.select('-email -password -salt').skip(skip).limit(pageSize).sort({'createdAt':-1});
     res.json({
         success: true,
         filter,
