@@ -84,13 +84,25 @@ await unit.remove();
 
 
 const update=catchAsyncError( async function(req ,res){
+  const {unit_id}=req.body
+await Unit.findByIdAndUpdate(req.body.unit_id,req.body)
+const unit= await Unit.findById(unit_id)
   
-  await Unit.findByIdAndUpdate(req.body.unit_id,req.body)
+    const course= await Course.findById(config.COURSE_ID)
+    const index = course.units.findIndex(item => item.unit_id == unit_id);
+    console.log(index);
+    course.units[index]= new longUnitToShort(unit)
+    console.log( new longUnitToShort(unit))
+
+    await course.save();
+
+
     res.status(200).json(
-       { success:true,
-        message:'updated successfully'
-    }
-    )
+        { success:true,
+         message:'updated successfully'
+     }
+     
+     )
 
 })
 const updateUnitPosition=catchAsyncError( async function(req ,res){
