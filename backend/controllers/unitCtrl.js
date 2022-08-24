@@ -74,8 +74,12 @@ const remove= catchAsyncError( async function(req ,res){
     const unit =await Unit.findById(unit_id)
 const course= await Course.findById(config.COURSE_ID)
 const index = course.units.findIndex(item => item.unit_id == unit_id);
+console.log(index);
+
 course.units.splice(index, 1);
+console.log(course.units);
 await unit.remove();
+await course.save();
 
     res.status(200).json({
         success:true,

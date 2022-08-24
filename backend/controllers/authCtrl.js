@@ -13,7 +13,7 @@ const errorHandler = require('../utils/errorHandler');
 
 
 const signin = catchAsyncError( async function(req,res,next){
-console.log(req.body)
+
 const {email,password}=req.body
         const user= await User.findOne({email})
         if(!user){
@@ -111,17 +111,16 @@ const signup=catchAsyncError( async function(req,res){
 })
 
 
-const requireSignin=function(req,res){
+const requireSignin=catchAsyncError(function(req,res){
 
     const requireSignin = expressJwt({
-        secret: config.jwtSecret,
+       secret : config.JWT_SECRET_KEY,
         userProperty: 'auth'
        })
-}
+})
 
-const hasAuthorisation=function(req,res){
 
-    const hasAuthorization = (req, res, next) => {
+    const hasAuthorisation =catchAsyncError(function(req, res, next){
         const authorized = req.profile && req.auth
         && req.profile._id == req.auth._id
         if (!(authorized)) {
@@ -131,9 +130,9 @@ const hasAuthorisation=function(req,res){
         }
 
         next()
-       }
+       })
 
-}
+
 
 
 
@@ -146,12 +145,12 @@ function authenticateToken(req, res, next) {
 
   if (token == null) return res.sendStatus(401)
 
-  jwt.verify(token, process.env.TOKEN_SECRET , (err, user) => {
+  jwt.verify(token, config.JWT_SECRET_KEY , (err, user) => {
     console.log(err)
 
     if (err) return res.sendStatus(403)
 
-    req.user = user
+    req.auth = user
 
     next()
   })

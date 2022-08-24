@@ -198,6 +198,7 @@ const lesson= await Lesson.findById(req.body.lesson_id);
 const unit= await Unit.findById(lesson.unit_id)
 const index = unit.lessons.findIndex(item => item.lesson_id == lesson_id);
 unit.lessons.splice(index, 1);
+await unit.save();
 await lesson.remove();
 
     res.status(200).json({
