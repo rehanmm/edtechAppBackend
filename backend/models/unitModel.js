@@ -70,7 +70,7 @@ const unitSchema = new mongoose.Schema({
         default:0},
         message:{
           type:String,
-          default:"please complete required unit first"
+          default:""
 
         }
     },
