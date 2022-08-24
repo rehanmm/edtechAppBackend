@@ -70,9 +70,10 @@ const unitdata=new unitData(unitProgress);
     
 })
 const remove= catchAsyncError( async function(req ,res){
-    const unit = Unit.findById(req.body.unit_id)
-
-
+    const unit =await Unit.findById(req.body.unit_id)
+const course= await Course.findById(config.COURSE_ID)
+const index = course.units.findIndex(item => item.unit_id == unit_id);
+course.units.splice(index, 1);
 await unit.remove();
 
     res.status(200).json({
