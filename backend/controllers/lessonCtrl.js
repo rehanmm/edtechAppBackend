@@ -193,6 +193,7 @@ console.log(lesson.prerequisite);
     
 })
 const remove= catchAsyncError( async function(req ,res){
+    const {lesson_id}=req.body;
 const lesson= await Lesson.findById(req.body.lesson_id);
 const unit= await Unit.findById(lesson.unit_id)
 const index = unit.lessons.findIndex(item => item.lesson_id == lesson_id);
