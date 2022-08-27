@@ -1,6 +1,7 @@
 const  express  = require('express');
 const lessonCtrl =require( '../controllers/lessonCtrl')
 const router=express.Router()
+const {authenticateToken,hasAuthorisation,verifyAdmin} = require( '../middleware/adminAuthMiddleware')
 
 router.route('/admin/lessons')
 .post(lessonCtrl.list)
@@ -17,7 +18,8 @@ router.route('/ui/lesson/completed')
 router.route('/ui/lesson/assignment/submit')
 .post(lessonCtrl.submitAssignment)
 // router.route('/lessons/:lessonId')
-router.route('/admi/lesson/delete')
+router.use(authenticateToken,hasAuthorisation,verifyAdmin)
+router.route('/admin/lesson/remove')
 .delete(lessonCtrl.remove)
 router.route('/admin/lesson/update')
 .put(lessonCtrl.update)

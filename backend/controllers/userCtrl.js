@@ -72,19 +72,20 @@ const create = catchAsyncError(async function (req, res) {
     })
 
 })
-const read = function (req, res) {
+const read =  catchAsyncError(async function (req, res) {
+const user=await User.findOne({user_id})
+  user.password = undefined
+  user.salt= undefined
+    res.status(200).json(user)
 
-    req.user.password = undefined
-
-    res.status(200).json(req.user)
-
-}
+})
 const remove = catchAsyncError(async function (req, res) {
-    const user = req.user;
+    const user=await User.findOne({user_id})
 
     await user.remove();
     delete user.password
     delete user._id
+    user.salt= undefined
 
     res.status(200).json(user)
 
@@ -93,7 +94,7 @@ const remove = catchAsyncError(async function (req, res) {
 
 const update =catchAsyncError( async function (req, res) {
 
-    await User.findByIdAndUpdate(req.params.userId, req.body)
+    await User.findByIdAndUpdate(req.body.user_id, req.body)
 
     res.status(200).json(
         {
@@ -104,16 +105,7 @@ const update =catchAsyncError( async function (req, res) {
 
 })
 
-const userById = catchAsyncError( async function (req, res, next) {
-    const user = await User.findById(req.params.userId);
-    if(!user){
-        return next(new errorHandler('user not found',200))
-    }
-    req.user = user;
-
-    next()
-})
 
 module.exports = {
-    list, read, update, userById, create, remove
+    list, read, update, create, remove
 }

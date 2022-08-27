@@ -1,0 +1,24 @@
+pipelineupdate
+example
+db.collection.updateOne(
+{ _id: someId },
+[
+  {
+    "$set": {
+      "hasKeys": {
+        $cond: [
+          {
+            $ifNull: [
+              "$keys",
+              false
+            ]
+          },
+          true,
+          false
+        ]
+      }
+    }
+  },
+])
+
+index use on particular feild

@@ -31,8 +31,9 @@ const read = catchAsyncError(async function (req, res) {
 
 })
 const remove = catchAsyncError(async function (req, res) {
-    const course = req.course;
+    const course = await Course.findById(config.COURSE_ID)
     await course.remove();
+    // await Unit.deleteMany({course_id});
 
     res.status(200).json({
         success: true,

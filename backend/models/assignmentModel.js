@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');  
-
 const assignmentSchema=new mongoose.Schema({
-    user_id:{
+    user_id :{
         type:String
     },
     assignment_url:{
@@ -13,16 +12,30 @@ const assignmentSchema=new mongoose.Schema({
     lesson_id:{
         type:String
     },
-    submitted_time:{
+    submitted_on:{
         type:Number
     },
-    assigned_time:{
+    assigned_on:{
         type:Number
     },
     deadline_time:{
         type:Number
     }
-
-
+    ,status:{
+        type:String,
+        enum:['Not Submitted','Submitted','Accepted','Rejected'],
+        default:'Not Submitted'
+    },
+    assignment_type:{
+        type:String,
+        enum:['auto','manual'] ,
+        default:'auto'
+    },
+    is_completed:{
+        type:Boolean,
+        default:false
+    }
 
 })
+       
+

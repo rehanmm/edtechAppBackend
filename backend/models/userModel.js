@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema({
     ,
     email:{
         type:String,
-        unique:true,
         trim:true,
         dropDups: true,
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
@@ -48,10 +47,6 @@ const userSchema = new mongoose.Schema({
         type:String,
     },
 
- educator:{
-    type:Boolean,
-    default:false
-},
 analysis:[String]    ,
 upcommingeventsubbed:[{
     event_id:mongoose.Schema.Types.ObjectId,
@@ -66,7 +61,7 @@ upcommingeventsubbed:[{
         type:String
     }
 
-}],
+}], 
 is_anonymous:{
     type:Boolean,
     default:false
@@ -117,7 +112,7 @@ units_completed:[{}]
 
     
 }
-);
+,{timestamps:{createdAt:'created_at',updatedAt:'updated_at'}});
 
 
 
@@ -131,7 +126,7 @@ userSchema.methods.isValidPassword= function(password) {
             return this.password === hash; 
         }; 
     
-        userSchema.methods.savePassword=async function(password) {
+userSchema.methods.savePassword=async function(password) {
             if(this.is_anonymous){return}
 
             this.salt=crypto.randomBytes(16).toString('hex')

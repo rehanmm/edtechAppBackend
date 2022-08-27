@@ -18,7 +18,6 @@ const login=catchAsyncError( async function(req ,res){
 
   // console.log(req.body)
 const {user_id,phone_number}=req.body
-
  const user=await admin.auth().getUser(user_id)
   // console.log(user)
  if(user.phoneNumber==phone_number){
@@ -89,7 +88,7 @@ const anonymous=catchAsyncError( async function(req,res){
    
   const {user_id}=req.body
   
-      const a =Math.floor( Math.random() * (20000000000000-1) + 1);
+      const a =Math.floor(Date.now()+ Math.random() * (20000-1) + 1);  
 req.body={user_id,
           is_anonymous:true,
           email:`anonymous-${a}@user.com`

@@ -1,5 +1,6 @@
 const  express  = require('express');
 const courseCtrl =require('../controllers/courseCtrl')
+const {authenticateToken,hasAuthorisation,verifyAdmin} = require( '../middleware/adminAuthMiddleware')
 // const progressCtrl =require('../../test/progressCtrl')
 const router=express.Router()
 
@@ -21,7 +22,7 @@ const router=express.Router()
 // router.route('/courses/by/:instructorId')
 
 
-
+router.use(authenticateToken,hasAuthorisation,verifyAdmin)
 router.route('/admin/course')
 .post(courseCtrl.read)
 router.route('/admin/updateCourse')

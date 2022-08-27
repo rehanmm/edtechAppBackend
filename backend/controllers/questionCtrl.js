@@ -18,6 +18,7 @@ const list=catchAsyncError(  async function(req ,res,){
     const pageSize = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * pageSize;
     const total = await Question.countDocuments(where);
+    console.log(total);
     const pages = Math.ceil(total / pageSize);
 
     if (page > pages) {

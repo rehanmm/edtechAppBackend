@@ -1,44 +1,41 @@
-const User=require('../models/userModel');
+// const User=require('../models/userModel');
+const Admin=require('../models/adminModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const jwt=require('jsonwebtoken');
 const config=require('../config/config')
 const {send,tsend}=require('../middleware/responseSender')
-
 const catchAsyncError = require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 
 
 
-
-
 const signin = catchAsyncError( async function(req,res,next){
-
 const {email,password}=req.body
-        const user= await User.findOne({email})
-        if(!user){
-           
+        const admin= await Admin.findOne({email})
+        if(!admin){
             return next(new errorHandler('User not found',401));
 
         }
-  if(!user.isValidPassword(req.body.password)){
+  if(!admin.isValidPassword(password)){
     
     return next(new errorHandler('Email or Password does not match',401));
   }
-  const token=jwt.sign({_id:user._id},config.JWT_SECRET_KEY)
-  res.cookie('t',token,{expire:new Date+10000});
+  const token=jwt.sign({admin_id:admin._id},config.JWT_SECRET_KEY,{expiresIn:'120s'})
+  res.cookie('jwt',token,{expire:'45s'});
+
 
   
 return res.status(200).json({
    success:true,
    message:'login successfully',
     data:{
+        admin_id:admin._id,
         token,
-        _id:user._id,
-        name:user.name,
-        email:user.email
+        email:admin.email
     }
 })
+
 
 
 })
@@ -46,7 +43,7 @@ return res.status(200).json({
 
 const signout=catchAsyncError( function(req,res){
 
-    res.clearCookie('t');
+    res.clearCookie('jwt');
     return res.status(200).json({
         success:true,
         message:"signed out"
@@ -89,72 +86,31 @@ req.body={
 })
 
 
-const signup=catchAsyncError( async function(req,res){
-   req.body.is_anonymous=false;
-    let user = new User(req.body);
-    
-    await user.savePassword()
-    await user.save()
+const createNewAdmin=catchAsyncError( async function(req,res){
+    let admin = new Admin(req.body);
+    console.log(req.body)
+    await admin.savePassword();
+    await admin.save()
 
     
-   const {_id}=user
-  
-
+   const {_id}=admin
     res.status(200).json({
         success: true,
         message: 'user signed up successfully',
-       data:{userId:_id}
+       data:{admin_id:_id}
 
     })
-
-
 })
 
 
-const requireSignin=catchAsyncError(function(req,res){
-
-    const requireSignin = expressJwt({
-       secret : config.JWT_SECRET_KEY,
-        userProperty: 'auth'
-       })
-})
-
-
-    const hasAuthorisation =catchAsyncError(function(req, res, next){
-        const authorized = req.profile && req.auth
-        && req.profile._id == req.auth._id
-        if (!(authorized)) {
-        return res.status('403').json({
-        error: "User is not authorized"
-        })
-        }
-
-        next()
-       })
+// const requireSignin=catchAsyncError(function(req,res,next){
+//     const requireSignin = expressJwt({
+//        secret : config.JWT_SECRET_KEY,
+//         userProperty: 'auth'
+//        })
+// })
 
 
 
 
-
-
-
-
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
-
-  if (token == null) return res.sendStatus(401)
-
-  jwt.verify(token, config.JWT_SECRET_KEY , (err, user) => {
-    console.log(err)
-
-    if (err) return res.sendStatus(403)
-
-    req.auth = user
-
-    next()
-  })
-}
-
-
-module.exports={anonymous,signin,signup,signout,requireSignin,hasAuthorisation}
+module.exports={anonymous,signin,createNewAdmin,signout}

@@ -1,5 +1,5 @@
 const Lesson=require('../models/lessonModel');
-const Unit=require('../models/unitModel');
+const {Unit}=require('../models/unitModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
@@ -33,23 +33,27 @@ const create=catchAsyncError( async function(req ,res){
         console.log(lesson);
     return tsend(lesson,'',res);
 }
-    else if(type==='article'){  
-        const lesson= await Lesson.findById(_id.toString());
+
+
+   else if(type==='article'){  
+        const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title  type  completion  head body');
         console.log(lesson);
     return tsend(lesson,'',res);
 }
+
+
    else if(type==='test'){  
-        const lesson= await Lesson.findById(_id.toString())
+        const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title  type  completion questions time_allowed num_question');
         console.log(lesson);
     return tsend(lesson,'',res);
 }
    else if(type==='payment'){  
-        const lesson= await Lesson.findById(_id.toString())
+        const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title  type  completion  amount price price_description');
         console.log(lesson);
     return tsend(lesson,'',res);
 }
    else if(type==='assignment'){  
-        const lesson= await Lesson.findById(_id.toString())
+        const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title  type  completion intro_vid body sample submitted_url placeholder status');
         console.log(lesson);
     return tsend(lesson,'',res);
 }
@@ -197,6 +201,8 @@ const remove= catchAsyncError( async function(req ,res){
 const lesson= await Lesson.findById(req.body.lesson_id);
 const unit= await Unit.findById(lesson.unit_id)
 const index = unit.lessons.findIndex(item => item.lesson_id == lesson_id);
+console.log(index);
+console.log(unit.lessons);
 unit.lessons.splice(index, 1);
 await unit.save();
 await lesson.remove();
@@ -213,11 +219,15 @@ const update=catchAsyncError( async function(req ,res){
 
   const {lesson_id,user_id}=req.body;
      await Lesson.findByIdAndUpdate(lesson_id,req.body)
-  const updatedvalue=await Lesson.findById(lesson_id)
+  const lesson=await Lesson.findById(lesson_id)
+const {unit_id}=lesson
+  const unit= await Unit.findById(unit_id)
+  const index = unit.lessons.findIndex(item => item.lesson_id == lesson_id);
+  unit.lessons[index]= new longLessonToShort(lesson)
+  await unit.save()
     res.status(200).json(
        { success:true,
-        message:'updated successfully',
-        updatedvalue
+        message:'updated successfully'
     }
     )
 

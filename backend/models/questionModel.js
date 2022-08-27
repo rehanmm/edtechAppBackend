@@ -3,7 +3,6 @@ const diffInDays = require('../helpers/forumHelpers/popularityIndex');
 
 const questionSchema=new mongoose.Schema({
 
-
     user_id:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Question',
@@ -57,3 +56,4 @@ this.popularity_index=0.25*this.total_likes+5*this.total_answers
 +0.8*diffInDays(this.updatedAt, referenceDate)+diffInDays(this.createdAt, referenceDate);
 console.log(this.popularity_index);
 }
+
