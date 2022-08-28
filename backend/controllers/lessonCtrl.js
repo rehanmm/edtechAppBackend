@@ -23,43 +23,43 @@ const create=catchAsyncError( async function(req ,res){
     const lesson = new Lesson(req.body);
     await lesson.save()
     const {_id}=lesson
-    if(type==='video'){  
-        const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title video_id type unit_id completion start_at total_time description thumbnail_url');
-        console.log(lesson);
-    return tsend(lesson,'',res);
-}
-   else if(type==='event'){  
-        const lesson= await Lesson.findById(_id.toString())
-        console.log(lesson);
-    return tsend(lesson,'',res);
-}
-    else if(type==='article'){  
-        const lesson= await Lesson.findById(_id.toString());
-        console.log(lesson);
-    return tsend(lesson,'',res);
-}
-   else if(type==='test'){  
-        const lesson= await Lesson.findById(_id.toString())
-        console.log(lesson);
-    return tsend(lesson,'',res);
-}
-   else if(type==='payment'){  
-        const lesson= await Lesson.findById(_id.toString())
-        console.log(lesson);
-    return tsend(lesson,'',res);
-}
-   else if(type==='assignment'){  
-        const lesson= await Lesson.findById(_id.toString())
-        console.log(lesson);
-    return tsend(lesson,'',res);
-}
-
-
     const shortLesson = new longLessonToShort(lesson); 
     // const unitLessonUpdate = await Unit.findOneAndUpdate(shortLesson,unit_id);
     shortLessonupdater(shortLesson,unit_id)
 
-    tsend(lesson,'lesson updated successfully',res)
+    if(lesson.type==='video'){  
+        const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title video_id type unit_id completion start_at total_time description thumbnail_url');
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+   else if(lesson.type==='event'){  
+        const lesson= await Lesson.findById(_id.toString())
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+    else if(lesson.type==='article'){  
+        const lesson= await Lesson.findById(_id.toString());
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+   else if(lesson.type==='test'){  
+        const lesson= await Lesson.findById(_id.toString())
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+   else if(lesson.type==='payment'){  
+        const lesson= await Lesson.findById(_id.toString())
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+   else if(lesson.type==='assignment'){  
+        const lesson= await Lesson.findById(_id.toString())
+        console.log(lesson);
+    return tsend(lesson,'',res);
+}
+
+
+   return tsend(lesson,'lesson updated successfully',res)
 
 })
 const read=catchAsyncError( async function(req ,res){
