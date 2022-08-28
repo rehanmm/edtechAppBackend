@@ -68,6 +68,8 @@ const {admin_id}=req.body;
 // });
 function authenticateToken(req, res, next) {;
   const token = req.cookies.jwt;
+  console.log(token)
+  console.log(req.body);
   if (token == null) return res.sendStatus(401);
 
   jwt.verify(token, config.JWT_SECRET_KEY, (err, user) => {
