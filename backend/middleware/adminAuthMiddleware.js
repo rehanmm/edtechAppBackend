@@ -66,8 +66,10 @@ const {admin_id}=req.body;
 //   // console.log(req.profile)
 //   next();
 // });
-function authenticateToken(req, res, next) {;
-  const token = req.cookies.jwt;
+function authenticateToken(req, res, next) {
+  
+    const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
   console.log(token)
   console.log(req.body);
   if (token == null) return res.sendStatus(401);
