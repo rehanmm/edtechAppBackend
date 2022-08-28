@@ -1,11 +1,11 @@
 const  express  = require('express');
 const adminCtrl = require( '../controllers/adminCtrl')
-const {authenticateToken,hasAuthorisation,verifyAdmin} = require( '../middleware/adminAuthMiddleware')
+const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 // const adminCtrl = require( '../controllers/adminCtrl.js')
 const router = express.Router()
 
 
-router.use(authenticateToken,verifyAdmin,hasAuthorisation)
+router.use(authenticateToken,hasAuthorisation)
 router.route('/admin/forum/get-user-question')
 .post(adminCtrl.Qlist)
 router.route('/admin/forum/getAllquestion')

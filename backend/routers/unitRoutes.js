@@ -1,11 +1,11 @@
 const  express  = require('express');
 const unitCtrl =require('../controllers/unitCtrl')
-const {authenticateToken,hasAuthorisation,verifyAdmin} = require( '../middleware/adminAuthMiddleware')
+const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 const router=express.Router()
 
 router.route('/ui/unit')
 .post(unitCtrl.read)
-router.use(authenticateToken,hasAuthorisation,verifyAdmin)
+router.use(authenticateToken,hasAuthorisation)
 router.route('/admin/course/units')
 .post(unitCtrl.list)
 router.route('/admin/unit/create')

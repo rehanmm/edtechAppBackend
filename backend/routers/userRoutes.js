@@ -1,11 +1,11 @@
 const  express  = require('express');
 const userCtrl =require( '../controllers/userCtrl')
-const {authenticateToken,hasAuthorisation,verifyAdmin} = require( '../middleware/adminAuthMiddleware')
+const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 const router=express.Router()
 //  console.log(userCtrl);
  
 // .post(userCtrl.create)
-router.use(authenticateToken,hasAuthorisation,verifyAdmin)
+router.use(authenticateToken,hasAuthorisation)
 router.route('/admin/user/read')
 .get(userCtrl.read)
 router.route('/admin/user/update')//also update on fire base
