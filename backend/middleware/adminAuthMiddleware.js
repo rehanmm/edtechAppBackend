@@ -5,6 +5,8 @@ const config=require('../config/config')
 const Admin=require('../models/adminModel')
 
     const hasAuthorisation =catchAsyncError(function(req, res, next){
+      console.log(req.auth)
+      console.log(req.profile)
         const authorized = req.profile && req.auth
         && req.profile._id == req.auth.admin_id
         if (!(authorized)) {
@@ -26,6 +28,7 @@ const Admin=require('../models/adminModel')
         return next(new errorHandler('Admin not found',401));
       }
       req.profile=admin
+      console.log(admin)
       next()
        })
 
@@ -53,7 +56,7 @@ const Admin=require('../models/adminModel')
 
 function authenticateToken(req, res, next) {
 const token=req.cookies.jwt
-// console.log(token)
+console.log(token)
   if (token == null) return res.sendStatus(401)
 
   jwt.verify(token, config.JWT_SECRET_KEY , (err, user) => {
