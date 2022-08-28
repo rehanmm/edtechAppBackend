@@ -21,8 +21,8 @@ const {email,password}=req.body
     
     return next(new errorHandler('Email or Password does not match',401));
   }
-  const token=jwt.sign({admin_id:admin._id},config.JWT_SECRET_KEY,{expiresIn:'120s'})
-  res.cookie('jwt',token,{expire:'45s'});
+  const token=jwt.sign({admin_id:admin._id},config.JWT_SECRET_KEY,{expiresIn:'172800s'})
+  res.cookie('jwt',token,{expire:'172800s'});
 
 
   
