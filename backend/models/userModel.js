@@ -12,9 +12,6 @@ const userSchema = new mongoose.Schema({
         default:'user'
         // required:['Name is required']
     },
-    user_id:{
-        type:String
-    },
     password:{
         type:String ,
         required:[function(value){
@@ -27,25 +24,17 @@ const userSchema = new mongoose.Schema({
         require:[true,'please Enter your phone number']
     }
     ,
-    email:{
-        type:String,
-        trim:true,
-        dropDups: true,
-        match: [/.+\@.+\..+/, 'Please fill a valid email address'],
-        required:[function(value){
-            if(this.is_anonymous||this.phone_number){
-            return false
-        }else {return true}},'Email is required']
-    },
-    
-    created:{
-        type:Date,
-        default:Date.now
-    },
-    updated:Date,
-    salt:{
-        type:String,
-    },
+    // email:{
+    //     type:String,
+    //     trim:true,
+    //     dropDups: true,
+    //     match: [/.+\@.+\..+/, 'Please fill a valid email address'],
+    //     required:[function(value){
+    //         if(this.is_anonymous||this.phone_number){
+    //         return false
+    //     }else {return true}},'Email is required']
+    // },
+
 
 analysis:[String]    ,
 upcommingeventsubbed:[{
@@ -93,6 +82,7 @@ title:{
 last_unit:{
 title:{
     type:String,
+    trim:true,
     default:'user has not seen any units'
 
 },
@@ -108,39 +98,12 @@ last_lesson_progress:{
     ref:'Progress'
 },
 units_completed:[{}]
-
-
-    
+  
 }
 ,{timestamps:{createdAt:'created_at',updatedAt:'updated_at'}});
 
 
-
-// ---------------------------------------------------------------------------
-
-
-// checking validity of the password
-userSchema.methods.isValidPassword= function(password) { 
-                const hash = crypto.pbkdf2Sync(password,  
-            this.salt, 1000, 64, `sha512`).toString(`hex`);
-            return this.password === hash; 
-        }; 
-    
-userSchema.methods.savePassword=async function(password) {
-            if(this.is_anonymous){return}
-
-            this.salt=crypto.randomBytes(16).toString('hex')
-    
-            this.password=crypto.pbkdf2Sync(this.password, this.salt,  
-                1000, 64, `sha512`).toString(`hex`); 
-    
-        }
-     
-     
-//    userSchema.pre('save',async function(){
-   
-//     })
-    module.exports= mongoose.model('User',userSchema);
+ module.exports= mongoose.model('User',userSchema);
     
     
     
