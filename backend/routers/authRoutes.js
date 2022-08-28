@@ -13,7 +13,7 @@ router.route('/admin/login')
 // .post(authCtrl.anonymous)
 
 router.route('/admin/new-admin')
-.post(authenticateToken,hasAuthorisation,verifyAdmin,authCtrl.createNewAdmin)
+.post(authenticateToken,verifyAdmin,hasAuthorisation,authCtrl.createNewAdmin)
 router.route('/admin/signout')
 .get(authCtrl.signout)
 
