@@ -92,7 +92,6 @@ const createNewAdmin=catchAsyncError( async function(req,res){
     await admin.savePassword();
     await admin.save()
 
-    
    const {_id}=admin
     res.status(200).json({
         success: true,

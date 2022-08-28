@@ -14,6 +14,9 @@ const video=require('../helpers/lessonHelper/videoUrlProcessing')
 
 const list=catchAsyncError(  async function(req ,res,){
 const lesson=await Lesson.find({unit_id:req.body.unit_id});
+if(!lesson){
+    return next(new errorHandler('No lesson found',404));
+}
 tsend(lesson,'',res);
 })
 
@@ -76,6 +79,9 @@ const read=catchAsyncError( async function(req ,res){
     // console.log(nothingProvided);
 
     const unitProgress = await Progress.findOne({user_id})
+    if(!unitProgress){
+        return next(new errorHandler('No progress found',404));
+    }
     
 // const obj={}
 // obj['62f3f716088e0c7a694a6bb4']='1660155813697'
@@ -94,6 +100,9 @@ const read=catchAsyncError( async function(req ,res){
     // getLessonById
     const lesson= await Lesson.findById(lesson_id).select(' title type completion description start_at is_locked thumbnail_url total_time video');
     //
+    if(!lesson){    
+        return next(new errorHandler('No lesson found',404));
+    }
    
 
 
@@ -142,6 +151,9 @@ else if(onlyunit){
     const nextLessonObject=arr[index+1].lesson_id
     const nextLessonid=nextLessonObject.lesson_id
     const lesson= await Lesson.findById(nextLessonid);
+    if(!lesson){
+        return next(new errorHandler('No lesson found',404));
+    }
     
 }
 else {
@@ -199,8 +211,19 @@ console.log(lesson.prerequisite);
 const remove= catchAsyncError( async function(req ,res){
     const {lesson_id}=req.body;
 const lesson= await Lesson.findById(req.body.lesson_id);
+if(!lesson){
+    return next(new errorHandler('No lesson found',404));
+}
+
 const unit= await Unit.findById(lesson.unit_id)
+if(!unit){
+    return next(new errorHandler('No unit found',404));
+
+}
 const index = unit.lessons.findIndex(item => item.lesson_id == lesson_id);
+if(index==-1){
+    return next(new errorHandler('No short lesson found in unit ',404));
+}
 console.log(index);
 console.log(unit.lessons);
 unit.lessons.splice(index, 1);
@@ -220,6 +243,7 @@ const update=catchAsyncError( async function(req ,res){
   const {lesson_id,user_id}=req.body;
      await Lesson.findByIdAndUpdate(lesson_id,req.body)
   const lesson=await Lesson.findById(lesson_id)
+
 const {unit_id}=lesson
   const unit= await Unit.findById(unit_id)
   const index = unit.lessons.findIndex(item => item.lesson_id == lesson_id);
