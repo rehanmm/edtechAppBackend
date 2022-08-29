@@ -20,7 +20,7 @@ router.route('/admin/lesson/remove')
 router.route('/admin/lesson/update')
 .put(lessonCtrl.update)
 
-router.route('/admin/unit/update/position')
+router.route('/admin/lesson/update/position')
 .put(lessonCtrl.updateLessonPosition)
 
 
