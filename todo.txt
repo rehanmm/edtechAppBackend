@@ -36,3 +36,7 @@ course model
 
 
 
+add pagination where ever needed listing happens
+
+
+

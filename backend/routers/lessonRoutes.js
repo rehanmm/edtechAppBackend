@@ -7,10 +7,6 @@ router.route('/admin/lessons')
 .post(lessonCtrl.list)
 router.route('/admin/lesson/create')
 .post(lessonCtrl.create)
-// router.route('/lessons/by/:instructorId')
-// .get(lessonCtrl.lessonByInstructor)
-// router.route('/lessons/published')
-// .get(courseCtrl.lessonsPublished)
 router.route('/ui/lesson')
 .post(lessonCtrl.read)
 router.route('/ui/lesson/completed')
@@ -24,6 +20,8 @@ router.route('/admin/lesson/remove')
 router.route('/admin/lesson/update')
 .put(lessonCtrl.update)
 
+router.route('/admin/unit/update/position')
+.put(lessonCtrl.updateLessonPosition)
 
 
 module.exports= router

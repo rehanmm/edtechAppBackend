@@ -302,11 +302,7 @@ const indexOfTargetLesson = lessonArray.findIndex(e=> e.lesson_id ==lesson_id);
 console.log(indexOfTargetLesson);
 lessonArray[indexOfTargetLesson].index=index;
 })
-
-
 unitArray.sort((a, b) => a.index-b.index);
-
-
 // console.log(unitArray);
 await course.save()
 
@@ -319,5 +315,5 @@ res.status(200).json(
 
 })
 
-module.exports={list,read,update,completedLesson,submitAssignment,create,remove
+module.exports={list,read,update,completedLesson,updateLessonPosition,submitAssignment,create,remove
 }

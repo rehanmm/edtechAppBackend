@@ -30,5 +30,4 @@ router.route('/admin/single-admin')
 // .put(authenticateToken,hasAuthorisation,authCtrl.updateAdminRole)
 
 
-
 module.exports=router

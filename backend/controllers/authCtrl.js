@@ -102,7 +102,7 @@ const createNewAdmin=catchAsyncError( async function(req,res){
 })
 
 
-const removeAdmin=catchAsyncError(function(req,res){
+const removeAdmin=catchAsyncError(async function(req,res){
     const {sec_admin_id,admin_id}=req.body
 
     if(sec_admin_id===admin_id){
@@ -119,7 +119,7 @@ const removeAdmin=catchAsyncError(function(req,res){
             message:'Admin deleted successfully'
         })
     })
-const listAdmins=catchAsyncError(function(req,res){
+const listAdmins=catchAsyncError(async function(req,res){
 
     const admins= await Admin.find({})
     if(!admins){
@@ -132,7 +132,7 @@ const listAdmins=catchAsyncError(function(req,res){
     })
 }
 )
-const readAdmin=catchAsyncError(function(req,res){
+const readAdmin=catchAsyncError(async function(req,res){
     const {sec_admin_id}=req.body
     const admin= await Admin.findById(admin_id)
     if(!admin){

@@ -1,4 +1,4 @@
-const Enrollment=require('../models/enrollModel');
+const Notification=require('../models/enrollModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
@@ -6,27 +6,35 @@ const errorHandler = require('../utils/errorHandler');
 
 
 const list=catchAsyncError(  async function(req ,res,){
-const enroll=await Enrollment.find();
-res.status(200).json(enroll)
+const notification=await Notification.find({}).lean()
+res.status(200).json({
+    success:true,
+    data:notification
+})
 })
 
 const create=catchAsyncError( async function(req ,res){
  
-    const enroll = new Enrollment(req.body);
+    const notification = new Notification(req.body);
 
-    await enroll.save()
-    res.status(200).json(req.body)
+    await notification.save()
+    res.status(200).json(notification)
 
 })
 const read=catchAsyncError( function(req ,res){
-
-    res.status(200).json(req.enroll)
-    
+const {notification_id}=req.body
+    const notification= await Notification.findById(notification_id).lean()
+    res.status(200).json({
+        success: true,
+        message: '',
+        data:notification
+    })
 })
 const remove= catchAsyncError( async function(req ,res){
-const enroll=req.enroll;
+    const {notification_id}=req.body
+    const notification= await Notification.findById(notification_id)
 
-await enroll.remove();
+await notification.remove();
 
     res.status(200).json({
         success:true,
@@ -38,25 +46,19 @@ await enroll.remove();
 
 const update=catchAsyncError( async function(req ,res){
 
-  
-     await Enroll.findByIdAndUpdate(req.params.enrollId,req.body)
-  const updatedvalue=await Enroll.findById(req.params.enrollId)
-    res.status(200).json(
-       { success:true,
+  const {notification_id}=req.body
+     await Notification.findByIdAndUpdate(notification_id,req.body)
+  const updatedvalue=await Notification.findById(notification_id).lean()
+    res.status(200).json({
+         success:true,
         message:'updated successfully',
         updatedvalue
-    }
-    )
+    })
 
 })
  
-const enrollById=catchAsyncError( async function(req ,res,next){
-const enroll= await Enroll.findById(req.params.enrollId);
-req.enroll=enroll
-next()
-})
 
-module.exports={list,read,update,enrollById,create,remove
+module.exports={list,read,update,create,remove
 }
 
 
