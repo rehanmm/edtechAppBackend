@@ -20,6 +20,7 @@ tsend(unit,'',res);
 const create=catchAsyncError( async function(req ,res){
     const unit = new Unit(req.body);
     const unit1= new longUnitToShort(unit);
+    console.log(unit1);
                       unitUpdater(unit1);
 
     
