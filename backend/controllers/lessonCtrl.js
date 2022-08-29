@@ -25,6 +25,9 @@ const create=catchAsyncError( async function(req ,res){
     const  {unit_id,type}= req.body
     const lesson = new Lesson(req.body);
     await lesson.save()
+     const shortLesson = new longLessonToShort(lesson); 
+    // const unitLessonUpdate = await Unit.findOneAndUpdate(shortLesson,unit_id);
+    shortLessonupdater(shortLesson,unit_id)
     const {_id}=lesson
     if(type==='video'){  
         const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title video_id type unit_id completion start_at total_time description thumbnail_url');
@@ -62,9 +65,7 @@ const create=catchAsyncError( async function(req ,res){
 }
 
 
-    const shortLesson = new longLessonToShort(lesson); 
-    // const unitLessonUpdate = await Unit.findOneAndUpdate(shortLesson,unit_id);
-    shortLessonupdater(shortLesson,unit_id)
+   
 
     tsend(lesson,'lesson updated successfully',res)
 

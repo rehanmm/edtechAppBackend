@@ -102,14 +102,51 @@ const createNewAdmin=catchAsyncError( async function(req,res){
 })
 
 
-// const requireSignin=catchAsyncError(function(req,res,next){
-//     const requireSignin = expressJwt({
-//        secret : config.JWT_SECRET_KEY,
-//         userProperty: 'auth'
-//        })
-// })
+const removeAdmin=catchAsyncError(function(req,res){
+    const {sec_admin_id,admin_id}=req.body
+
+    if(sec_admin_id===admin_id){
+        return next(new errorHandler('you are not allowed to perform this operation',401));
+    }
+
+
+   const admin =await Admin.findByIdAndDelete(sec_admin_id)
+    if(!admin){
+       return next(new errorHandler('Admin not found',401));
+        }
+        res.status(200).json({
+            success:true,
+            message:'Admin deleted successfully'
+        })
+    })
+const listAdmins=catchAsyncError(function(req,res){
+
+    const admins= await Admin.find({})
+    if(!admins){
+        return next(new errorHandler('Admins not found',401));
+    }
+    res.status(200).json({
+        success:true,
+        message:'Admins listed successfully',
+        data:admins
+    })
+}
+)
+const readAdmin=catchAsyncError(function(req,res){
+    const {sec_admin_id}=req.body
+    const admin= await Admin.findById(admin_id)
+    if(!admin){
+        return next(new errorHandler('Admin not found',401));
+    }
+    res.status(200).json({
+        success:true,
+        message:'Admin fetched successfully',
+        data:admin
+    })
+
+})
 
 
 
 
-module.exports={anonymous,signin,createNewAdmin,signout}
+module.exports={anonymous,signin,createNewAdmin,readAdmin,listAdmins,removeAdmin,signout}

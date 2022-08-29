@@ -34,7 +34,7 @@ class longUnitToShort{
         this.is_paid= unit.is_paid,
         this.is_locked=unit.is_paid,
         this.unit_id=unit._id
-        
+        this.image_url=unit.image_url;
         this.prerequisite=unit.prerequisite
         
     }

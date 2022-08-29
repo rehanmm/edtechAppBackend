@@ -125,7 +125,8 @@ const courseSchema = new mongoose.Schema({
             }
         },
 is_paid:Boolean,
-is_locked:Boolean
+is_locked:Boolean,
+image_url:String,
 }
 ],
 price:Number,
