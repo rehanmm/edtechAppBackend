@@ -12,7 +12,7 @@ const { tsend,send } = require('../middleware/responseSender');
 const Qlist=catchAsyncError(  async function(req ,res,next){
     const filter = req.body;
     let where = {};
-    if (filter.registered_user_id) {
+    if (filter.user_id) {
        next(new errorHandler(400,'user_id is required'))
     }
     let query = Question.find({user_id:filter.registered_user_id});
@@ -42,7 +42,7 @@ const Qlist=catchAsyncError(  async function(req ,res,next){
 const QToplist=catchAsyncError(  async function(req ,res,next){
     const filter = req.body;
     let where = {};
-    if (filter.registered_user_id) {
+    if (filter.user_id) {
        next(new errorHandler(400,'user_id is required'))
     }
     let query = Question.find({user_id:filter.registered_user_id});
@@ -140,10 +140,26 @@ const Aupdate = catchAsyncError( async function(req ,res){
 
 })
 const userInfo = catchAsyncError( async function(req ,res){
-const {registered_user_id}=req.body
-    const user= await User.findById(registered_user_id).select('-password -salt');
-    const progress= await Progress.findOne({user_id:registered_user_id});
-    tsend({user,progress},'',res)
+const {user_id}=req.body
+    const user= await User.findById(user_id).select('-password -salt');
+    const progress= await Progress.find({user_id});
+    const question= await Question.find({user_id});
+    const answer= await Answer.find({user_id});
+    const total_question=question.length;
+    const total_answer=answer.length;
+    const assignment= await Assignment.find({user_id});
+    const total_assignment=assignment.length;
+
+    tsend({
+        user,
+        progress,
+        question,
+        answer,
+        assignment,
+        total_assignments,
+        total_question,
+        total_answer,
+    },'',res)
 
     
 

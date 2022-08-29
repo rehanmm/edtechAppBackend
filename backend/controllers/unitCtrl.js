@@ -47,16 +47,16 @@ unit=unit.toObject({ getters: true, virtuals: true })
   
    
 // const {user_id}=req.body;
-const {user_id}=req.body;
+const {user_id,unit_id}=req.body;
 
-let unitProgress = await Progress.findOne({user_id})
+let unitProgress = await Progress.findOne({user_id,unit_id})
 
     if(unitProgress){
         unitProgress= unitProgress.toObject({ getters: true, virtuals: true });
     }
     else{
 
-const newProgress = new Progress({user_id});
+const newProgress = new Progress({user_id,unit_id});
 unitProgress=newProgress.toObject({ getters: true, virtuals: true });
 
     }

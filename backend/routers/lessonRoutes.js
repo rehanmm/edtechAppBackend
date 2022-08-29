@@ -11,8 +11,10 @@ router.route('/ui/lesson')
 .post(lessonCtrl.read)
 router.route('/ui/lesson/completed')
 .post(lessonCtrl.completedLesson)
-router.route('/ui/lesson/assignment/submit')
-.post(lessonCtrl.submitAssignment)
+
+// router.route('/ui/lesson/assignment/submit')
+// .post(lessonCtrl.submitAssignment)
+
 // router.route('/lessons/:lessonId')
 router.use(authenticateToken,hasAuthorisation)
 router.route('/admin/lesson/remove')

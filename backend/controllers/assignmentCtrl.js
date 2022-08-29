@@ -30,4 +30,9 @@ const listOfAssignment=catchAsyncError (async function (req, res) {
  
 });
 
+const submitAssignment=catchAsyncError( async function(req ,res,next){
+
+
+});
+
 module.exports={uploadAssignmet,listOfAssignment}

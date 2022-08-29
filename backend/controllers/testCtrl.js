@@ -9,7 +9,7 @@ const {send,tsend}=require('../middleware/responseSender')
 const startTest=catchAsyncError(async function(req,res){
    const {lesson_id,unit_id,user_id}=req.body
     const test = await Lesson.findById(lesson_id).select('title num_question time_allowed questions');
-    let testProgress= await Progress.findOne({user_id})//.select('test_answers option_choosed test_evaluation test_taken avg_test_score');
+    let testProgress= await Progress.findOne({user_id,unit_id})//.select('test_answers option_choosed test_evaluation test_taken avg_test_score');
     // console.log(testProgress)
 const arr=testProgress.test_evaluation
 startTime=Date.now();
@@ -36,7 +36,7 @@ startTime=Date.now();
 const submitTest=catchAsyncError(async function(req,res,next){
   
     const {lesson_id,unit_id,user_id}=req.body
-    const testProgress= await Progress.findOne({user_id}).select('test_evaluation'); 
+    const testProgress= await Progress.findOne({user_id,unit_id}).select('test_evaluation'); 
     const arr=testProgress.test_evaluation
 submitTime=Date.now();
 

@@ -72,7 +72,7 @@ const read=catchAsyncError( async function(req ,res){
     const nothingProvided=!lesson_id&&!unit_id
     // console.log(nothingProvided);
 
-    const unitProgress = await Progress.findOne({user_id})
+    const unitProgress = await Progress.findOne({user_id,unit_id})
     if(!unitProgress){
         return next(new errorHandler('No progress found',404));
     }
@@ -199,9 +199,8 @@ console.log(lesson.prerequisite);
 //
 
 }
-
-    
 })
+
 const remove= catchAsyncError( async function(req ,res){
     const {lesson_id}=req.body;
 const lesson= await Lesson.findById(req.body.lesson_id);
@@ -259,7 +258,7 @@ const completedLesson=catchAsyncError( async function(req ,res,next){
 //lesson_id
 //unit_id
 
-let progress= await Progress.findOne({user_id});
+let progress= await Progress.findOne({user_id,unit_id});
 console.log(progress);
 if(!progress){
  progress= new Progress({
@@ -285,12 +284,9 @@ tsend({user_id,lesson_id},'completed lesson updated successfuly',res)
 })
 
 
-const submitAssignment=catchAsyncError( async function(req ,res,next){
 
-
-})
 const updateLessonPosition=catchAsyncError( async function(req ,res,next){
-    let {lessons,unit_id,user_id}=req.body;
+    let {lessons,unit_id}=req.body;
   
     let unit=await Unit.findById(unit_id).select('lessons')
    lessonArray=unit.lessons
@@ -301,10 +297,11 @@ console.log(lessonArray);
 const indexOfTargetLesson = lessonArray.findIndex(e=> e.lesson_id ==lesson_id);
 console.log(indexOfTargetLesson);
 lessonArray[indexOfTargetLesson].index=index;
+
 })
 unitArray.sort((a, b) => a.index-b.index);
 // console.log(unitArray);
-await course.save()
+await unit.save()
 
 res.status(200).json(
    { success:true,
@@ -315,5 +312,5 @@ res.status(200).json(
 
 })
 
-module.exports={list,read,update,completedLesson,updateLessonPosition,submitAssignment,create,remove
+module.exports={list,read,update,completedLesson,updateLessonPosition,create,remove
 }
