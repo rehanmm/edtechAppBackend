@@ -1,4 +1,5 @@
 const {Unit}=require('../models/unitModel');
+const Lesson=require('../models/lessonModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const _=require('lodash');
@@ -75,10 +76,10 @@ const remove= catchAsyncError( async function(req ,res){
     const unit =await Unit.findById(unit_id)
 const course= await Course.findById(config.COURSE_ID)
 const index = course.units.findIndex(item => item.unit_id == unit_id);
-console.log(index);
+;
 
 course.units.splice(index, 1);
-console.log(course.units);
+
 await unit.remove();
 await course.save();
 await Lesson.deleteMany({unit_id});
