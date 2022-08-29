@@ -27,6 +27,7 @@ const create=catchAsyncError( async function(req ,res){
     await lesson.save()
     const {_id}=lesson
     const shortLesson = new longLessonToShort(lesson); 
+    console.log(shortLesson);
     // const unitLessonUpdate = await Unit.findOneAndUpdate(shortLesson,unit_id);
     shortLessonupdater(shortLesson,unit_id)
 
