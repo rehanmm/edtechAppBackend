@@ -94,6 +94,7 @@ const courseSchema = new mongoose.Schema({
 
       units:[{
         index:Number,
+        image_url:String,
         unit_id: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Unit'
