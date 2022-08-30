@@ -1,5 +1,5 @@
 const  express  = require('express')
-awsCtrl =require( '../controllers/awsCtrl')
+const awsCtrl =require( '../controllers/awsCtrl')
 const router=express.Router()
 const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 
