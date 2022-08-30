@@ -290,17 +290,17 @@ const updateLessonPosition=catchAsyncError( async function(req ,res,next){
     let {lessons,unit_id}=req.body;
   
     let unit=await Unit.findById(unit_id).select('lessons')
+   
    lessonArray=unit.lessons
     //destruct userId and newIndex 
 lessons.forEach(async (unit)=>{      
     let {lesson_id,index}=unit;
-console.log(lessonArray);
 const indexOfTargetLesson = lessonArray.findIndex(e=> e.lesson_id ==lesson_id);
-console.log(indexOfTargetLesson);
+// console.log(indexOfTargetLesson);
 lessonArray[indexOfTargetLesson].index=index;
 
 })
-unitArray.sort((a, b) => a.index-b.index);
+lessonArray.sort((a, b) => a.index-b.index);
 // console.log(unitArray);
 await unit.save()
 

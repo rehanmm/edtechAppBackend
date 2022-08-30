@@ -14,16 +14,24 @@ class video{
         else if(quality=="720"){
             return "High Quality";
         }
-
+        // else if(quality=="1080"){
+        //     return "High Quality";
+        // }
     }
 
     getVideoObject(quality){
         return {
-            title:getStringQuality(quality),
+            title:this.getStringQuality(quality),
            quality:  quality+"p",
             url:`https://quasar-edtech-stream.s3.amazonaws.com/${this.video_id}_${quality}.m3u8`};
     }
-
+    getVideoQuality(){
+   return [
+    this.getVideoObject('360'),
+    this.getVideoObject('480'),
+    this.getVideoObject('720')
+]
+}
 
 }
 
