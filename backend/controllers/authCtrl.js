@@ -121,7 +121,7 @@ const removeAdmin=catchAsyncError(async function(req,res){
     })
 const listAdmins=catchAsyncError(async function(req,res){
 
-    const admins= await Admin.find({})
+    const admins= await Admin.find({}).select('-password -__v -salt')
     if(!admins){
         return next(new errorHandler('Admins not found',401));
     }
