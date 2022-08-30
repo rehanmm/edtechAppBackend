@@ -23,6 +23,12 @@ tsend(lesson,'',res);
 const create=catchAsyncError( async function(req ,res){
     console.log(req.body);
     const  {unit_id,type}= req.body
+    if(type=='video'){
+        const {video_id}=req.body
+        const videoArr=new video(video_id)
+        req.body.video=videoArr.getVideoQuality()
+        console.log(req.body.video);
+    }
     const lesson = new Lesson(req.body);
     await lesson.save()
     const {_id}=lesson
@@ -32,32 +38,32 @@ const create=catchAsyncError( async function(req ,res){
     shortLessonupdater(shortLesson,unit_id)
 
     if(lesson.type==='video'){  
-        const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title video_id type unit_id completion start_at total_time description thumbnail_url');
+        const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title video video_id type unit_id completion start_at total_time description thumbnail_url');
         console.log(lesson);
     return tsend(lesson,'',res);
 }
    else if(lesson.type==='event'){  
-        const lesson= await Lesson.findById(_id.toString())
+        const lesson= await Lesson.findById(_id.toString()).select('title type completion prerequisite events ')
         console.log(lesson);
     return tsend(lesson,'',res);
 }
     else if(lesson.type==='article'){  
-        const lesson= await Lesson.findById(_id.toString());
+        const lesson= await Lesson.findById(_id.toString()).select('title type unit_id completion prerequisite head body ');
         console.log(lesson);
     return tsend(lesson,'',res);
 }
    else if(lesson.type==='test'){  
-        const lesson= await Lesson.findById(_id.toString())
+        const lesson= await Lesson.findById(_id.toString()).select('title type unit_id completion prerequisite num_question time_allowed questions')
         console.log(lesson);
     return tsend(lesson,'',res);
 }
    else if(lesson.type==='payment'){  
-        const lesson= await Lesson.findById(_id.toString())
+        const lesson= await Lesson.findById(_id.toString()).select('title type unit_id completion prerequisite amount price price_description')
         console.log(lesson);
     return tsend(lesson,'',res);
 }
    else if(lesson.type==='assignment'){  
-        const lesson= await Lesson.findById(_id.toString())
+        const lesson= await Lesson.findById(_id.toString()).select('title type unit_id completion prerequisite intro_vid body sample submitted_url placeholder status')
         console.log(lesson);
     return tsend(lesson,'',res);
 }

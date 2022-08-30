@@ -47,10 +47,10 @@ description:{
 },
 video:[
   {
-  title: String, //(Eg. High Quality, Low Quality, Medium Quality)
-  quality: String,// (Eg 480p, 360p),
-  bitrate: Number, //(15000) in kbps,360->800,480->1200,540->2000 720->3500  1080->5250
-   url: String// (Eg https://quasar-edtech-stream.s3.amazonaws.com/id1660772994502_360.m3u8 )
+  // title: String, //(Eg. High Quality, Low Quality, Medium Quality)
+  // quality: String,// (Eg 480p, 360p),
+  // bitrate: Number, //(15000) in kbps,360->800,480->1200,540->2000 720->3500  1080->5250
+  //  url: String// (Eg https://quasar-edtech-stream.s3.amazonaws.com/id1660772994502_360.m3u8 )
   }
   
   ],
