@@ -1,7 +1,6 @@
 const mongoose=require('mongoose');
 
 const awsSchema = new mongoose.Schema({
-    creditionals_type:String,
   accessKeyId:String,
     secretAccessKey:String
 },

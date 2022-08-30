@@ -10,6 +10,7 @@ const config=require('../config/config');
 const list=catchAsyncError(  async function(req ,res,){
 const aws=await Aws.find({}).lean();
 tsend(aws,'',res)
+
 })
 
 const create=catchAsyncError( async function(req ,res){
@@ -19,18 +20,13 @@ const create=catchAsyncError( async function(req ,res){
 
 })
 const read=catchAsyncError(async function(req ,res){
- const aws=await Aws.findById(config.AWS_ID).lean();
- if(!aws)
- {
-    next(new errorHandler('please store aws creditional first'));
- }
- 
+ const aws=await Aws.findOne({}).lean();
     tsend(aws,'',res)
     
 })
 const remove= catchAsyncError( async function(req ,res){
-const {aws_id}=req.body
-    const aws= await Aws.findById(config.AWS_ID)
+
+    const aws= await Aws.findOne({})
 await aws.remove();
 
     tsend({},'message deleted successfully',res)
@@ -40,9 +36,10 @@ await aws.remove();
 
 const update = catchAsyncError( async function(req ,res){
 
-     await Aws.findByIdAndUpdate(config.AWS_ID,req.body)
-  const updatedvalue=await Aws.findById(config.AWS_ID).lean()
-   tsend(updatedvalue,'updated successfully',res)
+      await Aws.deleteMany({})
+const aws= new Aws(req.body);
+ await aws.save()
+   res.json({ success:true, message:'updated successfully',data:aws});
     
 })
 

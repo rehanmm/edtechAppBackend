@@ -95,7 +95,7 @@ const createNewAdmin=catchAsyncError( async function(req,res){
    const {_id}=admin
     res.status(200).json({
         success: true,
-        message: 'user signed up successfully',
+        message: 'admin created successfully',
        data:{admin_id:_id}
 
     })

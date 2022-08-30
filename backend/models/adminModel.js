@@ -4,7 +4,8 @@ const crypto=require('crypto');
 const adminSchema=mongoose.Schema({ 
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:[true,'email already exists']
     },  
     password:{type:String},
     salt:{type:String},
