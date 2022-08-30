@@ -1,17 +1,18 @@
 const  express  = require('express')
 awsCtrl =require( '../controllers/awsCtrl')
 const router=express.Router()
+const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 
 router.route('/admin/aws/list')
-.post(awsCtrl.list)
+.post(authenticateToken,hasAuthorisation,awsCtrl.list)
 router.route('/admin/aws/create')
-.post(awsCtrl.create)
+.post(authenticateToken,hasAuthorisation,awsCtrl.create)
 router.route('/admin/aws/read')
-.post(awsCtrl.read)
+.postauthenticateToken,hasAuthorisation,(awsCtrl.read)
 router.route('/admin/aws/update')
-.put(awsCtrl.update)
+.put(authenticateToken,hasAuthorisation,awsCtrl.update)
 router.route('/admin/aws/remove')
-.delete(awsCtrl.remove)
+.delete(authenticateToken,hasAuthorisation,awsCtrl.remove)
 
 module.exports= router
 

@@ -4,9 +4,9 @@ const router=express.Router()
 const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 
 router.route('/admin/lessons')
-.post(lessonCtrl.list)
+.post(authenticateToken,hasAuthorisation,lessonCtrl.list)
 router.route('/admin/lesson/create')
-.post(lessonCtrl.create)
+.post(authenticateToken,hasAuthorisation,lessonCtrl.create)
 router.route('/ui/lesson')
 .post(lessonCtrl.read)
 router.route('/ui/lesson/completed')
@@ -16,14 +16,16 @@ router.route('/ui/lesson/completed')
 // .post(lessonCtrl.submitAssignment)
 
 // router.route('/lessons/:lessonId')
-router.use(authenticateToken,hasAuthorisation)
+
+
+// router.use(authenticateToken,hasAuthorisation)
 router.route('/admin/lesson/remove')
-.delete(lessonCtrl.remove)
+.delete(authenticateToken,hasAuthorisation,lessonCtrl.remove)
 router.route('/admin/lesson/update')
-.put(lessonCtrl.update)
+.put(authenticateToken,hasAuthorisation,lessonCtrl.update)
 
 router.route('/admin/lesson/update/position')
-.put(lessonCtrl.updateLessonPosition)
+.put(authenticateToken,hasAuthorisation,lessonCtrl.updateLessonPosition)
 
 
 module.exports= router

@@ -1,6 +1,6 @@
 const  express  = require('express');
 const authCtrl =require( '../controllers/authCtrl')
-const {authenticateToken,hasAuthorisation,verifyAdmin} = require( '../middleware/adminAuthMiddleware')
+const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 const router=express.Router()
 
 

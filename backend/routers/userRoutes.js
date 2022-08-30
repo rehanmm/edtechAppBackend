@@ -5,15 +5,15 @@ const router=express.Router()
 //  console.log(userCtrl);
  
 // .post(userCtrl.create)
-router.use(authenticateToken,hasAuthorisation)
+
 router.route('/admin/user/read')
-.get(userCtrl.read)
+.get(authenticateToken,hasAuthorisation,userCtrl.read)
 router.route('/admin/user/update')//also update on fire base
-.put(userCtrl.update)
+.put(authenticateToken,hasAuthorisation,userCtrl.update)
 router.route('/admin/user/remove')//also remove from firebase
-.delete(userCtrl.remove)
+.delete(authenticateToken,hasAuthorisation,userCtrl.remove)
 
 router.route('/admin/users')
-.post(userCtrl.list)
+.post(authenticateToken,hasAuthorisation,userCtrl.list)
 
 module.exports= router

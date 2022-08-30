@@ -31,6 +31,8 @@ app.use(cors());
 
 
 // app.use(logger);
+
+app.use('/edtech/admin/*',authRoutes);
 app.use('/edtech',authRoutes);
 app.use('/edtech',firebaseAuthRoutes);
 app.use('/edtech',userRoutes);

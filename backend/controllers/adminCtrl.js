@@ -1,4 +1,8 @@
 const Question=require('../models/questionModel');
+const User=require('../models/userModel');
+const Progress=require('../models/progressModel');
+const Lesson=require('../models/lessonModel');
+const Assignment=require('../models/assignmentModel');
 const Answer=require('../models/answerModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
@@ -148,17 +152,17 @@ const {user_id}=req.body
     const total_question=question.length;
     const total_answer=answer.length;
     const assignment= await Assignment.find({user_id});
-    const total_assignment=assignment.length;
+    const manual_lessons=await Lesson.find({completion:'manual'});
+    // const total_assignment=assignment.length;
 
     tsend({
         user,
         progress,
-        question,
-        answer,
-        assignment,
-        total_assignments,
-        total_question,
-        total_answer,
+       forum_questions:question,
+        forum_answers:answer,
+       uploaded_assignment:assignment,
+         manual_lessons,
+        // total_assignments,
     },'',res)
 
     

@@ -22,11 +22,11 @@ const router=express.Router()
 // router.route('/courses/by/:instructorId')
 
 
-router.use(authenticateToken,hasAuthorisation)
 router.route('/admin/course')
-.post(courseCtrl.read)
+.post(authenticateToken,hasAuthorisation,courseCtrl.read)
+
 router.route('/admin/updateCourse')
-.put(courseCtrl.update)
+.put(authenticateToken,hasAuthorisation,courseCtrl.update)
 // .delete(courseCtrl.remove)
 
 // router.param('courseId',courseCtrl.courseById)

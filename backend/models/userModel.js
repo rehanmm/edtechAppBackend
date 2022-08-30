@@ -70,12 +70,13 @@ default:0},
 last_lesson:{
 title:{
     type:String,
-    default:'user has not seen any lesson'
+    default:'User has not seen any lesson'
 
 },
     lesson_id:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'Lesson'
+    ref:'Lesson',
+    default:undefined
 }
 
 },
@@ -83,7 +84,7 @@ last_unit:{
 title:{
     type:String,
     trim:true,
-    default:'user has not seen any units'
+    default:'User has not seen any units'
 
 },
     unit_id:{

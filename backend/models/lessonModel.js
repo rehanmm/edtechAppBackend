@@ -175,7 +175,7 @@ events:[
 
 
    })
-   const Lesson=mongoose.model('Lesson', lessonSchema)
+   module.exports=mongoose.model('Lesson', lessonSchema)
 
 
    lessonSchema.methods.setVideo=function(){
@@ -184,4 +184,4 @@ events:[
       
 
    }
-   module.exports=Lesson
+

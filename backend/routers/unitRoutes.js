@@ -5,20 +5,20 @@ const router=express.Router()
 
 router.route('/ui/unit')
 .post(unitCtrl.read)
-router.use(authenticateToken,hasAuthorisation)
+
 router.route('/admin/course/units')
-.post(unitCtrl.list)
+.post(authenticateToken,hasAuthorisation,unitCtrl.list)
 router.route('/admin/unit/create')
-.post(unitCtrl.create)
+.post(authenticateToken,hasAuthorisation,unitCtrl.create)
 
 router.route('/admin/unit')
-.post(unitCtrl.read)
+.post(authenticateToken,hasAuthorisation,unitCtrl.read)
 router.route('/admin/unit/update')
-.put(unitCtrl.update)
+.put(authenticateToken,hasAuthorisation,unitCtrl.update)
 router.route('/admin/unit/update/position')
-.put(unitCtrl.updateUnitPosition)
+.put(authenticateToken,hasAuthorisation,unitCtrl.updateUnitPosition)
 router.route('/admin/unit/remove')
-.delete(unitCtrl.remove)
+.delete(authenticateToken,hasAuthorisation,unitCtrl.remove)
 
 
 
