@@ -40,12 +40,12 @@ total_comments:{
 type:Number,
 default:0
 },
-likes:[mongoose.Schema.Types.ObjectId],
+likes:[String],
 
 
 
 }, {
-    timestamps: { createdAt: true, updatedAt:true }
+    timestamps: { createdAt: 'created_at', updatedAt:"updated_at" }
   })
 
 module.exports=mongoose.model('Question',questionSchema)

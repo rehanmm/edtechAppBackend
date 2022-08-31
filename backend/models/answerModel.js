@@ -41,7 +41,7 @@ body:{
 total_upvote:{
 type:Number
 },
-upvotes:[mongoose.Schema.Types.ObjectId],
+upvotes:[String],
 is_top_answer:Boolean,
 accepted_answer:{
     type:Boolean,

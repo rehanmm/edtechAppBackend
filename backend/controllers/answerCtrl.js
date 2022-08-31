@@ -70,8 +70,7 @@ const upvote = catchAsyncError( async function(req ,res){
  
 
 
-module.exports = {list,read,update,upvote,create,remove
-}
+module.exports = {list,read,update,upvote,create,remove}
 
 
    

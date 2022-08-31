@@ -19,7 +19,7 @@ const list=catchAsyncError(  async function(req ,res,){
     const skip = (page - 1) * pageSize;
     const total = await Question.countDocuments(where);
     console.log(total);
-    const pages = Math.ceil(total / pageSize);
+    const pages = Math.floor(total / pageSize);
 
     if (page > pages) {
         return res.status(404).json({
@@ -39,8 +39,14 @@ const list=catchAsyncError(  async function(req ,res,){
 })
 
 const create=catchAsyncError( async function(req ,res){
- 
-    const question = new Question(req.body);
+ const {user_id,head,body}=req.body;
+    const userinfo= await User.findOne({user_id}).select('user_name');
+    const question = new Question({
+        user_id,
+        user_name:userinfo.user_name,
+        head,
+        body,
+    });
     // question.popularityIndex();
     await question.save()
     tsend(question,'',res)

@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
         default:'user'
         // required:['Name is required']
     },
+    user_id:{
+        type:String,
+        trim:true,
+        unique:[true,'user id is already taken']
+
+    },
     password:{
         type:String ,
         required:[function(value){

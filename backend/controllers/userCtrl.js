@@ -94,7 +94,8 @@ const remove = catchAsyncError(async function (req, res) {
 
 const update =catchAsyncError( async function (req, res) {
 
-    await User.findByIdAndUpdate(req.body.user_id, req.body)
+    const {user_id}=req.body
+    await User.findOneAndUpdate({user_id}, req.body)
 
     res.status(200).json(
         {
