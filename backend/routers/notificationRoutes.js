@@ -3,7 +3,7 @@ const notificationCtrl =require( '../controllers/notificationCtrl')
 const router=express.Router()
 
 router.route('/admin/notification/list')
-.get(notificationCtrl.list)
+.post(notificationCtrl.list)
 router.route('/admin/notification/create')
 .post(notificationCtrl.create)
 router.route('/admin/notification/read')

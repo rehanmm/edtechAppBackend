@@ -2,15 +2,15 @@ const  express  = require('express');
 const lessonCtrl =require( '../controllers/lessonCtrl')
 const router=express.Router()
 const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
-
+const blockUserMiddleware =require('../middleware/blockedUserMiddleware')
 router.route('/admin/lessons')
 .post(authenticateToken,hasAuthorisation,lessonCtrl.list)
 router.route('/admin/lesson/create')
 .post(authenticateToken,hasAuthorisation,lessonCtrl.create)
 router.route('/ui/lesson')
-.post(lessonCtrl.read)
+.post(blockUserMiddleware,lessonCtrl.read)
 router.route('/ui/lesson/completed')
-.post(lessonCtrl.completedLesson)
+.post(blockUserMiddleware,lessonCtrl.completedLesson)
 
 // router.route('/ui/lesson/assignment/submit')
 // .post(lessonCtrl.submitAssignment)

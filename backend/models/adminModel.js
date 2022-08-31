@@ -5,6 +5,9 @@ const adminSchema=mongoose.Schema({
     email:{
         type:String,
         required:true,
+        trim: true,
+        lowercase: true,
+        match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         unique:[true,'email already exists']
     },  
     password:{type:String},

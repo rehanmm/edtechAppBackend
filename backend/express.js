@@ -16,6 +16,7 @@ const assignmentRoutes=require('../backend/routers/assignmentRoutes');
 const adminRoutes=require('../backend/routers/adminRoutes');
 const awsRoutes=require('../backend/routers/awsRoutes');
 const notificationRoutes=require('../backend/routers/notificationRoutes');
+const blockedUserRoutes=require('../backend/routers/blockedUserRoutes');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
 // const logger=require('./middleware/logger')
@@ -34,6 +35,8 @@ app.use(cors());
 
 app.use('/edtech/admin/*',authRoutes);
 app.use('/edtech',authRoutes);
+app.use('/edtech',adminRoutes);
+app.use('/edtech',blockedUserRoutes);
 app.use('/edtech',firebaseAuthRoutes);
 app.use('/edtech',userRoutes);
 app.use('/edtech',courseRoutes);
@@ -43,7 +46,6 @@ app.use('/edtech',homeRoutes);
 app.use('/edtech',unitRoutes);
 app.use('/edtech',testRoutes);
 app.use('/edtech',assignmentRoutes);
-app.use('/edtech',adminRoutes);
 app.use('/edtech',awsRoutes);
 app.use('/edtech',notificationRoutes);
 

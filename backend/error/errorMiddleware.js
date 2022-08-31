@@ -21,7 +21,7 @@ if(err.name==='CastError'){
 // }
 
 res.status(err.statusCode).json({
-    success:false,
+    success:err.success||false,
     name:err.name,
     message:err.message
 

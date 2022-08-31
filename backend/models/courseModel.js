@@ -67,6 +67,7 @@ const courseSchema = new mongoose.Schema({
 
       }],
       units:[{
+        _id:false,
 
       }],
 
@@ -93,6 +94,7 @@ const courseSchema = new mongoose.Schema({
        },
 
       units:[{
+        _id:false,
         index:Number,
         unit_id: {
           type: mongoose.Schema.Types.ObjectId,

@@ -98,7 +98,9 @@ last_lesson_progress:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Progress'
 },
-units_completed:[{}]
+units_completed:[{
+   
+}]
   
 }
 ,{timestamps:{createdAt:'created_at',updatedAt:'updated_at'}});
