@@ -49,12 +49,12 @@ const QToplist=catchAsyncError(  async function(req ,res,next){
     if (filter.user_id) {
        next(new errorHandler(400,'user_id is required'))
     }
-    let query = Question.find({user_id:filter.registered_user_id});
+    let query = Question.find({});
     const page = parseInt(filter.page) || 1;
     const pageSize = parseInt(filter.limit) || 10;
     const skip = (page - 1) * pageSize;
     const total = await Question.countDocuments(where);
-    const pages = Math.ceil(total / pageSize)-1;
+    const pages = Math.ceil(total / pageSize);
 
     if (page > pages) {
         return res.status(404).json({
@@ -64,6 +64,7 @@ const QToplist=catchAsyncError(  async function(req ,res,next){
     }
     result = await query.skip(skip).limit(pageSize).sort({'createdAt':-1});
     res.json({
+        total,
         success: true,
         filter,
         count: result.length,
