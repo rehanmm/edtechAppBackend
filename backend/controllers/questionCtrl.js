@@ -8,18 +8,18 @@ const { tsend,send } = require('../middleware/responseSender');
 
 
 const list=catchAsyncError(  async function(req ,res,){
-    const filter = req.query;
+    const filter = req.body;
     let where = {};
     if (filter.keyword) {
         where.head = { $regex: filter.keyword, $options: "i" }
     }
     let query = Question.find(where);
-    const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.body.page) || 1;
+    const pageSize = parseInt(req.body.limit) || 10;
     const skip = (page - 1) * pageSize;
     const total = await Question.countDocuments(where);
     console.log(total);
-    const pages = Math.ceil(total / pageSize)-1;
+    const pages = Math.ceil(total / pageSize);
 
     if (page > pages) {
         return res.status(404).json({
