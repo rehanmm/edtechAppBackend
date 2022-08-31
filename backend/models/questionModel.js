@@ -4,7 +4,7 @@ const diffInDays = require('../helpers/forumHelpers/popularityIndex');
 const questionSchema=new mongoose.Schema({
 
     user_id:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:String,
         ref:'Question',
         // required:[true,'user id is required']
     },

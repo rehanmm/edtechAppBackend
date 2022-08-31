@@ -114,12 +114,6 @@ tsend(answer,'',res)
 })
 
 const Acreate=catchAsyncError( async function(req ,res){
-//  const question_id=req.body.question_id;
-//  const question= await Question.findOne({question_id});
-//  question.total_comment++;
-//  question.popularityIndex();
-
-//  question.save();
     const answer = new Answer(req.body);
     await answer.save()
     tsend(answer,'',res)

@@ -10,8 +10,14 @@ const adminSchema=mongoose.Schema({
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         unique:[true,'email already exists']
     },  
-    password:{type:String},
-    salt:{type:String},
+    password:{
+        type:String,
+        trim: true
+    },
+    salt:{
+        type:String,
+        trim:true
+    },
     role:{
         type:String,
         default:'admin',

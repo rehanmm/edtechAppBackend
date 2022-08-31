@@ -8,21 +8,35 @@ question_id:{
     required:[true,'question id is required']
 },
 user_id:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Question',
-    required:[true,'id of the user is required']
+    type:String,
+required:[function(e){
+    if(this.admin_id){
+        return false
+    }
+},'id of the user is required']
 },
 user_name:{
     type:String,
+    trim:true
+},
+admin_id:
+{
+type:mongoose.Schema.Types.ObjectId,
+required:[function(e){
+    if(this.user_id){
+        return false
+    }
+},'admin id of the user is required']
 },
 head:{
     type:String,
     trim:true,
-    // required:[true,'please enter your question']
+    required:[true,'please enter head of your question']
 },
 body:{
     type:String,
-    required:[true,'please explain your question ']
+    trim:true,
+    required:[true,'please enter body of your question']
 },
 total_upvote:{
 type:Number
@@ -33,9 +47,6 @@ accepted_answer:{
     type:Boolean,
     default:false
 }
-
-
-
 
 },{
     timestamps: { createdAt: true, updatedAt:true }

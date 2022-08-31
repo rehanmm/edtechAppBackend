@@ -12,7 +12,6 @@ router.route('/admin/user/update')//also update on fire base
 .put(authenticateToken,hasAuthorisation,userCtrl.update)
 router.route('/admin/user/remove')//also remove from firebase
 .delete(authenticateToken,hasAuthorisation,userCtrl.remove)
-
 router.route('/admin/users')
 .post(authenticateToken,hasAuthorisation,userCtrl.list)
 
