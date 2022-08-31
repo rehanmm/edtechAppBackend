@@ -6,7 +6,7 @@ const catchAsyncError=require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 const { tsend,send } = require('../middleware/responseSender');
 
- 
+
 const list=catchAsyncError(  async function(req ,res,){
     const filter = req.query;
     let where = {};
@@ -19,7 +19,7 @@ const list=catchAsyncError(  async function(req ,res,){
     const skip = (page - 1) * pageSize;
     const total = await Question.countDocuments(where);
     console.log(total);
-    const pages = Math.floor(total / pageSize);
+    const pages = Math.ceil(total / pageSize)-1;
 
     if (page > pages) {
         return res.status(404).json({
