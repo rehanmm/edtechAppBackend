@@ -27,7 +27,7 @@ class video{
     }
     getVideoUrl(){
        
-        return `https://quasar-edtech-stream.s3.amazonaws.com/${this.video_id}`
+        return `https://quasar-edtech-stream.s3.amazonaws.com/${this.video_id}.m3u8`;
     };
     
     getVideoQuality(){
