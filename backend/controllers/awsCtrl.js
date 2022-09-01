@@ -7,24 +7,24 @@ const Aws=require('../models/awsModel');
 const config=require('../config/config');
 
 
-const list=catchAsyncError(  async function(req ,res,){
+const list=catchAsyncError(  async function(req ,res,next){
 const aws=await Aws.find({}).lean();
 tsend(aws,'',res)
 
 })
 
-const create=catchAsyncError( async function(req ,res){
+const create=catchAsyncError( async function(req ,res,next){
     const aws = new Aws(req.body);
     await aws.save()
     tsend(aws,'',res)
 
 })
-const read=catchAsyncError(async function(req ,res){
+const read=catchAsyncError(async function(req ,res,next){
  const aws=await Aws.findOne({}).lean();
     tsend(aws,'',res)
     
 })
-const remove= catchAsyncError( async function(req ,res){
+const remove= catchAsyncError( async function(req ,res,next){
 
     const aws= await Aws.findOne({})
 await aws.remove();
@@ -34,7 +34,7 @@ await aws.remove();
 })
 
 
-const update = catchAsyncError( async function(req ,res){
+const update = catchAsyncError( async function(req ,res,next){
 
       await Aws.deleteMany({})
 const aws= new Aws(req.body);

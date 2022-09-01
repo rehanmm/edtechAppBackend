@@ -29,6 +29,10 @@ const create=catchAsyncError( async function(req ,res){
 
     await unit.save()
 
+    await Course.findByIdAndUpdate(config.COURSE_ID,{
+        $inc:{total_units:1} //decrement lessons
+    })
+
     tsend(unit,'unit created successfully',res)
     // send(unit,'',res);
 
@@ -81,7 +85,15 @@ course.units.splice(index, 1);
 
 await unit.remove();
 await course.save();
+const lessons=await Lesson.countDocuments({unit_id});
 await Lesson.deleteMany({unit_id});
+
+await Course.findByIdAndUpdate(config.COURSE_ID,{
+    $inc:{total_units:-1} //decrement lessons
+})
+await Course.findByIdAndUpdate(config.COURSE_ID,{
+    $inc:{total_lessons:-1*lessons} //decrement lessons
+})
 
     res.status(200).json({
         success:true,

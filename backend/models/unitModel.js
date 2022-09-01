@@ -38,11 +38,7 @@ const unitSchema = new mongoose.Schema({
       //   type: mongoose.Schema.ObjectId,
       //   ref: 'User'
       //  },
-       updated: Date,
-     created: {
-        type: Date,
-      default: Date.now
-      },
+
       is_paid:{
         type:Boolean,
         default:false
@@ -78,15 +74,15 @@ const unitSchema = new mongoose.Schema({
     //   type:Number,
     //   default:0
     // },
-    total_articles:{
+    total_articles:{//TODO: change to total_articles
       type:Number,
       default:0
     },
-    total_video:{//new
+    total_video:{//TODO: change to total_videos
       type:Number,
       default:0
     },
-    total_test:{//new
+    total_test:{//TODO: change to total_test
       type:Number,
       default:0
     },
@@ -132,7 +128,7 @@ const unitSchema = new mongoose.Schema({
       
 
     
-});
+},{timestamps:{createdAt:'created_at',updatedAt:'updated_at'}});
 const Unit=mongoose.model('unit',unitSchema);
 
 unitSchema.set('toObject', { virtuals: true })

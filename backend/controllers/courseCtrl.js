@@ -7,12 +7,12 @@ const errorHandler = require('../utils/errorHandler');
 const { send, tsend } = require('../middleware/responseSender');
 // const { findById } = require('../models/userModel');
 
-const list = catchAsyncError(async function (req, res,) {
+const list = catchAsyncError(async function (req, res,next) {
     const course = await Course.find({});
     res.status(200).json(course)
 })
 
-const create = catchAsyncError(async function (req, res) {
+const create = catchAsyncError(async function (req, res,next) {
 
 
     const course = new Course(req.body);
@@ -24,13 +24,13 @@ const create = catchAsyncError(async function (req, res) {
     
     
 })
-const read = catchAsyncError(async function (req, res) {
+const read = catchAsyncError(async function (req, res,next) {
     const course= await Course.findById(config.COURSE_ID)
     // res.status(200).json(course)
     tsend(course,'',res)
 
 })
-const remove = catchAsyncError(async function (req, res) {
+const remove = catchAsyncError(async function (req, res,next) {
     const course = await Course.findById(config.COURSE_ID)
     await course.remove();
     // await Unit.deleteMany({course_id});
@@ -43,7 +43,7 @@ const remove = catchAsyncError(async function (req, res) {
 })
 
 
-const update = catchAsyncError(async function (req, res) {
+const update = catchAsyncError(async function (req, res,next) {
 
     await Course.findByIdAndUpdate(config.COURSE_ID, req.body)
     const course =await Course.findById(config.COURSE_ID);

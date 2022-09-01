@@ -80,11 +80,8 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         default:0
        },
-      total_videos:{
-        type: Number,
-        default:0
-       },
-      total_resoursces:{
+    
+      total_events:{
         type: Number,
         default:0
        },

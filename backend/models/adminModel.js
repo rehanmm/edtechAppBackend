@@ -23,6 +23,7 @@ const adminSchema=mongoose.Schema({
         default:'admin',
         enum:['admin','superadmin']
 },
+total_blocked_user:Number
 
 },{timestamps:{createdAt:'created_at',updatedAt:'updated_at'}});
 

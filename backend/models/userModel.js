@@ -99,7 +99,8 @@ title:{
 }
 
 },
-
+total_answer_given:Number,
+total_question_asked:Number,
 last_lesson_progress:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Progress'

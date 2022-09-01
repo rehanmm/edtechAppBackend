@@ -24,7 +24,6 @@ body:{
 accepted_answer:{
 
 },
-
 popularity_index:{
 type:Number
 },
@@ -36,7 +35,7 @@ total_likes:{
 type:Number,
 default:0
 },
-total_comments:{
+total_answers:{
 type:Number,
 default:0
 },

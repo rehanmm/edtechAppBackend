@@ -25,6 +25,11 @@ class video{
            quality:  quality+"p",
             url:`https://quasar-edtech-stream.s3.amazonaws.com/${this.video_id}_${quality}.m3u8`};
     }
+    getVideoUrl(){
+       
+        return `https://quasar-edtech-stream.s3.amazonaws.com/${this.video_id}`
+    };
+    
     getVideoQuality(){
    return [
     this.getVideoObject('360'),

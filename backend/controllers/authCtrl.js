@@ -41,7 +41,7 @@ return res.status(200).json({
 })
 
 
-const signout=catchAsyncError( function(req,res){
+const signout=catchAsyncError( function(req,res,next){
 
     res.clearCookie('jwt');
     return res.status(200).json({
@@ -51,7 +51,7 @@ const signout=catchAsyncError( function(req,res){
 
 })
 
-const anonymous=catchAsyncError( async function(req,res){
+const anonymous=catchAsyncError( async function(req,res,next){
 
    
     const {phone_number}=req.body
@@ -86,7 +86,7 @@ req.body={
 })
 
 
-const createNewAdmin=catchAsyncError( async function(req,res){
+const createNewAdmin=catchAsyncError( async function(req,res,next){
     let admin = new Admin(req.body);
     console.log(req.body)
     await admin.savePassword();
@@ -102,7 +102,7 @@ const createNewAdmin=catchAsyncError( async function(req,res){
 })
 
 
-const removeAdmin=catchAsyncError(async function(req,res){
+const removeAdmin=catchAsyncError(async function(req,res,next){
     const {sec_admin_id,admin_id}=req.body
 
     if(sec_admin_id===admin_id){
@@ -119,7 +119,7 @@ const removeAdmin=catchAsyncError(async function(req,res){
             message:'Admin deleted successfully'
         })
     })
-const listAdmins=catchAsyncError(async function(req,res){
+const listAdmins=catchAsyncError(async function(req,res,next){
 
     const admins= await Admin.find({}).select('-password -__v -salt')
     if(!admins){
@@ -132,7 +132,7 @@ const listAdmins=catchAsyncError(async function(req,res){
     })
 }
 )
-const readAdmin=catchAsyncError(async function(req,res){
+const readAdmin=catchAsyncError(async function(req,res,next){
     const {sec_admin_id}=req.body
     const admin= await Admin.findById(admin_id)
     if(!admin){

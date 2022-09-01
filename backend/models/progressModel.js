@@ -4,8 +4,8 @@ const progressSchema = new mongoose.Schema({
     type:String,
     trim:true
 },
-   completed_lessons:[{}],
-   course_id:{
+completed_lessons:[{}],
+course_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Course'
 },
@@ -27,17 +27,15 @@ user_name:{
 },
 // completed_lessons:Number,
 completed_videos:Number,
-assignment_done:Number,
+assignment_done:Number,//T
 unit_name:{
     type:String
 },
     content: String,
     resource_url: String,
 
-
-
 // test progress
-test_answers:[{
+test_answers:[{//FIXME: change to test_answers
     lessonId:{ 
 index:Number,
 option_choosed:{

@@ -48,8 +48,12 @@ const create=catchAsyncError( async function(req ,res){
     });
     // question.popularityIndex();
     await question.save()
-    tsend(question,'',res)
+    if(user_id){
+        await User.findOneAndUpdate({user_id},{$inc:{total_answer_given:1}})
+        }
 
+    tsend(question,'',res)
+ 
 })
 const read=catchAsyncError( async function(req ,res){
 const {question_id}=req.body
@@ -62,8 +66,13 @@ tsend({question,answers},'',res);
 const remove= catchAsyncError( async function(req ,res){
 const {question_id}=req.body
 const question= await Question.findById(question_id)
-await question.remove();
+if(!question) return next(new errorHandler('question not found',200))
 
+const user_id=question.user_id
+await question.remove();
+if(user_id){
+await User.findOneAndUpdate({user_id},{$inc:{total_question_asked:-1}})
+}
    tsend({question_id:question._id},'question deleted successfully',res)
 
 })
