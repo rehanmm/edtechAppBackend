@@ -15,6 +15,8 @@ const firebaseAuthRoutes=require('../backend/routers/firebaseRoutes');
 const assignmentRoutes=require('../backend/routers/assignmentRoutes');
 const adminRoutes=require('../backend/routers/adminRoutes');
 const awsRoutes=require('../backend/routers/awsRoutes');
+const leaderBoardRoutes=require('../backend/routers/leaderBoardRoutes');
+const bucketRoutes=require('../backend/routers/bucketRoutes');
 const notificationRoutes=require('../backend/routers/notificationRoutes');
 const blockedUserRoutes=require('../backend/routers/blockedUserRoutes');
 
@@ -29,13 +31,14 @@ app.use(express.urlencoded({extended:true}));
 app.use(cors());
 // app.use(base64Decoder);
 // app.use(md5HashVerifier);
-
-
 // app.use(logger);
 
 app.use('/edtech/admin/*',authRoutes);
 app.use('/edtech',authRoutes);
 app.use('/edtech',adminRoutes);
+app.use('/edtech',awsRoutes);
+app.use('/edtech',bucketRoutes);
+app.use('/edtech',leaderBoardRoutes);
 app.use('/edtech',blockedUserRoutes);
 app.use('/edtech',firebaseAuthRoutes);
 app.use('/edtech',userRoutes);
@@ -46,7 +49,6 @@ app.use('/edtech',homeRoutes);
 app.use('/edtech',unitRoutes);
 app.use('/edtech',testRoutes);
 app.use('/edtech',assignmentRoutes);
-app.use('/edtech',awsRoutes);
 app.use('/edtech',notificationRoutes);
 
 

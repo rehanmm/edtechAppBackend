@@ -2,25 +2,17 @@ const mongoose = require('mongoose');
 
 const analyticsSchema=new mongoose.Schema({
 date:{
-
+type:Date,
 },
-home:{
-    type:Number,
-
-},
-lesson:{
-
-},
-question_asked:{
-
-},
-question_answered:{
-
-},
-question_liked:{},
-answer_upvoted:{},
-answer_downvoted:{},
-answer_accepted:{},
+visits:[
+    {
+        route:{
+            type:String,
+            trim:true
+        },
+        count:Number
+    }
+]
 
 
 })

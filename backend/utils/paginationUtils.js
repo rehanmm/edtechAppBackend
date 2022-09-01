@@ -1,8 +1,8 @@
 
 
-module.exports = async function(queryOn,page,limit,res)
+module.exports = async function(queryOn,pageNum,limit,res)
 {
-const page = parseInt(page) || 1;
+const page = parseInt(pageNum) || 1;
 const pageSize = parseInt(limit) || 10;
 const skip = (page - 1) * pageSize;
 const total = await queryOn.countDocuments(where);

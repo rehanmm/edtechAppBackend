@@ -40,11 +40,12 @@ const Qlist = catchAsyncError(async function (req, res, next) {
   });
 });
 
+
 const QToplist = catchAsyncError(async function (req, res, next) {
   const filter = req.body;
   let where = {};
   if (filter.user_id) {
-    next(new errorHandler(400, "user_id is required"));
+    next(new errorHandler(400, "User_id is required"));
   }
   let query = Question.find({});
   const page = parseInt(filter.page) || 1;

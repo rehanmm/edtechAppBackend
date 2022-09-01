@@ -27,8 +27,6 @@ router.route('/admin/course')
 
 router.route('/admin/updateCourse')
 .put(authenticateToken,hasAuthorisation,courseCtrl.update)
-// .delete(courseCtrl.remove)
 
-// router.param('courseId',courseCtrl.courseById)
 
 module.exports= router

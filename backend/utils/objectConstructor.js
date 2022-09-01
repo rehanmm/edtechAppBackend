@@ -101,6 +101,7 @@ constructor(lesson){
 this.lesson_id=lesson._id
 this.type=lesson.type
 this.title=lesson.title
+this.thumbnail_url=lesson.thumbnail_url
 this.description=lesson.description
 this.is_completed=null//from progress model
 this.prerequisite=lesson.prerequisite

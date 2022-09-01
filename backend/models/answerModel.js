@@ -43,15 +43,13 @@ type:Number
 },
 upvotes:[String],
 is_top_answer:Boolean,
-accepted_answer:{
-    type:Boolean,
-    default:false
-}
+
 
 },{
     timestamps: { createdAt: true, updatedAt:true }
   })
 
-
+  answerSchema.index({head: 'text', body: 'text'});
+  
 
 module.exports=mongoose.model('Answer',answerSchema)

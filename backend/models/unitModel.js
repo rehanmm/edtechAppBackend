@@ -89,6 +89,10 @@ const unitSchema = new mongoose.Schema({
 
       lessons:[{
         _id:false,
+        thumbnail_url:{
+          type:String,
+          trim:true,
+        },
         index:Number,
         lesson_id:mongoose.Schema.Types.ObjectId,
         type:{

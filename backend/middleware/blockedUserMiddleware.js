@@ -10,13 +10,11 @@ module.exports =catchAsyncError(async (req, res, next) => {
     const blockedUser = await BlockUser.findOne({user_id});
     if(blockedUser)
     { 
-        return next(
-            {
+        return next({
         success: true,
-        message:'you are bloked by admin',
-        statusCode:200,
-        name:'User blocked'
-    }
-    )}
+        message:'this number is blocked',
+        statusCode:200
+    })
+}
 next()
 })
