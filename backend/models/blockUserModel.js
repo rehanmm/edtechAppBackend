@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const blockUserSchema = new mongoose.Schema({
 user_id:{
         type:String,
-        unique:true,
+        unique:[true,'User already blocked'],
         trim:true,
         required:[true,'User id is required']
     },

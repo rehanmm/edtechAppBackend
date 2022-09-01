@@ -45,7 +45,7 @@ const create = catchAsyncError(async function (req, res, next) {
 
   if (lesson.type === "video") {
     const lesson = await Lesson.findById(_id.toString()).select(
-      "prerequisite unit_id title video video_id type unit_id completion start_at total_time description thumbnail_url"
+      "prerequisite unit_id title video_url type unit_id completion start_at total_time description thumbnail_url"
     );
     console.log(lesson);
 
