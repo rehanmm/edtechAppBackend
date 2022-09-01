@@ -10,6 +10,7 @@ const prereqFunction=require('../helpers/unitHelper/condition')
 const {longLessonToShort} =require('../utils/objectConstructor')
 const shortLessonupdater=require('../helpers/shortLessonUpdater')
 const video=require('../helpers/lessonHelper/videoUrlProcessing')
+const config=require('../config/config')
 
 
 const list=catchAsyncError(  async function(req ,res,){
@@ -20,7 +21,7 @@ if(!lesson){
 tsend(lesson,'',res);
 })
 
-const create=catchAsyncError( async function(req ,res){
+const create=catchAsyncError( async function(req ,res,next){
     console.log(req.body);
     const  {unit_id,type}= req.body
     if(type=='video'){
@@ -31,6 +32,12 @@ const create=catchAsyncError( async function(req ,res){
     }
     const lesson = new Lesson(req.body);
     await lesson.save()
+//progress
+await Course.findByIdAndUpdate(config.COURSE_ID,{
+    $inc:{total_lessons:1} //decrement lessons
+})
+
+
     const {_id}=lesson
     const shortLesson = new longLessonToShort(lesson); 
     console.log(shortLesson);
@@ -40,20 +47,50 @@ const create=catchAsyncError( async function(req ,res){
     if(lesson.type==='video'){  
         const lesson= await Lesson.findById(_id.toString()).select('prerequisite unit_id title video video_id type unit_id completion start_at total_time description thumbnail_url');
         console.log(lesson);
+
+        await Course.findByIdAndUpdate(config.COURSE_ID,{
+    $inc:{total_videos:1} //decrement lessons
+})
+
+await Unit.findOneAndUpdate({unit_id},{
+    $inc:{total_video:1} //decrement lessons
+    })
+
     return tsend(lesson,'',res);
 }
    else if(lesson.type==='event'){  
         const lesson= await Lesson.findById(_id.toString()).select('title type completion prerequisite events ')
+        await Course.findByIdAndUpdate(config.COURSE_ID,{
+            $inc:{total_events:1} //decrement lessons
+        })
+        
         console.log(lesson);
     return tsend(lesson,'',res);
 }
     else if(lesson.type==='article'){  
         const lesson= await Lesson.findById(_id.toString()).select('title type unit_id completion prerequisite head body ');
+      
+        await Course.findByIdAndUpdate(config.COURSE_ID,{
+            $inc:{total_articles:1} //decrement lessons
+        })   
+        
+        await Unit.findOneAndUpdate({unit_id},{
+            $inc:{total_articles:1} //decrement lessons
+            })
+      
         console.log(lesson);
     return tsend(lesson,'',res);
 }
    else if(lesson.type==='test'){  
         const lesson= await Lesson.findById(_id.toString()).select('title type unit_id completion prerequisite num_question time_allowed questions')
+  
+  await Course.findByIdAndUpdate(config.COURSE_ID,{
+     $inc:{total_tests:1} //decrement lessons
+        })
+
+ await Unit.findOneAndUpdate({unit_id},{
+            $inc:{total_test:1} //decrement lessons
+            })
         console.log(lesson);
     return tsend(lesson,'',res);
 }
@@ -67,10 +104,10 @@ const create=catchAsyncError( async function(req ,res){
         console.log(lesson);
     return tsend(lesson,'',res);
 }
-return tsend(lesson,'lesson updated successfully',res)
+
 
 })
-const read=catchAsyncError( async function(req ,res){
+const read=catchAsyncError( async function(req ,res,next){
 
     const {lesson_id,unit_id,user_id}=req.body;
     // console.log(unit_id);
@@ -80,9 +117,10 @@ const read=catchAsyncError( async function(req ,res){
     // console.log(nothingProvided);
 
     const unitProgress = await Progress.findOne({user_id,unit_id})
-    if(!unitProgress){
-        return next(new errorHandler('No progress found',404));
-    }
+
+    // if(!unitProgress){
+    //     return next(new errorHandler('No progress found',404));
+    // }
     
 // const obj={}
 // obj['62f3f716088e0c7a694a6bb4']='1660155813697'
@@ -128,7 +166,7 @@ tsend({lesson_id,is_locked:true},'lesson is locked',res);
 else if(onlyunit){
 
 //get next lesson user has to access
-  const unitProgress= await findOne({user_id})
+  const unitProgress= await Progress.findOne({user_id,unit_id})
   const arr=unitProgress.completed_lessons
   let lastElement = arr.pop();
   const lastWatchedLessonId=Object.keys(lastElement)[0];
@@ -214,7 +252,6 @@ const lesson= await Lesson.findById(req.body.lesson_id);
 if(!lesson){
     return next(new errorHandler('No lesson found',404));
 }
-
 const unit= await Unit.findById(lesson.unit_id)
 if(!unit){
     return next(new errorHandler('No unit found',404));
@@ -229,6 +266,59 @@ console.log(unit.lessons);
 unit.lessons.splice(index, 1);
 await unit.save();
 await lesson.remove();
+
+await Course.findByIdAndUpdate(config.COURSE_ID,{
+    $inc:{total_lessons:-1} //decrement lessons
+})
+
+
+
+
+if(lesson.type==='video'){  
+    await Course.findByIdAndUpdate(config.COURSE_ID,{
+$inc:{total_videos:-1} //decrement lessons
+})
+    await Unit.findOneAndUpdate({unit_id},{
+$inc:{total_video:-1} //decrement lessons
+})
+}
+else if(lesson.type==='event'){  
+     await Course.findByIdAndUpdate(config.COURSE_ID,{
+        $inc:{total_events:-1} //decrement lessons
+    })
+}
+else if(lesson.type==='article'){  
+    
+    await Course.findByIdAndUpdate(config.COURSE_ID,{
+        $inc:{total_articles:-1} //decrement lessons
+    }) 
+    await Unit.findOneAndUpdate({unit_id},{
+        $inc:{total_articles:-1} //decrement lessons
+        })
+}
+else if(lesson.type==='test'){  
+await Course.findByIdAndUpdate(config.COURSE_ID,{
+ $inc:{total_tests:-1} //decrement lessons
+    })
+
+    await Unit.findOneAndUpdate({unit_id},{
+        $inc:{total_test:-1} //decrement lessons
+        })
+
+}
+
+// else if(lesson.type==='payment'){  
+  
+// return tsend(lesson,'',res);
+// }
+// else if(lesson.type==='assignment'){  
+//     const lesson= await Lesson.findById(_id.toString()).select('title type unit_id completion prerequisite intro_vid body sample submitted_url placeholder status')
+//     console.log(lesson);
+// return tsend(lesson,'',res);
+// }
+
+
+
 
     res.status(200).json({
         success:true,
@@ -261,6 +351,7 @@ const {unit_id}=lesson
 const completedLesson=catchAsyncError( async function(req ,res,next){
     const {user_id,lesson_id,unit_id,timestamp}=req.body
 //user_id
+const {type}=await Lesson.findById(lesson_id).select('type')
 
 //lesson_id
 //unit_id
@@ -273,8 +364,11 @@ if(!progress){
         unit_id,
         timestamp
     })
-    progress.save();
-console.log(progress)
+    console.log(progress)
+    
+if(type==='video'){
+ progress.completed_videos++;
+        }
 
 const obj={}
 obj[user_id]=timestamp
@@ -285,6 +379,7 @@ if(!alreadyExist)
 progress.completed_lessons.push(obj)
 }
 console.log(progress);
+progress.save();
 
 tsend({user_id,lesson_id},'completed lesson updated successfuly',res)
 
