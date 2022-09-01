@@ -7,10 +7,12 @@ const lessonSchema = new mongoose.Schema({
     title : String,
     content: String,
     type:{
-      type:String
+      type:String,
+      required:[true,'type is required'],
     },
       unit_id:{
-        type:String
+        type:String,
+        required:[true,'unit_id is required'],
       },
     completion:{
         type:String,
@@ -44,6 +46,9 @@ video_id: String,
 description:{
   type:String,
   default:''
+},
+video_url:{
+type:String,
 },
 video:[
   {
