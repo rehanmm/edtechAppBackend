@@ -8,7 +8,9 @@ const enrollSchema = new mongoose.Schema({
     },
 
     lessonStatus: [{
-        lesson: { type: mongoose.Schema.ObjectId, ref: 'Lesson' },
+        lesson: {
+             type: mongoose.Schema.ObjectId, 
+             ref: 'Lesson' },
         complete: Boolean
     }],
     enrolled: {

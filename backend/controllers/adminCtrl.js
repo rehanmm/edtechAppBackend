@@ -123,7 +123,7 @@ const Aupdate = catchAsyncError(async function (req, res,next) {
 const userInfo = catchAsyncError(async function (req, res,next) {
   const { user_id } = req.body;
   //TODO: find by id ko find one karo
-  const user = await User.findById(user_id).select("-password -salt -__v");
+  const user = await User.findOne({user_id}).select("-password -salt -__v");
   const progress = await Progress.find({ user_id });
   const question = await Question.find({ user_id });
   const answer = await Answer.find({ user_id });

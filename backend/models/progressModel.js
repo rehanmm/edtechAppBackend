@@ -35,7 +35,7 @@ unit_name:{
     resource_url: String,
 
 // test progress
-test_answers:[{//FIXME: change to test_answers
+test_answers:[{//FIXME: isse sahi karo
     lessonId:{ 
 index:Number,
 option_choosed:{

@@ -3,6 +3,7 @@ const mongoose=require('mongoose');
 const blockUserSchema = new mongoose.Schema({
 user_id:{
         type:String,
+        unique:true,
         trim:true,
         required:[true,'User id is required']
     },
@@ -25,7 +26,7 @@ trim:true,
 },
 {
     timestamps:{createdAt:'blocked_at',updatedAt:false}
-});
+}); 
 
 //FIXME:timestamp is not working according to timezone
 module.exports=mongoose.model('BlockUser',blockUserSchema);
