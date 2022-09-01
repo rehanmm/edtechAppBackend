@@ -1,4 +1,5 @@
 const Lesson = require("../models/lessonModel");
+const Course = require("../models/courseModel");
 const { Unit } = require("../models/unitModel");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -118,6 +119,8 @@ const create = catchAsyncError(async function (req, res, next) {
     console.log(lesson);
     return tsend(lesson, "", res);
   }
+
+  
 });
 const read = catchAsyncError(async function (req, res, next) {
   const { lesson_id, unit_id, user_id } = req.body;
