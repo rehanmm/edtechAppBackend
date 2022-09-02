@@ -14,14 +14,14 @@ const {admin_id}=req.body;
   
 
   if (!admin) {
-    return next(new errorHandler("Admin not found", 401));
+    return next(new errorHandler("require sign in", 401));
   }
   req.profile = admin;
 
   const authorized =
     req.profile && req.auth && req.profile._id == req.auth.admin_id;
   if (!authorized) {
-     return next(new errorHandler("User is not authorized", 403));
+     return next(new errorHandler("Unauthorized", 403));
   }
   next();
 });
@@ -74,9 +74,9 @@ function authenticateToken(req, res, next) {
 
   jwt.verify(token, config.JWT_SECRET_KEY, (err, user) => {
     if (err) {
-      return res.json({
-        success: true,
-        message: "token is not valid please login",
+      return res.status(401).json({
+        success: false,
+        message: "Token is not valid please login again",
       });
     }
     if (!user) {
