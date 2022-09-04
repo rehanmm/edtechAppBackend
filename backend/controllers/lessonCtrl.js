@@ -152,7 +152,54 @@ const read = catchAsyncError(async function (req, res, next) {
   //condition logic for function
   if (onlyLesson) {
     // getLessonById
-    const lesson = await Lesson.findById(lesson_id);
+    const lesson = await Lesson.findById(lesson_id).select('type');
+
+const {type,_id}=lesson;
+
+    if (type === "video") {
+      const lesson = await Lesson.findById(_id.toString()).select(
+        "prerequisite unit_id title video_url type unit_id completion start_at total_time description thumbnail_url"
+      );
+      console.log(lesson);
+    
+      return tsend(lesson, "", res);
+    } else if (type === "event") {
+      const lesson = await Lesson.findById(_id.toString()).select(
+        "title type completion prerequisite events "
+      );
+     
+      console.log(lesson);
+      return tsend(lesson, "", res);
+    } else if (type === "article") {
+      const lesson = await Lesson.findById(_id.toString()).select(
+        "title type unit_id completion prerequisite head body "
+      );
+      console.log(lesson);
+      return tsend(lesson, "", res);
+    } else if (type === "test") {
+      const lesson = await Lesson.findById(_id.toString()).select(
+        "title type unit_id completion prerequisite num_question time_allowed questions"
+      );
+     
+      console.log(lesson);
+      return tsend(lesson, "", res);
+    } else if (type === "payment") {
+      const lesson = await Lesson.findById(_id.toString()).select(
+        "title type unit_id completion prerequisite amount price price_description"
+      );
+      console.log(lesson);
+      return tsend(lesson, "", res);
+    } else if (type === "assignment") {
+      const lesson = await Lesson.findById(_id.toString()).select(
+        "title type unit_id completion prerequisite intro_vid body sample submitted_url placeholder status"
+      );
+      console.log(lesson);
+      return tsend(lesson, "", res);
+    }
+    
+
+
+
     // const lesson = await Lesson.findById(lesson_id).select(
     //   " title type completion description start_at is_locked thumbnail_url total_time video_url"
     // );
@@ -456,3 +503,7 @@ module.exports = {
   create,
   remove,
 };
+
+
+
+
