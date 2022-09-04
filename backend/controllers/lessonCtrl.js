@@ -152,9 +152,10 @@ const read = catchAsyncError(async function (req, res, next) {
   //condition logic for function
   if (onlyLesson) {
     // getLessonById
-    const lesson = await Lesson.findById(lesson_id).select(
-      " title type completion description start_at is_locked thumbnail_url total_time video_url"
-    );
+    const lesson = await Lesson.findById(lesson_id);
+    // const lesson = await Lesson.findById(lesson_id).select(
+    //   " title type completion description start_at is_locked thumbnail_url total_time video_url"
+    // );
     //
     if (!lesson) {
       return next(new errorHandler("No lesson found", 404));
