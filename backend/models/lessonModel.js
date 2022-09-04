@@ -10,6 +10,9 @@ const lessonSchema = new mongoose.Schema({
       type:String,
       required:[true,'type is required'],
     },
+    unit_name:{
+type:String
+    },
       unit_id:{
         type:String,
         required:[true,'unit_id is required'],

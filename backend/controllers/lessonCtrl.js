@@ -1,4 +1,5 @@
 const Lesson = require("../models/lessonModel");
+const User = require("../models/userModel");
 const Course = require("../models/courseModel");
 const { Unit } = require("../models/unitModel");
 const express = require("express");
@@ -23,6 +24,7 @@ const list = catchAsyncError(async function (req, res,next) {
 
 const create = catchAsyncError(async function (req, res, next) {
   console.log(req.body);
+  //TODO: add unit name to lesson
   const { unit_id, type } = req.body;
   if (type == "video") {
     const { video_id } = req.body;
@@ -352,27 +354,28 @@ const completedLesson = catchAsyncError(async function (req, res, next) {
   //unit_id
 
   let progress = await Progress.findOne({ user_id, unit_id });
-  console.log(progress);
+  // 
   if (!progress) {
     progress = new Progress({
       user_id,
       unit_id,
-      timestamp,
     });
-    console.log(progress);
-
+  }
     if (type === "video") {
       progress.completed_videos++;
     }
+    // console.log('progress');
 
     const obj = {};
-    obj[user_id] = timestamp;
+    obj[lesson_id] = timestamp;
+
+    // console.log(obj);
 
     const alreadyExist = progress.completed_lessons.some((o) => user_id in o);
-    console.log(alreadyExist);
-    if (!alreadyExist) progress.completed_lessons.push(obj);
+    // console.log(alreadyExist);
+    if (!alreadyExist){ progress.completed_lessons.push(obj);
   }
-  console.log(progress);
+  // console.log(progress);
   progress.save();
 
   tsend({}, "completed lesson updated successfuly", res);
@@ -400,11 +403,52 @@ const updateLessonPosition = catchAsyncError(async function (req, res, next) {
   res.status(200).json({ success: true, message: "updated successfully" });
 });
 
+
+
+
+const startLesson = catchAsyncError(async function (req, res, next) {
+  const { user_id, lesson_id, unit_id } = req.body;
+  const timestamp = Date.now();
+
+  const { unit_name,title,type} = await Lesson.findById(lesson_id).select("title type unit_name").lean();
+ 
+ const last_lesson={
+  title,
+  lesson_id
+}
+const last_unit={
+  unit_id,
+  unit_name
+}
+
+  let progress = await Progress.exists({ user_id, unit_id });
+  console.log(progress);
+  if (!progress) {
+    progress = new Progress({
+      user_id,
+      unit_id,
+    });
+  }
+
+
+
+
+  await User.findOneAndUpdate({user_id},{
+      $set:{
+        last_lesson,
+        last_unit
+      }
+    })
+
+  tsend({}, "lesson started successfuly", res);
+});
+
 module.exports = {
   list,
   read,
   update,
   completedLesson,
+  startLesson,
   updateLessonPosition,
   create,
   remove,

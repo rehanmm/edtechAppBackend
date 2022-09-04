@@ -53,13 +53,14 @@ unit=unit.toObject({ getters: true, virtuals: true })
 const {user_id,unit_id}=req.body;
 
 let unitProgress = await Progress.findOne({user_id,unit_id})
-
+console.log(unitProgress);
     if(unitProgress){
         unitProgress= unitProgress.toObject({ getters: true, virtuals: true });
     }
     else{
 
 const newProgress = new Progress({user_id,unit_id});
+console.log(newProgress);
 unitProgress=newProgress.toObject({ getters: true, virtuals: true });
 
     }
