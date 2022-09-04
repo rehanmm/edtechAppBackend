@@ -26,7 +26,10 @@ user_name:{
     
 },
 // completed_lessons:Number,
-completed_videos:Number,
+completed_videos:{
+    type:Number,
+    default:0
+},
 assignment_done:Number,//T
 unit_name:{
     type:String
@@ -57,7 +60,10 @@ test_taken:{
     type:Number,
     default:0
 },
-avg_test_score:Number,
+avg_test_score:{
+    type:Number,
+    default:0
+},
 
    })
 

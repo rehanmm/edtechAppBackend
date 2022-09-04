@@ -26,7 +26,7 @@ const create = catchAsyncError(async function (req, res,next) {
 })
 const read = catchAsyncError(async function (req, res,next) {
     const course= await Course.findById(config.COURSE_ID)
-    // res.status(200).json(course)
+    
     tsend(course,'',res)
 
 })

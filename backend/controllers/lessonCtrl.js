@@ -361,9 +361,9 @@ const completedLesson = catchAsyncError(async function (req, res, next) {
       unit_id,
     });
   }
-    if (type === "video") {
-      progress.completed_videos++;
-    }
+    // if (type === "video") {
+    //   progress.completed_videos++;
+    // }
     // console.log('progress');
 
     const obj = {};
@@ -374,11 +374,13 @@ const completedLesson = catchAsyncError(async function (req, res, next) {
     const alreadyExist = progress.completed_lessons.some((o) => user_id in o);
     // console.log(alreadyExist);
     if (!alreadyExist){ progress.completed_lessons.push(obj);
+      progress.save();
+      //TODO:add completed evaluated field in progress model
+     return tsend({}, "completed lesson updated successfuly", res);
   }
   // console.log(progress);
-  progress.save();
 
-  tsend({}, "completed lesson updated successfuly", res);
+  return tsend({}, "lesson already completed", res);
 });
 
 const updateLessonPosition = catchAsyncError(async function (req, res, next) {

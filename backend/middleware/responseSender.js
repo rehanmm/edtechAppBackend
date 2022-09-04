@@ -5,7 +5,7 @@ const send=function(data,message,res){
     obj.success=true;
     obj.message=message;
     obj.data=data;
-res.status(200).json(obj);
+  return res.status(200).json(obj);
 
 }
 const tsend=function(data,message,res){
@@ -13,7 +13,7 @@ const tsend=function(data,message,res){
     obj.success=true;
     obj.message=message;
     obj.data=data;
-res.status(200).json(obj);
+return res.status(200).json(obj);
 
 }
 
