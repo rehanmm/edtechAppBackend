@@ -18,16 +18,13 @@ const userSchema = new mongoose.Schema({
         unique:[true,'user id is already taken']
 
     },
-    password:{
-        type:String ,
-        required:[function(value){
-            if(this.is_anonymous||this.phone_number){
-            return false
-        }else {return true}},'Password is required']
-    },
     phone_number:{
         type:Number,
-        require:[true,'please Enter your phone number']
+        require:[function(value){
+            if(this.is_anonymous){
+            return false
+        }else
+        {return true}},'please Enter your phone number']
     }
     ,
     // email:{

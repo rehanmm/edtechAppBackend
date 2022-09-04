@@ -343,7 +343,8 @@ const update = catchAsyncError(async function (req, res,next) {
 });
 
 const completedLesson = catchAsyncError(async function (req, res, next) {
-  const { user_id, lesson_id, unit_id, timestamp } = req.body;
+  const { user_id, lesson_id, unit_id } = req.body;
+  const timestamp = Date.now();
   //user_id
   const { type } = await Lesson.findById(lesson_id).select("type");
 
@@ -374,7 +375,7 @@ const completedLesson = catchAsyncError(async function (req, res, next) {
   console.log(progress);
   progress.save();
 
-  tsend({ user_id, lesson_id }, "completed lesson updated successfuly", res);
+  tsend({}, "completed lesson updated successfuly", res);
 });
 
 const updateLessonPosition = catchAsyncError(async function (req, res, next) {

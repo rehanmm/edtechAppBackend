@@ -51,39 +51,39 @@ const signout=catchAsyncError( function(req,res,next){
 
 })
 
-const anonymous=catchAsyncError( async function(req,res,next){
+// const anonymous=catchAsyncError( async function(req,res,next){
 
    
-    const {phone_number}=req.body
+//     const {phone_number}=req.body
     
-    if(phone_number===undefined){
-        const a =Math.floor( Math.random() * (200000000000-1) + 1);
-req.body={
-            name:"Anonymous",
-            is_anonymous:true,
-            email:`anonymous${a}@user.com`
-        }
-    }
+//     if(phone_number===undefined){
+//         const a =Math.floor( Math.random() * (200000000000-1) + 1);
+// req.body={
+//             name:"Anonymous",
+//             is_anonymous:true,
+//             email:`anonymous${a}@user.com`
+//         }
+//     }
 
 
     
-    let user = new User(req.body);
+//     let user = new User(req.body);
     
     
-    await user.save()
+//     await user.save()
     
-   const {_id}=user
+//    const {_id}=user
   
 
-    res.status(200).json({
-        success: true,
-        message: 'Anonymous user created successfully',
-       data:{userId:_id}
+//     res.status(200).json({
+//         success: true,
+//         message: 'Anonymous user created successfully',
+//        data:{userId:_id}
  
-    })
+//     })
 
 
-})
+// })
 
 
 const createNewAdmin=catchAsyncError( async function(req,res,next){
@@ -149,4 +149,4 @@ const readAdmin=catchAsyncError(async function(req,res,next){
 
 
 
-module.exports={anonymous,signin,createNewAdmin,readAdmin,listAdmins,removeAdmin,signout}
+module.exports={signin,createNewAdmin,readAdmin,listAdmins,removeAdmin,signout}

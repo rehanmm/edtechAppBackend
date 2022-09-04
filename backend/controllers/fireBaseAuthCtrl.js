@@ -28,11 +28,11 @@ const {user_id,phone_number}=req.body
     const user = await User.findOne({user_id})
     console.log(user)
     if(!user){
-      const a =Math.floor( Math.random() * (200000000000-1) + 1);
+      // const a =Math.floor( Math.random() * (200000000000-1) + 1);
       const user1= await new User({
         phone_number:phone_number,
-        user_id:user_id,
-        email:`dummy-user${a}@email.com`
+        user_id:user_id
+        // email:`dummy-user${a}@email.com`
       })
       await user1.save()
       msg = "New user created successfully";
@@ -85,16 +85,13 @@ return res.status(200).json({
 })
 const anonymous=catchAsyncError( async function(req,res){
 
-   
-  const {user_id}=req.body
-  
-      const a =Math.floor(Date.now()+ Math.random() * (20000-1) + 1);  
-req.body={user_id,
-          is_anonymous:true,
-          email:`anonymous-${a}@user.com`
-      }
+   req.body.is_anonymous=true;
 
-
+      // const a =Math.floor(Date.now()+ Math.random() * (20000-1) + 1);  
+// req.body={user_id,
+//           is_anonymous:true,
+//           // email:`anonymous-${a}@user.com`
+//       }
 
   
   let user = new User(req.body);
