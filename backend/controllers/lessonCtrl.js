@@ -407,8 +407,19 @@ await User.findOneAndUpdate({user_id},{
 })
 
 if(type==='video'){
-  
+  await User.findOneAndUpdate({user_id},{
+
+    $inc:{video_watched:1}
+  })
 }
+else if(type==='test'){
+  await User.findOneAndUpdate({user_id},{
+
+    $inc:{test_given:1}
+  })
+
+}
+
 
 ///
 

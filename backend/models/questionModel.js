@@ -10,7 +10,7 @@ const questionSchema=new mongoose.Schema({
     },
     body:String,
     image_url:String,
-    tags:[],
+    tags:[String],
 head:{
     type:String,
     trim:true,

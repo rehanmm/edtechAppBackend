@@ -39,8 +39,6 @@ return this.password === hash;
 
 adminSchema.methods.savePassword=async function(password) {
 this.salt=crypto.randomBytes(16).toString('hex')
-console.log(this.salt);
-console.log(this.password)
 this.password=crypto.pbkdf2Sync(this.password, this.salt,1000, 64, `sha512`).toString(`hex`); 
 }
 

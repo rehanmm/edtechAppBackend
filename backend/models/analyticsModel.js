@@ -6,6 +6,7 @@ type:Date,
 },
 visits:[
     {
+        _id:false,
         route:{
             type:String,
             trim:true

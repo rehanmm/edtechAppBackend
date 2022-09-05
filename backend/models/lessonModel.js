@@ -108,10 +108,14 @@ questions:[
   b: String,
   c: String,
   d: String
+  },
+  correct_option:{
+    type:String,
+    enum:['a','b','c','d']
   }
   }
   ],
-  correct_option:[{}],
+ 
   start_time:Number,
   End_time:Number,
   //index correct option and option choosed
@@ -129,6 +133,7 @@ price_decription: String,
 //Event
 events:[
   {
+    _id:false,
   title: String,
   time: {
   date_full: String,

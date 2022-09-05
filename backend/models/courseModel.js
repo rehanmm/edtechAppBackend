@@ -61,9 +61,11 @@ const courseSchema = new mongoose.Schema({
         default:0
        },
       top_reviews:[{
+        _id:false
 
       }],
       latest_reviews:[{
+        _id:false
 
       }],
       units:[{

@@ -2,10 +2,16 @@ const {Schema}=require('mongoose');
 
 const eventSchema=new Schema({
 
-
+users_subscribed:[{
+  user_id:mongoose.Schema.Type.ObjectId,
+  event_id:mongoose.Schema.Type.ObjectId,
+  is_paid:Boolean,
+  price:Number
+}],
 //Event
 events:[
     {
+      _id:false,
     title: String,
     time: {
     date_full: String,

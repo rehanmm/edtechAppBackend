@@ -4,7 +4,9 @@ const progressSchema = new mongoose.Schema({
     type:String,
     trim:true
 },
-completed_lessons:[{}],
+completed_lessons:[{
+    _id:false
+}],
 course_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Course'
@@ -38,14 +40,16 @@ unit_name:{
     resource_url: String,
 
 // test progress
-test_answers:[{//FIXME: isse sahi karo
-    lessonId:{ 
-index:Number,
-option_choosed:{
+tests_submitted_answers:[{
+    _id:false,
+lesson_id:mongoose.Schema.Types.ObjectId,
+answers:[{
+    question_id:mongoose.Schema.Types.ObjectId,
+    option_choosed:{
     type:String,
-    enum:['a','b','c','d']
-}
-}
+    enum:['a','b','c','d']}
+}]
+
 }],
 
 
