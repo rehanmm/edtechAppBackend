@@ -1,11 +1,12 @@
 
 
-module.exports = async function(queryOn,pageNum,limit,res)
+module.exports = async function(filter,Model,res)
 {
-const page = parseInt(pageNum) || 1;
-const pageSize = parseInt(limit) || 10;
+   const where={}
+const page = parseInt(filter.page) || 1;
+const pageSize = parseInt(filter.limit) || 10;
 const skip = (page - 1) * pageSize;
-const total = await queryOn.countDocuments(where);
+const total = await Model.countDocuments(where);
 const pages = Math.ceil(total / pageSize);
 if (page > pages) {
     return res.status(404).json({
@@ -13,7 +14,7 @@ if (page > pages) {
         message: "No page found",
     });
 }
-result = await queryOn.find({}).skip(skip).limit(pageSize).sort({'createdAt':-1}).lean();
+result = await Model.find({}).skip(skip).limit(pageSize).sort({'createdAt':-1}).lean();
 res.json({
     success: true,
     filter,

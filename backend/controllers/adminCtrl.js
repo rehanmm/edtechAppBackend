@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const catchAsyncError = require("../error/catchAsyncError");
 const errorHandler = require("../utils/errorHandler");
 const { tsend, send } = require("../middleware/responseSender");
+const paginationAndSearch=require('../utils/paginationAndSearch')
 
 const Qlist = catchAsyncError(async function (req, res, next) {
   const filter = req.body;
@@ -99,8 +100,8 @@ const Qupdate = catchAsyncError(async function (req, res,next) {
 });
 
 const Alist = catchAsyncError(async function (req, res,next) {
-  const answer = await Answer.find({}).lean();
-  tsend(answer, "", res);
+ paginationAndSearch(req.body,Answer,res)
+  
 });
 
 const Acreate = catchAsyncError(async function (req, res,next) {

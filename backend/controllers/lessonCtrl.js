@@ -122,7 +122,6 @@ const create = catchAsyncError(async function (req, res, next) {
     return tsend(lesson, "", res);
   }
 
-  
 });
 const read = catchAsyncError(async function (req, res, next) {
   const { lesson_id, unit_id, user_id } = req.body;
@@ -172,8 +171,7 @@ const {type,_id}=lesson;
       return tsend(lesson, "", res);
     } else if (type === "article") {
       const lesson = await Lesson.findById(_id.toString()).select(
-        "title type unit_id completion prerequisite head body "
-      );
+        "title type unit_id completion prerequisite head body");
       console.log(lesson);
       return tsend(lesson, "", res);
     } else if (type === "test") {
@@ -240,14 +238,6 @@ message:'none lesson is completed found'
     const index = arr.findIndex((object) => {
       return object.lesson_id == lastWatchedLessonId;
     });
-
-    //  agar lesson akhari hi ho to
-    // if(index+1==lessonsArray.length ){
-    //  const data=   {
-
-    //     }
-    // tsend()
-    // }
 
     if (index !== -1) {
       const nextLessonObject = arr[index + 1].lesson_id;
@@ -409,6 +399,20 @@ const completedLesson = catchAsyncError(async function (req, res, next) {
       unit_id,
     });
   }
+
+  //##progress model 
+await User.findOneAndUpdate({user_id},{
+
+  $inc:{lessons_completed:1}
+})
+
+if(type==='video'){
+  
+}
+
+///
+
+
     // if (type === "video") {
     //   progress.completed_videos++;
     // }

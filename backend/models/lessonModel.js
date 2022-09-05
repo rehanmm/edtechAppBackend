@@ -100,10 +100,9 @@ time_allowed: Number,
 questions:[
   {
   index: Number,
-  id: String,
   question: String,
-  image: String ,//url
-  video: String ,//url
+  image_url: String ,//url
+  // video_url: String ,//url
   options:{
   a: String,
   b: String,
