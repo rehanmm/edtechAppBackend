@@ -5,7 +5,7 @@ const progressSchema = new mongoose.Schema({
     trim:true
 },
 completed_lessons:[{
-    _id:false
+  
 }],
 // course_id:{
 //     type:mongoose.Schema.Types.ObjectId,

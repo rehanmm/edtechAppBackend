@@ -23,7 +23,8 @@ if(err.name==='CastError'){
 res.status(err.statusCode).json({
     success:err.success||false,
     name:err.name,
-    message:err.message
+    message:err.message,
+    stack:err.stack
 
 })
 

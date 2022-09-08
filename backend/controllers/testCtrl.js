@@ -31,11 +31,26 @@ const startTest = catchAsyncError(async function (req, res) {
   //     arr[index].name = 'John';
   //   }
   await testProgress.save();
-  tsend(test, "Test started successfully", res);
+  tsend({}, "Test started successfully", res);
   // testProgress.test_evaluation[lesson_id]
 });
 const submitTest = catchAsyncError(async function (req, res, next) {
   const { lesson_id, unit_id, user_id, answers } = req.body;
+  const testProgress = await Progress.findOne({ user_id, unit_id }).select(
+    'test_evaluation tests_submitted_answers avg_test_score test_taken completed_lessons'
+    );
+
+
+    const alreadyExist = testProgress.completed_lessons.some((o) => lesson_id in o);
+    // console.log(alreadyExist);
+    if (alreadyExist){ 
+        return res.status(200).json({
+            success:true,
+            message:'test is already submitted'
+        });
+  
+    
+  }
   /*answers
 1.test_evaluation--lesson_id start_time end_time test_score
 2.avg score
@@ -73,16 +88,13 @@ const submitTest = catchAsyncError(async function (req, res, next) {
   submitted_answers.answers=answers;
   
   
-  const testProgress = await Progress.findOne({ user_id, unit_id }).select(
-      'test_evaluation tests_submitted_answers avg_test_score test_taken'
-      );
+ 
     //   console.log(submitted_answers)
       
   testProgress.tests_submitted_answers.push(submitted_answers);
 
   const arr = testProgress.test_evaluation;
-  submitTime = Date.now(); 
-
+  const submitTime = Date.now(); 
   const index = arr.findIndex((object) => {
     return object.lesson_id == lesson_id;
   });
@@ -95,12 +107,25 @@ const submitTest = catchAsyncError(async function (req, res, next) {
     testProgress.test_taken=testProgress.test_taken+1;
 
   } else {
-    next(new errorHandler("you cannot sumbit before start of test", 500));
+   return next({success:true,message:'you cannot submit test before start'});
   }
+
+
+//
+
+const obj={}
+obj[lesson_id]=submitTime
+console.log(obj)
+testProgress.completed_lessons.push(obj);
+
+
+
+//
   await testProgress.save();
   
   tsend(testProgress, "Test submitted successfuly", res);
 });
+
 // const submitTest=catchAsyncError(async function(req,res){
 
 // })
