@@ -9,8 +9,8 @@ err.message=err.message||'internal server error';
 if(err.name==='CastError'){
     const message=`Resource not found invalid:${err.path}`
 
-    // err=new errorHandler(message,400)//bad request
-    err=new errorHandler(message,200)//bad request
+    // err=new errorHandler(message,400)/
+    err=new errorHandler(message,200)
 
 }
 // if(err.name==='TypeError'){

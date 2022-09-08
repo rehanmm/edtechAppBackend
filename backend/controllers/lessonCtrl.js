@@ -11,7 +11,7 @@ const Progress = require("../models/progressModel");
 const prereqFunction = require("../helpers/unitHelper/condition");
 const { longLessonToShort } = require("../utils/objectConstructor");
 const shortLessonupdater = require("../helpers/shortLessonUpdater");
-const video = require("../helpers/lessonHelper/videoUrlProcessing");
+const video = require("../helpers/lessonHelpers.js/videoUrlProcessing");
 const config = require("../config/config");
 
 const list = catchAsyncError(async function (req, res,next) {
@@ -178,8 +178,11 @@ const {type,_id}=lesson;
       const lesson = await Lesson.findById(_id.toString()).select(
         "title type unit_id completion prerequisite num_question time_allowed questions"
       );
+    
+      for(let i=0;i<lesson.questions.length;i++){
+        lesson.questions[i].correct_option=undefined
+      }
      
-      console.log(lesson);
       return tsend(lesson, "", res);
     } else if (type === "payment") {
       const lesson = await Lesson.findById(_id.toString()).select(

@@ -44,6 +44,7 @@ tests_submitted_answers:[{
     _id:false,
 lesson_id:mongoose.Schema.Types.ObjectId,
 answers:[{
+    _id:false,
     question_id:mongoose.Schema.Types.ObjectId,
     option_choosed:{
     type:String,

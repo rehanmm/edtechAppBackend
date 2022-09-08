@@ -2,7 +2,6 @@ const app=require('./express')
 const mongoose=require('mongoose')
 const dotenv = require('dotenv')
 const config=require('../backend/config/config')
-process.env.NODE_CONFIG_DIR = '../backend/config';
 const exitHandler=require('./error/shutdown')
 dotenv.config()
 //uncaughtException error handling

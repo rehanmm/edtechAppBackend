@@ -60,8 +60,6 @@ app.get('*', function (req, res) {
 
 
 
-
-
 // error middleware
 app.use(errorMiddleware);
 module.exports= app

@@ -35,7 +35,7 @@ startTime=Date.now();
 })
 const submitTest=catchAsyncError(async function(req,res,next){
   
-    const {lesson_id,unit_id,user_id}=req.body
+    const {lesson_id,unit_id,user_id,answers}=req.body
     const testProgress= await Progress.findOne({user_id,unit_id}).select('test_evaluation'); 
     const arr=testProgress.test_evaluation
 submitTime=Date.now();
