@@ -116,12 +116,6 @@ questions:[
   }
   ],
  
-  start_time:Number,
-  End_time:Number,
-  //index correct option and option choosed
-  
-
-
 //Payment
 amount: Number,
 price:  {

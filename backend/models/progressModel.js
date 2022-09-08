@@ -7,20 +7,19 @@ const progressSchema = new mongoose.Schema({
 completed_lessons:[{
     _id:false
 }],
-course_id:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Course'
-},
+// course_id:{
+//     type:mongoose.Schema.Types.ObjectId,
+//     ref:'Course'
+// },
 
 unit_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Unit'
 },
-course_name:{
-    type:String,
-    default:'' 
-},
-
+// course_name:{
+//     type:String,
+//     default:'' 
+// },
 
 user_name:{
     type:String,
@@ -48,17 +47,24 @@ answers:[{
     question_id:mongoose.Schema.Types.ObjectId,
     option_choosed:{
     type:String,
-    enum:['a','b','c','d']}
+    enum:['a','b','c','d']},
+    status:{
+        type:String,
+        enum:['correct','wrong']
+    }
 }]
 
 }],
 
 
 test_evaluation:[{
+    _id:false,
 lesson_id:mongoose.Schema.Types.ObjectId,
 start_time:Number,
 submit_time:Number,
-test_score:Number
+test_score:Number,
+correct_answers:Number,
+wrong_answers:Number,
 }],
 
 test_taken:{

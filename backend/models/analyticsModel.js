@@ -1,21 +1,19 @@
-const mongoose = require('mongoose');  
+const mongoose = require("mongoose");
 
-const analyticsSchema=new mongoose.Schema({
-date:{
-type:Date,
-},
-visits:[
+const analyticsSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+  },
+  visits: [
     {
-        _id:false,
-        route:{
-            type:String,
-            trim:true
-        },
-        count:Number
-    }
-]
+      _id: false,
+      route: {
+        type: String,
+        trim: true,
+      },
+      count: Number,
+    },
+  ],
+});
 
-
-})
-
-    module.exports=mongoose.model('Analytics',analyticsSchema)
+module.exports = mongoose.model("Analytics", analyticsSchema);
