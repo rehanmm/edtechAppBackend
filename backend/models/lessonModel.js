@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');  
 const catchAsyncError=require('../error/catchAsyncError');
-const video=require('../helpers/lessonHelper/videoUrlProcessing') 
+const video=require('../helpers/lessonHelpers.js/videoUrlProcessing') 
 const lessonSchema = new mongoose.Schema({
 
     title : String,
@@ -99,10 +99,10 @@ num_question: Number,
 time_allowed: Number,
 questions:[
   {
-  index: Number,
+  index:Number,
   question: String,
-  image_url: String ,//url
-  // video_url: String ,//url
+  body:String,
+  image_url: String,
   options:{
   a: String,
   b: String,
