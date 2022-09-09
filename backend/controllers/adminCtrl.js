@@ -17,7 +17,7 @@ const Qlist = catchAsyncError(async function (req, res, next) {
   if (filter.user_id) {
     next(new errorHandler(400, "user_id is required"));
   }
-  let query = Question.find({ user_id: filter.registered_user_id,question:filter.question_id});
+  let query = Question.find({ user_id: filter.registered_user_id,question_id:filter.question_id});
   const page = parseInt(filter.page) || 1;
   const pageSize = parseInt(filter.limit) || 10;
   const skip = (page - 1) * pageSize;
