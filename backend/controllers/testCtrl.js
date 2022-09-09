@@ -11,6 +11,15 @@ const startTest = catchAsyncError(async function (req, res) {
   const test = await Lesson.findById(lesson_id).select(
     "title num_question time_allowed questions"
   );
+  for(let i=0;i<test.questions.length;i++){
+    test.questions[i].correct_option=undefined
+  }
+ 
+  
+
+
+
+
   let testProgress = await Progress.findOne({ user_id, unit_id }); //.select('test_answers option_choosed test_evaluation test_taken avg_test_score');
   // console.log(testProgress)
   const arr = testProgress.test_evaluation;
@@ -31,9 +40,11 @@ const startTest = catchAsyncError(async function (req, res) {
   //     arr[index].name = 'John';
   //   }
   await testProgress.save();
-  tsend({}, "Test started successfully", res);
+  tsend(test, "Test started successfully", res);
   // testProgress.test_evaluation[lesson_id]
 });
+
+
 const submitTest = catchAsyncError(async function (req, res, next) {
   const { lesson_id, unit_id, user_id, answers } = req.body;
   const testProgress = await Progress.findOne({ user_id, unit_id }).select(
@@ -43,20 +54,21 @@ const submitTest = catchAsyncError(async function (req, res, next) {
 
     const alreadyExist = testProgress.completed_lessons.some((o) => lesson_id in o);
     // console.log(alreadyExist);
-    if (alreadyExist){ 
-        return res.status(200).json({
-            success:true,
-            message:'test is already submitted'
-        });
+//     if (alreadyExist){ 
+//         return res.status(200).json({
+//             success:true,
+//             message:'test is already submitted'
+//         });
   
     
-  }
+//   }
   /*answers
 1.test_evaluation--lesson_id start_time end_time test_score
 2.avg score
 3.tests_submitted_answers---answers me status
 */
-  const { questions,time_allowed ,title,num_question} = await Lesson.findById(lesson_id).select("questions");
+  const { questions,time_allowed ,title} = await Lesson.findById(lesson_id).select("questions").lean();
+  const num_question=questions.length
 const total_marks=num_question*1;
   let awarded_marks = 0,
     num_correct = 0,
@@ -65,7 +77,7 @@ const total_marks=num_question*1;
 
 
   questions.forEach(function ({_id,correct_option},questionIndex) {
-  
+    console.log(questionIndex)
       const index = answers.findIndex(
           (value) =>value.question_id == _id.toString()
     );
@@ -73,7 +85,7 @@ const total_marks=num_question*1;
     if (index != -1) {
         if(answers[index].option_choosed==correct_option)
      { 
-        questions[questionIndex].chosen_option=answers[index].option_choosed
+         questions[questionIndex].chosen_option=answers[index].option_choosed
         questions[questionIndex].awarded_marks=awarded_marks;
         questions[questionIndex].max_marks=1;
         questions[questionIndex].status = "correct";
@@ -82,8 +94,9 @@ const total_marks=num_question*1;
       num_correct++;
     }
     else {
+        questions[questionIndex].chosen_option=answers[index].option_choosed
         questions[questionIndex].status ="wrong";
-      answers[index].status = "wrong";
+      answers[index].status= "wrong";
       num_wrong++;
     }
 }
@@ -119,17 +132,15 @@ const total_marks=num_question*1;
 
 const obj={}
 obj[lesson_id]=submitTime
-console.log(obj)
 testProgress.completed_lessons.push(obj);
 
 
 
 //
   await testProgress.save();
-  
   tsend({
     title,
-num_question,
+    num_question,
 time_allowed,
 awarded_marks,
 total_marks,
