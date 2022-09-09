@@ -3,15 +3,15 @@ const eventCtrl =require( '../controllers/eventCtrl')
 const router=express.Router()
 
 
-router.route('/list')
+router.route('/event/list')
 .post(eventCtrl.list)
-router.route('/create')
+router.route('/event/create')
 .post(eventCtrl.create)
-router.route('/read')
+router.route('/event/read')
 .post(eventCtrl.read)
-router.route('/update')
+router.route('/event/update')
 .put(eventCtrl.update)
-router.route('/remove')
+router.route('/event/remove')
 .delete(eventCtrl.remove)
 
 module.exports= router

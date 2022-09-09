@@ -30,3 +30,4 @@ res.json({
 });
 
 }
+module.exports=paginationAndSearch

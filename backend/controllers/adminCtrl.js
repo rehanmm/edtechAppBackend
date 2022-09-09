@@ -100,7 +100,7 @@ const Qupdate = catchAsyncError(async function (req, res,next) {
 });
 
 const Alist = catchAsyncError(async function (req, res,next) {
- paginationAndSearch(req.body,Answer,res)
+  paginationAndSearch(req.body,Answer,res)
   
 });
 

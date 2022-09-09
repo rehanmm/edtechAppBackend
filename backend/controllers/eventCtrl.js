@@ -18,7 +18,11 @@ const create=catchAsyncError( async function(req ,res){
     const event = new Event(req.body);
 
     await event.save()
-    res.status(200).json(event)
+    res.status(200).json(
+        {success:true,
+message:'event created',
+        data:event}
+        )
 
 })
 const read=catchAsyncError( async function(req ,res){
@@ -32,7 +36,7 @@ const {event_id}=req.body
 })
 const remove= catchAsyncError( async function(req ,res){
     const {event_id}=req.body
-    const event= await Event.findById(notification_id)
+    const event= await Event.findById(event_id);
 
 await event.remove();
 
@@ -52,7 +56,7 @@ const update=catchAsyncError( async function(req ,res){
     res.status(200).json({
          success:true,
         message:'updated successfully',
-        event
+       data: event
 
     })
 

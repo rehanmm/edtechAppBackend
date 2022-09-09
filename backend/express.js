@@ -18,6 +18,7 @@ const awsRoutes=require('../backend/routers/awsRoutes');
 const leaderBoardRoutes=require('../backend/routers/leaderBoardRoutes');
 const bucketRoutes=require('../backend/routers/bucketRoutes');
 const notificationRoutes=require('../backend/routers/notificationRoutes');
+const eventRoutes=require('../backend/routers/eventRoutes');
 const blockedUserRoutes=require('../backend/routers/blockedUserRoutes');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
@@ -49,6 +50,7 @@ app.use('/edtech',homeRoutes);
 app.use('/edtech',unitRoutes);
 app.use('/edtech',testRoutes);
 app.use('/edtech',assignmentRoutes);
+app.use('/edtech',eventRoutes);
 app.use('/edtech',notificationRoutes);
 
 

@@ -1,17 +1,14 @@
-const {Schema}=require('mongoose');
+const mongoose=require('mongoose');
 
-const eventSchema=new Schema({
+const eventSchema=new mongoose.Schema({
 
 users_subscribed:[{
-  user_id:mongoose.Schema.Type.ObjectId,
-  event_id:mongoose.Schema.Type.ObjectId,
+  user_id:String,
+  event_id:mongoose.Schema.Types.ObjectId,
   is_paid:Boolean,
   price:Number
 }],
 //Event
-events:[
-    {
-      _id:false,
     title: String,
     time: {
     date_full: String,
@@ -60,9 +57,11 @@ events:[
       type: Boolean,
       default:false
     }
-    }]
+  
     
   
   
 
 })
+
+module.exports=mongoose.model('Event',eventSchema)
