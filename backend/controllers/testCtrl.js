@@ -56,15 +56,15 @@ const submitTest = catchAsyncError(async function (req, res, next) {
 2.avg score
 3.tests_submitted_answers---answers me status
 */
-  const { questions,time_allowed } = await Lesson.findById(lesson_id).select("questions");
-
-  let test_score = 0,
-    correct = 0,
-    wrong = 0,
+  const { questions,time_allowed ,title,num_question} = await Lesson.findById(lesson_id).select("questions");
+const total_marks=num_question*1;
+  let awarded_marks = 0,
+    num_correct = 0,
+    num_wrong = 0,
     submitted_answers={};
 
-    let i=0;
-  questions.forEach(function ({_id,correct_option}) {
+
+  questions.forEach(function ({_id,correct_option},questionIndex) {
   
       const index = answers.findIndex(
           (value) =>value.question_id == _id.toString()
@@ -73,14 +73,18 @@ const submitTest = catchAsyncError(async function (req, res, next) {
     if (index != -1) {
         if(answers[index].option_choosed==correct_option)
      { 
+        questions[questionIndex].chosen_option=answers[index].option_choosed
+        questions[questionIndex].awarded_marks=awarded_marks;
+        questions[questionIndex].max_marks=1;
+        questions[questionIndex].status = "correct";
         answers[index].status = "correct";
-      test_score++;
-      correct++;
+        awarded_marks++;
+      num_correct++;
     }
     else {
-
+        questions[questionIndex].status ="wrong";
       answers[index].status = "wrong";
-      wrong++;
+      num_wrong++;
     }
 }
   });
@@ -100,10 +104,10 @@ const submitTest = catchAsyncError(async function (req, res, next) {
   });
   if (index !== -1) {
     arr[index].submit_time = submitTime;
-    arr[index].test_score = test_score;
-    arr[index].correct_answers = correct;
-    arr[index].wrong_answers = wrong;
-    testProgress.avg_test_score=((testProgress.avg_test_score*testProgress.test_taken+test_score)/(testProgress.test_taken+1));
+    arr[index].awarded_marks = awarded_marks;
+    arr[index].correct_answers = num_correct;
+    arr[index].wrong_answers = num_wrong;
+    // testProgress.avg_test_score=((testProgress.avg_test_score*testProgress.test_taken+test_score)/(testProgress.test_taken+1));
     testProgress.test_taken=testProgress.test_taken+1;
 
   } else {
@@ -123,7 +127,17 @@ testProgress.completed_lessons.push(obj);
 //
   await testProgress.save();
   
-  tsend(testProgress, "Test submitted successfuly", res);
+  tsend({
+    title,
+num_question,
+time_allowed,
+awarded_marks,
+total_marks,
+num_correct,
+num_wrong,
+questions
+
+  }, "Test submitted successfuly", res);
 });
 
 // const submitTest=catchAsyncError(async function(req,res){

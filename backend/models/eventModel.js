@@ -11,10 +11,11 @@ users_subscribed:[{
 //Event
     title: String,
     time: {
+    event_time:String,//hours
     date_full: String,
-    date: Number,
+    date: String,
     month: String,
-    year: Number,
+    year: String,
     day: String,
     },
     description: String,
@@ -42,9 +43,6 @@ users_subscribed:[{
          type: mongoose.Schema.Types.ObjectId,
          ref:'Lesson'
       },
-      time:{
-        type:Number,
-      default:0},
       message:{
         type:String,
         default:"please complete required unit first"
