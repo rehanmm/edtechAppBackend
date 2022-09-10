@@ -83,16 +83,6 @@ body: String,
 sample: {
   type:String ,
   default:''},
-submitted_url: {
-  type:String ,
-  default:''},
-placeholder:  {
-  type:String ,
-  default:''},
-status:  {
-  type:String ,
-  default:'Not Submitted'},
-
 
 //test
 num_question: Number,
@@ -131,9 +121,9 @@ events:[
   title: String,
   time: {
   date_full: String,
-  date: Number,
+  date: String,
   month: String,
-  year: Number,
+  year:String,
   day: String,
   },
   description: String,
