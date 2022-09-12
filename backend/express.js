@@ -26,7 +26,7 @@ const blockedUserRoutes=require('../backend/routers/blockedUserRoutes');
 
 
 
-app.use(express.json());
+app.use(express.json({limit: '15mb'}));
 app.use(cookieparser());
 app.use(express.urlencoded({extended:true}));
 app.use(cors());
