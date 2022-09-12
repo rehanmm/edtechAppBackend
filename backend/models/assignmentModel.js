@@ -34,13 +34,16 @@ const assignmentSchema=new mongoose.Schema({
         default:false
     },
    bucket_name:{
-         type:String
+         type:String,
+         immutable: true 
    },
    file_path:{
-         type:String
+         type:String,
+         immutable: true 
    },
    placeholder:{
-    type:String
+    type:String,
+    default:"Your assignment has been submitted and it will be reviewed soon"
    }
 
 },{
