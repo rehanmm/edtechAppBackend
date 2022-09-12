@@ -15,13 +15,10 @@ const assignmentSchema=new mongoose.Schema({
     submitted_on:{
         type:Number
     },
-    assigned_on:{
-        type:Number
-    },
-    deadline_time:{
-        type:Number
-    }
-    ,status:{
+    // deadline_time:{
+    //     type:Number
+    // },
+    status:{
         type:String,
         enum:['Not Submitted','Submitted','Accepted','Rejected'],
         default:'Not Submitted'
@@ -31,11 +28,23 @@ const assignmentSchema=new mongoose.Schema({
         enum:['auto','manual'] ,
         default:'auto'
     },
-    is_completed:{
+    is_completed:{//TODO:true if assignment is submitted before deadline and auto
+
         type:Boolean,
         default:false
-    }
+    },
+   bucket_name:{
+         type:String
+   },
+   file_path:{
+         type:String
+   },
+   placeholder:{
+    type:String
+   }
 
+},{
+    timestamps:{createdAt:'created_at',updatedAt:'updated_at'}
 })
        
 module.exports=mongoose.model('Assignment',assignmentSchema);

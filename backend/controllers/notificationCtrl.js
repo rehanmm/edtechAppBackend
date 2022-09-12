@@ -7,6 +7,8 @@ const {tsend,send} = require('../middleware/responseSender');
 
 
 
+
+
 const list=catchAsyncError(  async function(req ,res,){
 const notification=await Notification.find({}).lean();
 tsend(notification,'',res)
@@ -45,8 +47,28 @@ const {notification_id}=req.body
 
 })
 
-module.exports = {list,read,update,create,remove
-}
+const sendToMultiple = catchAsyncError( async function(req ,res){
+const {notification_id}=req.body
+   await Notification.findByIdAndUpdate(notification_id,req.body)
+  const updatedvalue=await Notification.findById(notification_id).lean()
+   tsend(updatedvalue,'updated successfully',res)
+    
+
+})
+const sendToParticular = catchAsyncError( async function(req ,res){
+const {notification_id}=req.body
+   await Notification.findByIdAndUpdate(notification_id,req.body)
+  const updatedvalue=await Notification.findById(notification_id).lean()
+   tsend(updatedvalue,'updated successfully',res)
+    
+
+})
+
+
+
+
+module.exports = {list,read,update,create,remove}//,sendToAll,sendToMultiple,sendToParticular}
+
 
 
    

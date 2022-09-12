@@ -56,6 +56,36 @@ answers:[{
 
 }],
 
+submitted_answers:[{
+    lesson_id:mongoose.Schema.Types.ObjectId,
+    // start_time:Number,
+    // submit_time:Number,
+    num_question: Number,
+    awarded_marks: Number,
+    total_marks: Number,
+    num_correct: Number,
+    num_wrong: Number,
+    questions: [
+        {
+            question: String,
+            body:String,
+            image_url: String,
+            options: {
+                a: String,
+                b: String,
+                c: String,
+                d: String
+            },
+            correct_option:String,
+            _id: String,
+            chosen_option: String,
+            awarded_marks: Number,
+            max_marks: Number,
+            status: String
+        },
+    ]
+}]
+,
 
 test_evaluation:[{
     _id:false,
@@ -76,7 +106,7 @@ avg_test_score:{
     default:0
 },
 
-   })
+})
 
 
 

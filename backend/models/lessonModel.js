@@ -83,6 +83,11 @@ body: String,
 sample: {
   type:String ,
   default:''},
+  assignment_type:{
+    type:String,
+    enum:['auto','manual'] ,
+  },
+    //option–['auto','manual']
 
 //test
 num_question: Number,

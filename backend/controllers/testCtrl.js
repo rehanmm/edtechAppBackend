@@ -14,12 +14,8 @@ const startTest = catchAsyncError(async function (req, res) {
   for(let i=0;i<test.questions.length;i++){
     test.questions[i].correct_option=undefined
   }
- 
+
   
-
-
-
-
   let testProgress = await Progress.findOne({ user_id, unit_id }); //.select('test_answers option_choosed test_evaluation test_taken avg_test_score');
   // console.log(testProgress)
   const arr = testProgress.test_evaluation;

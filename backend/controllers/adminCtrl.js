@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const catchAsyncError = require("../error/catchAsyncError");
 const errorHandler = require("../utils/errorHandler");
 const { tsend, send } = require("../middleware/responseSender");
-const paginationAndSearch=require('../utils/paginationAndSearch')
+const paginationAndSearch=require('../utils/genaeralFilter')
 
 const Qlist = catchAsyncError(async function (req, res, next) {
   const filter = req.body;
@@ -17,7 +17,7 @@ const Qlist = catchAsyncError(async function (req, res, next) {
   if (filter.user_id) {
     next(new errorHandler(400, "user_id is required"));
   }
-  let query = Question.find({ user_id: filter.registered_user_id,question_id:filter.question_id});
+  let query = Question.find({question_id:filter.question_id });
   const page = parseInt(filter.page) || 1;
   const pageSize = parseInt(filter.limit) || 10;
   const skip = (page - 1) * pageSize;
@@ -100,7 +100,13 @@ const Qupdate = catchAsyncError(async function (req, res,next) {
 });
 
 const Alist = catchAsyncError(async function (req, res,next) {
-  paginationAndSearch(req.body,Answer,res)
+ 
+let where={}
+if(req.body.keyword){
+  where = {$or:[{head:{$regex: req.body.keyword, $options: 'i'}},{body:{$regex: req.body.keyword, $options: 'i'}}]}
+}
+
+ await paginationAndSearch(where,req.body,Answer,res)
   
 });
 
@@ -128,9 +134,9 @@ const userInfo = catchAsyncError(async function (req, res,next) {
   const user = await User.findOne({user_id}).select("-password -salt -__v");
   const progress = await Progress.find({ user_id });
   const question = await Question.find({ user_id });
-  const answer = await Answer.find({ user_id });
-  const total_question = question.length;
-  const total_answer = answer.length;
+  const answer = await Answer.find({user_id});
+  // const total_question = question.length;
+  // const total_answer = answer.length;
   const assignment = await Assignment.find({ user_id });
   const manual_lessons = await Lesson.find({ completion: "manual" });
   // const total_assignment=assignment.length;
@@ -142,8 +148,7 @@ const userInfo = catchAsyncError(async function (req, res,next) {
       forum_questions: question,
       forum_answers: answer,
       uploaded_assignment: assignment,
-      manual_lessons,
-      // total_assignments,
+      manual_lessons
     },
     "",
     res

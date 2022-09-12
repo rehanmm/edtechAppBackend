@@ -2,7 +2,7 @@
 const Question= require('../models/answerModel');
 
 paginationAndSearch = async (filter,Model,res) => { 
-let where = {};
+let where = {questin_id:filter.question_id};
 if (filter.keyword) {
     where = {$text: {$search:filter.keyword}}
 }     
