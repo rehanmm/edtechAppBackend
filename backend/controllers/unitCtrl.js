@@ -14,7 +14,9 @@ const config=require('../config/config');
 
 
 const list=catchAsyncError(  async function(req ,res){
+
 const unit=await Unit.find({});
+
 tsend(unit,'',res);
 })
 
@@ -53,17 +55,37 @@ unit=unit.toObject({ getters: true, virtuals: true })
 const {user_id,unit_id}=req.body;
 
 let unitProgress = await Progress.findOne({user_id,unit_id})
-console.log(unitProgress);
     if(unitProgress){
         unitProgress= unitProgress.toObject({ getters: true, virtuals: true });
     }
     else{
 
 const newProgress = new Progress({user_id,unit_id});
-console.log(newProgress);
+
 unitProgress=newProgress.toObject({ getters: true, virtuals: true });
 
     }
+
+const {completed_lessons}=unitProgress;
+// console.log(completed_lessons);
+completed_lessons.forEach((obj)=>{
+const comlessonId=Object.keys(obj)[0];
+
+for(let i=0;i<unit.lessons.length;i++){
+if(comlessonId==unit.lessons[i].lesson_id){
+    unit.lessons[i].is_completed=true;
+    
+}
+else{
+    unit.lessons[i].is_completed=false;
+}
+
+}
+
+
+
+})
+
 
 
 

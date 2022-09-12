@@ -9,7 +9,6 @@ const catchAsyncError = require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 
 
-
 const signin = catchAsyncError( async function(req,res,next){
 const {email,password}=req.body
         const admin= await Admin.findOne({email})

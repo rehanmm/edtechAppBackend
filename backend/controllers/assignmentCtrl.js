@@ -9,6 +9,7 @@ const errorHandler = require("../utils/errorHandler");
 const { tsend, send } = require("../middleware/responseSender");
 const { s3Uploadv2 } = require("../utils/s3services");
 const Progress = require("../models/progressModel");
+const paginationAndSearch=require('../utils/genaeralFilter')
 // const Question = require('../models/questionModel');
 
 const uploadAssignmet = catchAsyncError(async function (req, res,next) {
@@ -73,10 +74,13 @@ const listAssignment = catchAsyncError(async function (req, res,next) {
 
 });
 const reviewAssignment = catchAsyncError(async function (req, res,next) {
- const {user_id}=req.body
- 
-const assignment = await Assignment.find({user_id})
-
+  const {user_id,unit_id,lesson_id,status}=req.body
+  where={}
+  if(user_id){where.user_id=user_id}
+  if(unit_id){where.unit_id=unit_id}
+  if(lesson_id){where.lesson_id=lesson_id}
+  if(status){where.status=status}
+  paginationAndSearch(where,req.body,Assignment,res)
 
 });
 

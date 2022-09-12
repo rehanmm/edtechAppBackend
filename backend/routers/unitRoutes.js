@@ -7,7 +7,7 @@ const router=express.Router()
 
 router.route('/ui/unit')
 .post(unitCtrl.read)
-
+//TODO:check ui unit completed lessons
 router.route('/admin/course/units')
 .post(authenticateToken,hasAuthorisation,unitCtrl.list)
 router.route('/admin/unit/create')

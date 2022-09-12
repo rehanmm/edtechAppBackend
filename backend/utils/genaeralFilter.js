@@ -16,7 +16,7 @@ if page and limit provided then return answers per page
 
 */
 
-
+//## sort ke bhi condition pass karna hai
 paginationAndSearch = async (where,{limit,page},Model,res) => {  
 
 const query= Model.find(where)  

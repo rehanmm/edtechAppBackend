@@ -137,7 +137,7 @@ const userInfo = catchAsyncError(async function (req, res,next) {
   const answer = await Answer.find({user_id});
   // const total_question = question.length;
   // const total_answer = answer.length;
-  const assignment = await Assignment.find({ user_id }).lean();
+  const assignment = await Assignment.find({ user_id}).lean();
   const manual_lessons = await Lesson.find({ completion: "manual" });
   // const total_assignment=assignment.length;
 

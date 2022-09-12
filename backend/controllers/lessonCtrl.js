@@ -8,6 +8,7 @@ const catchAsyncError = require("../error/catchAsyncError");
 const errorHandler = require("../utils/errorHandler");
 const { send, tsend } = require("../middleware/responseSender");
 const Progress = require("../models/progressModel");
+const Assignment = require("../models/assignmentModel");
 const prereqFunction = require("../helpers/unitHelper/condition");
 const { longLessonToShort } = require("../utils/objectConstructor");
 const shortLessonupdater = require("../helpers/shortLessonUpdater");
@@ -191,6 +192,11 @@ const {type,_id}=lesson;
       console.log(lesson);
       return tsend(lesson, "", res);
     } else if (type === "assignment") {
+const assignment= await Assignment.findOne({lesson_id})
+      if(assignment){
+return tsend(assignment,'',res)
+      }
+
       const lesson = await Lesson.findById(_id.toString()).select(
         "title type unit_id completion prerequisite intro_vid body sample submitted_url placeholder status"
       );
