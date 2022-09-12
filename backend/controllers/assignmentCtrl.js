@@ -84,5 +84,16 @@ const reviewAssignment = catchAsyncError(async function (req, res,next) {
 
 });
 
+const reviewEditAssignment = catchAsyncError(async function (req, res,next) {
+  const {assignment_id}=req.body
 
-module.exports = { uploadAssignmet, listOfAssignment ,submitAssignment,reviewAssignment};
+  await Assignment.findOneAndUpdate({_id:assignment_id},req.body)
+
+  const assignment = await Assignment.findOne({_id:assignment_id})
+  return tsend(assignment, "Assignment updated successfully", res);
+  
+
+});
+
+
+module.exports = { uploadAssignmet, listOfAssignment ,submitAssignment,reviewAssignment,reviewEditAssignment};

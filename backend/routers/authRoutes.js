@@ -3,9 +3,6 @@ const authCtrl =require( '../controllers/authCtrl')
 const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 const router=express.Router()
 
-
-
-
 router.route('/admin/login')
 .post(authCtrl.signin)
 
