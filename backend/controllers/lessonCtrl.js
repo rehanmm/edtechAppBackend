@@ -193,7 +193,7 @@ const {type,_id}=lesson;
       return tsend(lesson, "", res);
     } else if (type === "assignment") {
      
-const assignment= await Assignment.findOne({lesson_id})
+const assignment= await Assignment.findOne({lesson_id,user_id})
       if(assignment){
 return tsend(assignment,'',res)
       }
