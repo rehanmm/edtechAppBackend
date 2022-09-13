@@ -13,7 +13,7 @@ users_subscribed:[{
     time: {
     date_full: String,
     date: Number,
-    month: Number,
+    month: String,
     year: Number,
     day: String,
     },
