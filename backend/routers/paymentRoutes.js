@@ -4,10 +4,11 @@ const { checkout,paymentVerification,dopayment,getKey} =require('../controllers/
 
 
 
-router.route("/checkout").post(checkout);
-
-router.route("/paymentverification").post(paymentVerification);
-router.route("/payment").post(dopayment);
-router.route("/key").post(getKey);
+router.route("/payment/checkout").
+get(checkout);
+router.route("/payment/paymentverification")
+.post(paymentVerification);
+router.route("/payment/get-key")
+.post(getKey);
 
 module.exports=router;

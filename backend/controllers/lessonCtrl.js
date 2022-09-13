@@ -518,6 +518,24 @@ const last_unit={
   tsend({}, "lesson started successfuly", res);
 });
 
+
+
+const paymentForLesson = catchAsyncError(async function (req, res, next) {
+const {user_id,lesson_id,unit_id}=req.body;
+const payment=await Lesson.findById(lesson_id).select('amount type price description').lean();
+if(!payment){
+  return tsend({}, "lesson not found", res);
+}
+if(payment.type!='payment'){
+  return tsend({}, "lesson not payment type", res);
+}
+
+res.redirect('/edtech/checkout?amount='+payment.amount+'&description='+payment.description+'&lesson_id='+lesson_id+'&unit_id='+unit_id+'&user_id='+user_id);
+
+
+
+})
+
 module.exports = {
   list,
   read,
@@ -527,6 +545,7 @@ module.exports = {
   updateLessonPosition,
   create,
   remove,
+  paymentForLesson 
 };
 
 

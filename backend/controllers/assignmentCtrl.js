@@ -9,7 +9,8 @@ const errorHandler = require("../utils/errorHandler");
 const { tsend, send } = require("../middleware/responseSender");
 const { s3Uploadv2 } = require("../utils/s3services");
 const Progress = require("../models/progressModel");
-const paginationAndSearch=require('../utils/genaeralFilter')
+const paginationAndSearch=require('../utils/genaeralFilter');
+
 // const Question = require('../models/questionModel');
 
 const uploadAssignmet = catchAsyncError(async function (req, res,next) {
@@ -68,9 +69,20 @@ const submitAssignment = catchAsyncError(async function (req, res, next) {
 
 
 
-const listAssignment = catchAsyncError(async function (req, res,next) {
- const {user_id,unit_id,lesson_id,status}=req.body
-  const assignment = await Assignment.find({user_id,unit_id,lesson_id,status})
+const getAssignment = catchAsyncError(async function (req, res,next) {
+ const {user_id,unit_id}=req.body
+ if(!user_id){
+   return next(new errorHandler(400,'user_id are required'))
+ }
+ const query={};
+ if(user_id){
+  query.user_id=user_id
+ }
+ if(unit_id){
+  query.unit_id=unit_id
+ }
+ paginationAndSearch(query,{limit:15},Assignment,res)
+
 
 });
 const reviewAssignment = catchAsyncError(async function (req, res,next) {
@@ -96,4 +108,6 @@ const reviewEditAssignment = catchAsyncError(async function (req, res,next) {
 });
 
 
-module.exports = { uploadAssignmet, listOfAssignment ,submitAssignment,reviewAssignment,reviewEditAssignment};
+module.exports = { uploadAssignmet,listOfAssignment, getAssignment ,submitAssignment,reviewAssignment,reviewEditAssignment};
+
+

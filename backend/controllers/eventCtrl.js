@@ -14,6 +14,18 @@ res.status(200).json({
 })
 
 const create=catchAsyncError( async function(req ,res){
+    const {time}=req.body
+    const {date_full}=time
+
+const [date,month,year]=time.date_full.split('-');
+req.body.time={
+date_full,
+    date,
+    month,
+    year,
+}
+
+
  
     const event = new Event(req.body);
 
@@ -61,9 +73,51 @@ const update=catchAsyncError( async function(req ,res){
     })
 
 })
+
+
+
+
+const paymentForEvent = catchAsyncError(async function (req, res, next) {
+    const {user_id,lesson_id,event_id,unit_id}=req.body;
+    const payment=await Event.findById(event_id).select('is_paid price').lean()
+    if(!payment){
+      return tsend({}, "event not found", res);
+    }
+  
+    if(!payment.is_paid||payment.price==0){
+      await Event.findByIdAndUpdate(event_id,{
+        $push:{
+          user_id,
+    event_id,
+    is_paid:payment.is_paid,
+    price:payment.price
+  
+        }
+      })
+     return tsend({}, "event registered successfully", res);
+  
+    }
+  
+    await Event.findByIdAndUpdate(event_id,{
+      $push:{
+        user_id,
+  event_id,
+  is_paid:payment.is_paid,
+  price:payment.price
+  
+      }
+    })
+  
+  
+    
+   return res.redirect('/edtech/checkout?amount='+payment.price+'&lesson_id='+lesson_id+'&unit_id='+unit_id+'&user_id='+user_id+'&event_id='+event_id);
+    
+    
+    
+    })
  
 
-module.exports={list,read,update,create,remove
+module.exports={list,read,update,create,remove,paymentForEvent
 }
 
 

@@ -11,11 +11,10 @@ users_subscribed:[{
 //Event
     title: String,
     time: {
-    event_time:String,//hours
     date_full: String,
-    date: String,
-    month: String,
-    year: String,
+    date: Number,
+    month: Number,
+    year: Number,
     day: String,
     },
     description: String,
@@ -29,7 +28,10 @@ users_subscribed:[{
     },
     venue: String,
     is_paid: Boolean,
-    price: Number,
+    price:{
+      type:Number,
+      default:0
+    },
     prerequisite: {
       has_prerequisite:{
         type:Boolean,

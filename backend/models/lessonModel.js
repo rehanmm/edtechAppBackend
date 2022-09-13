@@ -112,10 +112,11 @@ questions:[
   ],
  
 //Payment
-amount: Number,
-price:  {
-  type:String ,
-  default:''},
+amount: {
+  type:Number,
+  default:0
+},
+
 price_decription: String,
 
 

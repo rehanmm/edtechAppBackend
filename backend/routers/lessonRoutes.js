@@ -15,6 +15,8 @@ router.route('/ui/lesson/completed')
 .post(blockUserMiddleware,lessonCtrl.completedLesson)
 router.route('/ui/lesson/start')
 .post(blockUserMiddleware,lessonCtrl.startLesson)
+router.route('/ui/lesson/payment')
+.post(blockUserMiddleware,lessonCtrl.paymentForLesson)
 
 router.route('/ui/lesson/assignment/submit')
 .post(assignmentCtrl.submitAssignment)

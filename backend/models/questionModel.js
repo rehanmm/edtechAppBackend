@@ -8,13 +8,15 @@ const questionSchema=new mongoose.Schema({
         ref:'Question',
         // required:[true,'user id is required']
     },
-    body:String,
+    body:{
+        type:String,
+        index:true
+    },
     image_url:String,
     tags:[String],
 head:{
     type:String,
-    trim:true,
-    required:[true,'please enter your question']
+    index:true
 },
 body:{
     type:String,
