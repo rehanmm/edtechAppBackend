@@ -530,7 +530,8 @@ if(payment.type!='payment'){
   return tsend({}, "lesson not payment type", res);
 }
 
-res.redirect('/edtech/checkout?amount='+payment.amount+'&description='+payment.description+'&lesson_id='+lesson_id+'&unit_id='+unit_id+'&user_id='+user_id);
+
+res.redirect('/edtech/payment/checkout?amount='+payment.amount+'&description='+payment.description+'&lesson_id='+lesson_id+'&unit_id='+unit_id+'&user_id='+user_id);
 
 
 

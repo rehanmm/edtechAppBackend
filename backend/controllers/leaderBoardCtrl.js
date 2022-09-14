@@ -28,14 +28,15 @@ const {user_id,user_name,score}=req.body
 })
 
 const rankList=catchAsyncError(  async function(req ,res,next){
-
-leaderboard.list('all').then((rows) => {
+const page = parseInt(req.body.page) || 1;
+const limit = parseInt(req.body.limit) || 15;
+ const rows= await leaderboard.list('all',{limit,page})
+console.log(rows)
     res.status(200).json({
         success:true,
-        data:rows
+        ...rows
     })
 
-  });
 })
 
 
