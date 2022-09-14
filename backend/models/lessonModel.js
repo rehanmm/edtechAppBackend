@@ -116,6 +116,13 @@ amount: {
   type:Number,
   default:0
 },
+sub_amount:{
+  type:Number
+},
+currency: {
+  type:String,
+  default:'INR'
+},
 
 price_decription: String,
 

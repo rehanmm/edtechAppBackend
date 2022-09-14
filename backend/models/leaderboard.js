@@ -10,7 +10,9 @@ const leaderboardSchema = new mongoose.Schema({
         type:String,
     },
     total_score:{
+type:Number
+    }
 
-    },
+},timestamps:{createdAt:'created_at',updatedAt:'updated_at'});
 
-},timestamps:{createdAt:'created_at',updatedAt:'updated_at'}});
+module.exports=mongoose.model('Leaderboard',leaderboardSchema)

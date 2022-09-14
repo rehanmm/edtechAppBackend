@@ -7,11 +7,18 @@ const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMi
 // .post(authenticateToken,hasAuthorisation,awsCtrl.list)
 // router.route('/admin/aws/create')
 // .post(authenticateToken,hasAuthorisation,awsCtrl.create)
-router.route('/admin/leaderboard/read')
-.post(authenticateToken,hasAuthorisation,leaderBoardCtrl.read)
+router.route('/admin/leaderboard/ranklist')
+.post(authenticateToken,hasAuthorisation,leaderBoardCtrl.rankList)
+router.route('/admin/leaderboard/create')
+.post(leaderBoardCtrl.create)
+router.route('/admin/leaderboard/position')
+.post(authenticateToken,hasAuthorisation,leaderBoardCtrl.rankPostion)
+router.route('/admin/leaderboard/surrounding')
+.post(authenticateToken,hasAuthorisation,leaderBoardCtrl.rankSurronding) 
 
-// router.route('/admin/aws/remove')
-// .delete(authenticateToken,hasAuthorisation,awsCtrl.remove)
+
+
+
 
 module.exports= router
 

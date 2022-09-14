@@ -16,49 +16,50 @@ res.status(200).json({
 const create=catchAsyncError( async function(req ,res){
     const {time}=req.body
     const {date_full}=time
-
+console.log(time.date_full)
 let [date,month,year]=time.date_full.split('-');
+console.log(date,month,year)
 
 
 switch(month) {
     case '01':
-        month='Jan'
+        month='JAN'
       break;
     case '02':
-        month='Feb'
+        month='FEB'.
       break;
  
     case '03':
-        month='Mar'
+        month='MAR'
       break;
     case '04':
-        month='Apr'
+        month='APR'
       break;
     case '05':
-        month='May'
+        month='MAY'
       break;
     case '06':
-     month='Jun'
+     month='JUN'
       break;
     case '07':
-        month='Jul'
+        month='JUL'
       break;
  
     case '08':
-        month='Aug'
+        month='AUG'
       break;
     case '09':
-        month='Sep'
+        month='SEP'
       break;
 
     case '10':
-        month='Oct'
+        month='OCT'
       break;
     case '11':
-        month='Nov'
+        month='NOV'
       break;
     case '12':
-        month='Dec'
+        month='DEC'
       break;
     default:
         month=''
