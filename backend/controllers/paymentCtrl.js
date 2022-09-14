@@ -22,7 +22,7 @@ const checkout = async (req, res) => {
   const order = await instance.orders.create(options);
   payment.created_at=order.created_at
   await payment.save()
-
+console.log(order)
   res.status(200).json({
     success: true,
     order,

@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 const paymentSchema = new mongoose.Schema({
   user_id:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:"String",
     required:true
   },
 lesson_id:{
@@ -17,7 +17,6 @@ payment_for:{
 
   order_id:{
     type:String,
-    required:true,
     index:true
   },
     razorpay_order_id: {
