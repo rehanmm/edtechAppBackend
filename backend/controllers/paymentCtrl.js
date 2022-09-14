@@ -53,7 +53,7 @@ const checkout = async (req, res) => {
   if (isAuthentic) {
     // Database comes here
 
-   const payment= await Payment.findByIdAndUpdate(order_id,{
+   const payment= await Payment.findOneAndUpdate({order_id},{
       razorpay_order_id,
       razorpay_payment_id,
       razorpay_signature,
