@@ -21,8 +21,8 @@ const checkout = async (req, res) => {
   
   const order = await instance.orders.create(options);
   payment.created_at=order.created_at
+  payment.order_id=order.id
   await payment.save()
-console.log(order)
   res.status(200).json({
     success: true,
     data:{
@@ -65,7 +65,7 @@ console.log(order)
      data:payment
     })
   } else {
-    const payment= await Payment.findByIdAndUpdate(order_id,{
+    const payment= await Payment.findOneAndUpdate({order_id},{
       razorpay_order_id,
       razorpay_payment_id,
       razorpay_signature,
