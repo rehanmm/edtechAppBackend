@@ -25,7 +25,10 @@ const checkout = async (req, res) => {
 console.log(order)
   res.status(200).json({
     success: true,
-    order,
+    data:{
+      api_key:process.env.RAZORPAY_API_KEY,
+      order
+    },
   });
 };
 
