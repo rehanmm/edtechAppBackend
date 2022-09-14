@@ -116,6 +116,10 @@ amount: {
   type:Number,
   default:0
 },
+price:{
+  type:String,
+  default:'0'
+},
 sub_amount:{
   type:Number
 },

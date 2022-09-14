@@ -157,7 +157,7 @@ const paymentForEvent = catchAsyncError(async function (req, res, next) {
   
   
     
-   return res.redirect('/edtech/checkout?amount='+payment.price+'&lesson_id='+lesson_id+'&unit_id='+unit_id+'&user_id='+user_id+'&event_id='+event_id);
+   return res.redirect('/edtech/payment/checkout?amount='+payment.price+'&lesson_id='+lesson_id+'&unit_id='+unit_id+'&user_id='+user_id+'&event_id='+event_id);
     
     
     

@@ -33,6 +33,10 @@ const create = catchAsyncError(async function (req, res, next) {
     req.body.video_url = videoArr.getVideoUrl();
     console.log(req.body.video);
   }
+
+  if(type=='payment'){
+    req.body.amount=Number(req.body.price)
+  }
   const lesson = new Lesson(req.body);
   await lesson.save();
   //progress
