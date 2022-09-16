@@ -17,7 +17,8 @@ payment_for:{
 
   order_id:{
     type:String,
-    index:true
+    index:true,
+    unique:true
   },
     razorpay_order_id: {
       type: String,

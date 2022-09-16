@@ -3,10 +3,14 @@ const mongoose=require('mongoose');
 const eventSchema=new mongoose.Schema({
 
 users_subscribed:[{
+  _id:false,
   user_id:String,
   event_id:mongoose.Schema.Types.ObjectId,
   is_paid:Boolean,
-  price:Number
+  price:Number,
+  lesson_id:mongoose.Schema.Types.ObjectId,
+  subscribed_at:Number
+
 }],
 //Event
     title: String,
@@ -52,11 +56,11 @@ users_subscribed:[{
       }
   },
   
-    is_locked: Boolean,
-    is_subscribed :{
-      type: Boolean,
+    is_locked:{
+      type:Boolean,
       default:false
-    }
+    },
+
   
     
   

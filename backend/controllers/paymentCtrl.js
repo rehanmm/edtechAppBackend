@@ -53,23 +53,26 @@ const checkout = async (req, res) => {
   if (isAuthentic) {
     // Database comes here
 
-   const payment= await Payment.findOneAndUpdate({order_id},{
+    await Payment.findOneAndUpdate({order_id},{
       razorpay_order_id,
       razorpay_payment_id,
       razorpay_signature,
       status:'success'
     });
+
+    const payment=  await Payment.findOne({order_id}).lean()
+    console.log(payment);
     res.status(200).json({
       success: true,
       message: "Payment verified",
-     data:payment
+     data:''
     })
   } else {
     const payment= await Payment.findOneAndUpdate({order_id},{
       razorpay_order_id,
       razorpay_payment_id,
       razorpay_signature,
-      status:'failed'
+      status:'payment is Invalid'
     });
 
     res.status(400).json({

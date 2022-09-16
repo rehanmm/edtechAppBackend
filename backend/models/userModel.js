@@ -41,14 +41,22 @@ const userSchema = new mongoose.Schema({
 
 analysis:[String]    ,
 upcommingeventsubbed:[{
+    _id:false,
+    user_id:String,
     event_id:mongoose.Schema.Types.ObjectId,
-     name:{
+    is_paid:Boolean,
+    price:Number,
+    lesson_id:mongoose.Schema.Types.ObjectId,
+    subscribed_at:Number,
+     title:{
         type:String
     },
     time:{
-        type:Date
-        
-    },
+        date_full: String,
+        date: Number,
+        month: String,
+        year: Number
+        },
     venue:{
         type:String
     }

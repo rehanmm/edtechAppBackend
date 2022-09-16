@@ -13,8 +13,8 @@ router.route('/event/update')
 .put(eventCtrl.update)
 router.route('/event/remove')
 .delete(eventCtrl.remove)
-router.route('/event/payment')
-.post(eventCtrl.paymentForEvent)
+router.route('/event/subscribe')
+.post(eventCtrl.subscribeEvent)
 
 module.exports= router
 

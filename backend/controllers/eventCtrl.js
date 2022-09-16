@@ -1,4 +1,6 @@
 const Event=require('../models/eventModel');
+const Progress=require('../models/progressModel');
+const User=require('../models/userModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
@@ -122,49 +124,109 @@ const update=catchAsyncError( async function(req ,res){
 })
 
 
-
-
-const paymentForEvent = catchAsyncError(async function (req, res, next) {
+const subscribeEvent = catchAsyncError(async function (req, res, next) {
     const {user_id,lesson_id,event_id,unit_id}=req.body;
-    const payment=await Event.findById(event_id).select('is_paid price').lean()
+    const payment=await Event.findById(event_id).select('title  time venue is_paid price').lean()
     if(!payment){
       return tsend({}, "event not found", res);
     }
   
-    if(!payment.is_paid||payment.price==0){
+    if((!payment.is_paid)||payment.price==0){
       await Event.findByIdAndUpdate(event_id,{
-        $push:{
+        $push:{users_subscribed:{
           user_id,
     event_id,
-    is_paid:payment.is_paid,
+    lesson_id,
+    is_paid:false,
+    price:payment.price
+  
+        }}
+
+      })
+      await Progress.findOneAndUpdate({user_id,unit_id},{
+        $push:{
+          event_subscribed:{
+          user_id,
+    event_id,
+    lesson_id,
+    is_paid:false,
     price:payment.price
   
         }
+      }
+
+      })
+      await User.findOneAndUpdate({user_id},{
+        $push:{
+          upcommingeventsubbed:{
+          user_id,
+    event_id,
+    lesson_id,
+    is_paid:false,
+    price:payment.price,
+    title:payment.title,
+    time:payment.time,
+    venue:payment.venue,
+    subscribed_at:Date.now()
+  
+        }}
+
       })
      return tsend({}, "event registered successfully", res);
   
     }
+ 
+
+
+      await Event.findByIdAndUpdate(event_id,{
+        $push:{users_subscribed:{
+          user_id,
+    event_id,
+    lesson_id,
+    is_paid:true,
+    price:payment.price
   
-    await Event.findByIdAndUpdate(event_id,{
-      $push:{
-        user_id,
-  event_id,
-  is_paid:payment.is_paid,
-  price:payment.price
+        }}
+
+      })
+      await Progress.findOneAndUpdate({user_id,unit_id},{
+        $push:{
+          event_subscribed:{
+          user_id,
+    event_id,
+    lesson_id,
+    is_paid:true,
+    price:payment.price
   
+        }
       }
-    })
+
+      })
+      await User.findOneAndUpdate({user_id},{
+        $push:{
+          upcommingeventsubbed:{
+          user_id,
+    event_id,
+    lesson_id,
+    is_paid:true,
+    price:payment.price,
+    title:payment.title,
+    time:payment.time,
+    venue:payment.venue,
+    subscribed_at:Date.now()
   
-  
+        }}
+
+      })
+
     
    return res.redirect('/edtech/payment/checkout?amount='+payment.price+'&lesson_id='+lesson_id+'&unit_id='+unit_id+'&user_id='+user_id+'&event_id='+event_id);
-    
     
     
     })
  
 
-module.exports={list,read,update,create,remove,paymentForEvent
+module.exports={list,read,update,create,remove,subscribeEvent
 }
 
 

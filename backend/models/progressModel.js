@@ -106,6 +106,15 @@ avg_test_score:{
     default:0
 },
 
+event_subscribed:[{
+    _id:false,
+    event_id:mongoose.Schema.Types.ObjectId,
+    lesson_id:mongoose.Schema.Types.ObjectId,
+    subscribed_at:Number,
+    is_paid:Boolean,
+    price:Number,
+}]
+
 })
 
 
