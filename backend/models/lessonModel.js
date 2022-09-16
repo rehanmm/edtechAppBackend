@@ -134,10 +134,7 @@ price_decription: String,
 //Event
 events:[
   {
-    event_id:{
-      type:mongoose.Schema.Types.ObjectId
-    },
-    _id:false,
+    _id:String,
   title: String,
   time: {
   date_full: String,
