@@ -37,6 +37,11 @@ const create = catchAsyncError(async function (req, res, next) {
   if(type=='payment'){
     req.body.amount=Number(req.body.price)
   }
+  if(type=='event'){
+    for(let i=0;i<req.body.events.length;i++){
+   req.body.events[i].event_id=req.body.events[i]._id
+    }
+  }
   const lesson = new Lesson(req.body);
   await lesson.save();
   //progress
@@ -69,6 +74,7 @@ const create = catchAsyncError(async function (req, res, next) {
 
     return tsend(lesson, "", res);
   } else if (lesson.type === "event") {
+
     const lesson = await Lesson.findById(_id.toString()).select(
       "title type completion prerequisite events "
     );
