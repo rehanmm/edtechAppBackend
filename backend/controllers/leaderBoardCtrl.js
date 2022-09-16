@@ -30,12 +30,27 @@ const {user_id,user_name,score}=req.body
 const rankList=catchAsyncError(  async function(req ,res,next){
 const page = parseInt(req.body.page) || 1;
 const limit = parseInt(req.body.limit) || 15;
- const rows= await leaderboard.list('all',{limit,page})
-console.log(rows)
+pageSize = parseInt(limit) || 10;
+const leaderboardId='all'
+const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount();
+const pages = Math.ceil(total / pageSize);
+db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).skip((page-1)*limit).limit(limit).toArray(function(err, result) {
+  
     res.status(200).json({
         success:true,
-        ...rows
+        page,
+        pages,
+        total,
+       data: result
     })
+
+
+
+})
+//  const rows= await leaderboard.list('all',{limit,page})
+
+
+
 
 })
 
