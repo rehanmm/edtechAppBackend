@@ -134,6 +134,9 @@ price_decription: String,
 //Event
 events:[
   {
+    event_id:{
+      type:mongoose.Schema.Types.ObjectId
+    },
     _id:false,
   title: String,
   time: {
@@ -170,7 +173,8 @@ events:[
     },
     time:{
       type:Number,
-    default:0},
+    default:0
+  },
     message:{
       type:String,
       default:"please complete required unit first"
