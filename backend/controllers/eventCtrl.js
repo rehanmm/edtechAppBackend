@@ -135,7 +135,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
       await Event.findByIdAndUpdate(event_id,{
         $push:{users_subscribed:{
           user_id,
-    event_id,
+    event_id:pament._id,
     lesson_id,
     is_paid:false,
     price:payment.price
@@ -147,7 +147,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
         $push:{
           event_subscribed:{
           user_id,
-    event_id,
+          event_id:pament._id,
     lesson_id,
     is_paid:false,
     price:payment.price
@@ -160,7 +160,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
         $push:{
           upcommingeventsubbed:{
           user_id,
-    event_id,
+          event_id:pament._id,
     lesson_id,
     is_paid:false,
     price:payment.price,
@@ -181,7 +181,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
       await Event.findByIdAndUpdate(event_id,{
         $push:{users_subscribed:{
           user_id,
-    event_id,
+          event_id:pament._id,
     lesson_id,
     is_paid:true,
     price:payment.price
@@ -193,7 +193,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
         $push:{
           event_subscribed:{
           user_id,
-    event_id,
+          event_id:pament._id,
     lesson_id,
     is_paid:true,
     price:payment.price
@@ -206,7 +206,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
         $push:{
           upcommingeventsubbed:{
           user_id,
-    event_id,
+          event_id:pament._id,
     lesson_id,
     is_paid:true,
     price:payment.price,

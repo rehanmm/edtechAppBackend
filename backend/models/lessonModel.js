@@ -188,6 +188,8 @@ events:[
   
 
 
+   },{
+    _id:false
    })
    module.exports=mongoose.model('Lesson', lessonSchema)
 
