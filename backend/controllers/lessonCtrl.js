@@ -419,8 +419,9 @@ const completedLesson = catchAsyncError(async function (req, res, next) {
       unit_id,
     });
   }
-
-  //##progress model 
+  
+  ///user model   me progress
+ 
 await User.findOneAndUpdate({user_id},{
 
   $inc:{lessons_completed:1}
@@ -458,10 +459,74 @@ else if(type==='test'){
     // console.log(alreadyExist);
     if (!alreadyExist){ progress.completed_lessons.push(obj);
       progress.save();
+
+
+
+      let flag=1;
+      const user = await User.findOne({user_id});
+      for(let i=0;i<user.units_progress.length;i++){
+        if(unit_id == user.units_progress[i].unit_id){
+          user.units_progress[i].lessons_completed=user.units_progress[i].lessons_completed+1;
+          flag=0;
+          break;
+        } 
+        //##progress model 
+      }
+      
+      if(flag){
+        let obj={}
+      
+        obj.unit_id=unit_id
+        obj.lessons_completed=1
+
+        user.units_progress.push(obj);
+        
+      
+      }
+      
+      await user.save();
       //TODO:add completed evaluated field in progress model
      return tsend({}, "completed lesson updated successfuly", res);
   }
   // console.log(progress);
+
+
+  /*
+
+ agar lesson koi completed hua to user increment kro agar nahi h to ek value push kro ek de do value
+ 
+*/
+
+
+let flag=1;
+const user = await User.findOne({user_id});
+for(let i=0;i<user.units_progress.length;i++){
+  if(unit_id ==user.units_progress[i].unit_id){
+    user.units_progress[i]=user.units_progress[i]+1;
+    flag=0;
+    break;
+  } 
+  //##progress model 
+}
+
+if(flag){
+  let obj={}
+  obj.unit_id=unit_id
+        obj.lessons_completed=1
+  user.units_progress.push(obj);
+
+}
+
+await user.save();
+
+
+
+
+  
+
+
+
+
 
   return tsend({}, "lesson already completed", res);
 });

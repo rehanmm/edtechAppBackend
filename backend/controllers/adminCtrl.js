@@ -1,5 +1,6 @@
 const Question = require("../models/questionModel");
 const User = require("../models/userModel");
+const Payment = require("../models/paymentModel");
 const Progress = require("../models/progressModel");
 const Lesson = require("../models/lessonModel");
 const Assignment = require("../models/assignmentModel");
@@ -140,7 +141,7 @@ const userInfo = catchAsyncError(async function (req, res,next) {
   const assignment = await Assignment.find({ user_id}).lean();
   const manual_lessons = await Lesson.find({ completion: "manual" });
   // const total_assignment=assignment.length;
-
+const payment= await Payment.find({user_id}).lean();
   tsend(
     {
       user,
@@ -148,7 +149,8 @@ const userInfo = catchAsyncError(async function (req, res,next) {
       forum_questions: question,
       forum_answers: answer,
       uploaded_assignment: assignment,
-      manual_lessons
+      manual_lessons,
+      payment
     },
     "",
     res

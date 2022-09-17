@@ -109,8 +109,12 @@ last_lesson_progress:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Progress'
 },
-units_completed:[{
-   
+units_completed:[String],
+units_progress:[{
+    _id:false,
+    unit_id:mongoose.Schema.Types.ObjectId,
+    lessons_completed:Number
+//unit_id:'number of lesson completed'
 }]
   
 }
@@ -118,7 +122,9 @@ units_completed:[{
 
 
  module.exports= mongoose.model('User',userSchema);
-    
+
+ 
+ 
     
     
     

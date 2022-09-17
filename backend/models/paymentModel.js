@@ -4,13 +4,20 @@ const paymentSchema = new mongoose.Schema({
     type:"String",
     required:true
   },
+  unit_id:{
+    type:mongoose.Schema.Types.ObjectId
+  },
 lesson_id:{
     type:mongoose.Schema.Types.ObjectId,
 },
 event_id:{
     type:mongoose.Schema.Types.ObjectId,
 },
-payment_for:{
+payment_type:{
+    type:String,
+    enum:['lesson','event'],
+},
+pay_for:{
     type:String,
     enum:['lesson','event'],
 },

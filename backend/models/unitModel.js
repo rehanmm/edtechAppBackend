@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');   
 const {lessonSchema}=require('../models/lessonModel')
+const Progress=require('../models/progressModel')
 
 const unitSchema = new mongoose.Schema({
     unit_name: {
@@ -148,7 +149,24 @@ module.exports={
     Unit,unitSchema
 }
 
- 
+ unitSchema.methods.isUnitCompleted=async function(user_id){
+    this.total_lessons=this.lessons.length;
+    const unitProgress= await Progress.findOne({user_id,unit_id:this._id});
+if(unitProgress.completed_lessons.length==this.lessons.length){
+
+  await User.findOneAndUpdate({user_id},{
+    $addToSet:{
+      units_completed:this._id
+    }
+  })
+};
+
+
+
+
+
+
+ }
 // unitSchema.pre('',async function(){
 
 //   this.salt=crypto.randomBytes(16).toString('hex')
