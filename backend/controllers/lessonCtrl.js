@@ -136,11 +136,13 @@ const create = catchAsyncError(async function (req, res, next) {
 });
 const read = catchAsyncError(async function (req, res, next) {
   const { lesson_id, unit_id, user_id } = req.body;
-  // console.log(unit_id);
-  const onlyLesson = lesson_id && !unit_id;
+
+  const onlyLesson = lesson_id //&& !unit_id;
   const onlyunit = !lesson_id && unit_id;
   const nothingProvided = !lesson_id && !unit_id;
-  // console.log(nothingProvided);
+  console.log(nothingProvided);
+  console.log(onlyLesson);
+  console.log(onlyunit);
 
   const unitProgress = await Progress.findOne({ user_id, unit_id });
 
@@ -163,8 +165,8 @@ const read = catchAsyncError(async function (req, res, next) {
   if (onlyLesson) {
     // getLessonById
     const lesson = await Lesson.findById(lesson_id).select('type');
-
-const {type,_id}=lesson;
+    const {type,_id}=lesson;
+    
 
     if (type === "video") {
       const lesson = await Lesson.findById(_id.toString()).select(
