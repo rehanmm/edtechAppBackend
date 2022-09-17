@@ -3,6 +3,7 @@ const Progress=require('../models/progressModel');
 const User=require('../models/userModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
+const { send, tsend } = require('../middleware/responseSender');
 const catchAsyncError=require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 
@@ -128,7 +129,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
     const {user_id,lesson_id,event_id,unit_id}=req.body;
     const payment=await Event.findById(event_id).select('title  time venue is_paid price').lean()
     if(!payment){
-      return tsend({}, "event not found", res);
+      return tsend({},"event not found", res);
     }
   
     if((!payment.is_paid)||payment.price==0){
