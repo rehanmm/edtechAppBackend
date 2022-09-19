@@ -57,6 +57,21 @@ app.use('/edtech',notificationRoutes);
 
 
 
+// const mongoose=require('mongoose');
+// const Lesson=require('../backend/models/lessonModel');
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('*', function (req, res) {
     res.send('invalid url');
 })

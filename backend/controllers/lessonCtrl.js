@@ -14,6 +14,7 @@ const { longLessonToShort } = require("../utils/objectConstructor");
 const shortLessonupdater = require("../helpers/shortLessonUpdater");
 const video = require("../helpers/lessonHelpers.js/videoUrlProcessing");
 const config = require("../config/config");
+const countLesson=require('../helpers/unitHelper/mongoQueries');
 
 const list = catchAsyncError(async function (req, res,next) {
   const lesson = await Lesson.find({ unit_id: req.body.unit_id });
@@ -44,6 +45,11 @@ const create = catchAsyncError(async function (req, res, next) {
   }
   const lesson = new Lesson(req.body);
   await lesson.save();
+
+  const count=await countLesson(unit_id);
+await Unit.findByIdAndUpdate(unit_id,count)
+
+
   //progress
   await Course.findByIdAndUpdate(config.COURSE_ID, {
     $inc: { total_lessons: 1 }, //decrement lessons
@@ -140,9 +146,7 @@ const read = catchAsyncError(async function (req, res, next) {
   const onlyLesson = lesson_id //&& !unit_id;
   const onlyunit = !lesson_id && unit_id;
   const nothingProvided = !lesson_id && !unit_id;
-  console.log(nothingProvided);
-  console.log(onlyLesson);
-  console.log(onlyunit);
+ 
 
   const unitProgress = await Progress.findOne({ user_id, unit_id });
 
@@ -317,6 +321,7 @@ message:'none lesson is completed found'
 const remove = catchAsyncError(async function (req, res,next) {
   const { lesson_id } = req.body;
   const lesson = await Lesson.findById(req.body.lesson_id);
+  const { unit_id } = lesson;
   if (!lesson) {
     return next(new errorHandler("No lesson found", 404));
   }
@@ -333,6 +338,8 @@ const remove = catchAsyncError(async function (req, res,next) {
   unit.lessons.splice(index, 1);
   await unit.save();
   await lesson.remove();
+
+
 
   await Course.findByIdAndUpdate(config.COURSE_ID, {
     $inc: { total_lessons: -1 }, //decrement lessons
@@ -384,6 +391,11 @@ const remove = catchAsyncError(async function (req, res,next) {
   //     console.log(lesson);
   // return tsend(lesson,'',res);
   // }
+
+
+  const count=await countLesson(unit_id);
+  await Unit.findByIdAndUpdate(unit_id,count)
+  
 
   res.status(200).json({
     success: true,

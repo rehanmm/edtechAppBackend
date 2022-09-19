@@ -11,7 +11,7 @@ const {send,tsend}=require('../middleware/responseSender');
 const Progress = require('../models/progressModel');
 const Course = require('../models/courseModel');
 const config=require('../config/config');
-
+const countLesson=require('../helpers/unitHelper/mongoQueries');
 
 const list=catchAsyncError(  async function(req ,res){
 
@@ -22,8 +22,8 @@ tsend(unit,'',res);
 
 const create=catchAsyncError( async function(req ,res){
     const unit = new Unit(req.body);
+    
     const unit1= new longUnitToShort(unit);
-    console.log(unit1);
                       unitUpdater(unit1);
 
     
@@ -31,9 +31,15 @@ const create=catchAsyncError( async function(req ,res){
 
     await unit.save()
 
+
+   
     await Course.findByIdAndUpdate(config.COURSE_ID,{
         $inc:{total_units:1} //decrement lessons
     })
+
+
+
+    
 
     tsend(unit,'unit created successfully',res)
     // send(unit,'',res);
@@ -94,6 +100,8 @@ const unitdata=new unitData(unitProgress);
 
  data={...unit,...unitdata}
 
+
+
     tsend(data,'',res);
     
 })
@@ -118,6 +126,7 @@ await Course.findByIdAndUpdate(config.COURSE_ID,{
     $inc:{total_lessons:-1*lessons} //decrement lessons
 })
 
+
     res.status(200).json({
         success:true,
         message:'deleted successfully'
@@ -128,8 +137,9 @@ await Course.findByIdAndUpdate(config.COURSE_ID,{
 
 const update=catchAsyncError( async function(req ,res){
   const {unit_id}=req.body
-  console.log(req.body)
-await Unit.findByIdAndUpdate(unit_id,req.body)
+  const count=await countLesson(unit_id);
+ 
+await Unit.findByIdAndUpdate(unit_id,{...req.body,...count})
 const unit= await Unit.findById(unit_id)
   
     const course= await Course.findById(config.COURSE_ID)
@@ -137,6 +147,7 @@ const unit= await Unit.findById(unit_id)
     course.units[index]= new longUnitToShort(unit)
     // console.log( new longUnitToShort(unit))
 
+   
     await course.save();
 
 

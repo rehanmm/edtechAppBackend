@@ -71,10 +71,10 @@ const unitSchema = new mongoose.Schema({
 
         }
     },
-    // total_lesson:{
-    //   type:Number,
-    //   default:0
-    // },
+    total_events:{
+      type:Number,
+      default:0
+    },
     total_articles:{//TODO: change to total_articles
       type:Number,
       default:0
