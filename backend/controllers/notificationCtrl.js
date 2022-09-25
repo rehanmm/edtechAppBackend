@@ -4,6 +4,7 @@ const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 const {tsend,send} = require('../middleware/responseSender');
+const {sendToAll}=require('../controllers/pushNotificationCtrl')
 
 
 
@@ -17,6 +18,16 @@ tsend(notification,'',res)
 const create=catchAsyncError( async function(req ,res){
 
     const notification = new Notification(req.body);
+    const {title,description}=req.body
+
+    const message={
+        notification: { title, body:description ,topic:'all'}
+    }
+
+    sendToAll([message])
+
+    
+
     await notification.save()
     tsend(notification,'',res)
 

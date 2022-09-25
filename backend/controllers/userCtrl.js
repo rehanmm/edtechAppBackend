@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const catchAsyncError = require('../error/catchAsyncError');
 // const { findByIdAndUpdate } = require('../models/userModel');
 const errorHandler = require('../utils/errorHandler');
-
+// const {profileUpload}=require('../middleware/uploadMiddleware')
+const {s3Uploadv2Profile}=require('../utils/s3services')
 
 const list = catchAsyncError(async function (req, res) {
     // const users = await User.find({})
@@ -106,7 +107,19 @@ const update =catchAsyncError( async function (req, res) {
 
 })
 
+const displayPicture =catchAsyncError( async function (req, res) {
+
+    const {user_id, file, ext}=req.body
+
+const result = await s3Uploadv2Profile(file);
+    await User.findOneAndUpdate({user_id}, req.body)
+
+    
+
+    tsend({},"profile picture updated successfully",res)
+})
+
 
 module.exports = {
-    list, read, update, create, remove
+    list, read, update, create, remove,displayPicture
 }

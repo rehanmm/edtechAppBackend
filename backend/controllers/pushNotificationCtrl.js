@@ -3,25 +3,24 @@
 
 
 const admin = require('firebase-admin');
-let serviceAccount = require('../config/quaser-edtech-firebase-adminsdk-7yvco-33641cf2b5.json');
-// const c = require('config');
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+const catchAsyncError=require('../error/catchAsyncError')
+// let serviceAccount = require('../config/quaser-edtech-firebase-adminsdk-7yvco-33641cf2b5.json');
+// // const c = require('config');
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
 
 
 
 
 
 
-const sendToAll= catchAsyncError( async function(req ,res){
-    const message={
-        notification: { title: 'test notification', body: '5% off all electronics' }
-    }
-    admin.messaging().sendAll(message)
+exports.sendToAll= catchAsyncError( async function(message){
+  
+  const result= await  admin.messaging().sendAll(message)
+  console.log(result)
 
-    
-
+ 
 })
 
 

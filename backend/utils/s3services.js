@@ -30,6 +30,18 @@ exports.s3Uploadv2 = async (file) => {
     return await s3.upload(params).promise();
   };
 
+exports.s3Uploadv2Profile = async (file) => {
+    const s3 = new S3();
+  console.log(file)
+    const params =  {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `displayPicture/${file.originalname}`,
+        Body: file.buffer,
+      };
+  
+    return await s3.upload(params).promise();
+  };
+
   
 
 

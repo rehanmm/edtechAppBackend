@@ -17,7 +17,26 @@ var buffer = Buffer.from(b64string, 'base64');
     next()
 }
 
+const uploadprofile=(req,res,next)=>{
+const {file,user_id,ext}=req.body;
 
-module.exports=upload
+var b64string = file;
+var buffer = Buffer.from(b64string, 'base64');
+        req.file={
+            fieldname: 'file',
+  originalname: `${user_id}.${ext}`,
+  encoding: '7bit',
+  mimetype: `image/${ext}`,
+  buffer
+};   
+        console.log(req.file);
+   
+    next()
+}
+
+
+
+
+module.exports={upload,uploadprofile}
 
 

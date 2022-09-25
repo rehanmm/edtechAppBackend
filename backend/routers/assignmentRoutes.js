@@ -2,7 +2,7 @@ const  express  = require('express');
 const {uploadAssignmet,listOfAssignment,submitAssignment,reviewAssignment,reviewEditAssignment,getAssignment} =require( '../controllers/assignmentCtrl')
 const router=express.Router()
 const {authenticateToken,hasAuthorisation} = require('../middleware/adminAuthMiddleware')
-const upload=require('../middleware/uploadMiddleware')
+const {upload}=require('../middleware/uploadMiddleware')
 
 router.route('/assignment/upload')
 .post(upload,uploadAssignmet,submitAssignment)
