@@ -131,8 +131,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
     if(!payment){
       return tsend({},"event not found", res);
     }
-  
-    if((!payment.is_paid)||payment.price==0){
+    if(!(payment.is_paid != null && payment.is_paid|| payment.price>0)){
       await Event.findByIdAndUpdate(event_id,{
         $push:{users_subscribed:{
           user_id,
