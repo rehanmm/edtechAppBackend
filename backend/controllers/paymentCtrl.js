@@ -78,21 +78,24 @@ if(req.query.event_id){
     razorpay_signature,
     status:'success'
   });
-  
+  const obj={}
+obj[lesson_id]=Date.now()
+console.log(obj)
+  await Progress.findOneAndUpdate({user_id,lesson_id},{
+    $addToSet:{
+      completed_lessons:obj
+    }
+  })
+  const pro=await Progress.findOne({user_id,lesson_id})
+  console.log(pro);
   const payment=  await Payment.findOne({order_id}).lean()
-  console.log(payment);
+  // console.log(payment);
   res.status(200).json({
     success: true,
     message: "Payment verified",
     data:payment
   })
-const obj={}
-obj[lesson_id]=Date.now()
-  await Progress.findOneAndUpdate({user_id,lesson_id},{
-    $push:{
-      completed_lessons:obj
-    }
-  })
+
   
   
   
