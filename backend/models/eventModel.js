@@ -31,8 +31,7 @@ users_subscribed:[{
     filled: Number
     },
     venue: String,
-    is_paid: {type:Boolean,
-
+    is_paid: {type:Boolean
     },
     // ispaid!=null &&ispaid||price>0
     price:{

@@ -17,7 +17,13 @@ res.status(200).json({
 })
 
 const create=catchAsyncError( async function(req ,res){
-    const {time}=req.body
+    const {time,price}=req.body
+    if(price&&price!=0){
+      req.body.is_paid=true
+    }
+    else{
+      req.body.is_paid=false;
+    }
     const {date_full}=time
 console.log(time.date_full)
 let [date,month,year]=time.date_full.split('-');
