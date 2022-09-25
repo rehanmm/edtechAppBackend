@@ -66,7 +66,7 @@ if(req.query.event_id){
   const isAuthentic = expectedSignature === razorpay_signature;
   if (isAuthentic) {
     // Database comes here
-    const {event_id,payment_type,lesson_id,user_id} = await Payment.findOne({ order_id: order_id });
+    const {event_id,payment_type,lesson_id,user_id,unit_id} = await Payment.findOne({ order_id: order_id });
     
     //    agar lesson hai toh
     if(payment_type=='lesson'){
@@ -81,12 +81,12 @@ if(req.query.event_id){
   const obj={}
 obj[lesson_id]=Date.now()
 console.log(obj)
-  await Progress.findOneAndUpdate({user_id,lesson_id},{
+  await Progress.findOneAndUpdate({user_id,unit_id},{
     $addToSet:{
       completed_lessons:obj
     }
   })
-  const pro=await Progress.findOne({user_id,lesson_id})
+  const pro=await Progress.findOne({user_id,unit_id})
   console.log(pro);
   const payment=  await Payment.findOne({order_id}).lean()
   // console.log(payment);
