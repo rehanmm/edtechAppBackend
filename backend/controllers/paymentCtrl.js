@@ -3,7 +3,8 @@ const razorpay = require("razorpay");
 const crypto = require("crypto");
 const Payment  = require("../models/paymentModel");
 const Event  = require("../models/eventModel");
-const catchAsyncError=require('../error/catchAsyncError')
+const catchAsyncError=require('../error/catchAsyncError');
+const Progress = require('../models/progressModel');
 
 
 const checkout = catchAsyncError(async (req, res) => {
@@ -65,7 +66,7 @@ if(req.query.event_id){
   const isAuthentic = expectedSignature === razorpay_signature;
   if (isAuthentic) {
     // Database comes here
-    const {event_id,payment_type} = await Payment.findOne({ order_id: order_id });
+    const {event_id,payment_type,lesson_id,user_id} = await Payment.findOne({ order_id: order_id });
     
     //    agar lesson hai toh
     if(payment_type=='lesson'){
@@ -84,6 +85,13 @@ if(req.query.event_id){
     success: true,
     message: "Payment verified",
     data:payment
+  })
+const obj={}
+obj[lesson_id]=Date.now()
+  await Progress.findOneAndUpdate({user_id,lesson_id},{
+    $push:{
+      completed_lessons:obj
+    }
   })
   
   
@@ -112,6 +120,14 @@ event.razorpay_order_id=razorpay_order_id
    data:event
    
   })
+
+  const obj={}
+  obj[lesson_id]=Date.now()
+    await Progress.findOneAndUpdate({user_id,lesson_id},{
+      $push:{
+        completed_lessons:obj
+      }
+    })
 
 
 }

@@ -136,6 +136,7 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
     const {user_id,lesson_id,event_id,unit_id}=req.body;
 
     const eventExist= await Payment.exists({user_id,event_id,status:"success"})
+    console.log(eventExist)
 
     if(eventExist){
       return next(new errorHandler('Event is already registered',200))
