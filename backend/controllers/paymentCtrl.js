@@ -121,14 +121,6 @@ event.razorpay_order_id=razorpay_order_id
    
   })
 
-  const obj={}
-  obj[lesson_id]=Date.now()
-    await Progress.findOneAndUpdate({user_id,lesson_id},{
-      $push:{
-        completed_lessons:obj
-      }
-    })
-
 
 }
 
