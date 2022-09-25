@@ -1,4 +1,5 @@
 const Event=require('../models/eventModel');
+const Payment=require('../models/paymentModel');
 const Progress=require('../models/progressModel');
 const User=require('../models/userModel');
 const express=require('express');
@@ -133,6 +134,13 @@ const update=catchAsyncError( async function(req ,res){
 
 const subscribeEvent = catchAsyncError(async function (req, res, next) {
     const {user_id,lesson_id,event_id,unit_id}=req.body;
+
+    const eventExist= await Payment.exists({user_id,event_id,status:"success"})
+
+    if(eventExist){
+      return next(new errorHandler('Event is already registered',200))
+    }
+
     const payment=await Event.findById(event_id).select('title  time venue is_paid price').lean()
     if(!payment){
       return tsend({},"event not found", res);

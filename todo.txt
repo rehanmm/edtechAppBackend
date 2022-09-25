@@ -1,2 +1,2 @@
-is already subscribed
-is paid issue
+is already subscribed--doing
+is paid issue--done
