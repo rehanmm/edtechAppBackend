@@ -1,5 +1,6 @@
 const Question=require('../models/questionModel');
 const Answer=require('../models/answerModel');
+const User=require('../models/userModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');

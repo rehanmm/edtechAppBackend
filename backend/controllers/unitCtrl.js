@@ -75,6 +75,11 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
     const { completed_lessons } = unitProgress;
     const lessonCompleted= completed_lessons.length
     const totalLesson=unit.lessons.length
+    console.log(lessonCompleted)
+    console.log(totalLesson)
+    console.log(unit.lessons)
+    console.log(completed_lessons )
+
     
     
     completed_lessons.forEach((obj) => {
