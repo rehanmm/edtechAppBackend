@@ -48,6 +48,15 @@ const create = catchAsyncError(async function (req, res, next) {
 
   const count=await countLesson(unit_id);
 await Unit.findByIdAndUpdate(unit_id,count)
+ const course = await Course.findById(config.COURSE_ID).select('units');
+ const index =  course.units.findIndex((item) => item.unit_id ==unit_id);
+ course.units[index].total_lessons=count;
+ console.log( course,count );
+ console.log( course.units[index]);
+
+
+
+ 
 
 
   //progress
@@ -395,6 +404,9 @@ const remove = catchAsyncError(async function (req, res,next) {
 
   const count=await countLesson(unit_id);
   await Unit.findByIdAndUpdate(unit_id,count)
+  const course = await Course.findById(config.COURSE_ID).select('units');
+  const index1 =  course.units.findIndex((item) => item.unit_id ==unit_id);
+  course.units[index1].total_lessons=count;
   
 
   res.status(200).json({
