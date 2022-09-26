@@ -50,9 +50,17 @@ const create = catchAsyncError(async function (req, res, next) {
 await Unit.findByIdAndUpdate(unit_id,count)
  const course = await Course.findById(config.COURSE_ID).select('units');
  const index =  course.units.findIndex((item) => item.unit_id ==unit_id);
- course.units[index].total_lessons=count;
 
- console.log( course);
+ const values = Object.values(count);
+
+ const sum = values.reduce((accumulator, value) => {
+   return accumulator + value;
+ }, 0);
+
+ course.units[index].total_lessons=sum;
+ 
+
+ console.log("sum h BAWAAAA",sum);
  console.log("lessons COUNT h ye: ",count);
  console.log( course.units[index]);
 
