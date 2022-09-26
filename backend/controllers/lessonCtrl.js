@@ -64,6 +64,8 @@ await Unit.findByIdAndUpdate(unit_id,count)
  console.log("lessons COUNT h ye: ",count);
  console.log( course.units[index]);
 
+ await course.save();
+
 
 
  
