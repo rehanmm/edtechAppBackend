@@ -19,7 +19,7 @@ const list=catchAsyncError(  async function(req ,res,){
     const pageSize = parseInt(req.body.limit) || 10;
     const skip = (page - 1) * pageSize;
     const total = await Question.countDocuments(where);
-    const pages = Math.ceil(total / pageSize)-1;
+    const pages = Math.ceil(total / pageSize);
 
     if (page > pages) {
         return res.status(200).json({
@@ -34,6 +34,7 @@ const list=catchAsyncError(  async function(req ,res,){
        
         data: {
             filter,
+            total,
             count: result.length,
             page,
             pages,
