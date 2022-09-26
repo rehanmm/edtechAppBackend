@@ -31,11 +31,14 @@ const list=catchAsyncError(  async function(req ,res,){
     result = await query.skip(skip).limit(pageSize).sort({'created_at':-1});
     res.json({
         success: true,
-        filter,
-        count: result.length,
-        page,
-        pages,
-        data: {questions:result}
+       
+        data: {
+            filter,
+            count: result.length,
+            page,
+            pages,
+            questions:result
+        }
     });
 })
 
