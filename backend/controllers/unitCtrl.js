@@ -75,10 +75,10 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
     const { completed_lessons } = unitProgress;
     const lessonCompleted= completed_lessons.length
     const totalLesson=unit.lessons.length
-    console.log(lessonCompleted)
-    console.log(totalLesson)
+    // console.log(lessonCompleted)
+    // console.log(totalLesson)
     console.log(unit.lessons)
-    console.log(completed_lessons )
+    // console.log(completed_lessons )
 
     
     
@@ -87,22 +87,26 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
     const comlessonId=Object.keys(obj)[0];
    
 
-    for (let i = 0; i < unit.lessons.length; i++){
+    const index = unit.lessons.findIndex((object) => {
+        return object.lesson_id == comlessonId;
+      });
+      unit.lessons[index].is_completed=true;
+//     for (let i = 0; i < unit.lessons.length; i++){
     
-    if (comlessonId == unit.lessons[i].lesson_id) {
+//     if (comlessonId == unit.lessons[i].lesson_id) {
        
-    unit.lessons[i].is_completed=true;
+//     unit.lessons[i].is_completed=true;
     
-}
-else{
-    unit.lessons[i].is_completed=false;
-        }
+// }
+// else{
+//     unit.lessons[i].is_completed=false;
+//         }
         
         
 
     
 
-}
+// }
 
 
 

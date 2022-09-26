@@ -125,7 +125,10 @@ const unitSchema = new mongoose.Schema({
 
         title:{type:String,
           default:''},
-        is_completed:Boolean,
+        is_completed:{
+          type:Boolean,
+          default:false
+        },
         description:{type:String,
           default:''}
 
