@@ -17,19 +17,39 @@ tsend(notification,'',res)
 
 const create=catchAsyncError( async function(req ,res){
 
-    const notification = new Notification(req.body);
-    const {title,description}=req.body
+    // const notification = new Notification(req.body);
+    // const {title,description}=req.body
+    const topic = 'all';
 
-    const message={
-        notification: { title, body:description ,topic:'all'}
+    // const message = {
+    //     data: {
+    //      title:"titp",
+    //      body:'description'
+    //     },
+    //     topic: topic
+    //   };
+    
+var message = {
+    notification: {
+      title: 'JustCodeDict Daily Word',
+      body: 'Today daily word is [Love]'
+    },
+    data: {
+      msgType: 'Search',
+      word: 'Love'
     }
+  };
+      
+// console.log(message)
 
-    sendToAll([message])
+
+    sendToAll(message)
 
     
 
-    await notification.save()
-    tsend(notification,'',res)
+    // await notification.save()
+    // tsend(notification,'',res)
+    tsend({},'',res)
 
 })
 

@@ -2,7 +2,7 @@
 
 
 
-const admin = require('firebase-admin');
+const {admin }= require('../controllers/fireBaseAuthCtrl');
 const catchAsyncError=require('../error/catchAsyncError')
 // let serviceAccount = require('../config/quaser-edtech-firebase-adminsdk-7yvco-33641cf2b5.json');
 // // const c = require('config');
@@ -17,10 +17,8 @@ const catchAsyncError=require('../error/catchAsyncError')
 
 exports.sendToAll= catchAsyncError( async function(message){
   
-  const result= await  admin.messaging().sendAll(message)
-  console.log(result)
-
- 
+  const result= await  admin.messaging().sendToTopic('all',message)
+ console.log(result)
 })
 
 

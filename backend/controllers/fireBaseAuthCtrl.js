@@ -9,7 +9,9 @@ const admin = require('firebase-admin');
 let serviceAccount = require('../config/quaser-edtech-firebase-adminsdk-7yvco-33641cf2b5.json');
 // const c = require('config');
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://quaser-edtech.firebaseio.com'
+
 });
 
 
@@ -115,7 +117,7 @@ const anonymous=catchAsyncError( async function(req,res){
 
 
 
-module.exports={login,update,anonymous}
+module.exports={login,update,anonymous,admin}
 
 
 // admin.auth().createUser({

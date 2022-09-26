@@ -28,7 +28,8 @@ var buffer = Buffer.from(b64string, 'base64');
   encoding: '7bit',
   mimetype: `image/${ext}`,
   buffer
-};   
+};  
+
         console.log(req.file);
    
     next()

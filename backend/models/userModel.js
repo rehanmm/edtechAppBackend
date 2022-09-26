@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema({
         unique:[true,'user id is already taken']
 
     },
+    display_picture:{
+        type:String,
+        
+    },
+    bucket:{
+        type:String
+    },
     phone_number:{
         type:Number,
         require:[function(value){

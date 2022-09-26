@@ -6,6 +6,7 @@ const catchAsyncError = require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 // const {profileUpload}=require('../middleware/uploadMiddleware')
 const {s3Uploadv2Profile}=require('../utils/s3services')
+const {tsend,send}=require('../middleware/responseSender')
 
 const list = catchAsyncError(async function (req, res) {
     // const users = await User.find({})
@@ -109,10 +110,17 @@ const update =catchAsyncError( async function (req, res) {
 
 const displayPicture =catchAsyncError( async function (req, res) {
 
-    const {user_id, file, ext}=req.body
+    const {user_id}=req.body
 
-const result = await s3Uploadv2Profile(file);
-    await User.findOneAndUpdate({user_id}, req.body)
+const result = await s3Uploadv2Profile(req.file);
+console.log(result)
+delete req.file
+    await User.findOneAndUpdate({user_id}, {
+        $set:{
+            display_picture:result.Location,
+            bucket:result.Bucket
+        }
+    })
 
     
 
