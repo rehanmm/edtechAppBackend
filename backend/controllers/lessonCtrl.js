@@ -25,14 +25,14 @@ const list = catchAsyncError(async function (req, res,next) {
 });
 
 const create = catchAsyncError(async function (req, res, next) {
-  console.log(req.body);
+  // console.log(req.body);
   //TODO: add unit name to lesson
   const { unit_id, type } = req.body;
   if (type == "video") {
     const { video_id } = req.body;
     const videoArr = new video(video_id);
     req.body.video_url = videoArr.getVideoUrl();
-    console.log(req.body.video);
+    // console.log(req.body.video);
   }
 
   if(type=='payment'){
@@ -51,7 +51,9 @@ await Unit.findByIdAndUpdate(unit_id,count)
  const course = await Course.findById(config.COURSE_ID).select('units');
  const index =  course.units.findIndex((item) => item.unit_id ==unit_id);
  course.units[index].total_lessons=count;
- console.log( course,count );
+
+ console.log( course);
+ console.log("lessons COUNT h ye: ",count);
  console.log( course.units[index]);
 
 
@@ -66,7 +68,7 @@ await Unit.findByIdAndUpdate(unit_id,count)
 
   const { _id } = lesson;
   const shortLesson = new longLessonToShort(lesson);
-  console.log(shortLesson);
+  // console.log(shortLesson);
   // const unitLessonUpdate = await Unit.findOneAndUpdate(shortLesson,unit_id);
   shortLessonupdater(shortLesson, unit_id);
 
@@ -74,7 +76,7 @@ await Unit.findByIdAndUpdate(unit_id,count)
     const lesson = await Lesson.findById(_id.toString()).select(
       "prerequisite unit_id title video_url type unit_id completion start_at total_time description thumbnail_url"
     );
-    console.log(lesson);
+    // console.log(lesson);
 
     await Course.findByIdAndUpdate(config.COURSE_ID, {
       $inc: { total_videos: 1 }, //decrement lessons
@@ -97,7 +99,7 @@ await Unit.findByIdAndUpdate(unit_id,count)
       $inc: { total_events: 1 }, //decrement lessons
     });
 
-    console.log(lesson);
+    // console.log(lesson);
     return tsend(lesson, "", res);
   } else if (lesson.type === "article") {
     const lesson = await Lesson.findById(_id.toString()).select(
@@ -115,7 +117,7 @@ await Unit.findByIdAndUpdate(unit_id,count)
       }
     );
 
-    console.log(lesson);
+    // console.log(lesson);
     return tsend(lesson, "", res);
   } else if (lesson.type === "test") {
     const lesson = await Lesson.findById(_id.toString()).select(
@@ -132,19 +134,19 @@ await Unit.findByIdAndUpdate(unit_id,count)
         $inc: { total_test: 1 }, //decrement lessons
       }
     );
-    console.log(lesson);
+    // console.log(lesson);
     return tsend(lesson, "", res);
   } else if (lesson.type === "payment") {
     const lesson = await Lesson.findById(_id.toString()).select(
       "title type unit_id completion prerequisite amount price price_description"
     );
-    console.log(lesson);
+    // console.log(lesson);
     return tsend(lesson, "", res);
   } else if (lesson.type === "assignment") {
     const lesson = await Lesson.findById(_id.toString()).select(
       "title type unit_id completion prerequisite intro_vid body sample submitted_url placeholder status"
     );
-    console.log(lesson);
+    // console.log(lesson);
     return tsend(lesson, "", res);
   }
 
