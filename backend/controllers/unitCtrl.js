@@ -72,19 +72,30 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
 
     }
 
-const {completed_lessons}=unitProgress;
-// console.log(completed_lessons);
-completed_lessons.forEach((obj)=>{
-const comlessonId=Object.keys(obj)[0];
+    const { completed_lessons } = unitProgress;
+    const lessonCompleted= completed_lessons.length
+    const totalLesson=unit.lessons.length
+    
+    
+    completed_lessons.forEach((obj) => {
+    
+    const comlessonId=Object.keys(obj)[0];
+   
 
-for(let i=0;i<unit.lessons.length;i++){
-if(comlessonId==unit.lessons[i].lesson_id){
+    for (let i = 0; i < unit.lessons.length; i++){
+    
+    if (comlessonId == unit.lessons[i].lesson_id) {
+       
     unit.lessons[i].is_completed=true;
     
 }
 else{
     unit.lessons[i].is_completed=false;
-}
+        }
+        
+        
+
+    
 
 }
 

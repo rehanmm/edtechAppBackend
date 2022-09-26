@@ -113,7 +113,7 @@ const displayPicture =catchAsyncError( async function (req, res) {
     const {user_id}=req.body
 
 const result = await s3Uploadv2Profile(req.file);
-console.log(result)
+
 delete req.file
     await User.findOneAndUpdate({user_id}, {
         $set:{
@@ -124,7 +124,7 @@ delete req.file
 
     
 
-    tsend({},"profile picture updated successfully",res)
+    tsend({link:result.Location},"profile picture updated successfully",res)
 })
 
 

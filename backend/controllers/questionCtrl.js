@@ -39,12 +39,13 @@ const list=catchAsyncError(  async function(req ,res,){
 
 const create=catchAsyncError( async function(req ,res){
  const {user_id,head,body}=req.body;
-    const userinfo= await User.findOne({user_id}).select('user_name');
+    const userinfo= await User.findOne({user_id}).select('user_name,display_picture');
     const question = new Question({
         user_id,
         user_name:userinfo.user_name,
         head,
         body,
+        display_picture:userinfo.display_picture
     });
     // question.popularityIndex();
     await question.save()

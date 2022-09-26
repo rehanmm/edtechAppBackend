@@ -17,7 +17,7 @@ const create = catchAsyncError(async function (req, res,next) {
   //  question.total_comment++;
   //  question.popularityIndex();
   const { user_id, question_id } = req.body;
-
+  const {user_name,display_picture}= await User.findOne({user_id}).select('user_name,display_picture');
   await User.findByIdAndUpdate(
     user_id,
     { $inc: { total_answer_given: 1 } },
@@ -31,7 +31,7 @@ const create = catchAsyncError(async function (req, res,next) {
   //TODO: analytics udpate
 
   //  question.save();
-  const answer = new Answer(req.body);
+  const answer = new Answer(user_name,display_picture,...req.body);
   await answer.save();
   tsend(answer, "", res);
 });

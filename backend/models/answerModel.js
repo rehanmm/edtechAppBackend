@@ -19,6 +19,10 @@ user_name:{
     type:String,
     trim:true
 },
+display_picture:{
+    type:String,
+    trim:true
+},
 admin_id:
 {
 type:mongoose.Schema.Types.ObjectId,
