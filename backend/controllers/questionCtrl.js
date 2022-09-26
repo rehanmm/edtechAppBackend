@@ -22,9 +22,10 @@ const list=catchAsyncError(  async function(req ,res,){
     const pages = Math.ceil(total / pageSize)-1;
 
     if (page > pages) {
-        return res.status(404).json({
+        return res.status(200).json({
             success: "true",
             message: "No page found",
+            data:{questions:[]}
         });
     }
     result = await query.skip(skip).limit(pageSize).sort({'createdAt':-1});
@@ -40,10 +41,11 @@ const list=catchAsyncError(  async function(req ,res,){
 
 const create=catchAsyncError( async function(req ,res){
  const {user_id,head,body}=req.body;
-    const userinfo= await User.findOne({user_id}).select('user_name,display_picture');
+    const userinfo= await User.findOne({user_id}).select('name display_picture').lean();
+
     const question = new Question({
         user_id,
-        user_name:userinfo.user_name,
+        user_name:userinfo.name,
         head,
         body,
         display_picture:userinfo.display_picture

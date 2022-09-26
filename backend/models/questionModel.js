@@ -12,6 +12,7 @@ const questionSchema=new mongoose.Schema({
         type:String,
         index:true
     },
+    display_picture:String,
     image_url:String,
     tags:[String],
 head:{
