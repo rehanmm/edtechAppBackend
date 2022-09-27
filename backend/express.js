@@ -21,6 +21,7 @@ const notificationRoutes=require('../backend/routers/notificationRoutes');
 const eventRoutes=require('../backend/routers/eventRoutes');
 const blockedUserRoutes=require('../backend/routers/blockedUserRoutes');
 const paymentRoutes=require('../backend/routers/paymentRoutes');
+const tagsRoutes=require('../backend/routers/tagsRoutes');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
 // const logger=require('./middleware/logger')
@@ -53,6 +54,7 @@ app.use('/edtech',testRoutes);
 app.use('/edtech',assignmentRoutes);
 app.use('/edtech',eventRoutes);
 app.use('/edtech',paymentRoutes);
+app.use('/edtech',tagsRoutes);
 app.use('/edtech',notificationRoutes);
 
 

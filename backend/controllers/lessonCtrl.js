@@ -66,11 +66,7 @@ await Unit.findByIdAndUpdate(unit_id,count)
 
  await course.save();
 
-
-
  
-
-
   //progress
   await Course.findByIdAndUpdate(config.COURSE_ID, {
     $inc: { total_lessons: 1 }, //decrement lessons

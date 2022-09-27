@@ -28,7 +28,7 @@ router.route('/forum/answer/create')
 // .get(answerCtrl.read)
 router.route('/forum/answer/edit')
 .put(answerCtrl.update)
-router.route('/forum/')
+router.route('/forum/remove')
 .delete(answerCtrl.remove)
 
 module.exports= router

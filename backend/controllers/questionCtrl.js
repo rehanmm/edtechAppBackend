@@ -12,7 +12,10 @@ const list=catchAsyncError(  async function(req ,res,){
     const filter = req.body;
     let where = {};
     if (filter.keyword) {
-        where.head = { $regex: filter.keyword, $options: "i" }
+        where = {$or:[{head:{$regex: req.body.keyword, $options: 'i'}},{body:{$regex: req.body.keyword, $options: 'i'}}]}
+    }
+    if (filter.tags) {
+        where.tags = filter.tags
     }
     let query = Question.find(where);
     const page = parseInt(req.body.page) || 1;
