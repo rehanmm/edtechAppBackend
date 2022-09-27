@@ -60,7 +60,7 @@ const create=catchAsyncError( async function(req ,res){
         html,
         tags,
         image_url,
-serialization,
+serialized,
 media,
         body,
         display_picture:userinfo.display_picture

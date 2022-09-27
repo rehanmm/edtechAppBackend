@@ -21,7 +21,7 @@ body:{
     index:true
 },
 html:String,
-serialization:String,
+serialized:String,
 media:[String],
 accepted_answer:{
 
