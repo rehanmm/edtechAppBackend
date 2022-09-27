@@ -48,7 +48,7 @@ const list=catchAsyncError(  async function(req ,res,){
 })
 
 const create=catchAsyncError( async function(req ,res){
- const {user_id,head,body, html,
+ const {user_id,head,body, html,tags,image_url,
     serialization,
     media}=req.body;
     const userinfo= await User.findOne({user_id}).select('name display_picture').lean();
@@ -58,6 +58,8 @@ const create=catchAsyncError( async function(req ,res){
         user_name:userinfo.name,
         head,
         html,
+        tags,
+        image_url,
 serialization,
 media,
         body,

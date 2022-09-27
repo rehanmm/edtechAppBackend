@@ -184,8 +184,15 @@ event.razorpay_order_id=razorpay_order_id
  });
 
 
-const paymentntHistory = catchAsyncError(async (req, res) => {
-  const { user_id,payment_type } = req.body;
+const paymentHistory = catchAsyncError(async (req, res) => {
+  const { user_id, payment_type } = req.body;
+  if (!user_id) {
+    return res.status(400).json({
+      success: false,
+      message: "User id is required",
+    });
+
+  }
   const where = { user_id };
   if (payment_type) {
     where.payment_type = payment_type;
@@ -193,7 +200,12 @@ const paymentntHistory = catchAsyncError(async (req, res) => {
   const page = parseInt(req.body.page) || 1;
   const limit = parseInt(req.body.limit) || 10;
   const payHistory = await Payment.find(where).sort({ created_at: -1 }).skip((page - 1) * limit).limit(limit).lean()
-  tsend(payHistory, '', res)
+  tsend({
+    page,
+    limit,
+    payHistory,
+    
+  }, '', res)
 
  })
 
@@ -203,4 +215,4 @@ const paymentntHistory = catchAsyncError(async (req, res) => {
 
  
 
-module.exports={checkout,paymentLessonVerification,paymentEventVerification,paymentntHistory}
+module.exports={checkout,paymentLessonVerification,paymentEventVerification,paymentHistory}
