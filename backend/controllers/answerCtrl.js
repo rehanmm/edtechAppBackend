@@ -36,7 +36,7 @@ const create = catchAsyncError(async function (req, res,next) {
   tsend(answer, "", res);
 });
 const read = catchAsyncError(function (req, res) {
-  // res.status(200).json(req.enroll)
+  
 });
 const remove = catchAsyncError(async function (req, res,next) {
   const { answer_id, user_id } = req.body;

@@ -1,6 +1,8 @@
 const  express  = require('express');
 const questionCtrl = require( '../controllers/questionCtrl.js')
 const answerCtrl = require( '../controllers/answerCtrl.js')
+const {forumfileupload}=require('../controllers/uploadFileCtrl')
+const {uploadforumMiddleware}=require('../middleware/uploadMiddleware')
 const router = express.Router()
 
 router.route('/forum/getAllQuestion')
@@ -31,6 +33,9 @@ router.route('/forum/answer/edit')
 router.route('/forum/remove')
 .delete(answerCtrl.remove)
 
+
+router.route('/ui/file-upload')
+.post(uploadforumMiddleware, forumfileupload)
 module.exports= router
 
 

@@ -1,4 +1,4 @@
-
+const uuid = require("uuid").v4;
 
 const upload=(req,res,next)=>{
 const {file,user_id,lesson_id}=req.body;
@@ -35,9 +35,27 @@ var buffer = Buffer.from(b64string, 'base64');
     next()
 }
 
+const uploadforumMiddleware=(req,res,next)=>{
+const {file,user_id,ext}=req.body;
+
+var b64string = file;
+var buffer = Buffer.from(b64string, 'base64');
+        req.file={
+            fieldname: 'file',
+  originalname: `${user_id}-${uuid()}.${ext}`,
+  encoding: '7bit',
+  mimetype: `image/${ext}`,
+  buffer
+};  
+
+
+   
+    next()
+}
 
 
 
-module.exports={upload,uploadprofile}
+
+module.exports={upload,uploadprofile,uploadforumMiddleware}
 
 

@@ -5,6 +5,7 @@ const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
+const {s3Uploadv2forum}=require('../utils/s3services')
 const { tsend,send } = require('../middleware/responseSender');
 
 
@@ -47,13 +48,18 @@ const list=catchAsyncError(  async function(req ,res,){
 })
 
 const create=catchAsyncError( async function(req ,res){
- const {user_id,head,body}=req.body;
+ const {user_id,head,body, html,
+    serialization,
+    media}=req.body;
     const userinfo= await User.findOne({user_id}).select('name display_picture').lean();
 
     const question = new Question({
         user_id,
         user_name:userinfo.name,
         head,
+        html,
+serialization,
+media,
         body,
         display_picture:userinfo.display_picture
     });
@@ -123,6 +129,8 @@ await question.save()
 
 })
  
+
+
 
 
 module.exports={list,read,update,create,remove,like

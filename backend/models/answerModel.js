@@ -42,6 +42,9 @@ body:{
     trim:true,
     required:[true,'please enter body of your question']
 },
+html:String,
+serialization:String,
+media:[String],
 total_upvote:{
 type:Number
 },

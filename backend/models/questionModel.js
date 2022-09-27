@@ -8,10 +8,6 @@ const questionSchema=new mongoose.Schema({
         ref:'Question',
         // required:[true,'user id is required']
     },
-    body:{
-        type:String,
-        index:true
-    },
     display_picture:String,
     image_url:String,
     tags:[String],
@@ -21,9 +17,12 @@ head:{
 },
 body:{
     type:String,
-    required:[true,'please explain your question ']
+    required:[true,'please explain your question'],
+    index:true
 },
-
+html:String,
+serialization:String,
+media:[String],
 accepted_answer:{
 
 },
