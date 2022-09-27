@@ -18,7 +18,11 @@ router.route('/admin/notification/all')
 router.route('/admin/notification/single')
 .post(notificationCtrl.create)
 router.route('/admin/notification/multiple')
-.post(notificationCtrl.create)
+    .post(notificationCtrl.create)
+
+
+    router.route('/ui/notification/list')
+.post(notificationCtrl.list)
 module.exports= router
 
 

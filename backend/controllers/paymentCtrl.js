@@ -181,7 +181,21 @@ event.razorpay_order_id=razorpay_order_id
       message: "Payment failed",
     });
   }
-});
+ });
+
+
+const paymentntHistory = catchAsyncError(async (req, res) => {
+  const { user_id,payment_type } = req.body;
+  const where = { user_id };
+  if (payment_type) {
+    where.payment_type = payment_type;
+  }
+  const page = parseInt(req.body.page) || 1;
+  const limit = parseInt(req.body.limit) || 10;
+  const payHistory = await Payment.find(where).sort({ created_at: -1 }).skip((page - 1) * limit).limit(limit).lean()
+  tsend(payHistory, '', res)
+
+ })
 
 
 
@@ -189,4 +203,4 @@ event.razorpay_order_id=razorpay_order_id
 
  
 
-module.exports={checkout,paymentLessonVerification,paymentEventVerification}
+module.exports={checkout,paymentLessonVerification,paymentEventVerification,paymentntHistory}

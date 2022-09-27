@@ -65,7 +65,7 @@ const rankPostion=catchAsyncError(async function(req ,res,next){
             position
         })
     });
-  
+    
 })
 
 
@@ -82,7 +82,36 @@ const {user_id}=req.body
 })
 
 
-module.exports = {rankList,rankSurronding,rankPostion,create}
+
+const apprankList=catchAsyncError(  async function(req ,res,next){
+    const {user_id}=req.body
+const page = parseInt(req.body.page) || 1;
+const limit = parseInt(req.body.limit) || 20;
+pageSize = parseInt(limit) || 10;
+const leaderboardId='all'
+const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount();
+const pages = Math.ceil(total / pageSize);
+const position= await leaderboard.position('all',user_id)
+db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).skip((page-1)*limit).limit(limit).toArray(function(err, result) {
+
+    
+    res.status(200).json({
+        success:true,
+
+       data:{
+        position,
+        page,
+        pages,
+        total,
+         result
+        }
+    })
+
+})
+ 
+})
 
 
-   
+module.exports = {rankList,rankSurronding,rankPostion,apprankList,create}
+
+

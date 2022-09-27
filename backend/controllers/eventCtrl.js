@@ -241,6 +241,14 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
     })
  
 
+
+const viewSubbedEvent = catchAsyncError(async function (req, res, next) {
+  const { user_id } = req.body;
+
+  
+
+})
+
 module.exports={list,read,update,create,remove,subscribeEvent
 }
 
