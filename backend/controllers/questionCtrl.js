@@ -111,7 +111,7 @@ const like=catchAsyncError( async function(req ,res){
 
     const { user_id, question_id } = req.body
     
-    const likeFlag = false;
+    let likeFlag = false;
     
     const question= await Question.findById(question_id)
      if(question.likes.includes(user_id)){
@@ -131,8 +131,6 @@ const like=catchAsyncError( async function(req ,res){
 await question.save()
 //const updatedvalue=await Question.findById(req.body.question_id)
     
-
-
     tsend({
         liked: likeFlag,
         unliked:!likeFlag

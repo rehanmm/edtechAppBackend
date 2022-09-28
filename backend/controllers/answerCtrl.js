@@ -66,7 +66,7 @@ const update = catchAsyncError(async function (req, res,next) {
 
 const upvote = catchAsyncError(async function (req, res,next) {
   const { user_id, answer_id } = req.body;
-  const upvotedFlag = false;
+  let upvotedFlag = false;
   const answer = await Answer.findById(answer_id);
   if (answer.likes.includes(user_id)) {
     answer.upvotes.pull(user_id);
@@ -81,7 +81,8 @@ const upvote = catchAsyncError(async function (req, res,next) {
   await answer.save();
   //   const updatedvalue=await Question.findById(req.body.question_id)
   tsend({
-
+    upvoted: upvotedFlag,
+    unupvoted:!upvotedFlag
 
   }, "", res);
 });
