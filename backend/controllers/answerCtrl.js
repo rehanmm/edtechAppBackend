@@ -66,20 +66,24 @@ const update = catchAsyncError(async function (req, res,next) {
 
 const upvote = catchAsyncError(async function (req, res,next) {
   const { user_id, answer_id } = req.body;
-
+  const upvotedFlag = false;
   const answer = await Answer.findById(answer_id);
   if (answer.likes.includes(user_id)) {
     answer.upvotes.pull(user_id);
     const value = answer.total_upvote;
     answer.total_upvote = value - 1;
   } else {
-    const value = question.total_upvote;
-    question.total_upvote = value + 1;
+    upvotedFlag = true;
+    const value = answer.total_upvote;
+    answer.total_upvote = value + 1;
     answer.upvotes.push(user_id);
   }
-  await question.save();
+  await answer.save();
   //   const updatedvalue=await Question.findById(req.body.question_id)
-  tsend({}, "", res);
+  tsend({
+
+
+  }, "", res);
 });
 
 module.exports = { list, read, update, upvote, create, remove };
