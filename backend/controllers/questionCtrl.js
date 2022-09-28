@@ -109,24 +109,35 @@ const update=catchAsyncError( async function(req ,res){
 //
 const like=catchAsyncError( async function(req ,res){
 
-  const {user_id,question_id}=req.body
-
+    const { user_id, question_id } = req.body
+    
+    const likeFlag = false;
+    
     const question= await Question.findById(question_id)
      if(question.likes.includes(user_id)){
             question.likes.pull(user_id)
           const value=question.total_likes
            question.total_likes=value-1
-     }else{
-        const value=question.total_likes
-        question.total_likes=value+1
-            question.likes.push(user_id)
-     }
-
+     } else {
+         const value=question.total_likes
+         question.total_likes=value+1
+         question.likes.push(user_id)
+         likeFlag = true;
+        }
+    
+  
 //update question popularity index
 // question.popularityIndex();
 await question.save()
 //const updatedvalue=await Question.findById(req.body.question_id)
-    tsend ({},'',res)
+    
+
+
+    tsend({
+        liked: likeFlag,
+        unliked:!likeFlag
+        
+    },'',res)
     
 
 })
