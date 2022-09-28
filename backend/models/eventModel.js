@@ -1,5 +1,10 @@
 const mongoose=require('mongoose');
-
+/*
+user_id
+event info 
+seat 
+seat number
+*/
 const eventSchema=new mongoose.Schema({
 
 users_subscribed:[{

@@ -11,7 +11,7 @@ type:String
     },
    unit_id:{
     type:mongoose.Schema.Type.objectId
-   } ,
+   },
    unit_name:{
     type:String
    },
