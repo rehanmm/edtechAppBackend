@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     user_id:{
         type:String,
         trim:true,
-        unique:[true,'user id is already taken']
+        unique: [true, 'user id is already taken'],
+        index:true
 
     },
     display_picture:{
