@@ -90,11 +90,18 @@ const limit = parseInt(req.body.limit) || 20;
 pageSize = parseInt(limit) || 10;
 const leaderboardId='all'
 const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount();
-const pages = Math.ceil(total / pageSize);
-const position= await leaderboard.position('all',user_id)
-db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).skip((page-1)*limit).limit(limit).toArray(function(err, result) {
-
+    const pages = Math.ceil(total / pageSize);
+    const exist = await db.collection(`lb_${leaderboardId}`).findOne({ user_id })
+    if (!exist) {
+        
+        next(new errorHandler('this user data has  not updated in leaderboard yet or not given any test'))
+    }
     
+    const position = await leaderboard.position('all', user_id)
+    
+    const result =await db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).skip((page-1)*limit).limit(limit)
+  
+
     res.status(200).json({
         success:true,
 
@@ -107,7 +114,7 @@ db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).skip((page-1)*lim
         }
     })
 
-})
+
  
 })
 
