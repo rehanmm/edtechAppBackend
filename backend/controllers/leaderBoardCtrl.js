@@ -93,10 +93,10 @@ pageSize = parseInt(limit) || 10;
 const leaderboardId='all'
 const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount();
     const pages = Math.ceil(total / pageSize);
-    const exist = await db.collection(`lb_${leaderboardId}`).countDocuments({user_id:user_id});
+    const user = await db.collection(`lb_${leaderboardId}`).findOne({id:user_id});
     let position = -1;
-    console.log(exist)
-    if (exist>0) {
+    console.log(user)
+    if (user) {
         
          position = await leaderboard.position('all', user_id)
     }
@@ -112,6 +112,8 @@ const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount()
             position,
             page,
             pages,
+            user,
+
             total,
              result
             }
