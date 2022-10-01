@@ -103,7 +103,7 @@ const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount()
     
    
     
-    db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).skip((page-1)*limit).limit(limit).toArray(function(err, result) {
+    db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).collation({locale: "en_US", numericOrdering: true}).skip((page-1)*limit).limit(limit).toArray(function(err, result) {
   
         res.status(200).json({
             success:true,
