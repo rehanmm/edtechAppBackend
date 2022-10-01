@@ -95,25 +95,39 @@ const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount()
     const pages = Math.ceil(total / pageSize);
     const user = await db.collection(`lb_${leaderboardId}`).findOne({id:user_id});
     let position = -1;
-    console.log(user)
     if (user) {
         
-         position = await leaderboard.position('all', user_id)
+        position = await  db.collection(`lb_${leaderboardId}`).countDocuments({
+            score: {
+                $gt: user.score
+            }
+        })
+        position++;
+    
+     
     }
+    user.rank=position
     
    
     
     db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).collation({locale: "en_US", numericOrdering: true}).skip((page-1)*limit).limit(limit).toArray(function(err, result) {
-  
+  let rank=(page-1)*limit+1
+        for (let i = 0; i < result.length; i++)
+{
+    result[i].rank = rank;
+
+    rank++
+
+}
+
+
         res.status(200).json({
             success:true,
-    
            data:{
             position,
             page,
             pages,
             user,
-
             total,
              result
             }

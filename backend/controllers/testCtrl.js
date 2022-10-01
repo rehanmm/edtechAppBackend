@@ -161,7 +161,7 @@ testProgress.completed_lessons.push(obj);
       id: user_id,
       user_id,
       user_name,
-      score: awarded_marks.toString(),
+      score:Number.parseInt(awarded_marks),
       createdAt: Date.now(),
       display_picture
 
