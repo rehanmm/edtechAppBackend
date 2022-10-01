@@ -1,26 +1,50 @@
-
-const {MongoClient}=require("mongodb");
-const {Leaderboard}= require("@gamestdio/leaderboard");
-const {MONGODB_URI}=require("../config/config");
+const {leaderboard,db}=require('./leaderBoardCtrl')
 
 
 
-const client = new MongoClient(MONGODB_URI);
 
-   let db = client.db("leaderboard");
+
+
+
+
+
+  //leaderboard
+
+const testFunc = async function (req, res) {
+   const user_id = "r6836r38756835738957398";
+   const user_name = "gagan";
+   const awarded_marks = 43;
+
+
+   const count = await db.collection(`lb_all`).countDocuments({ id: user_id })
+  
+   if (count > 0) {
+      await db.collection(`lb_all`).findOneAndUpdate({ id: user_id }, {
+         $inc: {
+            score: awarded_marks
+         }
+      })
+   }
+  
+   else {
+
+      await db.collection(`lb_all`).insertOne({
+         id: user_id,
+         user_id,
+         user_name,
+         score: awarded_marks,
+         createdAt:Date.now(),
+         display_picture: 'fskldjfksfj'
+
+      })
+    
+
+   }
+
+   return res.json({
+      success:true
+   })
    
+}
 
-
-// Initialize the leaderboard.
-const leaderboard = new Leaderboard(db);
-
-leaderboard.record("day", { user_id:'y8GbVPtaSrSlDrzOYm3tf7yxgzs2',user_name:'rehan', score: 6090 });
-
-leaderboard.list('day').then((rows) => {
-    console.log(rows);
-
-
-   
-  });
-
-
+module.exports={testFunc}

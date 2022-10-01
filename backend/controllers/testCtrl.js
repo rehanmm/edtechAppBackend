@@ -1,5 +1,7 @@
 const Lesson = require("../models/lessonModel");
+const User = require("../models/userModel");
 const Progress = require("../models/progressModel");
+const {leaderboard,db}=require('./leaderBoardCtrl')
 const express = require("express");
 const mongoose = require("mongoose");
 const catchAsyncError = require("../error/catchAsyncError");
@@ -134,6 +136,42 @@ testProgress.completed_lessons.push(obj);
 
 //
   await testProgress.save();
+
+
+
+  //leaderboard
+  const user = await User.findOne({ user_id }).select('name display_picture');
+
+  const { name: user_name, display_picture } = user;
+
+  const count = await db.collection(`lb_all`).countDocuments({ id: user_id })
+  
+  if (count > 0)
+  {
+    await db.collection(`lb_all`).findOneAndUpdate({ id: user_id }, {
+      $inc: {
+        score:awarded_marks
+      }
+    })
+  }
+  
+  else {
+
+    await db.collection(`lb_all`).insertOne({
+      id: user_id,
+      user_id,
+      user_name,
+      score: awarded_marks,
+      createdAt: Date.now(),
+      display_picture
+
+    })
+    
+
+  }
+
+  //
+
   tsend({
     title,
     num_question,

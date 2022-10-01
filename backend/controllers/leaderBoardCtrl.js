@@ -13,6 +13,8 @@ const client = new MongoClient(MONGODB_URI);
 const leaderboard = new Leaderboard(db);
 
 
+
+
 leaderboard.create("all", { ttl: 1 * 60 * 60 * 24*4*365 });
 
 // const leaderBoard=require('../models/');
@@ -99,7 +101,7 @@ const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount()
     
     const position = await leaderboard.position('all', user_id)
     
-    const result =await db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).skip((page-1)*limit).limit(limit)
+    const result = await db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).skip((page-1)*limit).limit(limit)
   
 
     res.status(200).json({
@@ -119,6 +121,6 @@ const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount()
 })
 
 
-module.exports = {rankList,rankSurronding,rankPostion,apprankList,create}
+module.exports = {rankList,rankSurronding,rankPostion,apprankList,create,leaderboard,db}
 
 

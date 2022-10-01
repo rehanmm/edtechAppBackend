@@ -1,7 +1,9 @@
 const  express  = require('express')
 const leaderBoardCtrl =require( '../controllers/leaderBoardCtrl')
+const {testFunc} =require( '../controllers/leaderboard')
 const router=express.Router()
-const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
+const { authenticateToken, hasAuthorisation } = require('../middleware/adminAuthMiddleware')
+
 
 // router.route('/admin/aws/list')
 // .post(authenticateToken,hasAuthorisation,awsCtrl.list)
@@ -9,8 +11,8 @@ const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMi
 // .post(authenticateToken,hasAuthorisation,awsCtrl.create)
 router.route('/admin/leaderboard/ranklist')
 .post(authenticateToken,hasAuthorisation,leaderBoardCtrl.rankList)
-router.route('/admin/leaderboard/create')
-.post(leaderBoardCtrl.create)
+router.route('/leaderboard/create')
+.post(testFunc)
 router.route('/admin/leaderboard/position')
 .post(authenticateToken,hasAuthorisation,leaderBoardCtrl.rankPostion)
 router.route('/admin/leaderboard/surrounding')
