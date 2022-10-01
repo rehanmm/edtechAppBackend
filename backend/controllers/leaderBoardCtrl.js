@@ -118,7 +118,14 @@ const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount()
 
     rank++
 
-}
+        }
+        
+        if (page > pages) {
+            return res.json({
+                success: false,
+                message:"No pages found"
+            })
+        }
 
 
         res.status(200).json({
