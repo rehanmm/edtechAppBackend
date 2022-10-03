@@ -7,7 +7,7 @@ module.exports=function(user,unitPrerequisite){
     if (has_prerequisite) {
 //  console.log(units_completed);
 
-        
+
         const lessonObj = units_completed.find(item => item[on] != undefined);
         
         

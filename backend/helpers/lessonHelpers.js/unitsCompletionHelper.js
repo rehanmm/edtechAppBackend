@@ -1,18 +1,19 @@
 
+
  
-const checker = function (lessons,completed_lessons) {
-    return  lessons.every((v, i) => {
-    
-        const condition = completed_lessons.some((v2) => {
-              
-              return v.lesson_id in v2
+const checker = function (lessons, completed_lessons) {
+   
+    let ans=false;
+  return lessons.every((v, i) => {
+       completed_lessons.forEach((v2) => {
+            if (v.lesson_id in v2) {
+                ans = true;
+                return;
+               
+            }
+            
           })
-      
-          if (condition) {
-              return true
-          } else {
-              return false
-          };
+      return ans;
       })
 }
   

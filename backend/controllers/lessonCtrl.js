@@ -446,7 +446,9 @@ const completedLesson = catchAsyncError(async function (req, res, next) {
   //lesson_id
   //unit_id
   let progress = await Progress.findOne({ user_id, unit_id });
-  let { lessons } = await Unit.findOne({ unit_id });
+  // console.log(unit_id);
+  let {lessons}= await Unit.findById(unit_id);
+ 
 
   // 
   if (!progress) {
@@ -493,7 +495,7 @@ else if(type==='test'){
 
     const alreadyExist = progress.completed_lessons.some((o) => lesson_id in o);
     // console.log(alreadyExist);
-    if (!alreadyExist){ progress.completed_lessons.push(obj);
+    if (!alreadyExist){ progress.completed_lessons.push(obj);//
     
 
       let flag=1;
@@ -522,18 +524,18 @@ else if(type==='test'){
 
       //
 
+      // console.log(checkIfUnitCompleted(lessons, progress.completed_lessons));
       if (checkIfUnitCompleted(lessons, progress.completed_lessons)) {
-        // console.log('unit completed');
       
         const obj = {};
         obj[unit_id] = timestamp;
-        const alreadyExist = user.completed_units.some((o) => unit_id in o);
+        const alreadyExist = user.units_completed.some((o) => unit_id in o);
         if (!alreadyExist) {
-          user.completed_units.push(obj);
+          user.units_completed.push(obj);
         } 
         else {
-          const index = user.completed_units.findIndex((o) => unit_id in o);
-          user.completed_units[index][unit_id] = timestamp;
+          const index = user.units_completed.findIndex((o) => unit_id in o);
+          user.units_completed[index][unit_id] = timestamp;
         }
      
        
