@@ -15,6 +15,7 @@ const shortLessonupdater = require("../helpers/shortLessonUpdater");
 const video = require("../helpers/lessonHelpers.js/videoUrlProcessing");
 const config = require("../config/config");
 const countLesson=require('../helpers/unitHelper/mongoQueries');
+const {checker:checkIfUnitCompleted}=require('../helpers/lessonHelpers.js/unitsCompletionHelper');
 
 const list = catchAsyncError(async function (req, res,next) {
   const lesson = await Lesson.find({ unit_id: req.body.unit_id });
@@ -444,8 +445,9 @@ const completedLesson = catchAsyncError(async function (req, res, next) {
 
   //lesson_id
   //unit_id
-
   let progress = await Progress.findOne({ user_id, unit_id });
+  let { lessons } = await Unit.findOne({ unit_id });
+
   // 
   if (!progress) {
     progress = new Progress({
@@ -489,12 +491,10 @@ else if(type==='test'){
 
     // console.log(obj);
 
-    const alreadyExist = progress.completed_lessons.some((o) => user_id in o);
+    const alreadyExist = progress.completed_lessons.some((o) => lesson_id in o);
     // console.log(alreadyExist);
     if (!alreadyExist){ progress.completed_lessons.push(obj);
-      progress.save();
-
-
+    
 
       let flag=1;
       const user = await User.findOne({user_id});
@@ -517,7 +517,34 @@ else if(type==='test'){
         
       
       }
+
+
+
+      //
+
+      if (checkIfUnitCompleted(lessons, progress.completed_lessons)) {
+        // console.log('unit completed');
       
+        const obj = {};
+        obj[unit_id] = timestamp;
+        const alreadyExist = user.completed_units.some((o) => unit_id in o);
+        if (!alreadyExist) {
+          user.completed_units.push(obj);
+        } 
+        else {
+          const index = user.completed_units.findIndex((o) => unit_id in o);
+          user.completed_units[index][unit_id] = timestamp;
+        }
+     
+       
+  
+      }
+      
+
+      //
+
+
+     await  progress.save();
       await user.save();
       //TODO:add completed evaluated field in progress model
      return tsend({}, "completed lesson updated successfuly", res);

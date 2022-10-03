@@ -9,7 +9,7 @@ const errorHandler = require("../utils/errorHandler");
 const { tsend, send } = require("../middleware/responseSender");
 const { s3Uploadv2 } = require("../utils/s3services");
 const Progress = require("../models/progressModel");
-const paginationAndSearch=require('../utils/genaeralFilter');
+const {paginationAndSearch}=require('../helpers/lessonHelpers.js/assignmentHelper');
 
 // const Question = require('../models/questionModel');
 
@@ -107,7 +107,18 @@ const reviewEditAssignment = catchAsyncError(async function (req, res,next) {
 
 });
 
+const userAssignment = catchAsyncError(async function (req, res, next) { 
+  const { user_id, unit_id } = req.body
+  if (!user_id) {
+    next(new errorHandler(400, "user_id is required")); 
+  }
+  where={user_id}
+  if(unit_id){where.unit_id=unit_id}
+  paginationAndSearch(where,req.body,Assignment,res)
+})
 
-module.exports = { uploadAssignmet,listOfAssignment, getAssignment ,submitAssignment,reviewAssignment,reviewEditAssignment};
+
+
+module.exports = { userAssignment, uploadAssignmet,listOfAssignment, getAssignment ,submitAssignment,reviewAssignment,reviewEditAssignment};
 
 
