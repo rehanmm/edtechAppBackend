@@ -10,6 +10,8 @@ const { tsend, send } = require("../middleware/responseSender");
 const { s3Uploadv2 } = require("../utils/s3services");
 const Progress = require("../models/progressModel");
 const {paginationAndSearch}=require('../helpers/lessonHelpers.js/assignmentHelper');
+const { Unit } = require("../models/unitModel");
+const Lesson = require("../models/lessonModel");
 
 // const Question = require('../models/questionModel');
 
@@ -38,8 +40,13 @@ const listOfAssignment = catchAsyncError(async function (req, res,next) {
 const submitAssignment = catchAsyncError(async function (req, res, next) {
   const { user_id, unit_id, lesson_id } = req.body;
   const { Location, Key,Bucket } = req.assignment;
-  // const {assigned}=await Lesson.findOne({lesson_id,unit_id,type:'assignment'})
+  const assign = await Lesson.findById(lesson_id).lean();
+  const { unit_name: unit_title } = await Unit.findById(unit_id).select('unit_name').lean();
+  console.log(assign);
+console.log(unit_title)
   const assignment = new Assignment({
+    ...assign,
+    unit_title,
     user_id,
     unit_id,
     lesson_id,

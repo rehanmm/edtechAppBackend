@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');  
-const assignmentSchema=new mongoose.Schema({
+const assignmentSchema = new mongoose.Schema({
+    title: {
+        type: String,
+
+    },
+    unit_title: {
+        type: String
+
+    },
+    body:{
+        type: String
+    },
     user_id :{
         type:String
     },
