@@ -4,6 +4,15 @@ const paymentSchema = new mongoose.Schema({
     type:"String",
     required:true
   },
+  unit_title: {
+    type: "String"
+  },
+  lesson_title: {
+    type: "String"
+  },
+  event_title: {
+    type: "String"
+  },
   unit_id:{
     type:mongoose.Schema.Types.ObjectId
   },
