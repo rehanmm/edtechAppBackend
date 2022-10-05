@@ -113,7 +113,7 @@ endtTest = catchAsyncError(async (req, res, next) => {
 
     
     await User.findOneAndUpdate(user_id, { personality: result });
-    await User.findOneAndUpdate(is_personality_test_taken, true);
+    await User.findOneAndUpdate(user_id, {is_personality_test_taken: true});
     
     return res.json({
         success: true,
