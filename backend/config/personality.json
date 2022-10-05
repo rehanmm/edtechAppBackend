@@ -1,0 +1,716 @@
+{
+    "ENTP": {
+      "title": "Debater",
+      "head": "Rancho, 3 Idiots - Analyst, Rational",
+      "body": "Smart and curious thinkers who cannot resist an intellectual challenge. No one loves mental sparring more, as it gives them a chance to exercise their quick wit, broad accumulated knowledge base, and capacity for connecting disparate ideas to prove their points.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "INTP": {
+      "title": "Logicians",
+      "head": "NEO, The Matrix - Analyst, Rational",
+      "body": "Innovative inventors with an unquenchable thirst for knowledge. Logicians are known for their brilliant theories and unrelenting logic - they are considered the most logically precise of all the personality types.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "INTJ": {
+      "title": "Architect",
+      "head": "MOHAN BHARGAVA, Swades - Analyst, Rational",
+      "body": "Imaginative and strategic thinkers, with a plan for everything. Architects, ever independent, remain free from the expectations of others. This allows them to pursue their own interesting and fresh ideas.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "ENFJ": {
+      "title": "Protagonist",
+      "head": "Mr. India, Anil Kapoor - Diplomat, Idealist",
+      "body": "Charismatic and inspiring leaders, able to mesmerise their listeners. Protagonists are genuine, caring people who talk the talk and walk the walk, and nothing makes them happier than leading the charge, uniting and motivating their team with infectious enthusiasm.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "ENFP": {
+      "title": "Campaigner",
+      "head": "Geet - Jab We Met - Diplomat, Idealist",
+      "body": "Enthusiastic, creative and sociable free spirits, who can always find a reason to smile. ENFPs are fiercely independent, and more than stability and security, they crave creativity and freedom. They see life as a big, complex puzzle where everything is connected.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "INFP": {
+      "title": "Mediator",
+      "head": "PK - Amir Khan - The Idealist",
+      "body": "Poetic, kind, altruistic people, always eager to help a good cause. True idealists, always looking for the hint of good even the worst of people and events. While they may appear as calm, reserved, or even shy, they have an inner flame and passion that can truly shine.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "INFJ": {
+      "title": "Advocate",
+      "head": "Raj Aryan (SRK- Mohabbatein) - Developer, The Counsler",
+      "body": "Quiet and mystical, yet very inspiring and tireless idealists. With an inborn sense of idealism and morality, but what sets them apart is that they are not idle dreamers, but quite capable of concrete action",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "ESFP": {
+      "title": "Entertainer",
+      "head": "PIKACHU - Motivator, The Performer",
+      "body": "Spontaneous, energetic and enthusiastic people - life is never boring around them. Entertainers get caught up in the excitement of the moment, and want everyone else to feel that way, too. No other type is as generous with their time and energy when encouraging others.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "ESTP": {
+      "title": "Entrepreneur",
+      "head": "“BUNNY” (Ranbir Kapoor-YJHD)",
+      "body": "Smart, energetic and very perceptive people, who truly enjoy living on the edge. Sometimes Entrepreneurs' instantaneous observation and action is just what's required, as in some corporate environments, and especially in emergencies.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "ISTP": {
+      "title": "Virtuoso",
+      "head": "JAMES BOND - Analyser, Operator, Craftsman",
+      "body": "Bold and practical experimenters, masters of all kinds of tools. People with this personality type are natural Makers, moving from project to project, building the useful and the superfluous for the fun of it, and learning from their environment as they go.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "ISTJ": {
+      "title": "Logisticians",
+      "head": "Veeru Sahastrabudhi 'VIRUS' (Boman Irani- 3 Idiots) - Planner, The Inspector",
+      "body": "Practical and fact-minded individuals, whose reliability cannot be doubted. Their defining characteristics are integrity, practical logic and tireless dedication to duty, taking responsibility and pride in the work they do.",
+      "traits": [
+        "DISCIPLINED",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "METICULOUS",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Supportive",
+        "Reliable",
+        "Patient",
+        "Imaginative",
+        "Observant",
+        "Enthusiastic",
+        "Loyal",
+        "Hard-Working",
+        "Good Practical Skills"
+      ],
+      "weakness": [
+        "Humble and Shy",
+        "Take Things Too Personally",
+        "Repress Their Feelings",
+        "Overload Themselves",
+        "Reluctant to Change",
+        "Too Altruistic"
+      ],
+      "career_options": [
+        "Optician",
+        "Personal Assistant",
+        "Interior Designer",
+        "Historian",
+        "Accountant",
+        "Dentist",
+        "Religious Teacher",
+        "Nurse",
+        "Surgeon",
+        "School Teacher"
+      ]
+    },
+    "ESFJ": {
+      "title": "Consul",
+      "head": "Munna Bhai from Munna Bhai M.B.B.S. - Facilitator, Caretaker",
+      "body": "Extraordinarily caring, social and popular people, always eager to help. Consuls are altruists, and they take seriously their responsibility to help and to do the right thing. ESFJs love to be of service and feel valued.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-CONCERNED",
+        "DOWN-TO-EARTH",
+        "GREGARIOUS",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Strong Practical Skills",
+        "Strong Sense of Duty",
+        "Very Loyal",
+        "Sensitive",
+        "Warm",
+        "Good at Connecting with Others"
+      ],
+      "weakness": [
+        "Worried about Their Social Status",
+        "Inflexible",
+        "Reluctant to Innovate or Improvise",
+        "Vulnerable to Criticism",
+        "Often Too Needy",
+        " Too Selfless"
+      ],
+      "career_options": [
+        "Financial Advisor",
+        "Physiotherapist",
+        "School Principal",
+        "Office Supervisor",
+        "Hotel Manager",
+        "Dentist",
+        "Public Relations",
+        "Social Worker",
+        "Family Doctor",
+        "Pastor"
+      ]
+    },
+    "ISFJ ": {
+      "title": "Defender",
+      "head": "CAPTAIN AMERICA - Protector, Supporter",
+      "body": "Very dedicated and warm protectors, always ready to defend their loved ones. True altruists, meeting kindness with kindness-in-excess, engaging work and people they believe in with enthusiasm and generosity.",
+      "traits": [
+        "CARING",
+        "METICULOUS",
+        "DOWN-TO-EARTH",
+        "RELIABLE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Supportive",
+        "Reliable",
+        "Patient",
+        "Imaginative",
+        "Observant",
+        "Enthusiastic",
+        "Loyal",
+        "Hard-Working",
+        "Good Practical Skills"
+      ],
+      "weakness": [
+        "Humble and Shy",
+        "Take Things Too Personally",
+        "Repress Their Feelings",
+        "Overload Themselves",
+        "Reluctant to change",
+        "Too Altruistic"
+      ],
+      "career_options": [
+        "Optician",
+        "Personal Assistant",
+        "Interior Designer",
+        "Historian",
+        "Accountant",
+        "Dentist",
+        "Religious Teacher",
+        "Nurse",
+        "Surgeon",
+        "School Teacher"
+      ]
+    },
+    "ESTJ": {
+      "title": "Executive",
+      "head": "Agent Smith from The Matrix - Implementro, The Supervisor",
+      "body": "Excellent administrators, unsurpassed at managing things - or people. Executives are classic images of the model citizen: they help their neighbours, uphold the law, and try to make sure that everyone participates in the communities and organisations they hold so dear.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "ISFP": {
+      "title": "Adventurer",
+      "head": "RAHUL JAYKAR - AASHIQUI 2, HARRY POTTER - Composer, Producer, The Artist",
+      "body": "Flexible and charming artists, always ready to explore and experience something new. Adventurers live in a colourful, sensual world, inspired by connections with people and ideas. Push the limits of social convention.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    },
+    "ENTJ": {
+      "title": "Commander",
+      "head": "STEVE JOBS,  Alauddin Khilji (Padmaavat) - Analyst, Rational",
+      "body": "Bold, imaginative and strong-willed leaders, always finding a way or making one. People with this personality type embody the gifts of charisma and confidence, and project authority in a way that draws crowds together behind a common goal. If there's anything Commanders love, it's a good challenge.",
+      "traits": [
+        "HARDWORKING",
+        "TASK-ORIENTED",
+        "OBJECTIVE",
+        "ASSERTIVE",
+        "TRADITIONAL",
+        "ORGANIZED"
+      ],
+      "strengths": [
+        "Dedicated",
+        " Strong-willed",
+        "Direct",
+        "Honest",
+        "Loyal",
+        "Patient",
+        "Reliable",
+        "Enjoy Creating Order",
+        "Excellent Organisers"
+      ],
+      "weakness": [
+        "Inflexible",
+        "Stubborn",
+        "Uncomfortable with Unconventional Situations",
+        "Judgmental",
+        "Too Focused on Social Status",
+        "Difficult to Relax",
+        "Difficulty Expressing Emotion"
+      ],
+      "career_options": [
+        "Office Supervisor",
+        "Financial Advisor",
+        "Project Manager",
+        "Office Manager",
+        "Tax Officer",
+        "Flight Engineer",
+        "Stock Broker",
+        "Military Officer",
+        "School Teacher",
+        "Finance Executive"
+      ]
+    }
+  }
