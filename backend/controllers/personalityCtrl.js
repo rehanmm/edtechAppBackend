@@ -1,5 +1,6 @@
 
 const PersonalityTest = require('../models/personalityModel') 
+const User= require('../models/userModel') 
 const catchAsyncError = require('../error/catchAsyncError')
 const errorHandler = require('../utils/errorHandler');
 const { tsend, send } = require('../middleware/responseSender');
@@ -23,6 +24,7 @@ endtTest = catchAsyncError(async (req, res, next) => {
      * 
      * 
      */
+    const {user_id}=req.body
     const test_answers = req.body;
 
     const { tests } = test_answers;
@@ -84,7 +86,7 @@ endtTest = catchAsyncError(async (req, res, next) => {
     const result = { ...Code,head, scores }
 
     
-    
+    await User.findOneAndUpdate(user_id, { personality: result });
     
     return res.json({
         success: true,

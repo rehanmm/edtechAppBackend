@@ -133,9 +133,9 @@ const userSchema = new mongoose.Schema(
       body: String,
       head: String,
       traits: [String],
-      weekness: [String],
+      weakness: [String],
       strenghts: [String],
-      career_option: [String],
+      career_options: [String],
       scores: [
         {
           test_index: Number,
