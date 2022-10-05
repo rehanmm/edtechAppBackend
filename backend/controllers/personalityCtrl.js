@@ -14,7 +14,7 @@ getPersonality =  catchAsyncError(async (req, res, next) => {
     if (!user) {
         return next(new errorHandler('list not found', 200))
     }
-    if (user.is_personality_test_taken && (user.personality != null && !user.personality)){
+    if (user.is_personality_test_taken){
         return res.status(200).json(
             {
                 success: true,
