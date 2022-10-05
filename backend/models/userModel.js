@@ -127,6 +127,11 @@ const userSchema = new mongoose.Schema(
       },
     ],
 
+    is_personality_test_taken:{
+      type: Boolean,
+      default: false
+  },
+
     personality: {
       title: String,
       head: String,

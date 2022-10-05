@@ -14,12 +14,13 @@ getPersonality =  catchAsyncError(async (req, res, next) => {
     if (!user) {
         return next(new errorHandler('list not found', 200))
     }
-    if (user.personality == null || !user.personality){
+    if (user.is_personality_test_taken && (user.personality != null && !user.personality)){
         return res.status(200).json(
             {
                 success: true,
                 data: {
-                    is_test_attempted:false
+                    is_test_attempted:true,
+                    personality: user.personality
                 }
             }
         )
@@ -28,8 +29,7 @@ getPersonality =  catchAsyncError(async (req, res, next) => {
             {
                 success: true,
                 data: {
-                    is_test_attempted:true,
-                    personality: user.personality
+                    is_test_attempted:false
                 }
             }
         )
@@ -113,6 +113,7 @@ endtTest = catchAsyncError(async (req, res, next) => {
 
     
     await User.findOneAndUpdate(user_id, { personality: result });
+    await User.findOneAndUpdate(is_personality_test_taken, true);
     
     return res.json({
         success: true,
