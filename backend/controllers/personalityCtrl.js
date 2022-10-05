@@ -8,7 +8,33 @@ const personality = require('../config/personality.json')
 
 // console.log(personality.ENFJ)
 
-
+getPersonality =  catchAsyncError(async (req, res, next) => {
+    const {user_id}=req.body
+    const user = await User.findOne({user_id})
+    if (!user) {
+        return next(new errorHandler('list not found', 200))
+    }
+    if (user.personality == null || !user.personality){
+        return res.status(200).json(
+            {
+                success: true,
+                data: {
+                    is_test_attempted:false
+                }
+            }
+        )
+    } else {
+        return res.status(200).json(
+            {
+                success: true,
+                data: {
+                    is_test_attempted:true,
+                    personality: user.personality
+                }
+            }
+        )
+    }
+ })
 
 startTest = catchAsyncError(async (req, res, next) => {
 
@@ -121,7 +147,7 @@ createTest = catchAsyncError(async (req, res, next) => {
 })
 
 
-module.exports={startTest,endtTest,createTest}
+module.exports={startTest,endtTest,createTest, getPersonality}
 
 
 

@@ -11,5 +11,8 @@ router.route('/ui/personality/test/create')
 router.route('/ui/personality/endTest')
     .post(personalityCtrl.endtTest)
 
+router.route('/ui/personality/get')
+    .post(personalityCtrl.getPersonality)
+
 
     module.exports = router;
