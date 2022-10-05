@@ -139,7 +139,7 @@ const userSchema = new mongoose.Schema(
       head: String,
       traits: [String],
       weakness: [String],
-      strenghts: [String],
+      strengths: [String],
       career_options: [String],
       scores: [
         {
