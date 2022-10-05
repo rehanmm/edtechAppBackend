@@ -10,7 +10,7 @@ const personality = require('../config/personality.json')
 
 getPersonality =  catchAsyncError(async (req, res, next) => {
     const {user_id}=req.body
-    const user = await User.findOne({user_id})
+    const user = await User.findOne({ user_id }).select('is_personality_test_taken   personality').lean();
     if (!user) {
         return next(new errorHandler('list not found', 200))
     }
