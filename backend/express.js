@@ -23,6 +23,7 @@ const blockedUserRoutes=require('../backend/routers/blockedUserRoutes');
 const paymentRoutes=require('../backend/routers/paymentRoutes');
 const tagsRoutes=require('../backend/routers/tagsRoutes');
 const personalityRoutes=require('../backend/routers/personalityRoutes');
+const deviceRoutes=require('../backend/routers/deviceRouters');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
 // const logger=require('./middleware/logger')
@@ -58,6 +59,7 @@ app.use('/edtech',paymentRoutes);
 app.use('/edtech',tagsRoutes);
 app.use('/edtech',notificationRoutes);
 app.use('/edtech',personalityRoutes);
+app.use('/edtech',deviceRoutes);
 
 
 

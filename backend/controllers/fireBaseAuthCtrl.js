@@ -1,4 +1,5 @@
 const User=require('../models/userModel');
+const Device=require('../models/deviceModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const catchAsyncError=require('../error/catchAsyncError');
@@ -19,33 +20,95 @@ admin.initializeApp({
 
 const login=catchAsyncError( async function(req ,res){
 
-  // console.log(req.body)
-const {user_id,phone_number}=req.body
- const user=await admin.auth().getUser(user_id)
-  // console.log(user)
+const {user_id,phone_number,device_id}=req.body
+const user=await admin.auth().getUser(user_id)
+  let device;
  if(user.phoneNumber==phone_number){
-   
+   let device_id_matched = true;
    let msg = "Login Successful";
    let is_new = false;
-    // console.log(req.body.user_id)
-    const user = await User.findOne({user_id})
-    console.log(user)
-    if(!user){
-      // const a =Math.floor( Math.random() * (200000000000-1) + 1);
-      const user1= await new User({
+  
+    const myuser = await User.findOne({user_id})
+  console.log(myuser)
+    if(!myuser){
+     
+      const user1= new User({
         phone_number:phone_number,
-        user_id:user_id
-        // email:`dummy-user${a}@email.com`
+        user_id: user_id,
+        device_id: device_id,
+        name: user.displayName,
+       
       })
+      is_new = true;
       await user1.save()
       msg = "New user created successfully";
-      is_new = true;
+    
+   }
+   
+
+
+   if (is_new) { 
+      device = new Device({
+       user_id: user_id,
+       old_device_id: device_id,
+       status: "nothing",
+       created_at: Date.now(),
+      //  history: [{ 
+      //    old_device_id: device_id,
+      //    new_device_id: device_id,
+      //    message: msg,
+      //    status: "accepted",
+      //    placeholder: "placeholder",
+          
+      //    created_at: Date.now()
+      //  }]
+        
+       
+     })
+      await device.save()
+     
+   }
+
+
+   if (!is_new) {
+     
+     if (myuser.device_id == device_id) {
+       msg = "Login Successful";
+      
+     }
+
+     else {
+      device_id_matched = false;
+       const device = await Device.findOne({user_id: user_id})
+       console.log(device)
+       device.status = "nothing";
+       device.new_device_id = device_id;
+      //  device.message = msg;
+       device.created_at = Date.now();
+       device.history.push({
+         old_device_id: device.old_device_id,
+         new_device_id: device.new_device_id
+       })
+       await device.save()
+       msg = "your device is not registered with us, please contact admin";
+     }
+     
+     
     }
+
+   
+     
 
    return res.status(200).json({
       success:true,
       message:msg,
-      data:{is_new_user:is_new,user_id:user_id}
+     data: {
+       is_new_user: is_new,
+       user_id: user_id,
+       user_name: user.name,
+       device_id_matched
+
+     }
     })
 
 

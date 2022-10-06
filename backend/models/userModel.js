@@ -126,6 +126,10 @@ const userSchema = new mongoose.Schema(
         //unit_id:'number of lesson completed'
       },
     ],
+    device_id: {
+      type: String,
+      trim: true
+    },
 
     is_personality_test_taken:{
       type: Boolean,
