@@ -12,8 +12,16 @@ const changeDeviceRequest = catchAsyncError(async function (req, res, next) {
     let  is_old_request_pending = false;
     const device = await Device.findOne({ user_id });
     if (!device) {
-    
-        return next(new errorHandler('no new device recorded before', 404))
+        const newDevice = new Device({
+            user_id: user_id,
+            new_device_id: new_device_id,
+            status: "pending",
+            created_at: Date.now()
+        }
+        );
+        await newDevice.save();
+       return tsend({}, 200, "New device request created successfully", res);
+       
     }
 
     if (device.status == 'pending') {
