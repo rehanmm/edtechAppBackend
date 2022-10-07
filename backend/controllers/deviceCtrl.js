@@ -16,6 +16,7 @@ const changeDeviceRequest = catchAsyncError(async function (req, res, next) {
             user_id: user_id,
             new_device_id: new_device_id,
             status: "pending",
+            message,
             created_at: Date.now()
         }
         );
@@ -64,7 +65,7 @@ const changeDeviceRequest = catchAsyncError(async function (req, res, next) {
 })
 
 const changeStatus = catchAsyncError(async function (req, res, next) {
-    const { user_id,accept,placeholde } = req.body;
+    const { user_id,accept,placeholder } = req.body;
     const device = await Device.findOne({ user_id });
     if (!device) {
         return next(new errorHandler('Device not found', 404));
@@ -73,7 +74,7 @@ const changeStatus = catchAsyncError(async function (req, res, next) {
         return next(new errorHandler('No pending request', 400));
     }
     device.status = accept;
-    device.placeholder = placeholde;
+    device.placeholder = placeholder;
     await User.findOneAndUpdate({ user_id }, { device_id: device.new_device_id });
 
     await device.save();
