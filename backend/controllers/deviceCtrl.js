@@ -20,7 +20,7 @@ const changeDeviceRequest = catchAsyncError(async function (req, res, next) {
         }
         );
         await newDevice.save();
-       return tsend({}, 200, "New device request created successfully", res);
+       return tsend({}, "New device request created successfully", res);
        
     }
 
