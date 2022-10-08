@@ -132,9 +132,13 @@ const unitSchema = new mongoose.Schema({
         description:{type:String,
           default:''}
 
-      }],
+  }],
+  additionals: [{}],
+  expiry: {
+    type: Number,
+  }
       
-
+ 
     
 },{timestamps:{createdAt:'created_at',updatedAt:'updated_at'}});
 const Unit=mongoose.model('unit',unitSchema);

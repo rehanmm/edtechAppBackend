@@ -9,7 +9,10 @@ const eventSchema=new mongoose.Schema({
 
 users_subscribed:[{
   _id:false,
-  user_id:String,
+  user_id: {
+    type: String,
+    index:true
+  },
   event_id:mongoose.Schema.Types.ObjectId,
   is_paid:Boolean,
   price:Number,
@@ -66,11 +69,19 @@ users_subscribed:[{
     is_locked:{
       type:Boolean,
       default:false
-    },
-
-  
+  },
     
-  
+  location: {
+    type: {
+      type: String,
+    }
+  },
+    meet_link: String,
+    sdk: String,
+    pw: String,
+  sid: String,
+    id: String,
+    sno: String,
   
 
 })

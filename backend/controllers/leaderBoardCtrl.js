@@ -93,7 +93,17 @@ pageSize = parseInt(limit) || 10;
 const leaderboardId='all'
 const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount();
     const pages = Math.ceil(total / pageSize);
-    const user = await db.collection(`lb_${leaderboardId}`).findOne({id:user_id});
+    const user = await db.collection(`lb_${leaderboardId}`).findOne({ id: user_id });
+    if (!user) {
+        return res.status(200).json({
+            success: true,
+            page,
+            pages,
+            total,
+            data: []
+        })
+    }
+
     let position = -1;
     if (user) {
         

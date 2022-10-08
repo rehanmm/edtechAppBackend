@@ -131,6 +131,28 @@ const update=catchAsyncError( async function(req ,res){
 
 })
 
+const getDetails=catchAsyncError( async function(req ,res){
+
+  const {event_id,user_id}=req.body
+  
+  const event=await Event.findById(event_id).select('-meet_link -sdk -key -id -pw -sid -sno').lean()
+    res.status(200).json({
+         success:true,
+        message:'updated successfully',
+       data: event
+
+    })
+  
+  // const event=await Event.findById(event_id).select('-meet_link -sdk -key -id -pw -sid -sno').lean()
+  //   res.status(200).json({
+  //        success:true,
+  //       message:'updated successfully',
+  //      data: event
+
+  //   })
+
+})
+
 
 const subscribeEvent = catchAsyncError(async function (req, res, next) {
     const {user_id,lesson_id,event_id,unit_id}=req.body;
