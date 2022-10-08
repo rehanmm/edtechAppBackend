@@ -133,17 +133,33 @@ const update=catchAsyncError( async function(req ,res){
 
 const getDetails=catchAsyncError( async function(req ,res){
 
-  const {event_id,user_id}=req.body
+  const { event_id, user_id } = req.body
+  // { awards: { $elemMatch: { award: "National Medal", year: 1975 } } },
+  // { "awards.$": 1, name: 1 }
+  let event;
+  event = await Event.find({ event_id, users_subscribed: { "$elemMatch": { user_id } } }, { "users_subscribed.$": 1 }).lean()
+  // const { users_subscribed } = event
+  if (event.length > 0) {
+
+    event=await Event.findById(event_id).lean()
+  }
   
-  const event=await Event.findById(event_id).select('-meet_link -sdk -key -id -pw -sid -sno').lean()
+  else {
+    event=await Event.findById(event_id).select('-meet_link -sdk -key -id -pw -sid -sno').lean()
+
+
+  }
+  // const 
     res.status(200).json({
          success:true,
-        message:'updated successfully',
+        message:'',
        data: event
 
     })
   
-  // const event=await Event.findById(event_id).select('-meet_link -sdk -key -id -pw -sid -sno').lean()
+  
+  
+  // const
   //   res.status(200).json({
   //        success:true,
   //       message:'updated successfully',
@@ -264,14 +280,9 @@ const subscribeEvent = catchAsyncError(async function (req, res, next) {
  
 
 
-const viewSubbedEvent = catchAsyncError(async function (req, res, next) {
-  const { user_id } = req.body;
 
-  
 
-})
-
-module.exports={list,read,update,create,remove,subscribeEvent
+module.exports={list,read,update,create,remove,subscribeEvent, getDetails
 }
 
 

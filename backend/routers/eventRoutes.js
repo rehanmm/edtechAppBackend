@@ -15,8 +15,8 @@ router.route('/event/remove')
 .delete(eventCtrl.remove)
 router.route('/event/subscribe')
 .post(eventCtrl.subscribeEvent)
-// router.route('/events/getDetails')
-// .post(eventCtrl.getDetails)
+router.route('/events/getDetails')
+.post(eventCtrl.getDetails)
 
 module.exports= router
 
