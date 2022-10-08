@@ -25,7 +25,6 @@ status:{
     default:'not_started'
 }
 
-
  })
    module.exports=mongoose.model('LessonProgress', lessonProgressSchema)
 

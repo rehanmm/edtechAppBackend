@@ -1,5 +1,6 @@
 const {Unit}=require('../models/unitModel');
 const Lesson=require('../models/lessonModel');
+const Assignment=require('../models/assignmentModel');
 const express=require('express');
 const mongoose =require('mongoose') ;
 const _=require('lodash');
@@ -77,7 +78,7 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
     const totalLesson=unit.lessons.length
     // console.log(lessonCompleted)
     // console.log(totalLesson)
-    console.log(unit.lessons)
+    // console.log(unit.lessons)
     // console.log(completed_lessons )
 
     
@@ -116,9 +117,10 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
 
 
  unit.lessons.sort((a,b)=>a.index-b.index)
-const unitdata=new unitData(unitProgress);
-
- data={...unit,...unitdata}
+    const unitdata = new unitData(unitProgress);
+    
+    const assignment= await Assignment.find({unit_id,user_id}).lean()
+ data={...unit,...unitdata,assignments:assignment}
 
 
 
