@@ -40,13 +40,15 @@ const listOfAssignment = catchAsyncError(async function (req, res,next) {
 const submitAssignment = catchAsyncError(async function (req, res, next) {
   const { user_id, unit_id, lesson_id } = req.body;
   const { Location, Key,Bucket } = req.assignment;
-  const assign = await Lesson.findOne({lesson_id}).lean();
-  console.log(assign);
+  const assign = await Lesson.findOne({_id:lesson_id}).select('-_id').lean()
+  // console.log('assign', assign)
+  // const copy=JSON.parse(JSON.stringify(assign))
 
   const { unit_name: unit_title } = await Unit.findById(unit_id).select('unit_name').lean();
-console.log(unit_title)
+  
+  
   const assignment = new Assignment({
-    ...assign,
+   ...assign,
     unit_title,
     user_id,
     unit_id,
