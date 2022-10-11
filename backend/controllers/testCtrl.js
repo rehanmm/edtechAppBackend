@@ -172,11 +172,13 @@ testProgress.completed_lessons.push(obj);
 
   const countPerTest = await db.collection(`lb_testWise`).countDocuments({ id: user_id,lesson_id })
   
-  if (count > 0)
+  if (countPerTest > 0)
   {
     await db.collection(`lb_testWise`).findOneAndUpdate({ id: user_id, lesson_id }, {
-    
-      score: awarded_marks   
+      $set:{
+        score: awarded_marks   
+      }
+   
     })
   }
   
