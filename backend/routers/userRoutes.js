@@ -18,5 +18,7 @@ router.route('/admin/users')
 .post(authenticateToken,hasAuthorisation,userCtrl.list)
 router.route('/user/displayPicture/update')
 .post(uploadprofile,userCtrl.displayPicture)
+router.route('/ui/user/events')
+.post(userCtrl.getSubbedEvents)
 
 module.exports= router

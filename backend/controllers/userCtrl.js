@@ -127,7 +127,29 @@ delete req.file
     tsend({link:result.Location},"profile picture updated successfully",res)
 })
 
+const getSubbedEvents = catchAsyncError( async function (req, res) {
+    const {user_id} = req.body
+    const user=await User.findOne({user_id})
+    if (!user){
+        res.status(200).json(
+            {
+                success: false,
+                message: 'User not found!'
+            }
+        )
+    } else {
+        res.status(200).json(
+            {
+                success: true,
+                message: 'User found',
+                data: {
+                    "events": user.upcommingeventsubbed
+                }
+            }
+        )
+    }
+})
 
 module.exports = {
-    list, read, update, create, remove,displayPicture
+    list, read, update, create, remove,displayPicture, getSubbedEvents
 }
