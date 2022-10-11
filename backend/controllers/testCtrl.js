@@ -170,6 +170,32 @@ testProgress.completed_lessons.push(obj);
 
   }
 
+  const countPerTest = await db.collection(`lb_testWise`).countDocuments({ id: user_id,lesson_id })
+  
+  if (count > 0)
+  {
+    await db.collection(`lb_testWise`).findOneAndUpdate({ id: user_id, lesson_id }, {
+    
+      score: awarded_marks   
+    })
+  }
+  
+  else {
+
+    await db.collection(`lb_testWise`).insertOne({
+      id: user_id,
+      user_id,
+      lesson_id,
+      user_name,
+      score:Number.parseInt(awarded_marks),
+      createdAt: Date.now(),
+      display_picture
+
+    })
+    
+
+  }
+
   //
 
   tsend({
