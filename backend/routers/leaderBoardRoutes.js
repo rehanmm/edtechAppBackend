@@ -21,6 +21,8 @@ router.route('/ui/leaderboard/ranklist')
 .post(leaderBoardCtrl.apprankList)
 router.route('/ui/leaderboard/surrounding')
 .post(leaderBoardCtrl.rankSurronding) 
+router.route('/ui/test/leaderboard')
+.post(leaderBoardCtrl.testWise) 
 
 
 

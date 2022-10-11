@@ -160,8 +160,90 @@ const total =await db.collection(`lb_${leaderboardId}`).estimatedDocumentCount()
 
  
 })
+const testWise=catchAsyncError(  async function(req ,res,next){
+    const {user_id,lesson_id}=req.body
+const page = parseInt(req.body.page) || 1;
+const limit = parseInt(req.body.limit) || 20;
+pageSize = parseInt(limit) || 10;
+const leaderboardId='testWise'
+    const total = await db.collection(`lb_${leaderboardId}`).countDocuments({
+        lesson_id
+    });
+    
+    const pages = Math.ceil(total / pageSize);
+    const user = await db.collection(`lb_${leaderboardId}`).findOne({ id: user_id });
+    console.log(user)
+    if (!user) {
+        return res.status(200).json({
+            success: true,
+            page,
+            pages,
+            total,
+            data: []
+        })
+    }
+
+    let position = -1;
+    if (user) {
+        
+        position = await  db.collection(`lb_${leaderboardId}`).countDocuments({
+            score: {
+                $gt: user.score
+        
+            },
+            lesson_id,
+        })
+        position++;
+    
+     
+    }
+    user.rank=position
+    
+   
+    
+    db.collection(`lb_${leaderboardId}`).find({}).sort({score:-1}).collation({locale: "en_US", numericOrdering: true}).skip((page-1)*limit).limit(limit).toArray(function(err, result) {
+        let rank = (page - 1) * limit + 1
+        // console.log(result)
+        for (let i = 0; i < result.length; i++)
+{
+    result[i].rank = rank;
+
+    rank++
+
+        }
+       
+        if (page > pages) {
+            return res.json({
+                success: false,
+                message:"No pages found"
+            })
+        }
 
 
-module.exports = {rankList,rankSurronding,rankPostion,apprankList,create,leaderboard,db}
+        res.status(200).json({
+            success:true,
+           data:{
+            position,
+            page,
+            pages,
+            user,
+            total,
+             result
+            }
+        })
+    
+    
+    
+    })
+  
+
+ 
+
+
+ 
+})
+
+
+module.exports = {testWise,rankList,rankSurronding,rankPostion,apprankList,create,leaderboard,db}
 
 
