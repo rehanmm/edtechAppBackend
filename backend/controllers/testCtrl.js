@@ -128,14 +128,6 @@ const total_marks=num_question*1;
 
 //
 
-const obj={}
-obj[lesson_id]=submitTime
-testProgress.completed_lessons.push(obj);
-
-
-
-//
-  await testProgress.save();
 
 
 
@@ -197,6 +189,21 @@ testProgress.completed_lessons.push(obj);
     
 
   }
+
+
+
+
+
+
+  
+const obj={}
+obj[lesson_id]=submitTime
+testProgress.completed_lessons.push(obj);
+
+
+
+//
+  await testProgress.save();
 
   //
 
