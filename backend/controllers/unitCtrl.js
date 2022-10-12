@@ -50,7 +50,7 @@ const create=catchAsyncError( async function(req ,res){
 })
 const read=catchAsyncError(async function(req ,res){
     // console.log(req.body.unit_id);
-let unit = await Unit.findById(req.body.unit_id).select('unit_name completion tags is_paid total_articles total_video total_test total_lesson name lessons additionals')
+let unit = await Unit.findById(req.body.unit_id).select('unit_name completion tags is_paid total_articles total_video total_test total_lesson name lessons additionals expiry')
 unit=unit.toObject({ getters: true, virtuals: true })
 // unit =unit.toObject()
 
