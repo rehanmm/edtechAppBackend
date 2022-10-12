@@ -70,18 +70,12 @@ function authenticateToken(req, res, next) {
   
     const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-  if (token == null) {return res.status(401).json({
-    success:false,
-    message:'token is not valid please login'
-  });
+  if (token == null) {return next(new errorHandler('token is not found in authorizarion header',401));
 }
 
   jwt.verify(token, config.JWT_SECRET_KEY, (err, user) => {
     if (err) {
-      return res.status(401).json({
-        success: false,
-        message: "Token is not valid please login again",
-      });
+      return next(new errorHandler('token is not valid please login',401));
     }
     if (!user) {
       return next(new errorHandler("Not authenticated", 401));

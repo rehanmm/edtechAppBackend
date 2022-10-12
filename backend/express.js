@@ -24,6 +24,7 @@ const paymentRoutes=require('../backend/routers/paymentRoutes');
 const tagsRoutes=require('../backend/routers/tagsRoutes');
 const personalityRoutes=require('../backend/routers/personalityRoutes');
 const deviceRoutes=require('../backend/routers/deviceRouters');
+const additionalLessonRoutes=require('../backend/routers/additionalLessonRoutes');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
 // const logger=require('./middleware/logger')
@@ -38,7 +39,7 @@ app.use(cors());
 // app.use(md5HashVerifier);
 // app.use(logger);
 
-app.use('/edtech/admin/*',authRoutes);
+// app.use('/edtech/admin/*',authRoutes);
 app.use('/edtech',authRoutes);
 app.use('/edtech',adminRoutes);
 app.use('/edtech',awsRoutes);
@@ -60,6 +61,7 @@ app.use('/edtech',tagsRoutes);
 app.use('/edtech',notificationRoutes);
 app.use('/edtech',personalityRoutes);
 app.use('/edtech',deviceRoutes);
+app.use('/edtech',additionalLessonRoutes);
 
 
 

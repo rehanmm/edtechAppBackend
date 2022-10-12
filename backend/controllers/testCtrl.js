@@ -162,7 +162,8 @@ const total_marks=num_question*1;
 
   }
 
-  const countPerTest = await db.collection(`lb_testWise`).countDocuments({ id: user_id,lesson_id })
+  const countPerTest = await db.collection(`lb_testWise`).countDocuments({ id: user_id, lesson_id })
+  db.collection(`lb_testWise`).indexes({ id: 1,user_id:1, lesson_id: 1 }, { unique:false  })
   
   if (countPerTest > 0)
   {
