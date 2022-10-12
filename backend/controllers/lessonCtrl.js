@@ -16,6 +16,7 @@ const video = require("../helpers/lessonHelpers.js/videoUrlProcessing");
 const config = require("../config/config");
 const countLesson=require('../helpers/unitHelper/mongoQueries');
 const {checker:checkIfUnitCompleted}=require('../helpers/lessonHelpers.js/unitsCompletionHelper');
+const additionallessonCtrl =require( '../controllers/additionalLessonCtrl')
 
 const list = catchAsyncError(async function (req, res,next) {
   const lesson = await Lesson.find({ unit_id: req.body.unit_id });
@@ -187,6 +188,10 @@ const read = catchAsyncError(async function (req, res, next) {
   if (onlyLesson) {
     // getLessonById
     const lesson = await Lesson.findById(lesson_id).select('type');
+    if (!lesson){
+      await additionallessonCtrl.read(req, res, next);
+      return;
+    }
     const {type,_id}=lesson;
     
 
@@ -227,9 +232,9 @@ const read = catchAsyncError(async function (req, res, next) {
       return tsend(lesson, "", res);
     } else if (type === "assignment") {
      
-const assignment= await Assignment.findOne({lesson_id,user_id})
+      const assignment= await Assignment.findOne({lesson_id,user_id})
       if(assignment){
-return tsend(assignment,'',res)
+        return tsend(assignment,'',res)
       }
 
       const lesson = await Lesson.findById(_id.toString()).select(
