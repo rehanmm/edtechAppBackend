@@ -14,7 +14,7 @@ const { longLessonToShort } = require("../utils/objectConstructor");
 const shortLessonupdater = require("../helpers/shortLessonUpdater");
 const video = require("../helpers/lessonHelpers.js/videoUrlProcessing");
 const config = require("../config/config");
-const additionallessonCtrl =require( '../controllers/additionalLessonCtrl')
+const AdditionalLesson = require("../models/additonalLessonModel");
 const countLesson=require('../helpers/unitHelper/mongoQueries');
 const {checker:checkIfUnitCompleted}=require('../helpers/lessonHelpers.js/unitsCompletionHelper');
 
