@@ -14,6 +14,7 @@ const { longLessonToShort } = require("../utils/objectConstructor");
 const shortLessonupdater = require("../helpers/shortLessonUpdater");
 const video = require("../helpers/lessonHelpers.js/videoUrlProcessing");
 const config = require("../config/config");
+const additionallessonCtrl =require( '../controllers/additionalLessonCtrl')
 const countLesson=require('../helpers/unitHelper/mongoQueries');
 const {checker:checkIfUnitCompleted}=require('../helpers/lessonHelpers.js/unitsCompletionHelper');
 
@@ -187,6 +188,62 @@ const read = catchAsyncError(async function (req, res, next) {
   if (onlyLesson) {
     // getLessonById
     const lesson = await Lesson.findById(lesson_id).select('type');
+    if (!lesson){
+      const AdditionalLesson = await AdditionalLesson.findById(lesson_id).select('type');
+    const {type,_id}=AdditionalLesson;
+    
+
+    if (type === "video") {
+      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+        "prerequisite unit_id title video_url type unit_id completion start_at total_time description thumbnail_url"
+      );
+      console.log(AdditionalLesson);
+    
+      return tsend(AdditionalLesson, "", res);
+    } else if (type === "event") {
+      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+        "title type completion prerequisite events "
+      );
+     
+      console.log(AdditionalLesson);
+      return tsend(AdditionalLesson, "", res);
+    } else if (type === "article") {
+      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+        "title type unit_id completion prerequisite head body");
+      console.log(AdditionalLesson);
+      return tsend(AdditionalLesson, "", res);
+    } else if (type === "test") {
+      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+        "title type unit_id completion prerequisite num_question time_allowed questions"
+      );
+    
+      for(let i=0;i<AdditionalLesson.questions.length;i++){
+        AdditionalLesson.questions[i].correct_option=undefined
+      }
+     
+      return tsend(AdditionalLesson, "", res);
+    } else if (type === "payment") {
+      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+        "title type unit_id completion prerequisite amount price price_description"
+      );
+      console.log(AdditionalLesson);
+      return tsend(AdditionalLesson, "", res);
+    } else if (type === "assignment") {
+     
+const assignment= await Assignment.findOne({lesson_id,user_id})
+      if(assignment){
+return tsend(assignment,'',res)
+      }
+
+      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+        "title type unit_id completion prerequisite intro_vid body sample submitted_url placeholder status"
+      );
+      console.log(AdditionalLesson);
+      return tsend(AdditionalLesson, "", res);
+    }
+
+
+    }
     const {type,_id}=lesson;
     
 
@@ -227,9 +284,9 @@ const read = catchAsyncError(async function (req, res, next) {
       return tsend(lesson, "", res);
     } else if (type === "assignment") {
      
-const assignment= await Assignment.findOne({lesson_id,user_id})
+      const assignment= await Assignment.findOne({lesson_id,user_id})
       if(assignment){
-return tsend(assignment,'',res)
+        return tsend(assignment,'',res)
       }
 
       const lesson = await Lesson.findById(_id.toString()).select(
