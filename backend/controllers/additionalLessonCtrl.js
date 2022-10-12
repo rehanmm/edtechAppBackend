@@ -150,11 +150,11 @@ const create = catchAsyncError(async function (req, res, next) {
 
 });
 const read = catchAsyncError(async function (req, res, next) {
-  const { AdditionalLesson_id, unit_id, user_id } = req.body;
+  const { lesson_id, unit_id, user_id } = req.body;
 
-  const onlyAdditionalLesson = AdditionalLesson_id //&& !unit_id;
-  const onlyunit = !AdditionalLesson_id && unit_id;
-  const nothingProvided = !AdditionalLesson_id && !unit_id;
+  const onlyAdditionalLesson = lesson_id //&& !unit_id;
+  const onlyunit = !lesson_id && unit_id;
+  const nothingProvided = !lesson_id && !unit_id;
  
 
   const unitProgress = await Progress.findOne({ user_id, unit_id });
@@ -177,7 +177,7 @@ const read = catchAsyncError(async function (req, res, next) {
   //condition logic for function
   if (onlyAdditionalLesson) {
     // getAdditionalLessonById
-    const AdditionalLesson = await AdditionalLesson.findById(AdditionalLesson_id).select('type');
+    const AdditionalLesson = await AdditionalLesson.findById(lesson_id).select('type');
     const {type,_id}=AdditionalLesson;
     
 
@@ -218,7 +218,7 @@ const read = catchAsyncError(async function (req, res, next) {
       return tsend(AdditionalLesson, "", res);
     } else if (type === "assignment") {
      
-const assignment= await Assignment.findOne({AdditionalLesson_id,user_id})
+const assignment= await Assignment.findOne({lesson_id,user_id})
       if(assignment){
 return tsend(assignment,'',res)
       }
