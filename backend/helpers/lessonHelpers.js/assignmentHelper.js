@@ -12,18 +12,17 @@ exports.paginationAndSearch = async (where, { limit, page }, Model, res) => {
         return res.status(404).json({
             success: "true",
             message: "No page found",
+            data: {}
         });
     }
     result = await query.skip(skip).limit(pageSize).sort({'createdAt':-1}).select('-bucket_name').lean();
     res.json({
         success: true,
-      
-       
         data: {
             page,
             count: result.length,
             pages,
-           assignments:result
+           assignments:result?result:[]
         }
     });
     
