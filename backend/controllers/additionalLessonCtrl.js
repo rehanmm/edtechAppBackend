@@ -177,45 +177,45 @@ const read = catchAsyncError(async function (req, res, next) {
   //condition logic for function
   if (onlyAdditionalLesson) {
     // getAdditionalLessonById
-    const AdditionalLesson = await AdditionalLesson.findById(lesson_id).select('type');
-    const {type,_id}=AdditionalLesson;
+    const lesson = await AdditionalLesson.findById(lesson_id).select('type');
+    const {type,_id}=lesson;
     
 
     if (type === "video") {
-      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+      const lesson = await AdditionalLesson.findById(_id.toString()).select(
         "prerequisite unit_id title video_url type unit_id completion start_at total_time description thumbnail_url"
       );
-      console.log(AdditionalLesson);
+      console.log(lesson);
     
-      return tsend(AdditionalLesson, "", res);
+      return tsend(lesson, "", res);
     } else if (type === "event") {
-      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+      const lesson = await AdditionalLesson.findById(_id.toString()).select(
         "title type completion prerequisite events "
       );
      
-      console.log(AdditionalLesson);
-      return tsend(AdditionalLesson, "", res);
+      console.log(lesson);
+      return tsend(lesson, "", res);
     } else if (type === "article") {
-      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+      const lesson = await AdditionalLesson.findById(_id.toString()).select(
         "title type unit_id completion prerequisite head body");
-      console.log(AdditionalLesson);
-      return tsend(AdditionalLesson, "", res);
+      console.log(lesson);
+      return tsend(lesson, "", res);
     } else if (type === "test") {
-      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+      const lesson = await AdditionalLesson.findById(_id.toString()).select(
         "title type unit_id completion prerequisite num_question time_allowed questions"
       );
     
-      for(let i=0;i<AdditionalLesson.questions.length;i++){
-        AdditionalLesson.questions[i].correct_option=undefined
+      for(let i=0;i<lesson.questions.length;i++){
+        lesson.questions[i].correct_option=undefined
       }
      
-      return tsend(AdditionalLesson, "", res);
+      return tsend(lesson, "", res);
     } else if (type === "payment") {
-      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+      const lesson = await AdditionalLesson.findById(_id.toString()).select(
         "title type unit_id completion prerequisite amount price price_description"
       );
-      console.log(AdditionalLesson);
-      return tsend(AdditionalLesson, "", res);
+      console.log(lesson);
+      return tsend(lesson, "", res);
     } else if (type === "assignment") {
      
 const assignment= await Assignment.findOne({lesson_id,user_id})
@@ -223,11 +223,11 @@ const assignment= await Assignment.findOne({lesson_id,user_id})
 return tsend(assignment,'',res)
       }
 
-      const AdditionalLesson = await AdditionalLesson.findById(_id.toString()).select(
+      const lesson = await AdditionalLesson.findById(_id.toString()).select(
         "title type unit_id completion prerequisite intro_vid body sample submitted_url placeholder status"
       );
-      console.log(AdditionalLesson);
-      return tsend(AdditionalLesson, "", res);
+      console.log(lesson);
+      return tsend(lesson, "", res);
     }
     
 
