@@ -54,11 +54,7 @@ const read=catchAsyncError(async function(req ,res){
     // console.log(req.body.unit_id);
     let unit = await Unit.findById(req.body.unit_id).select('unit_name completion tags is_paid total_articles total_video total_test total_lesson name lessons additionals expiry')
 
-      
-    
 
-  
-    
 unit=unit.toObject({ getters: true, virtuals: true })
 // unit =unit.toObject()
 
@@ -133,7 +129,7 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
 
     
     
- let diffTime = -1;
+ let diffTime = 1;
  currentTime = Date.now();
 if(unit.expiry)
 {

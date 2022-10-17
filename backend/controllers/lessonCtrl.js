@@ -188,7 +188,7 @@ const read = catchAsyncError(async function (req, res, next) {
   if (onlyLesson) {
     // getLessonById
     const lesson = await Lesson.findById(lesson_id).select('type');
-    console.log(lesson);
+   
     if (!lesson){
      return next(new errorHandler('No lesson found', 404));
     }
@@ -273,6 +273,7 @@ const read = catchAsyncError(async function (req, res, next) {
     //get next lesson user has to access
     const unitProgress = await Progress.findOne({ user_id, unit_id });
     const arr = unitProgress.completed_lessons;
+  
     if(!arr){
       return res.status(404).json({
 success:true,
