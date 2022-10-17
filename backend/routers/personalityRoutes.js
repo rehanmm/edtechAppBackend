@@ -13,6 +13,9 @@ router.route('/ui/personality/endTest')
 
 router.route('/ui/personality/get')
     .post(personalityCtrl.getPersonality)
-
+router.route('/personality/test/create')
+    .post(personalityCtrl.createTest)
+router.route('/personality/test/update')
+    .put(personalityCtrl.updateTest)
 
     module.exports = router;

@@ -215,6 +215,12 @@ const paymentHistory = catchAsyncError(async (req, res) => {
 
 
 
+const bundleBuy = catchAsyncError(async (req, res) => { 
+  
+
+})
+
+
  
 
-module.exports={checkout,paymentLessonVerification,paymentEventVerification,paymentHistory}
+module.exports={checkout,paymentLessonVerification,paymentEventVerification,paymentHistory,bundleBuy}

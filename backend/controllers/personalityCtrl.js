@@ -8,7 +8,7 @@ const personality = require('../config/personality.json')
 
 // console.log(personality.ENFJ)
 
-getPersonality =  catchAsyncError(async (req, res, next) => {
+const getPersonality =  catchAsyncError(async (req, res, next) => {
     const {user_id}=req.body
     const user = await User.findOne({ user_id }).select('is_personality_test_taken   personality').lean();
     if (!user) {
@@ -37,13 +37,13 @@ getPersonality =  catchAsyncError(async (req, res, next) => {
     }
  })
 
-startTest = catchAsyncError(async (req, res, next) => {
+const startTest = catchAsyncError(async (req, res, next) => {
 
-    const tests = await PersonalityTest.findOne({}).lean();
+    const tests = await PersonalityTest.findOne({}).sort({ $natural: -1 }).limit(1).lean();
     tsend(tests, '', res)
 
  })
-endtTest = catchAsyncError(async (req, res, next) => {
+const endtTest = catchAsyncError(async (req, res, next) => {
     /**
      * object creaate krna hai
      * json se info uthna hai jaisa head ka result aaaye
@@ -133,14 +133,37 @@ endtTest = catchAsyncError(async (req, res, next) => {
 
 
  })
-createTest = catchAsyncError(async (req, res, next) => { 
+const createTest = catchAsyncError(async (req, res, next) => { 
 
     const test = await PersonalityTest.create(req.body);
 
     await test.save();
 
     res.status(200).json({
-        success: true
+        success: true,
+        message:"test created successfully",
+        data:test
+    })
+    
+
+
+    
+
+})
+const updateTest = catchAsyncError(async (req, res, next) => { 
+
+    const test = await PersonalityTest.findOne({}).sort({ $natural: -1 }).limit(1);
+
+    Object.assign(test, req.body)
+    
+    await test.save()
+    
+
+
+    res.status(200).json({
+        success: true,
+        message:"test updated successfully",
+        data:test
     })
     
 
@@ -150,7 +173,7 @@ createTest = catchAsyncError(async (req, res, next) => {
 })
 
 
-module.exports={startTest,endtTest,createTest, getPersonality}
+module.exports={startTest,endtTest,createTest,getPersonality,updateTest}
 
 
 

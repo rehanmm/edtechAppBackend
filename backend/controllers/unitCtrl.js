@@ -12,7 +12,8 @@ const {send,tsend}=require('../middleware/responseSender');
 const Progress = require('../models/progressModel');
 const Course = require('../models/courseModel');
 const config=require('../config/config');
-const countLesson=require('../helpers/unitHelper/mongoQueries');
+const countLesson = require('../helpers/unitHelper/mongoQueries');
+const daysToMilliseconds = require('../utils/dayToMilli');
 
 const list=catchAsyncError(  async function(req ,res){
 
@@ -21,7 +22,8 @@ const unit=await Unit.find({});
 tsend(unit,'',res);
 })
 
-const create=catchAsyncError( async function(req ,res){
+const create = catchAsyncError(async function (req, res) {
+    req.body.expiry=daysToMilliseconds(req.body.expiry)
     const unit = new Unit(req.body);
     
     const unit1= new longUnitToShort(unit);
@@ -50,7 +52,22 @@ const create=catchAsyncError( async function(req ,res){
 })
 const read=catchAsyncError(async function(req ,res){
     // console.log(req.body.unit_id);
-let unit = await Unit.findById(req.body.unit_id).select('unit_name completion tags is_paid total_articles total_video total_test total_lesson name lessons additionals expiry')
+    let unit = await Unit.findById(req.body.unit_id).select('unit_name completion tags is_paid total_articles total_video total_test total_lesson name lessons additionals expiry')
+    currentTime = Date.now();
+   if(unit.expiry)
+   {
+       diffTime = unit.expiry - currentTime;
+    }
+    
+   else {
+    diffTime = 1;
+    }
+    if (diffTime >= 0) {
+      
+    
+
+  
+    
 unit=unit.toObject({ getters: true, virtuals: true })
 // unit =unit.toObject()
 
@@ -124,7 +141,15 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
 
 
 
-    tsend(data,'',res);
+        tsend(data, '', res);
+        
+
+    }
+    else {
+        
+        next(new errorHandler("Unit has been expired",200)) 
+
+    }  
     
 })
 const remove= catchAsyncError( async function(req ,res){
@@ -158,7 +183,8 @@ await Course.findByIdAndUpdate(config.COURSE_ID,{
 
 
 const update=catchAsyncError( async function(req ,res){
-  const {unit_id}=req.body
+    const { unit_id } = req.body
+    req.body.expiry=daysToMilliseconds(req.body.expiry)
   const count=await countLesson(unit_id);
  
 await Unit.findByIdAndUpdate(unit_id,{...req.body,...count})

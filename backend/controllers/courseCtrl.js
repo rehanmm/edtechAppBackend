@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const catchAsyncError = require('../error/catchAsyncError')
 const errorHandler = require('../utils/errorHandler');
 const { send, tsend } = require('../middleware/responseSender');
+const daysToMilliseconds = require('../utils/dayToMilli');
 // const { findById } = require('../models/userModel');
 
 const list = catchAsyncError(async function (req, res,next) {
@@ -14,7 +15,7 @@ const list = catchAsyncError(async function (req, res,next) {
 
 const create = catchAsyncError(async function (req, res,next) {
 
-
+    req.body.expiry=daysToMilliseconds(req.body.expiry)
     const course = new Course(req.body);
 
     await course.save()
@@ -25,9 +26,31 @@ const create = catchAsyncError(async function (req, res,next) {
     
 })
 const read = catchAsyncError(async function (req, res,next) {
-    const course= await Course.findById(config.COURSE_ID)
+    const course = await Course.findById(config.COURSE_ID)
     
-    tsend(course,'',res)
+    currentTime = Date.now();
+
+    if( course.expiry)
+    {
+        diffTime = course.expiry - currentTime;
+     }
+     
+    else {
+     diffTime = 1;
+     }
+    diffTime = course.expiry - currentTime;
+    if (diffTime >= 0) {
+      
+        tsend(course,'',res)  
+
+    }
+    else {
+        
+        tsend({},'Course has been expired',res)   
+
+    }
+    
+   
 
 })
 const remove = catchAsyncError(async function (req, res,next) {
@@ -44,7 +67,7 @@ const remove = catchAsyncError(async function (req, res,next) {
 
 
 const update = catchAsyncError(async function (req, res,next) {
-
+    req.body.expiry=daysToMilliseconds(req.body.expiry)
     await Course.findByIdAndUpdate(config.COURSE_ID, req.body)
     const course =await Course.findById(config.COURSE_ID);
     res.status(200).json(

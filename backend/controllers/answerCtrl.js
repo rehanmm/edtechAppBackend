@@ -7,8 +7,16 @@ const errorHandler = require("../utils/errorHandler");
 const { tsend, send } = require("../middleware/responseSender");
 const Question = require("../models/questionModel");
 
-const list = catchAsyncError(async function (req, res,next) {
+const list = catchAsyncError(async function (req, res, next) {
+  const { user_id } = req.body;
   const answer = await Answer.find({}).lean();
+  for (let i = 0; i < answer.length; i++){
+     answer[i].is_upvoted = false;
+    let flag=  answer[i].upvotes.findIndex((id) => id == user_id);
+      if (!(flag == -1)) {
+        answer[i].is_upvoted = true;
+  }
+  }
   tsend(answer, "", res);
 });
 

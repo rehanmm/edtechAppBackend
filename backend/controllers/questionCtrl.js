@@ -75,8 +75,14 @@ media,
  
 })
 const read=catchAsyncError( async function(req ,res){
-const {question_id}=req.body
-const question= await Question.findById(question_id);
+const {question_id,user_id}=req.body
+    const question = await Question.findById(question_id);
+    let is_liked = false;
+  let flag=  question.likes.findIndex((id) => id == user_id);
+    if (!(flag == -1)) {
+        is_liked = true;
+}
+    
 const answers= await Answer.find({question_id}).sort({upvote:-1}).limit(10)
 tsend({question,answers},'',res);
    
