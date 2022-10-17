@@ -188,9 +188,9 @@ const read = catchAsyncError(async function (req, res, next) {
   if (onlyLesson) {
     // getLessonById
     const lesson = await Lesson.findById(lesson_id).select('type');
+    console.log(lesson);
     if (!lesson){
-      await additionallessonCtrl.read(req, res, next);
-      return;
+     return next(new errorHandler('No lesson found', 404));
     }
     const {type,_id}=lesson;
     
