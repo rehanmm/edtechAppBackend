@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const personalityCtrl = require('../controllers/personalityCtrl');
+const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
 
 
 router.route('/ui/personality/startTest')
@@ -13,9 +14,9 @@ router.route('/ui/personality/endTest')
 
 router.route('/ui/personality/get')
     .post(personalityCtrl.getPersonality)
-router.route('/personality/test/create')
-    .post(personalityCtrl.createTest)
-router.route('/personality/test/update')
-    .put(personalityCtrl.updateTest)
+router.route('/admin/personality/test/create')
+    .post(authenticateToken,hasAuthorisation,personalityCtrl.createTest)
+router.route('/admin/personality/test/update')
+    .putauthenticateToken,hasAuthorisation,(personalityCtrl.updateTest)
 
     module.exports = router;

@@ -53,16 +53,17 @@ const create = catchAsyncError(async function (req, res) {
 const read=catchAsyncError(async function(req ,res){
     // console.log(req.body.unit_id);
     let unit = await Unit.findById(req.body.unit_id).select('unit_name completion tags is_paid total_articles total_video total_test total_lesson name lessons additionals expiry')
+    let diffTime = -1;
     currentTime = Date.now();
    if(unit.expiry)
    {
        diffTime = unit.expiry - currentTime;
     }
-    
-   else {
-    diffTime = 1;
+    if (diffTime <= 0) {
+        for (let i = 0; i < unit.lessons.length; i++) {
+            unit.lessons[i].lesson_id=undefined;
+        } 
     }
-    if (diffTime >= 0) {
       
     
 
@@ -144,12 +145,8 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
         tsend(data, '', res);
         
 
-    }
-    else {
-        
-        next(new errorHandler("Unit has been expired",200)) 
-
-    }  
+   
+    
     
 })
 const remove= catchAsyncError( async function(req ,res){

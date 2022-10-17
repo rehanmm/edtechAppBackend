@@ -35,8 +35,7 @@ const {user_id}=req.body
        
         for (let i = 0; i < course.units.length; i++) {
             course.units[i].unit_id=undefined;
-        } 
-        
+        }   
     }
   
    
