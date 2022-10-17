@@ -23,7 +23,7 @@ const router=express.Router()
 
 
 router.route('/admin/course')
-.post(authenticateToken,hasAuthorisation,courseCtrl.read)
+.post(courseCtrl.read)
 
 router.route('/admin/updateCourse')
 .put(authenticateToken,hasAuthorisation,courseCtrl.update)
