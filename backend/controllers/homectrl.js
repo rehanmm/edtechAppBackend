@@ -22,11 +22,27 @@ const {user_id}=req.body
         return next(new errorHandler('list not found', 200))
     }
     const course = await Course.findById(config.COURSE_ID).select('-_id');
-    // console.log(course);
-    
 
-        // completdunitPusher('62ecf6772d0f69f9c00d56c2','1659772127431',user);
-
+    currentTime = Date.now();
+    let diffTime = 1;
+    if(course.expiry)
+    {
+        diffTime = course.expiry - currentTime;
+     }
+     
+    else {
+     diffTime = 1;
+     }
+    diffTime = course.expiry - currentTime;
+    if (!(diffTime >= 0)) {
+        
+        for (let i = 0; i < course.units.length; i++) {
+            course.units[i].unit_id=undefined;
+        } 
+        
+    }
+  
+   
 
         await user.save();
         //    console.log(course.units[0].is_locked)

@@ -28,26 +28,6 @@ const create = catchAsyncError(async function (req, res,next) {
 const read = catchAsyncError(async function (req, res,next) {
     const course = await Course.findById(config.COURSE_ID)
     
-    // currentTime = Date.now();
-
-    // if( course.expiry)
-    // {
-    //     diffTime = course.expiry - currentTime;
-    //  }
-     
-    // else {
-    //  diffTime = 1;
-    //  }
-    // diffTime = course.expiry - currentTime;
-    // if (diffTime >= 0) {
-      
-        
-    // }
-    // else {
-        
-    //     tsend({},'Course has been expired',res)   
-        
-    // }
     
     tsend(course,'',res)  
    
