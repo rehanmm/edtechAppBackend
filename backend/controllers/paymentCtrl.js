@@ -221,6 +221,62 @@ const bundleBuy = catchAsyncError(async (req, res) => {
 })
 
 
+
+
+const paymentHistoryAdmin = catchAsyncError(async (req, res) => {
+  const { user_id, payment_type } = req.body;
+  if (!user_id) {
+    return res.status(400).json({
+      success: false,
+      message: "User id is required",
+    });
+
+  }
+  const where = { user_id };
+  if (payment_type) {
+    where.payment_type = payment_type;
+  }
+  const page = parseInt(req.body.page) || 1;
+  const limit = parseInt(req.body.limit) || 10;
+  const payHistory = await Payment.find(where).sort({ created_at: -1 }).skip((page - 1) * limit).limit(limit).lean()
+  tsend({
+    page,
+    limit,
+    payHistory,
+    
+  }, '', res)
+
+ })
+
+const paymentHistoryAdminToDay = catchAsyncError(async (req, res) => {
+  const { user_id, payment_type } = req.body;
+  if (!user_id) {
+    return res.status(400).json({
+      success: false,
+      message: "User id is required",
+    });
+
+  }
+
+  dayTimestamp = Date.now() - 1 * 24 * 60 * 60 * 1000;
+  const where = { user_id };
+  if (payment_type) {
+    where.payment_type = payment_type;
+  }
+  const page = parseInt(req.body.page) || 1;
+  const limit = parseInt(req.body.limit) || 10;
+  const payHistory = await Payment.find(where).sort({ created_at: -1 }).skip((page - 1) * limit).limit(limit).lean()
+  tsend({
+    page,
+    limit,
+    payHistory,
+    
+  }, '', res)
+
+ })
+
+
+
  
 
 module.exports={checkout,paymentLessonVerification,paymentEventVerification,paymentHistory,bundleBuy}

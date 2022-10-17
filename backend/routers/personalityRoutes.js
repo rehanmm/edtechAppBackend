@@ -18,5 +18,7 @@ router.route('/admin/personality/test/create')
     .post(authenticateToken,hasAuthorisation,personalityCtrl.createTest)
 router.route('/admin/personality/test/update')
     .put(authenticateToken,hasAuthorisation,personalityCtrl.updateTest)
+router.route('/admin/personality/test/read')
+    .post(authenticateToken,hasAuthorisation,personalityCtrl.startTest)
 
     module.exports = router;
