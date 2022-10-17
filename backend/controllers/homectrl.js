@@ -30,12 +30,9 @@ const {user_id}=req.body
         diffTime = course.expiry - currentTime;
      }
      
-    else {
-     diffTime = 1;
-     }
     diffTime = course.expiry - currentTime;
-    if (!(diffTime >= 0)) {
-        
+    if (diffTime <= 0) {
+       
         for (let i = 0; i < course.units.length; i++) {
             course.units[i].unit_id=undefined;
         } 
