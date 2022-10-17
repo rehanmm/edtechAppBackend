@@ -225,24 +225,30 @@ const bundleBuy = catchAsyncError(async (req, res) => {
 
 const paymentHistoryAdmin = catchAsyncError(async (req, res) => {
   const { user_id, payment_type } = req.body;
-  if (!user_id) {
-    return res.status(400).json({
-      success: false,
-      message: "User id is required",
-    });
-
+  const where = {  };
+  if (user_id) {
+    where.user_id = user_id ;
   }
-  const where = { user_id };
   if (payment_type) {
     where.payment_type = payment_type;
   }
   const page = parseInt(req.body.page) || 1;
   const limit = parseInt(req.body.limit) || 10;
   const payHistory = await Payment.find(where).sort({ created_at: -1 }).skip((page - 1) * limit).limit(limit).lean()
+
+  const previousDate = Date.now() - 1 * 24 * 60 * 60 * 1000;
+
+
+  const payHistoryDay = await Payment.find({
+    created_at: {
+      $gte: previousDate
+    }
+  }).sort({ created_at: -1 }).lean();
   tsend({
     page,
     limit,
     payHistory,
+    payHistoryDay
     
   }, '', res)
 
@@ -250,6 +256,7 @@ const paymentHistoryAdmin = catchAsyncError(async (req, res) => {
 
 const paymentHistoryAdminToDay = catchAsyncError(async (req, res) => {
   const { user_id, payment_type } = req.body;
+
   if (!user_id) {
     return res.status(400).json({
       success: false,
@@ -258,7 +265,15 @@ const paymentHistoryAdminToDay = catchAsyncError(async (req, res) => {
 
   }
 
-  dayTimestamp = Date.now() - 1 * 24 * 60 * 60 * 1000;
+  const previousDate = Date.now() - 1 * 24 * 60 * 60 * 1000;
+
+
+  const payHistoryDay = await Payment.find({
+    created_at: {
+      $gte: previousDate
+    }
+  }).sort({ created_at: -1 }).lean();
+
   const where = { user_id };
   if (payment_type) {
     where.payment_type = payment_type;
@@ -279,4 +294,4 @@ const paymentHistoryAdminToDay = catchAsyncError(async (req, res) => {
 
  
 
-module.exports={checkout,paymentLessonVerification,paymentEventVerification,paymentHistory,bundleBuy}
+module.exports={checkout,paymentLessonVerification,paymentEventVerification,paymentHistory,bundleBuy,paymentHistoryAdmin}

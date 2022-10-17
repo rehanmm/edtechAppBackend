@@ -53,17 +53,7 @@ const create = catchAsyncError(async function (req, res) {
 const read=catchAsyncError(async function(req ,res){
     // console.log(req.body.unit_id);
     let unit = await Unit.findById(req.body.unit_id).select('unit_name completion tags is_paid total_articles total_video total_test total_lesson name lessons additionals expiry')
-    let diffTime = -1;
-    currentTime = Date.now();
-   if(unit.expiry)
-   {
-       diffTime = unit.expiry - currentTime;
-    }
-    if (diffTime <= 0) {
-        for (let i = 0; i < unit.lessons.length; i++) {
-            unit.lessons[i].lesson_id=undefined;
-        } 
-    }
+
       
     
 
@@ -141,6 +131,19 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
  data={...unit,...unitdata,assignments:assignment}
 
 
+    
+    
+ let diffTime = -1;
+ currentTime = Date.now();
+if(unit.expiry)
+{
+    diffTime = unit.expiry - currentTime;
+ }
+ if (diffTime <= 0) {
+     for (let i = 0; i < unit.lessons.length; i++) {
+         unit.lessons[i].lesson_id=undefined;
+     } 
+ }
 
         tsend(data, '', res);
         
