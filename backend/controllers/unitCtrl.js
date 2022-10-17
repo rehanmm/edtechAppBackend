@@ -128,7 +128,7 @@ unitProgress=newProgress.toObject({ getters: true, virtuals: true });
 
 
     
-    
+    let flag = false;
  let diffTime = 1;
  currentTime = Date.now();
 if(unit.expiry)
@@ -139,9 +139,10 @@ if(unit.expiry)
      for (let i = 0; i < unit.lessons.length; i++) {
          unit.lessons[i].lesson_id=undefined;
      } 
+     flag = true;
  }
 
-        tsend(data, '', res);
+        tsend({is_expired:flag,...data}, '', res);
         
 
    
