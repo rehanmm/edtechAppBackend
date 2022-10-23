@@ -1,7 +1,8 @@
 const  express  = require('express');
 const authCtrl =require( '../controllers/authCtrl')
 const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
-const router=express.Router()
+const router = express.Router()
+const {isModerator,isCourseManager,isAdmin}=require('../middleware/rolesAuthorization')
 
 router.route('/admin/login')
 .post(authCtrl.signin)
@@ -10,16 +11,16 @@ router.route('/admin/login')
 // .post(authCtrl.anonymous)
 
 router.route('/admin/new-admin')
-.post(authenticateToken,hasAuthorisation,authCtrl.createNewAdmin)
+.post(authenticateToken,hasAuthorisation,isAdmin,authCtrl.createNewAdmin)
 router.route('/admin/signout')
-.post(authCtrl.signout)
+.post(isAdmin,authCtrl.signout)
 
 router.route('/admin/remove-admin')
-.post(authenticateToken,hasAuthorisation,authCtrl.removeAdmin)
+.post(authenticateToken,hasAuthorisation,isAdmin,authCtrl.removeAdmin)
 router.route('/admin/list-admins')
-.post(authenticateToken,hasAuthorisation,authCtrl.listAdmins)
+.post(authenticateToken,hasAuthorisation,isAdmin,authCtrl.listAdmins)
 router.route('/admin/single-admin')
-.post(authenticateToken,hasAuthorisation,authCtrl.readAdmin)
+.post(authenticateToken,hasAuthorisation,isAdmin,authCtrl.readAdmin)
 // router.route('/admin/update-admin')
 // .put(authenticateToken,hasAuthorisation,authCtrl.updateAdmin)
 

@@ -20,8 +20,8 @@ const adminSchema=mongoose.Schema({
     },
     role:{
         type:String,
-        default:'admin',
-        enum:['admin','superadmin']
+        enum: ['admin', 'course-manager', 'moderator'],
+        required:true
 },
 total_blocked_user:Number
 

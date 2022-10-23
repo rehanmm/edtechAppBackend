@@ -1,6 +1,7 @@
 const  express  = require('express');
 const testCtrl =require( '../controllers/testCtrl')
-const blockUserMiddleware=require('../middleware/blockedUserMiddleware')
+const blockUserMiddleware = require('../middleware/blockedUserMiddleware')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 const router=express.Router()
 
 // router.route('/admin/lessons')

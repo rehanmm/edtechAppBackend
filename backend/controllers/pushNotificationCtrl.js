@@ -2,7 +2,7 @@
 
 
 
-const {admin }= require('../controllers/fireBaseAuthCtrl');
+const {admin}= require('../controllers/fireBaseAuthCtrl');
 const catchAsyncError=require('../error/catchAsyncError')
 // let serviceAccount = require('../config/quaser-edtech-firebase-adminsdk-7yvco-33641cf2b5.json');
 // // const c = require('config');

@@ -1,12 +1,15 @@
 const  express  = require('express')
-const bucketCtrl =require( '../controllers/bucketCtrl')
+const razorpayCtrl =require( '../controllers/razorpayCtrl')
 const router=express.Router()
 const { authenticateToken, hasAuthorisation } = require('../middleware/adminAuthMiddleware')
 const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 
-router.route('/admin/bucket/read')
-.post(authenticateToken,hasAuthorisation,isAdmin,bucketCtrl.read)
-router.route('/admin/bucket/update')
-.put(authenticateToken,hasAuthorisation,isAdmin,bucketCtrl.update)
+
+router.route('/admin/razorpay/read')
+.post(authenticateToken,hasAuthorisation,isAdmin,razorpayCtrl.read)
+router.route('/admin/razorpay/update')
+.put(authenticateToken,hasAuthorisation,isAdmin,razorpayCtrl.update)
+
 
 module.exports= router
+

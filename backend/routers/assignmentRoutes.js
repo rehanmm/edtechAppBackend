@@ -1,7 +1,8 @@
 const  express  = require('express');
 const {uploadAssignmet, userAssignment,listOfAssignment,submitAssignment,reviewAssignment,reviewEditAssignment,getAssignment} =require( '../controllers/assignmentCtrl')
 const router=express.Router()
-const {authenticateToken,hasAuthorisation} = require('../middleware/adminAuthMiddleware')
+const { authenticateToken, hasAuthorisation } = require('../middleware/adminAuthMiddleware')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 const {upload}=require('../middleware/uploadMiddleware')
 
 router.route('/assignment/upload')

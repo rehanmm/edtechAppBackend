@@ -3,10 +3,11 @@ const lessonCtrl =require( '../controllers/lessonCtrl')
 const assignmentCtrl =require( '../controllers/assignmentCtrl')
 const router=express.Router()
 const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
-const blockUserMiddleware =require('../middleware/blockedUserMiddleware')
+const blockUserMiddleware = require('../middleware/blockedUserMiddleware')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 
 router.route('/admin/lessons')
-.post(authenticateToken,hasAuthorisation,lessonCtrl.list)
+.post(authenticateToken,hasAuthorisation,isAdminOrCourseManagerOrModerator,lessonCtrl.list)
 router.route('/admin/lesson/create')
 .post(authenticateToken,hasAuthorisation,lessonCtrl.create)
 router.route('/ui/lesson')
@@ -26,12 +27,12 @@ router.route('/ui/lesson/assignment/submit')
 
 // router.use(authenticateToken,hasAuthorisation)
 router.route('/admin/lesson/remove')
-.delete(authenticateToken,hasAuthorisation,lessonCtrl.remove)
+.delete(authenticateToken,hasAuthorisation,isAdminOrCourseManager,lessonCtrl.remove)
 router.route('/admin/lesson/update')
-.put(authenticateToken,hasAuthorisation,lessonCtrl.update)
+.put(authenticateToken,hasAuthorisation,isAdminOrCourseManager,lessonCtrl.update)
 
 router.route('/admin/lesson/update/position')
-.put(authenticateToken,hasAuthorisation,lessonCtrl.updateLessonPosition)
+.put(authenticateToken,hasAuthorisation,isAdminOrCourseManager,lessonCtrl.updateLessonPosition)
 
 
 module.exports= router

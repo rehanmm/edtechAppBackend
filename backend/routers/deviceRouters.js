@@ -1,5 +1,7 @@
 const  express  = require('express');
-const deviceCtrl =require( '../controllers/deviceCtrl')
+const deviceCtrl = require('../controllers/deviceCtrl')
+const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 const router=express.Router()
 // {
 //     changeDeviceRequest,
@@ -12,7 +14,7 @@ router.route('/auth/changeDevice')
 router.route('/auth/isDeviceChanged')
 .post(deviceCtrl.isDeviceChanged)
 router.route('/admin/changeDevice')
-.post(deviceCtrl.changeStatus)
+.post(authenticateToken,hasAuthorisation,isAdmin,deviceCtrl.changeStatus)
 
 
 

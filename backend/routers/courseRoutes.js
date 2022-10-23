@@ -1,6 +1,7 @@
 const  express  = require('express');
 const courseCtrl =require('../controllers/courseCtrl')
-const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
+const { authenticateToken, hasAuthorisation } = require('../middleware/adminAuthMiddleware')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 // const progressCtrl =require('../../test/progressCtrl')
 const router=express.Router()
 
@@ -23,10 +24,10 @@ const router=express.Router()
 
 
 router.route('/admin/course')
-.post(authenticateToken,hasAuthorisation,courseCtrl.read)
+.post(authenticateToken,hasAuthorisation,isAdminOrCourseManagerOrModerator,courseCtrl.read)
 
 router.route('/admin/updateCourse')
-.put(authenticateToken,hasAuthorisation,courseCtrl.update)
+.put(authenticateToken,hasAuthorisation,isAdminOrCourseManager,courseCtrl.update)
 
 
 module.exports= router

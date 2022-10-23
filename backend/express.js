@@ -14,6 +14,7 @@ const authRoutes=require('../backend/routers/authRoutes');
 const firebaseAuthRoutes=require('../backend/routers/firebaseRoutes');
 const assignmentRoutes=require('../backend/routers/assignmentRoutes');
 const adminRoutes=require('../backend/routers/adminRoutes');
+const razorpayRoutes=require('../backend/routers/razorpayRoutes');
 const awsRoutes=require('../backend/routers/awsRoutes');
 const leaderBoardRoutes=require('../backend/routers/leaderBoardRoutes');
 const bucketRoutes=require('../backend/routers/bucketRoutes');
@@ -25,6 +26,7 @@ const tagsRoutes=require('../backend/routers/tagsRoutes');
 const personalityRoutes=require('../backend/routers/personalityRoutes');
 const deviceRoutes=require('../backend/routers/deviceRouters');
 const additionalLessonRoutes=require('../backend/routers/additionalLessonRoutes');
+const marketingRoutes=require('../backend/routers/marketingTest');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
 // const logger=require('./middleware/logger')
@@ -42,6 +44,7 @@ app.use(cors());
 // app.use('/edtech/admin/*',authRoutes);
 app.use('/edtech',authRoutes);
 app.use('/edtech',adminRoutes);
+app.use('/edtech',razorpayRoutes);
 app.use('/edtech',awsRoutes);
 app.use('/edtech',bucketRoutes);
 app.use('/edtech',leaderBoardRoutes);
@@ -62,6 +65,7 @@ app.use('/edtech',notificationRoutes);
 app.use('/edtech',personalityRoutes);
 app.use('/edtech',deviceRoutes);
 app.use('/edtech',additionalLessonRoutes);
+app.use('/edtech',marketingRoutes);
 
 
 

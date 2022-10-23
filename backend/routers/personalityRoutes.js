@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const personalityCtrl = require('../controllers/personalityCtrl');
-const {authenticateToken,hasAuthorisation} = require( '../middleware/adminAuthMiddleware')
+const { authenticateToken, hasAuthorisation } = require('../middleware/adminAuthMiddleware')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 
 
 router.route('/ui/personality/startTest')
@@ -15,9 +16,9 @@ router.route('/ui/personality/endTest')
 router.route('/ui/personality/get')
     .post(personalityCtrl.getPersonality)
 router.route('/admin/personality/test/create')
-    .post(authenticateToken,hasAuthorisation,personalityCtrl.createTest)
+    .post(authenticateToken,hasAuthorisation,isAdminOrCourseManager,personalityCtrl.createTest)
 router.route('/admin/personality/test/update')
-    .put(authenticateToken,hasAuthorisation,personalityCtrl.updateTest)
+    .put(authenticateToken,hasAuthorisation,isAdminOrCourseManager,personalityCtrl.updateTest)
 router.route('/admin/personality/test/read')
     .post(personalityCtrl.startTest)
 

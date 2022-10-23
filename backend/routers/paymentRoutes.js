@@ -1,6 +1,8 @@
 const express =require('express');
 const router = express.Router();
-const {paymentHistory, checkout,paymentLessonVerification,paymentEventVerification,dopayment,bundleBuy,getKey,paymentHistoryAdmin} =require('../controllers/paymentCtrl') 
+const { paymentHistory, checkout, paymentLessonVerification, paymentEventVerification, dopayment, bundleBuy, getKey, paymentHistoryAdmin } = require('../controllers/paymentCtrl') 
+const { authenticateToken, hasAuthorisation } = require('../middleware/adminAuthMiddleware')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 
 
 
@@ -13,7 +15,7 @@ router.route("/payment/history")
 router.route("/payment/bundleBuy")
 .post(bundleBuy);
 router.route("/admin/payment/paymentHistory")
-.post(paymentHistoryAdmin);
+.post(authenticateToken,hasAuthorisation,paymentHistoryAdmin);
 
 
 module.exports=router;

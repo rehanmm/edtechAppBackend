@@ -1,5 +1,6 @@
 const  express  = require('express');
-const firebaseAuthCtrl =require( '../controllers/fireBaseAuthCtrl')
+const firebaseAuthCtrl = require('../controllers/fireBaseAuthCtrl')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 const router=express.Router()
 
 router.route('/auth/login')

@@ -2,7 +2,8 @@ const  express  = require('express');
 const questionCtrl = require( '../controllers/questionCtrl.js')
 const answerCtrl = require( '../controllers/answerCtrl.js')
 const {forumfileupload}=require('../controllers/uploadFileCtrl')
-const {uploadforumMiddleware}=require('../middleware/uploadMiddleware')
+const { uploadforumMiddleware } = require('../middleware/uploadMiddleware')
+const {isModerator,isCourseManager,isAdmin,isAdminOrCourseManager,isAdminOrCourseManagerOrModerator}=require('../middleware/rolesAuthorization')
 const router = express.Router()
 
 router.route('/forum/getAllQuestion')
