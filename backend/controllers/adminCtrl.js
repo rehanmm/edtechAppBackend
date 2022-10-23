@@ -27,7 +27,7 @@ const Qlist = catchAsyncError(async function (req, res, next) {
 
   if (page > pages) {
     return res.status(404).json({
-      success: "true",
+      success: "false",
       message: "No page found",
     });
   }
@@ -61,7 +61,7 @@ const QToplist = catchAsyncError(async function (req, res, next) {
 
   if (page > pages) {
       return res.status(200).json({
-          success: "true",
+          success: "false",
           message: "No page found",
           data:{questions:[]}
       });
