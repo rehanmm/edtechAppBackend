@@ -106,14 +106,16 @@ const Qupdate = catchAsyncError(async function (req, res,next) {
 });
 
 const Alist = catchAsyncError(async function (req, res,next) {
- const {question_id}=req.body
+  let { question_id, limit, page } = req.body
+  limit = Number.parseInt(limit) || 10
+  page = Number.parseInt(page) || 1;
 let where={}
 if(req.body.keyword){
   where = {$or:[{head:{$regex: req.body.keyword, $options: 'i'}},{body:{$regex: req.body.keyword, $options: 'i'}}]}
   }
   where.question_id=question_id
 
- await paginationAndSearch(where,req.body,Answer,res)
+ await paginationAndSearch(where,{limit,page},Answer,res)
   
 });
 
