@@ -46,27 +46,32 @@ const Qlist = catchAsyncError(async function (req, res, next) {
 const QToplist = catchAsyncError(async function (req, res, next) {
   const filter = req.body;
   let where = {};
-  if (filter.user_id) {
-    next(new errorHandler(400, "User_id is required"));
+  if (filter.keyword) {
+      where = {$or:[{head:{$regex: req.body.keyword, $options: 'i'}},{body:{$regex: req.body.keyword, $options: 'i'}}]}
   }
-  let query = Question.find({});
-  const page = parseInt(filter.page) || 1;
-  const pageSize = parseInt(filter.limit) || 10;
+  if (filter.tags) {
+      where.tags = filter.tags
+  }
+  let query = Question.find(where);
+  const page = parseInt(req.body.page) || 1;
+  const pageSize = parseInt(req.body.limit) || 10;
   const skip = (page - 1) * pageSize;
   const total = await Question.countDocuments(where);
   const pages = Math.ceil(total / pageSize);
 
   if (page > pages) {
-    return res.status(404).json({
-      success: "true",
-      message: "No page found",
-    });
+      return res.status(200).json({
+          success: "true",
+          message: "No page found",
+          data:{questions:[]}
+      });
   }
-  result = await query.skip(skip).limit(pageSize).sort({ createdAt: -1 });
+  result = await query.skip(skip).limit(pageSize).sort({'created_at':-1}).lean();
+  
   res.json({
-    total,
     success: true,
-    filter,
+    total,
+    filter:where,
     count: result.length,
     page,
     pages,
@@ -101,11 +106,12 @@ const Qupdate = catchAsyncError(async function (req, res,next) {
 });
 
 const Alist = catchAsyncError(async function (req, res,next) {
- 
+ const {question_id}=req.body
 let where={}
 if(req.body.keyword){
   where = {$or:[{head:{$regex: req.body.keyword, $options: 'i'}},{body:{$regex: req.body.keyword, $options: 'i'}}]}
-}
+  }
+  where.question_id=question_id
 
  await paginationAndSearch(where,req.body,Answer,res)
   
