@@ -61,7 +61,8 @@ const QToplist = catchAsyncError(async function (req, res, next) {
 
   if (page > pages) {
       return res.status(200).json({
-          success: "false",
+        success: "true",
+        status: 200,
           message: "No page found",
           data:{questions:[]}
       });
