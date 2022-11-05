@@ -20,7 +20,7 @@ const list = catchAsyncError(async function (req, res) {
     }
     let query = User.find(where);
     const page = parseInt(req.body.page) || 1;
-    const pageSize = parseInt(req.body.limit) || 10;
+    const pageSize = parseInt(req.body.limit) || 50;
     const skip = (page - 1) * pageSize;
     const total = await User.countDocuments(where);
     const pages = Math.ceil(total / pageSize);

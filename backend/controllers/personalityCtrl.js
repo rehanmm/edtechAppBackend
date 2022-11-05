@@ -55,11 +55,9 @@ const endtTest = catchAsyncError(async (req, res, next) => {
     const test_answers = req.body;
 
     const { tests } = test_answers;
-   
-
+   console.log(tests)
     const alltests = await PersonalityTest.findOne({}).lean();
 
-    // console.log(alltests)
     const param = {};
     let scores = [];
     let head = '';
