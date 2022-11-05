@@ -17,15 +17,15 @@ tsend(tags,'',res);
 
 
 const createTags=catchAsyncError(async (req,res,next)=>{
-const {tags,related}=req.body
-    const tag= new Tags({
-        tags,
-        related
-         
-    })
-
-  await  tag.save()   
-    tsend(tag,'',res);
+  const { tags, related } = req.body
+  await Tags.findOneAndUpdate({}, {
+    $push: {
+      tags: { ...tags },
+      related: { ...related }
+    }
+    
+  })
+    tsend({},'',res);
     
     })
 

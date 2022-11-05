@@ -23,16 +23,15 @@ tsend(unit,'',res);
 })
 
 const create = catchAsyncError(async function (req, res) {
-    req.body.expiry=daysToMilliseconds(req.body.expiry)
+    const {expiry}=req.body
+    if (expiry) {
+        req.body.expiry=daysToMilliseconds(expiry)
+    }
     const unit = new Unit(req.body);
+    await unit.save()
     
     const unit1= new longUnitToShort(unit);
                       unitUpdater(unit1);
-
-    
-    
-
-    await unit.save()
 
 
    

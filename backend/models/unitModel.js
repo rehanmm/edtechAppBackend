@@ -135,7 +135,7 @@ const unitSchema = new mongoose.Schema({
   }],
   additionals: [{}],
   expiry: {
-    type: Number,
+    type: Number
   }
       
  
