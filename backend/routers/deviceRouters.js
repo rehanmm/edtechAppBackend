@@ -15,6 +15,8 @@ router.route('/auth/isDeviceChanged')
 .post(deviceCtrl.isDeviceChanged)
 router.route('/admin/changeDevice')
 .post(authenticateToken,hasAuthorisation,isAdmin,deviceCtrl.changeStatus)
+router.route('/admin/changeDeviceList')
+.post(authenticateToken,hasAuthorisation,isAdmin,deviceCtrl.list)
 
 
 

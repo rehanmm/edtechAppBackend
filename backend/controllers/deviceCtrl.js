@@ -149,9 +149,21 @@ const isDeviceChanged = catchAsyncError(async function (req, res, next) {
  
     })    
     
+
+
+const list = catchAsyncError(async function (req, res, next) {
+
+    const {status} = req.body;
+  const page = parseInt(req.body.page) || 1;
+  const limit = parseInt(req.body.limit) || 20;
+  const device = await Device.find({}).skip((page - 1) * limit).limit(limit).lean()
+  tsend(device, '', res)
+    
+        })
 module.exports = {
     changeDeviceRequest,
     changeStatus,
     changeDeviceHistory,
-    isDeviceChanged
+    isDeviceChanged,
+    list
 }
