@@ -14,7 +14,7 @@ const list = catchAsyncError(async function (req, res,) {
   const { user_id } = req.body;
   const page = parseInt(req.body.page) || 1;
   const limit = parseInt(req.body.limit) || 10;
-  const notification = await Notification.find({ user_id }).sort({ created_at: 1 }).skip((page - 1) * limit).limit(limit).lean()
+  const notification = await Notification.find({ user_id }).sort({ created_at: -1 ,_id:-1 }).skip((page - 1) * limit).limit(limit).lean()
   tsend(notification, '', res)
   
 })
