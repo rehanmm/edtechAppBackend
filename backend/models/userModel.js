@@ -135,8 +135,33 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
   },
+  is_marketing_test_taken:{
+      type: Boolean,
+      default: false
+  },
 
     personality: {
+      title: String,
+      head: String,
+      body: String,
+      head: String,
+      traits: [String],
+      weakness: [String],
+      strengths: [String],
+      career_options: [String],
+      scores: [
+        {
+          test_index: Number,
+          test_id: String, 
+          test_title: String,
+          positive_score: String,
+          positive_title: String,
+          negative_score: String,
+          negative_title: String,
+        },
+      ],
+    },
+    marketing: {
       title: String,
       head: String,
       body: String,

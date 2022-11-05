@@ -115,8 +115,6 @@ const endtTest = catchAsyncError(async (req, res, next) => {
     
 
    const user= await User.findOneAndUpdate({user_id}, { marketing: result ,is_marketing_test_taken: true});
-   console.log(user)
-    
     return res.json({
         success: true,
         data: result

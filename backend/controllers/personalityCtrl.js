@@ -55,7 +55,6 @@ const endtTest = catchAsyncError(async (req, res, next) => {
     const test_answers = req.body;
 
     const { tests } = test_answers;
-   console.log(tests)
     const alltests = await PersonalityTest.findOne({}).lean();
 
     const param = {};
@@ -67,11 +66,13 @@ const endtTest = catchAsyncError(async (req, res, next) => {
         let M = 0, P = 0, Q = 0, T = 0;;
         const test_id = test_answer.test_id;
         const test = alltests.tests.find(test => test._id == test_id);
+        console.log(test_id);
+        console.log(alltests.tests);
         param.T = test.questions.length;
         test.questions.forEach(question => {
             const question_id = question._id;
             const answer = test_answer.answers.find(answer => answer.question_id == question_id);
-          
+    
             const option_id = answer.option_id;
             const answer_weight = question.options.find(option => option._id == option_id).weight;
             question.weight = answer_weight;
