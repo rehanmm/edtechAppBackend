@@ -6,22 +6,22 @@ const errorHandler = require('../utils/errorHandler');
 const { tsend, send } = require('../middleware/responseSender');
 const marketing = require('../config/marketing.json')
 
-// console.log(personality.ENFJ)
+// console.log(marketing.ENFJ)
 
-const getPersonality =  catchAsyncError(async (req, res, next) => {
+const getMarketing =  catchAsyncError(async (req, res, next) => {
     const {user_id}=req.body
-    const user = await User.findOne({ user_id }).select('is_personality_test_taken   personality').lean();
+    const user = await User.findOne({ user_id }).select('is_marketing_test_taken   marketing').lean();
     if (!user) {
         return next(new errorHandler('list not found', 200))
     }
-    if (user.is_personality_test_taken) {
+    if (user.is_marketing_test_taken) {
         
         return res.status(200).json(
             {
                 success: true,
                 data: {
                     is_test_attempted:true,
-                    personality: user.personality
+                    marketing: user.marketing
                 }
             }
         )
@@ -109,12 +109,12 @@ const endtTest = catchAsyncError(async (req, res, next) => {
     });
     
     // console.log(head)
-    const Code= personality[head]
+    const Code= marketing[head]
     const result = { ...Code,head, scores }
 
     
 
-   const user= await User.findOneAndUpdate({user_id}, { personality: result ,is_personality_test_taken: true});
+   const user= await User.findOneAndUpdate({user_id}, { marketing: result ,is_marketing_test_taken: true});
    console.log(user)
     
     return res.json({
@@ -173,7 +173,7 @@ const updateTest = catchAsyncError(async (req, res, next) => {
 })
 
 
-module.exports={startTest,endtTest,createTest,getPersonality,updateTest}
+module.exports={startTest,endtTest,createTest,getMarketing,updateTest}
 
 
 

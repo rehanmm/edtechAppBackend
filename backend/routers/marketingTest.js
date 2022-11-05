@@ -14,7 +14,7 @@ router.route('/ui/marketing/endTest')
     .post(marketingCtrl.endtTest)
 
 router.route('/ui/marketing/get')
-    .post(marketingCtrl.getPersonality)
+    .post(marketingCtrl.getMarketing)
 router.route('/admin/marketing/test/create')
     .post(authenticateToken,hasAuthorisation,isAdminOrCourseManager,marketingCtrl.createTest)
 router.route('/admin/marketing/test/update')
