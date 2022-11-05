@@ -21,39 +21,25 @@ const list = catchAsyncError(async function (req, res,) {
 
 const create=catchAsyncError( async function(req ,res){
 
-    // const notification = new Notification(req.body);
-    // const {title,description}=req.body
-    const topic = 'all';
-
-    // const message = {
-    //     data: {
-    //      title:"titp",
-    //      body:'description'
-    //     },
-    //     topic: topic
-    //   };
-    
+    const notification = new Notification(req.body);
+    const {title,description}=req.body
+  
+    console.log('hello world')
 var message = {
     notification: {
-      title: 'JustCodeDict Daily Word',
-      body: 'Today daily word is [Love]'
-    },
-    data: {
-      msgType: 'Search',
-      word: 'Love'
+      title,
+      body:description
     }
   };
       
-// console.log(message)
+
 
 
     sendToAll(message)
 
-    
-
-    // await notification.save()
-    // tsend(notification,'',res)
-    tsend({},'',res)
+  
+    await notification.save()
+    tsend(notification,'',res)
 
 })
 

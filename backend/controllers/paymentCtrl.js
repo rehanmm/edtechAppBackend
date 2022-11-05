@@ -225,7 +225,7 @@ const bundleBuy = catchAsyncError(async (req, res) => {
 
 const paymentHistoryAdmin = catchAsyncError(async (req, res) => {
   const { user_id, payment_type } = req.body;
-  const where = {  };
+  const where = {};
   if (user_id) {
     where.user_id = user_id ;
   }
