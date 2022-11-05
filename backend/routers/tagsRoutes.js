@@ -10,7 +10,7 @@ router.route("/ui/tags").
 post(getAllTags);
 router.route("/admin/tags").
 post(authenticateToken,hasAuthorisation,isAdminOrCourseManager,getAllTags);
-router.route("/tags/create").
+router.route("/admin/tags/create").
 post(createTags);
 
 
