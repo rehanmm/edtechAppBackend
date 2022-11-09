@@ -17,11 +17,13 @@ tsend(tags,'',res);
 
 
 const createTags=catchAsyncError(async (req,res,next)=>{
-  const { tags, related } = req.body
+  let { tags, related } = req.body
+
+tags=tags.map(tag=>tag.toLowerCase())
   await Tags.findOneAndUpdate({}, {
-    $push: {
-      tags: { ...tags },
-      related: { ...related }
+    $addToSet: {
+      tags:tags ,
+      // related: { ...related }
     }
     
   })
