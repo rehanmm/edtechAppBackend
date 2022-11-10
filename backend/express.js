@@ -27,6 +27,7 @@ const personalityRoutes=require('../backend/routers/personalityRoutes');
 const deviceRoutes=require('../backend/routers/deviceRouters');
 const additionalLessonRoutes=require('../backend/routers/additionalLessonRoutes');
 const marketingRoutes=require('../backend/routers/marketingTest');
+const feedbackRoutes=require('../backend/routers/feedbackRoutes');
 
 // const {base64Decoder,md5HashVerifier}=require('./middleware/hashingAndEncodingMiddleware')
 // const logger=require('./middleware/logger')
@@ -66,6 +67,7 @@ app.use('/edtech',personalityRoutes);
 app.use('/edtech',deviceRoutes);
 app.use('/edtech',additionalLessonRoutes);
 app.use('/edtech',marketingRoutes);
+app.use('/edtech',feedbackRoutes);
 
 
 

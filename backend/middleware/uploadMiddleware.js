@@ -12,8 +12,6 @@ var buffer = Buffer.from(b64string, 'base64');
   mimetype: 'application/pdf',
   buffer
 };   
-        console.log(req.file);
-   
     next()
 }
 

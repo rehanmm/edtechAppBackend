@@ -7,10 +7,12 @@ const catchAsyncError=require('../error/catchAsyncError');
 const errorHandler = require('../utils/errorHandler');
 const {s3Uploadv2forum}=require('../utils/s3services')
 const { tsend,send } = require('../middleware/responseSender');
+const { result } = require('lodash');
 
 
 const list=catchAsyncError(  async function(req ,res,){
     const filter = req.body;
+    const {user_id} = req.body;
     let where = {};
     if (filter.keyword) {
         where = {$or:[{head:{$regex: req.body.keyword, $options: 'i'}},{body:{$regex: req.body.keyword, $options: 'i'}}]}
@@ -32,7 +34,16 @@ const list=catchAsyncError(  async function(req ,res,){
             data:{questions:[]}
         });
     }
-    result = await query.skip(skip).limit(pageSize).sort({'created_at':-1});
+   let result = await query.skip(skip).limit(pageSize).sort({ 'created_at': -1 }).lean();
+    //is_liked
+    for(let i=0;i<result.length;i++){
+        let is_liked = false;
+        let flag= result[i].likes.findIndex((id) => id == user_id);
+        if (!(flag == -1)) {
+            is_liked = true;
+        }
+        result[i].is_liked = is_liked;
+    }
     res.json({
         success: true,
        
@@ -76,14 +87,23 @@ media,
 })
 const read=catchAsyncError( async function(req ,res){
 const {question_id,user_id}=req.body
-    const question = await Question.findById(question_id);
+    const question = await Question.findById(question_id).lean();
     let is_liked = false;
   let flag=  question.likes.findIndex((id) => id == user_id);
     if (!(flag == -1)) {
         is_liked = true;
 }
     
-const answers= await Answer.find({question_id}).sort({upvote:-1}).limit(10)
+    const answers = await Answer.find({ question_id }).sort({ upvote: -1 }).limit(10).lean()
+    
+    for (let i = 0; i < answers.length; i++) {
+        let is_liked = false;
+        let flag=  answers[i].likes.findIndex((id) => id == user_id);
+        if (!(flag == -1)) {
+            is_liked = true;
+        }
+        answers[i].is_liked = is_liked;
+    }
 tsend({question,answers},'',res);
    
     
