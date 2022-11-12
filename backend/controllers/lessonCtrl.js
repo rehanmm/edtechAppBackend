@@ -681,9 +681,28 @@ res.redirect('/edtech/payment/checkout?amount='+payment.amount+'&description='+p
 
 })
 
+
+
+const getLesson = catchAsyncError(async function (req, res, next) { 
+  const { lesson_id } = req.body;
+  const lesson = await Lesson.findById(lesson_id).lean();
+  if (!lesson) {
+    return res.status(404).json({
+      success: false,
+      message: "lesson not found"
+    });
+  }
+  res.status(200).json({
+    success: true,
+    lesson
+  });
+
+})
+
 module.exports = {
   list,
   read,
+  getLesson,
   update,
   completedLesson,
   startLesson,
