@@ -233,13 +233,21 @@ await course.save()
 })
  
 
+const getUnit = catchAsyncError(async function (req, res) {
+    const { unit_id } = req.body;
+
+    const unit = await Unit.findById(unit_id).select('unit_name completion tags is_paid total_articles total_video total_test total_lesson name lessons additionals expiry')
+    unit.lessons.sort((a, b) => a.index - b.index)
+    res.status(200).json({
+        success: true,
+        data: unit
+    })
+
+})
 
 
 
 
-
-
-
-module.exports={list,read,update,updateUnitPosition,create,remove
+module.exports={list,read,update,updateUnitPosition,create,remove,getUnit
 }
 
