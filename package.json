@@ -2,6 +2,9 @@
   "scripts": {
     "dev": "nodemon backend/server.js"
   },
+  "engines": {
+    "node":"14.x"
+  },
   "dependencies": {
     "@gamestdio/leaderboard": "^0.1.7",
     "aws-sdk": "^2.1199.0",
