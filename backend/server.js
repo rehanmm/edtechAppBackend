@@ -20,17 +20,7 @@ process.on('SIGINT',exitHandler(0, 'SIGTINT'))
 process.on('unhandledRejection',exitHandler(0,'unhandledRejection'))    
 
 
-
-app.listen(config.PORT, function (err) {
-    if(err){
-        console.log("error while starting server");
-        console.log(err);
-        console.log(err.stack);
-    }
-    else{
-        console.log("server has been started at port "+config.PORT);
-    }
-})
+module.exports = app;
 
 
 
