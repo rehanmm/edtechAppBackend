@@ -1,0 +1,10 @@
+{
+    "version": 1,
+    "name": "quasar-edtech",
+    "builds": [
+       { "backend": "server.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+       { "backend": "/(.*)", "dest": "/server.js" }
+    ]
+ }

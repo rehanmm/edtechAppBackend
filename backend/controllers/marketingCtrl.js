@@ -156,8 +156,6 @@ const updateTest = catchAsyncError(async (req, res, next) => {
     
     await test.save()
     
-
-
     res.status(200).json({
         success: true,
         message:"test updated successfully",
