@@ -1,8 +1,7 @@
+*.agdai
+MAlonzo/**
 node_modules
-.vscode
 test
-.env
-.gitignore
-.txt
-git
+.vscode
 .vercel
+
