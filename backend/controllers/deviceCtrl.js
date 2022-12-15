@@ -152,11 +152,16 @@ const isDeviceChanged = catchAsyncError(async function (req, res, next) {
 
 
 const list = catchAsyncError(async function (req, res, next) {
+    //accepted rejected pending
 
-    const {status} = req.body;
+    const { status } = req.body;
+    const where = {};
+    if (status) {
+        where.status = status;
+    }
   const page = parseInt(req.body.page) || 1;
   const limit = parseInt(req.body.limit) || 20;
-  const device = await Device.find({}).skip((page - 1) * limit).limit(limit).lean()
+  const device = await Device.find(where).skip((page - 1) * limit).limit(limit).lean()
   tsend(device, '', res)
     
         })

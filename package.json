@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "node backend/server.js"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "@gamestdio/leaderboard": "^0.1.7",
