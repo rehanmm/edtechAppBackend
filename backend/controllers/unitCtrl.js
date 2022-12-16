@@ -179,10 +179,11 @@ await Course.findByIdAndUpdate(config.COURSE_ID,{
 
 
 const update=catchAsyncError( async function(req ,res){
-    const { unit_id } = req.body
-    req.body.expiry=daysToMilliseconds(req.body.expiry)
-  const count=await countLesson(unit_id);
- 
+    const { unit_id, expiry } = req.body
+    if (expiry) {
+        req.body.expiry=daysToMilliseconds(req.body.expiry)
+    }
+    const count=await countLesson(unit_id);
 await Unit.findByIdAndUpdate(unit_id,{...req.body,...count})
 const unit= await Unit.findById(unit_id)
   
