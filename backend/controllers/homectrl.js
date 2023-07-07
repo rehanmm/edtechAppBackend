@@ -16,6 +16,8 @@ const config=require('../config/config')
 const list = catchAsyncError(async function (req, res, next) {
 const {user_id}=req.body
     // console.log(req.body.user_id)
+    if (!user_id) 
+        return next(new errorHandler('user_id not found', 200));
     const user = await User.findOne({user_id})
     // console.log(user)
     if (!user) {
