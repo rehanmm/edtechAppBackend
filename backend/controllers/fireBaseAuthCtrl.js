@@ -7,7 +7,7 @@ const errorHandler = require('../utils/errorHandler');
 
 //FIREBASE CONFIGURATION
 const admin = require('firebase-admin');
-let serviceAccount = require('../config/quaser-edtech-firebase-adminsdk-7yvco-33641cf2b5.json');
+let serviceAccount = require('../config/firbaseCredentials');
 // const c = require('config');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

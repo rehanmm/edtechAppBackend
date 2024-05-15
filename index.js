@@ -1,5 +1,4 @@
 const app = require('./backend/server');
-
 app.listen(3000, function (err) {
     if(err){
         console.log("error while starting server");
