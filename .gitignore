@@ -2,3 +2,6 @@ node_modules
 .vscode
 test
 .gitignore
+.env
+description.txt
+.vercel
