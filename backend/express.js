@@ -92,7 +92,7 @@ app.use('/edtech',feedbackRoutes);
 
 
 app.get('*', function (req, res) {
-    res.send('invalid url');
+    res.send('Yeah its Working!!');
 })
 
 
